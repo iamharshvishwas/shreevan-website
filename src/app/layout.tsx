@@ -41,6 +41,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <JsonLd data={organizationSchema()} />
         <JsonLd data={localBusinessSchema()} />
         {children}
+        <script
+          src="https://crm.shreevanwellness.com/veda-widget.js"
+          data-api="https://api.shreevanwellness.com/api/v1"
+          defer
+        />
       </body>
     </html>
   );
