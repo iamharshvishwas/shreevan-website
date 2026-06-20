@@ -1,0 +1,52 @@
+import type { Metadata } from "next";
+import { SevenDayFoundationPage } from "@/components/programs/seven-day-foundation-page";
+import { JsonLd } from "@/lib/schema/json-ld";
+import { breadcrumbSchema } from "@/lib/schema/site-schema";
+import { siteConfig } from "@/config/site";
+
+const pageUrl = `${siteConfig.url}/programs/7-day-foundation`;
+
+const programSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "7-Day Ganga Sattva Foundation",
+  serviceType: "Wellness retreat program",
+  provider: {
+    "@type": "Organization",
+    name: siteConfig.name,
+    url: siteConfig.url,
+  },
+  areaServed: ["United States", "Canada", "United Kingdom", "India"],
+  url: pageUrl,
+  description:
+    "A 7-day Shreevan Wellness foundation retreat in Rishikesh designed to help participants rebuild healthy habits through yoga, pranayama, meditation, sattvic living and reflection.",
+  audience: {
+    "@type": "Audience",
+    audienceType: "International wellness guests seeking a deeper foundation than a short reset",
+  },
+};
+
+export const metadata: Metadata = {
+  title: "7-Day Ganga Sattva Foundation",
+  description:
+    "Explore the 7-Day Ganga Sattva Foundation by Shreevan Wellness: Rebuild Your Life From Within through yoga, pranayama, meditation, sattvic nutrition and habit formation.",
+  alternates: {
+    canonical: "/programs/7-day-foundation",
+  },
+};
+
+export default function Page() {
+  return (
+    <>
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: siteConfig.url },
+          { name: "Programs", url: `${siteConfig.url}/programs` },
+          { name: "7-Day Ganga Sattva Foundation", url: pageUrl },
+        ])}
+      />
+      <JsonLd data={programSchema} />
+      <SevenDayFoundationPage />
+    </>
+  );
+}
