@@ -3,7 +3,7 @@ export const siteConfig = {
   tagline: "Return to Your True Self",
   founder: "Isha Dutta",
   location: "Rishikesh, India",
-  url: "https://www.shreevanwellness.com",
+  url: "https://shreevanwellness.com",
   email: "hello@shreevanwellness.com",
   logoPath: "/images/brand/shreevan-wellness-logo.png",
   logos: {
