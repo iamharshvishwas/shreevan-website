@@ -5,13 +5,58 @@ import { FormEvent, useState } from "react";
 export function SuitabilityForm() {
   const [status, setStatus] = useState("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setStatus("Thank you. Connect this form to your email/CRM before launch.");
+    setStatus("Sending...");
+
+    const formData = new FormData(event.currentTarget);
+    const fullName = String(formData.get("name") ?? "");
+    const email = String(formData.get("email") ?? "");
+    const country = String(formData.get("country") ?? "");
+    const programInterest = String(formData.get("program") ?? "");
+    const resetNote = String(formData.get("note") ?? "");
+
+    const response = await fetch("/api/leads", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        source: "home-suitability",
+        name: fullName,
+        email,
+        country,
+        program: programInterest,
+        goal: resetNote,
+        consent: formData.get("wellness-boundary") === "on",
+      }),
+    });
+
+    if (!response.ok) {
+      setStatus("Something went wrong. Please email the team directly.");
+      return;
+    }
+
+    void fetch("https://api.shreevanwellness.com/api/v1/intake/form", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        form: "Suitability call request",
+        name: fullName,
+        email,
+        country,
+        program: programInterest,
+        message: resetNote,
+      }),
+      keepalive: true,
+    }).catch(() => {});
+
+    event.currentTarget.reset();
+    setStatus("Thank you. Your request has been received.");
   }
 
   return (
-    <form className="suitability-form" method="post" onSubmit={handleSubmit}>
+    <form className="suitability-form" method="post" data-veda-form="Home suitability request" onSubmit={handleSubmit}>
       <div className="form-grid">
         <div className="form-row">
           <label htmlFor="guest-name">Full name</label>

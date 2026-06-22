@@ -1,0 +1,149 @@
+{
+  "pages": [
+    {
+      "id": "home",
+      "title": "Home",
+      "path": "/",
+      "template": "home",
+      "status": "published",
+      "connected": true,
+      "seo": {
+        "title": "Shreevan Wellness | Return to Your True Self",
+        "description": "Premium structured wellness retreats in Rishikesh, India for international guests seeking guided reconnection, rhythm and responsible transformation.",
+        "canonicalPath": "/",
+        "noindex": false
+      },
+      "hero": {
+        "eyebrow": "Premium wellness retreats in India",
+        "title": "Return to Your True Self",
+        "lede": "Structured retreat experiences for professionals, founders, serious practitioners and life-transition seekers who want space, rhythm and guided reconnection.",
+        "primaryCtaLabel": "Book a consultation",
+        "primaryCtaHref": "#consultation",
+        "secondaryCtaLabel": "Explore programs",
+        "secondaryCtaHref": "#programs"
+      },
+      "notes": "Connected to the public homepage hero and metadata."
+    },
+    {
+      "id": "about-founder",
+      "title": "Our Story",
+      "path": "/about-founder",
+      "template": "standard",
+      "status": "published",
+      "connected": false,
+      "seo": {
+        "title": "Our Story | Shreevan Wellness",
+        "description": "Founder story, philosophy and trust markers for Shreevan Wellness.",
+        "canonicalPath": "/about-founder",
+        "noindex": false
+      },
+      "hero": {
+        "eyebrow": "Founder story",
+        "title": "The story behind Shreevan Wellness",
+        "lede": "A human introduction to the person, practice and care standards behind the retreat experience.",
+        "primaryCtaLabel": "Book Consultation",
+        "primaryCtaHref": "/book-consultation",
+        "secondaryCtaLabel": "Explore Programs",
+        "secondaryCtaHref": "/#programs"
+      },
+      "notes": "Seeded for Phase 3; public wiring comes after homepage validation."
+    },
+    {
+      "id": "accommodation-inclusions",
+      "title": "Stay & Food",
+      "path": "/accommodation-inclusions",
+      "template": "standard",
+      "status": "published",
+      "connected": false,
+      "seo": {
+        "title": "Stay & Food | Shreevan Wellness",
+        "description": "Accommodation, meals, inclusions and practical retreat-life clarity for guests.",
+        "canonicalPath": "/accommodation-inclusions",
+        "noindex": false
+      },
+      "hero": {
+        "eyebrow": "Stay and food",
+        "title": "Know the place before you travel",
+        "lede": "Clear expectations for rooms, sattvic meals, daily comfort and practical guest support.",
+        "primaryCtaLabel": "Book Consultation",
+        "primaryCtaHref": "/book-consultation",
+        "secondaryCtaLabel": "Contact Us",
+        "secondaryCtaHref": "/contact"
+      },
+      "notes": "Seeded for Phase 3; public wiring comes after homepage validation."
+    },
+    {
+      "id": "contact",
+      "title": "Contact Us",
+      "path": "/contact",
+      "template": "standard",
+      "status": "published",
+      "connected": false,
+      "seo": {
+        "title": "Contact Us | Shreevan Wellness",
+        "description": "Contact Shreevan Wellness for retreat enquiries, travel questions and support.",
+        "canonicalPath": "/contact",
+        "noindex": false
+      },
+      "hero": {
+        "eyebrow": "Contact",
+        "title": "Start with a clear conversation",
+        "lede": "Use this page for retreat enquiries, travel questions, partnerships and guest support.",
+        "primaryCtaLabel": "Book Consultation",
+        "primaryCtaHref": "/book-consultation",
+        "secondaryCtaLabel": "Email Us",
+        "secondaryCtaHref": "mailto:hello@shreevanwellness.com"
+      },
+      "notes": "Seeded for Phase 3; public wiring comes after homepage validation."
+    },
+    {
+      "id": "faqs",
+      "title": "FAQs",
+      "path": "/faqs",
+      "template": "standard",
+      "status": "published",
+      "connected": false,
+      "seo": {
+        "title": "FAQs | Shreevan Wellness",
+        "description": "Answers for suitability, travel, stay, food, payment and wellness boundaries.",
+        "canonicalPath": "/faqs",
+        "noindex": false
+      },
+      "hero": {
+        "eyebrow": "FAQs",
+        "title": "Answers before you enquire",
+        "lede": "Practical clarity for international guests and responsible wellness decision-making.",
+        "primaryCtaLabel": "Book Consultation",
+        "primaryCtaHref": "/book-consultation",
+        "secondaryCtaLabel": "Contact Us",
+        "secondaryCtaHref": "/contact"
+      },
+      "notes": "Seeded for Phase 3; public wiring comes after homepage validation."
+    },
+    {
+      "id": "payment",
+      "title": "Payment",
+      "path": "/payment",
+      "template": "commerce",
+      "status": "draft",
+      "connected": false,
+      "seo": {
+        "title": "Payment | Shreevan Wellness",
+        "description": "Secure payment page for approved Shreevan Wellness bookings.",
+        "canonicalPath": "/payment",
+        "noindex": true
+      },
+      "hero": {
+        "eyebrow": "Approved booking",
+        "title": "Complete your booking securely",
+        "lede": "Payment is available after suitability review and booking approval.",
+        "primaryCtaLabel": "Contact Support",
+        "primaryCtaHref": "/contact",
+        "secondaryCtaLabel": "Read Terms",
+        "secondaryCtaHref": "/terms-conditions"
+      },
+      "notes": "Keep noindex until the secure checkout flow is final."
+    }
+  ],
+  "updatedAt": "2026-06-21T16:22:14.838Z"
+}

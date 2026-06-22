@@ -1,0 +1,347 @@
+{
+  "updatedAt": "2026-06-22T08:21:36.591Z",
+  "hero": {
+    "eyebrow": "Premium wellness retreats in India",
+    "title": "Return to Your True Self",
+    "lede": "Structured retreat experiences for professionals, founders, serious practitioners and life-transition seekers who want space, rhythm and guided reconnection.",
+    "primaryCtaLabel": "Book a consultation",
+    "primaryCtaHref": "#consultation",
+    "secondaryCtaLabel": "Explore programs",
+    "secondaryCtaHref": "#programs",
+    "trustItems": [
+      {
+        "id": "hero-trust-1",
+        "text": "Consultation-first enrolment"
+      },
+      {
+        "id": "hero-trust-2",
+        "text": "International guest ready"
+      },
+      {
+        "id": "hero-trust-3",
+        "text": "Responsible wellness boundaries"
+      }
+    ]
+  },
+  "mediaBand": {
+    "media": {
+      "kind": "",
+      "src": "",
+      "alt": "",
+      "caption": "Real retreat setting, accommodation, practice space, meals or soft morning nature.",
+      "placeholder": "Image slot"
+    }
+  },
+  "proofStrip": {
+    "items": [
+      {
+        "id": "proof-1",
+        "title": "Clear programs",
+        "copy": "3, 7, 14, 28 and future 60-day pathways"
+      },
+      {
+        "id": "proof-2",
+        "title": "Human-led fit check",
+        "copy": "Consultation before commitment"
+      },
+      {
+        "id": "proof-3",
+        "title": "International reassurance",
+        "copy": "Travel, stay, food and safety clarity"
+      },
+      {
+        "id": "proof-4",
+        "title": "Responsible wellness",
+        "copy": "No cure or guaranteed transformation claims"
+      }
+    ]
+  },
+  "intro": {
+    "sectionNumber": "01 The intent",
+    "heading": "A calmer way to begin again",
+    "paragraphs": [
+      {
+        "id": "intro-1",
+        "text": "Shreevan Wellness is for people who do not need more noise, pressure or quick fixes. They need space, structure, guidance and a clear rhythm that supports reconnection."
+      },
+      {
+        "id": "intro-2",
+        "text": "The experience is grounded in yoga, meditation, sattvic living, reflection and nature, while clearly distinguishing wellness education from medical advice."
+      }
+    ]
+  },
+  "programPathways": {
+    "eyebrow": "Program pathways",
+    "heading": "Choose the depth of your reset",
+    "copy": "All programs matter. The 28-day immersive reset is the signature offer, but shorter pathways help guests enter at the right level of readiness.",
+    "items": [
+      {
+        "id": "program-3-day",
+        "title": "3-Day Ganga Sattva Reset",
+        "copy": "",
+        "href": "/programs/3-day-ganga-reset",
+        "duration": "3 days",
+        "summary": "Best for a short pause and reconnection.",
+        "outcome": "A gentle return to breath, rhythm and perspective.",
+        "label": ""
+      },
+      {
+        "id": "program-7-day",
+        "title": "7-Day Ganga Sattva Foundation",
+        "copy": "",
+        "href": "/programs/7-day-foundation",
+        "duration": "7 days",
+        "summary": "Best for beginners who want structure and clarity.",
+        "outcome": "A practical base for everyday wellness practices.",
+        "label": ""
+      },
+      {
+        "id": "program-14-day",
+        "title": "14-Day Ganga Sattva Transformation",
+        "copy": "",
+        "href": "/programs/14-day-transformation",
+        "duration": "14 days",
+        "summary": "Best for a deeper mind-body-emotional reset.",
+        "outcome": "More time for practice, reflection and integration.",
+        "label": ""
+      },
+      {
+        "id": "program-28-day",
+        "title": "28-Day Sattva Ganga Inner Awakening",
+        "copy": "",
+        "href": "/programs/28-day-inner-awakening",
+        "duration": "28 days",
+        "summary": "Best for a complete structured retreat experience.",
+        "outcome": "A sustained reset with daily rhythm, guided practice and reflection.",
+        "label": "Signature"
+      },
+      {
+        "id": "program-60-day",
+        "title": "60-Day Rishi Tantra Conscious Living Residency",
+        "copy": "",
+        "href": "/programs/60-day-rishi-residency",
+        "duration": "60 days",
+        "summary": "Advanced residency for serious lifestyle reinvention.",
+        "outcome": "A conscious living residency with mentoring, service and integration.",
+        "label": "Advanced"
+      }
+    ]
+  },
+  "differentiation": {
+    "eyebrow": "What guests should understand",
+    "heading": "Make the retreat feel real before the call",
+    "cards": [
+      {
+        "id": "diff-1",
+        "title": "Daily guided practice",
+        "copy": "Yoga, pranayama, meditation, Yoga Nidra and reflective practices.",
+        "highlighted": false
+      },
+      {
+        "id": "diff-2",
+        "title": "Structured daily rhythm",
+        "copy": "Practice, workshops, meals, rest, journaling and sharing circles.",
+        "highlighted": false
+      },
+      {
+        "id": "diff-3",
+        "title": "Sattvic meals",
+        "copy": "Simple vegetarian food with clear dietary guidance before arrival.",
+        "highlighted": false
+      },
+      {
+        "id": "diff-4",
+        "title": "Accommodation clarity",
+        "copy": "Room photos, privacy level, amenities and stay expectations should be shown.",
+        "highlighted": false
+      },
+      {
+        "id": "diff-5",
+        "title": "Integration support",
+        "copy": "Practical routines and tools that participants may continue after returning home.",
+        "highlighted": false
+      },
+      {
+        "id": "diff-6",
+        "title": "Responsible boundary",
+        "copy": "No cure claim, therapy substitute or guaranteed transformation promise.",
+        "highlighted": true
+      }
+    ]
+  },
+  "rhythm": {
+    "eyebrow": "Retreat experience",
+    "heading": "A daily rhythm designed for clarity",
+    "body": "The day is intentionally paced between practice, learning, meals, rest and reflection. The experience should feel structured, not crowded.",
+    "items": [
+      {
+        "id": "rhythm-1",
+        "text": "Morning yoga and pranayama"
+      },
+      {
+        "id": "rhythm-2",
+        "text": "Intention circle"
+      },
+      {
+        "id": "rhythm-3",
+        "text": "Workshop or learning session"
+      },
+      {
+        "id": "rhythm-4",
+        "text": "Sattvic meals"
+      },
+      {
+        "id": "rhythm-5",
+        "text": "Reflection and journaling"
+      },
+      {
+        "id": "rhythm-6",
+        "text": "Meditation or Yoga Nidra"
+      },
+      {
+        "id": "rhythm-7",
+        "text": "Evening sharing circle"
+      }
+    ]
+  },
+  "team": {
+    "eyebrow": "Founder, team and responsible wellness",
+    "heading": "Trust starts with knowing who is holding the space",
+    "body": "Add founder credentials, facilitator experience, training, guest-care standards and how suitability concerns are handled. This keeps trust personal without turning the page into a heavy \"why us\" block.",
+    "media": {
+      "kind": "",
+      "src": "",
+      "alt": "",
+      "caption": "Founder, lead facilitator or retreat team portrait",
+      "placeholder": "Image slot"
+    },
+    "bullets": [
+      {
+        "id": "team-1",
+        "text": "Years of practice and relevant training"
+      },
+      {
+        "id": "team-2",
+        "text": "Professional retreat management standards"
+      },
+      {
+        "id": "team-3",
+        "text": "Clear wellness boundaries and guest-care process"
+      },
+      {
+        "id": "team-4",
+        "text": "Health disclaimer and suitability screening"
+      }
+    ]
+  },
+  "travel": {
+    "eyebrow": "International visitor reassurance",
+    "heading": "A guest travelling from abroad needs practical confidence",
+    "body": "The page should answer the questions a US, Canada or UK visitor will silently ask before booking a consultation.",
+    "cards": [
+      {
+        "id": "travel-1",
+        "title": "Airport and transfer guidance",
+        "copy": "Nearest airport, travel time, arrival window and transfer support.",
+        "tag": "Arrival"
+      },
+      {
+        "id": "travel-2",
+        "title": "Accommodation and daily life",
+        "copy": "Rooms, bathrooms, climate, laundry, quiet hours, internet policy and packing.",
+        "tag": "Stay"
+      },
+      {
+        "id": "travel-3",
+        "title": "Sattvic meals explained plainly",
+        "copy": "Vegetarian food, caffeine, alcohol, spice level and dietary suitability.",
+        "tag": "Food"
+      },
+      {
+        "id": "travel-4",
+        "title": "Suitability before payment",
+        "copy": "Goals, expectations, health context and whether the retreat is responsible for them.",
+        "tag": "Fit"
+      }
+    ]
+  },
+  "location": {
+    "eyebrow": "Location and safety clarity",
+    "heading": "Trust increases when the place feels real",
+    "body": "Replace placeholder content with verified location details, guest support flow, policies and real photography before launch.",
+    "media": {
+      "kind": "",
+      "src": "",
+      "alt": "",
+      "caption": "Location exterior, accommodation, entrance, dining area or practice hall",
+      "placeholder": "Image slot"
+    },
+    "cards": [
+      {
+        "id": "location-1",
+        "title": "Where guests stay",
+        "copy": "Room options, privacy, cleaning and basic amenities."
+      },
+      {
+        "id": "location-2",
+        "title": "Who is available",
+        "copy": "On-site support and emergency contact process."
+      },
+      {
+        "id": "location-3",
+        "title": "What policies apply",
+        "copy": "Health disclaimer, refund policy and code of conduct."
+      }
+    ]
+  },
+  "testimonials": {
+    "eyebrow": "Social proof placeholders",
+    "heading": "Use specific proof, not generic praise",
+    "items": [
+      {
+        "id": "testimonial-1",
+        "quote": "The structure gave me space to slow down without feeling lost.",
+        "attribution": "Guest reflection placeholder"
+      },
+      {
+        "id": "testimonial-2",
+        "quote": "Add an international guest note about travel comfort, safety and support.",
+        "attribution": "International guest placeholder"
+      },
+      {
+        "id": "testimonial-3",
+        "quote": "Add operational proof that the retreat is professionally managed.",
+        "attribution": "Operational proof placeholder"
+      }
+    ]
+  },
+  "consultation": {
+    "eyebrow": "Free suitability call",
+    "heading": "The consultation is the conversion point. Make it feel safe.",
+    "body": "Visitors should understand that the call is not a sales trap. It is a responsible fit conversation before travel, payment or commitment.",
+    "ctaLabel": "Book a free suitability call",
+    "ctaHref": "#suitability-form",
+    "steps": [
+      {
+        "id": "consultation-1",
+        "title": "Understand your context",
+        "copy": "Goals, work pressure, travel plans, prior practice and current lifestyle."
+      },
+      {
+        "id": "consultation-2",
+        "title": "Check suitability",
+        "copy": "Health boundaries, retreat expectations, food, schedule and comfort with the rhythm."
+      },
+      {
+        "id": "consultation-3",
+        "title": "Recommend the next step",
+        "copy": "Program depth, booking path and what information you need before deciding."
+      }
+    ]
+  },
+  "leadForm": {
+    "eyebrow": "Request the call",
+    "heading": "Share a little context before we speak",
+    "body": "Keep this short. The goal is to route serious enquiries, understand country and program fit, and avoid asking for sensitive health details on the homepage."
+  }
+}

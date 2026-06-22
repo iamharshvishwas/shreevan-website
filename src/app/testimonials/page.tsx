@@ -3,6 +3,9 @@ import { HealingStoriesPage } from "@/components/testimonials/healing-stories-pa
 import { siteConfig } from "@/config/site";
 import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema } from "@/lib/schema/site-schema";
+import { getPublicStoryContent } from "@/lib/site/public-content-trust";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Healing Stories",
@@ -13,7 +16,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Page() {
+export default async function Page() {
+  const storyContent = await getPublicStoryContent();
+
   return (
     <>
       <JsonLd
@@ -22,7 +27,7 @@ export default function Page() {
           { name: "Healing Stories", url: `${siteConfig.url}/testimonials` },
         ])}
       />
-      <HealingStoriesPage />
+      <HealingStoriesPage content={storyContent} />
     </>
   );
 }

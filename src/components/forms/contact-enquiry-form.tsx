@@ -5,13 +5,38 @@ import { FormEvent, useState } from "react";
 export function ContactEnquiryForm() {
   const [status, setStatus] = useState("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setStatus("Thank you. Connect this form to your CRM or inbox before launch.");
+    setStatus("Sending...");
+
+    const formData = new FormData(event.currentTarget);
+    const response = await fetch("/api/leads", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        source: "contact",
+        name: formData.get("name"),
+        email: formData.get("email"),
+        country: formData.get("country"),
+        topic: formData.get("topic"),
+        message: formData.get("message"),
+        consent: formData.get("consent") === "on",
+      }),
+    });
+
+    if (!response.ok) {
+      setStatus("Something went wrong. Please email the team directly.");
+      return;
+    }
+
+    event.currentTarget.reset();
+    setStatus("Thank you. Your enquiry has been received.");
   }
 
   return (
-    <form className="contact-form" onSubmit={handleSubmit}>
+    <form className="contact-form" data-veda-form="Contact form" onSubmit={handleSubmit}>
       <div className="form-grid">
         <div className="form-row">
           <label htmlFor="contact-name">Full name</label>

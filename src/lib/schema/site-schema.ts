@@ -1,27 +1,32 @@
 import { siteConfig } from "@/config/site";
+import type { PublicSiteSettings } from "@/lib/site/public-settings-types";
 
-export function organizationSchema() {
+export function organizationSchema(settings?: PublicSiteSettings) {
+  const siteOrigin = settings?.brand.primaryDomain.replace(/\/+$/, "") || siteConfig.url;
+
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: siteConfig.name,
-    url: siteConfig.url,
-    logo: `${siteConfig.url}${siteConfig.logos.primary}`,
+    name: settings?.brand.name ?? siteConfig.name,
+    url: siteOrigin,
+    logo: `${siteOrigin}${siteConfig.logos.primary}`,
     founder: {
       "@type": "Person",
-      name: siteConfig.founder,
+      name: settings?.brand.founder ?? siteConfig.founder,
     },
   };
 }
 
-export function localBusinessSchema() {
+export function localBusinessSchema(settings?: PublicSiteSettings) {
+  const siteOrigin = settings?.brand.primaryDomain.replace(/\/+$/, "") || siteConfig.url;
+
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    name: siteConfig.name,
-    url: siteConfig.url,
-    image: `${siteConfig.url}${siteConfig.logos.primary}`,
-    email: siteConfig.email,
+    name: settings?.brand.name ?? siteConfig.name,
+    url: siteOrigin,
+    image: `${siteOrigin}${siteConfig.logos.primary}`,
+    email: settings?.contact.email ?? siteConfig.email,
     address: {
       "@type": "PostalAddress",
       addressLocality: "Rishikesh",

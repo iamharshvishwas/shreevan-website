@@ -3,6 +3,9 @@ import { JournalPage } from "@/components/journal/journal-page";
 import { siteConfig } from "@/config/site";
 import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema } from "@/lib/schema/site-schema";
+import { getPublicJournalContent } from "@/lib/site/public-content-trust";
+
+export const dynamic = "force-dynamic";
 
 const pageUrl = `${siteConfig.url}/journal`;
 
@@ -42,7 +45,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Page() {
+export default async function Page() {
+  const journalContent = await getPublicJournalContent();
+
   return (
     <>
       <JsonLd
@@ -52,7 +57,7 @@ export default function Page() {
         ])}
       />
       <JsonLd data={journalSchema} />
-      <JournalPage />
+      <JournalPage content={journalContent} />
     </>
   );
 }

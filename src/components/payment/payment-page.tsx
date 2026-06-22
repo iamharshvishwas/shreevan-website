@@ -158,7 +158,7 @@ export function PaymentPage({ initialBookingId = "", initialProgramSlug = "" }: 
 
         <section className="section checkout-section" aria-labelledby="checkout-title">
           <div className="container checkout-grid">
-            <form className="checkout-form" onSubmit={handleSubmit}>
+            <form className="checkout-form" data-veda-form="Payment verification" onSubmit={handleSubmit}>
               <div>
                 <p className="eyebrow">Payment details</p>
                 <h2 id="checkout-title">Booking verification</h2>
@@ -185,7 +185,12 @@ export function PaymentPage({ initialBookingId = "", initialProgramSlug = "" }: 
               <div className="form-grid">
                 <div className="form-row">
                   <label htmlFor="program">Program</label>
-                  <select id="program" value={programSlug} onChange={(event) => setProgramSlug(event.target.value)}>
+                  <select
+                    id="program"
+                    name="program"
+                    value={programSlug}
+                    onChange={(event) => setProgramSlug(event.target.value)}
+                  >
                     {programs.map((program) => (
                       <option value={program.slug} key={program.slug}>
                         {program.name}
@@ -195,7 +200,12 @@ export function PaymentPage({ initialBookingId = "", initialProgramSlug = "" }: 
                 </div>
                 <div className="form-row">
                   <label htmlFor="payment-type">Payment type</label>
-                  <select id="payment-type" value={paymentType} onChange={(event) => setPaymentType(event.target.value)}>
+                  <select
+                    id="payment-type"
+                    name="payment-type"
+                    value={paymentType}
+                    onChange={(event) => setPaymentType(event.target.value)}
+                  >
                     {paymentTypes.map((type) => (
                       <option key={type}>{type}</option>
                     ))}
@@ -206,7 +216,7 @@ export function PaymentPage({ initialBookingId = "", initialProgramSlug = "" }: 
               <div className="form-grid">
                 <div className="form-row">
                   <label htmlFor="currency">Preferred currency</label>
-                  <select id="currency" value={currency} onChange={(event) => setCurrency(event.target.value)}>
+                  <select id="currency" name="currency" value={currency} onChange={(event) => setCurrency(event.target.value)}>
                     <option>USD</option>
                     <option>GBP</option>
                     <option>CAD</option>
@@ -216,7 +226,7 @@ export function PaymentPage({ initialBookingId = "", initialProgramSlug = "" }: 
                 </div>
                 <div className="form-row">
                   <label htmlFor="invoice-amount">Invoice amount</label>
-                  <input id="invoice-amount" value="Loaded from secure invoice" readOnly />
+                  <input id="invoice-amount" name="invoice-amount" value="Loaded from secure invoice" readOnly />
                 </div>
               </div>
 
@@ -240,6 +250,7 @@ export function PaymentPage({ initialBookingId = "", initialProgramSlug = "" }: 
               <label className="checkbox-row">
                 <input
                   type="checkbox"
+                  name="terms-accepted"
                   checked={accepted}
                   onChange={(event) => setAccepted(event.target.checked)}
                   required

@@ -1,0 +1,42 @@
+import "server-only";
+
+import { readAdminPageContent } from "@/lib/admin/page-content";
+import type { AdminManagedPage } from "@/lib/admin/page-content";
+import type { PublicManagedPageContent } from "@/lib/site/public-pages-types";
+
+function cleanText(value: string, fallback: string) {
+  return value.trim() || fallback;
+}
+
+function toPublicPage(page: AdminManagedPage, fallback: AdminManagedPage): PublicManagedPageContent {
+  const source = page.status === "published" ? page : fallback;
+
+  return {
+    id: source.id,
+    path: cleanText(source.path, fallback.path),
+    status: source.status,
+    seo: {
+      title: cleanText(source.seo.title, fallback.seo.title),
+      description: cleanText(source.seo.description, fallback.seo.description),
+      canonicalPath: cleanText(source.seo.canonicalPath, fallback.seo.canonicalPath),
+      noindex: source.seo.noindex,
+    },
+    hero: {
+      eyebrow: cleanText(source.hero.eyebrow, fallback.hero.eyebrow),
+      title: cleanText(source.hero.title, fallback.hero.title),
+      lede: cleanText(source.hero.lede, fallback.hero.lede),
+      primaryCtaLabel: cleanText(source.hero.primaryCtaLabel, fallback.hero.primaryCtaLabel),
+      primaryCtaHref: cleanText(source.hero.primaryCtaHref, fallback.hero.primaryCtaHref),
+      secondaryCtaLabel: cleanText(source.hero.secondaryCtaLabel, fallback.hero.secondaryCtaLabel),
+      secondaryCtaHref: cleanText(source.hero.secondaryCtaHref, fallback.hero.secondaryCtaHref),
+    },
+  };
+}
+
+export async function getPublicPageContent(pageId: string) {
+  const store = await readAdminPageContent();
+  const fallback = store.pages.find((page) => page.id === pageId) ?? store.pages[0];
+  const page = store.pages.find((item) => item.id === pageId) ?? fallback;
+
+  return toPublicPage(page, fallback);
+}

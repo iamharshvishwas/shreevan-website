@@ -3,21 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { modalityRoutes, programRoutes } from "@/config/routes";
 import { siteConfig } from "@/config/site";
+import { usePublicSiteSettings } from "@/components/site/public-settings-provider";
+import type { PublicNavLink } from "@/lib/site/public-settings-types";
 
-const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/about-founder", label: "Our Story" },
-  { href: "/testimonials", label: "Healing Stories" },
-  { href: "/accommodation-inclusions", label: "Stay & Food" },
-  { href: "/journal", label: "Journal" },
-  { href: "/contact", label: "Contact Us" },
-];
-
-type ActiveMenu = "modalities" | "programs" | null;
+type ActiveMenu = string | null;
 
 export function SiteHeader() {
+  const settings = usePublicSiteSettings();
   const [isOpen, setIsOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<ActiveMenu>(null);
 
@@ -29,7 +22,7 @@ export function SiteHeader() {
     setActiveMenu((current) => (current === menu ? null : current));
   }
 
-  function handleMenuToggle(menu: Exclude<ActiveMenu, null>) {
+  function handleMenuToggle(menu: string) {
     setActiveMenu((current) => (current === menu ? null : menu));
   }
 
@@ -61,6 +54,48 @@ export function SiteHeader() {
     };
   }, []);
 
+  function renderNavItem(item: PublicNavLink) {
+    if (item.children?.length) {
+      const isMenuOpen = activeMenu === item.id;
+
+      return (
+        <div
+          className={`nav-group${isMenuOpen ? " is-open" : ""}`}
+          key={item.id}
+          onBlur={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget)) {
+              setActiveMenu(null);
+            }
+          }}
+          onMouseEnter={() => handleMenuHover(item.id)}
+          onMouseLeave={() => handleMenuLeave(item.id)}
+        >
+          <button
+            className="nav-summary"
+            type="button"
+            aria-expanded={isMenuOpen}
+            onClick={() => handleMenuToggle(item.id)}
+          >
+            {item.label}
+          </button>
+          <div className="nav-menu" aria-label={`${item.label} navigation`}>
+            {item.children.map((child) => (
+              <Link key={child.id} href={child.href} onClick={closeMenus}>
+                {child.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <Link key={item.id} href={item.href} onClick={closeMenus}>
+        {item.label}
+      </Link>
+    );
+  }
+
   return (
     <>
       <div className="announcement">
@@ -81,77 +116,15 @@ export function SiteHeader() {
           </Link>
 
           <nav className="main-nav" aria-label="Primary navigation">
-            {navItems.slice(0, 2).map((item) => (
-              <Link key={item.href} href={item.href} onClick={closeMenus}>
-                {item.label}
-              </Link>
-            ))}
-
-            <div
-              className={`nav-group${activeMenu === "modalities" ? " is-open" : ""}`}
-              onBlur={(event) => {
-                if (!event.currentTarget.contains(event.relatedTarget)) {
-                  setActiveMenu(null);
-                }
-              }}
-              onMouseEnter={() => handleMenuHover("modalities")}
-              onMouseLeave={() => handleMenuLeave("modalities")}
-            >
-              <button
-                className="nav-summary"
-                type="button"
-                aria-expanded={activeMenu === "modalities"}
-                onClick={() => handleMenuToggle("modalities")}
-              >
-                Core Modalities
-              </button>
-              <div className="nav-menu" aria-label="Educational modality pages">
-                {modalityRoutes.map((item) => (
-                  <Link key={item.href} href={item.href} onClick={closeMenus}>
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <div
-              className={`nav-group${activeMenu === "programs" ? " is-open" : ""}`}
-              onBlur={(event) => {
-                if (!event.currentTarget.contains(event.relatedTarget)) {
-                  setActiveMenu(null);
-                }
-              }}
-              onMouseEnter={() => handleMenuHover("programs")}
-              onMouseLeave={() => handleMenuLeave("programs")}
-            >
-              <button
-                className="nav-summary"
-                type="button"
-                aria-expanded={activeMenu === "programs"}
-                onClick={() => handleMenuToggle("programs")}
-              >
-                Immersive Programs
-              </button>
-              <div className="nav-menu" aria-label="Program package pages">
-                {programRoutes.map((item) => (
-                  <Link key={item.href} href={item.href} onClick={closeMenus}>
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {navItems.slice(2).map((item) => (
-              <Link key={item.href} href={item.href} onClick={closeMenus}>
-                {item.label}
-              </Link>
-            ))}
+            {settings.navigation.headerItems.map(renderNavItem)}
           </nav>
 
           <div className="header-actions">
-            <Link className="button button-primary button-small" href="/book-consultation">
-              BOOK CONSULTATION
-            </Link>
+            {settings.navigation.headerCta ? (
+              <Link className="button button-primary button-small" href={settings.navigation.headerCta.href}>
+                {settings.navigation.headerCta.label}
+              </Link>
+            ) : null}
             <button
               className="menu-toggle"
               type="button"

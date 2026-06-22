@@ -1,0 +1,338 @@
+{
+  "brand": {
+    "name": "Shreevan Wellness",
+    "tagline": "Return to Your True Self",
+    "founder": "Isha Dutta",
+    "location": "Rishikesh, India",
+    "primaryDomain": "https://shreevanwellness.com",
+    "adminDomain": "https://admin.shreevanwellness.com",
+    "description": "Premium structured wellness retreats in Rishikesh, India for international guests seeking guided reconnection, rhythm and responsible transformation."
+  },
+  "contact": {
+    "email": "hello@shreevanwellness.com",
+    "phone": "",
+    "whatsapp": "",
+    "address": "Rishikesh, Uttarakhand, India",
+    "responseTime": "Within 24-48 hours"
+  },
+  "social": {
+    "instagram": "",
+    "youtube": "",
+    "linkedin": "",
+    "facebook": ""
+  },
+  "crm": {
+    "enabled": true,
+    "scriptUrl": "https://crm.shreevanwellness.com/veda-widget.js",
+    "apiUrl": "https://api.shreevanwellness.com/api/v1"
+  },
+  "launch": {
+    "indexingMode": "noindex",
+    "robotsPolicy": "blocked",
+    "sitemapEnabled": false
+  },
+  "navigation": {
+    "headerCta": {
+      "id": "book-consultation",
+      "label": "Book Consultation",
+      "href": "/book-consultation",
+      "enabled": true
+    },
+    "headerItems": [
+      {
+        "id": "home",
+        "label": "Home",
+        "href": "/",
+        "enabled": true
+      },
+      {
+        "id": "our-story",
+        "label": "Our Story",
+        "href": "/about-founder",
+        "enabled": true
+      },
+      {
+        "id": "modalities",
+        "label": "Core Modalities",
+        "href": "/modalities",
+        "enabled": true,
+        "children": [
+          {
+            "id": "modalities-yoga-therapy",
+            "label": "Yoga Therapy & Medicine",
+            "href": "/modalities/yoga-therapy",
+            "enabled": true
+          },
+          {
+            "id": "modalities-guided-meditation",
+            "label": "Guided Meditation & Mind Mastery",
+            "href": "/modalities/guided-meditation",
+            "enabled": true
+          },
+          {
+            "id": "modalities-sound-healing",
+            "label": "Sound Healing & Vibrational Therapy",
+            "href": "/modalities/sound-healing",
+            "enabled": true
+          },
+          {
+            "id": "modalities-panchkarma-detox",
+            "label": "Panchkarma & Deep Detox",
+            "href": "/modalities/panchkarma-detox",
+            "enabled": true
+          },
+          {
+            "id": "modalities-chakra-opening",
+            "label": "Chakra Opening & Energy Balancing",
+            "href": "/modalities/chakra-opening",
+            "enabled": true
+          },
+          {
+            "id": "modalities-spiritual-sadhanas",
+            "label": "Spiritual Sadhanas & Yogic Philosophy",
+            "href": "/modalities/spiritual-sadhanas",
+            "enabled": true
+          }
+        ]
+      },
+      {
+        "id": "programs",
+        "label": "Immersive Programs",
+        "href": "/programs",
+        "enabled": true,
+        "children": [
+          {
+            "id": "programs-3-day-ganga-reset",
+            "label": "3-Day Ganga Sattva Reset",
+            "href": "/programs/3-day-ganga-reset",
+            "enabled": true
+          },
+          {
+            "id": "programs-7-day-foundation",
+            "label": "7-Day Ganga Sattva Foundation",
+            "href": "/programs/7-day-foundation",
+            "enabled": true
+          },
+          {
+            "id": "programs-14-day-transformation",
+            "label": "14-Day Ganga Sattva Transformation",
+            "href": "/programs/14-day-transformation",
+            "enabled": true
+          },
+          {
+            "id": "programs-28-day-inner-awakening",
+            "label": "28-Day Sattva Ganga Flagship Inner Awakening",
+            "href": "/programs/28-day-inner-awakening",
+            "enabled": true
+          },
+          {
+            "id": "programs-60-day-rishi-residency",
+            "label": "60-Day Rishi Tantra Lifestyle Transformation Residency",
+            "href": "/programs/60-day-rishi-residency",
+            "enabled": true
+          }
+        ]
+      },
+      {
+        "id": "healing-stories",
+        "label": "Healing Stories",
+        "href": "/testimonials",
+        "enabled": true
+      },
+      {
+        "id": "stay-food",
+        "label": "Stay & Food",
+        "href": "/accommodation-inclusions",
+        "enabled": true
+      },
+      {
+        "id": "journal",
+        "label": "Journal",
+        "href": "/journal",
+        "enabled": true
+      },
+      {
+        "id": "contact",
+        "label": "Contact Us",
+        "href": "/contact",
+        "enabled": true
+      }
+    ],
+    "footerColumns": [
+      {
+        "id": "core",
+        "title": "Core Pages",
+        "enabled": true,
+        "links": [
+          {
+            "id": "about-founder",
+            "label": "About Founder",
+            "href": "/about-founder",
+            "enabled": true
+          },
+          {
+            "id": "accommodation-inclusions",
+            "label": "Accommodation & Inclusions",
+            "href": "/accommodation-inclusions",
+            "enabled": true
+          },
+          {
+            "id": "testimonials",
+            "label": "Healing Stories",
+            "href": "/testimonials",
+            "enabled": true
+          },
+          {
+            "id": "journal",
+            "label": "Journal",
+            "href": "/journal",
+            "enabled": true
+          },
+          {
+            "id": "faqs",
+            "label": "FAQs",
+            "href": "/faqs",
+            "enabled": true
+          },
+          {
+            "id": "contact",
+            "label": "Contact",
+            "href": "/contact",
+            "enabled": true
+          }
+        ]
+      },
+      {
+        "id": "programs",
+        "title": "Programs",
+        "enabled": true,
+        "links": [
+          {
+            "id": "programs-3-day-ganga-reset",
+            "label": "3-Day Ganga Sattva Reset",
+            "href": "/programs/3-day-ganga-reset",
+            "enabled": true
+          },
+          {
+            "id": "programs-7-day-foundation",
+            "label": "7-Day Ganga Sattva Foundation",
+            "href": "/programs/7-day-foundation",
+            "enabled": true
+          },
+          {
+            "id": "programs-14-day-transformation",
+            "label": "14-Day Ganga Sattva Transformation",
+            "href": "/programs/14-day-transformation",
+            "enabled": true
+          },
+          {
+            "id": "programs-28-day-inner-awakening",
+            "label": "28-Day Sattva Ganga Flagship Inner Awakening",
+            "href": "/programs/28-day-inner-awakening",
+            "enabled": true
+          },
+          {
+            "id": "programs-60-day-rishi-residency",
+            "label": "60-Day Rishi Tantra Lifestyle Transformation Residency",
+            "href": "/programs/60-day-rishi-residency",
+            "enabled": true
+          }
+        ]
+      },
+      {
+        "id": "modalities",
+        "title": "Modalities",
+        "enabled": true,
+        "links": [
+          {
+            "id": "modalities-yoga-therapy",
+            "label": "Yoga Therapy & Medicine",
+            "href": "/modalities/yoga-therapy",
+            "enabled": true
+          },
+          {
+            "id": "modalities-guided-meditation",
+            "label": "Guided Meditation & Mind Mastery",
+            "href": "/modalities/guided-meditation",
+            "enabled": true
+          },
+          {
+            "id": "modalities-sound-healing",
+            "label": "Sound Healing & Vibrational Therapy",
+            "href": "/modalities/sound-healing",
+            "enabled": true
+          },
+          {
+            "id": "modalities-panchkarma-detox",
+            "label": "Panchkarma & Deep Detox",
+            "href": "/modalities/panchkarma-detox",
+            "enabled": true
+          },
+          {
+            "id": "modalities-chakra-opening",
+            "label": "Chakra Opening & Energy Balancing",
+            "href": "/modalities/chakra-opening",
+            "enabled": true
+          },
+          {
+            "id": "modalities-spiritual-sadhanas",
+            "label": "Spiritual Sadhanas & Yogic Philosophy",
+            "href": "/modalities/spiritual-sadhanas",
+            "enabled": true
+          }
+        ]
+      },
+      {
+        "id": "conversion",
+        "title": "Conversion",
+        "enabled": true,
+        "links": [
+          {
+            "id": "book-consultation",
+            "label": "Book Consultation",
+            "href": "/book-consultation",
+            "enabled": true
+          },
+          {
+            "id": "payment",
+            "label": "Payment",
+            "href": "/payment",
+            "enabled": true
+          }
+        ]
+      },
+      {
+        "id": "legal",
+        "title": "Legal",
+        "enabled": true,
+        "links": [
+          {
+            "id": "privacy-policy",
+            "label": "Privacy Policy",
+            "href": "/privacy-policy",
+            "enabled": true
+          },
+          {
+            "id": "terms-conditions",
+            "label": "Terms & Conditions",
+            "href": "/terms-conditions",
+            "enabled": true
+          },
+          {
+            "id": "refund-policy",
+            "label": "Refund Policy",
+            "href": "/refund-policy",
+            "enabled": true
+          },
+          {
+            "id": "wellness-disclaimer",
+            "label": "Wellness Disclaimer",
+            "href": "/wellness-disclaimer",
+            "enabled": true
+          }
+        ]
+      }
+    ]
+  },
+  "updatedAt": "2026-06-21T09:35:00.598Z"
+}

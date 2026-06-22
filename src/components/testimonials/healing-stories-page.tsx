@@ -1,66 +1,13 @@
 import Link from "next/link";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import type { PublicStoryContent } from "@/lib/site/public-content-trust-types";
 
-const trustMarkers = [
-  ["Consent-led", "Every story should be approved by the guest before publishing."],
-  ["Context-rich", "Show program, duration, travel context and why the guest came."],
-  ["No cure claims", "Stories should reflect individual experience, not guaranteed results."],
-  ["International clarity", "Include details that help US, Canada and UK guests feel informed."],
-];
+function stageLabel(id: string) {
+  return id.slice(0, 1).toUpperCase() + id.slice(1);
+}
 
-const storySlots = [
-  {
-    label: "Story slot 01",
-    title: "A professional pause that became a steadier daily rhythm",
-    context: "Ideal for a 7 or 14-day guest reflection once consent-approved.",
-    proof: "Capture what changed in routine, clarity, sleep rhythm, practice consistency or decision-making.",
-  },
-  {
-    label: "Story slot 02",
-    title: "A founder stepping away from pressure without losing structure",
-    context: "Ideal for an entrepreneur, executive or high-responsibility guest.",
-    proof: "Capture what made the retreat feel safe, organised, well-held and worth international travel.",
-  },
-  {
-    label: "Story slot 03",
-    title: "A life-transition guest finding space to listen again",
-    context: "Ideal for a transition, grief, burnout-adjacent or self-reconnection story.",
-    proof: "Keep language responsible: reflection, support, space, routine and perspective instead of cure claims.",
-  },
-];
-
-const videoSlots = [
-  ["Short reflection", "A 45-90 second guest video with consent-approved name, country and program."],
-  ["Retreat atmosphere", "A quiet montage slot for practice space, meals, room, surroundings and arrival clarity."],
-];
-
-const outcomeRows = [
-  {
-    stage: "Before",
-    title: "What brought them here",
-    copy: "Work pressure, routine fatigue, life transition, spiritual seeking or the need for a structured reset.",
-  },
-  {
-    stage: "During",
-    title: "What supported them",
-    copy: "Daily rhythm, facilitator guidance, sattvic meals, nature, reflection, breathwork and intentional rest.",
-  },
-  {
-    stage: "After",
-    title: "What they carried home",
-    copy: "A clearer routine, practical practices, perspective and a more grounded relationship with daily life.",
-  },
-];
-
-const consentStandards = [
-  "Use real guest words only after written testimonial/media consent.",
-  "Add country, program duration and travel context when the guest agrees.",
-  "Avoid before-after medical framing, diagnosis, cure language or guaranteed outcomes.",
-  "Separate guest reflection from clinical, therapeutic or emergency-care claims.",
-];
-
-export function HealingStoriesPage() {
+export function HealingStoriesPage({ content }: Readonly<{ content: PublicStoryContent }>) {
   return (
     <>
       <a className="skip-link" href="#main">
@@ -97,10 +44,10 @@ export function HealingStoriesPage() {
 
         <section className="story-proof-strip" aria-label="Healing story standards">
           <div className="container story-marker-grid">
-            {trustMarkers.map(([title, copy]) => (
-              <article key={title}>
-                <h2>{title}</h2>
-                <p>{copy}</p>
+            {content.trustMarkers.map((marker) => (
+              <article key={marker.id}>
+                <h2>{marker.title}</h2>
+                <p>{marker.copy}</p>
               </article>
             ))}
           </div>
@@ -151,8 +98,8 @@ export function HealingStoriesPage() {
             </div>
 
             <div className="story-card-grid">
-              {storySlots.map((story) => (
-                <article className="story-card" key={story.label}>
+              {content.storySlots.map((story) => (
+                <article className="story-card" key={story.id}>
                   <div className="image-slot story-card-media">
                     <span>Image slot</span>
                     <p>Guest portrait, practice detail or retreat environment</p>
@@ -176,14 +123,14 @@ export function HealingStoriesPage() {
               <h2 id="video-stories-title">Let future guests see the environment, not just read about it</h2>
             </div>
             <div className="video-story-grid">
-              {videoSlots.map(([title, copy]) => (
-                <article key={title}>
+              {content.videoSlots.map((video) => (
+                <article key={video.id}>
                   <div className="image-slot video-slot">
                     <span>Video slot</span>
-                    <p>{title}</p>
+                    <p>{video.title}</p>
                   </div>
-                  <h3>{title}</h3>
-                  <p>{copy}</p>
+                  <h3>{video.title}</h3>
+                  <p>{video.copy}</p>
                 </article>
               ))}
             </div>
@@ -202,9 +149,9 @@ export function HealingStoriesPage() {
               </p>
             </div>
             <div className="outcome-map">
-              {outcomeRows.map((row) => (
-                <article key={row.stage}>
-                  <span>{row.stage}</span>
+              {content.outcomeRows.map((row) => (
+                <article key={row.id}>
+                  <span>{stageLabel(row.id)}</span>
                   <h3>{row.title}</h3>
                   <p>{row.copy}</p>
                 </article>
@@ -224,7 +171,7 @@ export function HealingStoriesPage() {
               </p>
             </div>
             <ul className="standards-list">
-              {consentStandards.map((standard) => (
+              {content.consentStandards.map((standard) => (
                 <li key={standard}>{standard}</li>
               ))}
             </ul>

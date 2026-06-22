@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
-import { faqCategories, faqResearchSignals } from "@/components/faqs/faq-data";
+import type { PublicFaqContent, PublicFaqLink } from "@/lib/site/public-content-trust-types";
 
 const decisionCards = [
   {
@@ -39,7 +39,7 @@ const responsibleStandards = [
   },
 ];
 
-function FaqLinkList({ links }: { links?: { href: string; label: string; external?: boolean }[] }) {
+function FaqLinkList({ links }: { links?: PublicFaqLink[] }) {
   if (!links?.length) {
     return null;
   }
@@ -61,7 +61,7 @@ function FaqLinkList({ links }: { links?: { href: string; label: string; externa
   );
 }
 
-export function FaqsPage() {
+export function FaqsPage({ content }: Readonly<{ content: PublicFaqContent }>) {
   return (
     <>
       <a className="skip-link" href="#main">
@@ -94,7 +94,7 @@ export function FaqsPage() {
               <span>What visitors search before trust</span>
               <h2>Most doubts are not objections. They are risk checks.</h2>
               <ul>
-                {faqResearchSignals.map((signal) => (
+                {content.researchSignals.map((signal) => (
                   <li key={signal}>{signal}</li>
                 ))}
               </ul>
@@ -119,7 +119,7 @@ export function FaqsPage() {
             <aside className="faq-category-nav" aria-label="FAQ categories">
               <p className="eyebrow">Find answers by concern</p>
               <nav>
-                {faqCategories.map((category) => (
+                {content.categories.map((category) => (
                   <a key={category.id} href={`#${category.id}`}>
                     {category.label}
                   </a>
@@ -143,7 +143,7 @@ export function FaqsPage() {
                 <h2 id="faq-library-title">The questions serious guests ask before they commit</h2>
               </div>
 
-              {faqCategories.map((category) => (
+              {content.categories.map((category) => (
                 <section className="faq-topic-block" id={category.id} key={category.id}>
                   <div className="faq-topic-heading">
                     <span>{category.label}</span>
@@ -183,7 +183,7 @@ export function FaqsPage() {
               </p>
             </div>
             <div className="faq-standard-grid">
-              {responsibleStandards.map((standard, index) => (
+              {content.responsibleStandards.map((standard, index) => (
                 <article key={standard.title}>
                   <span>{String(index + 1).padStart(2, "0")}</span>
                   <h3>{standard.title}</h3>

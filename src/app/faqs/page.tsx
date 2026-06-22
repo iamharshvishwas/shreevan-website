@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { FaqsPage } from "@/components/faqs/faqs-page";
-import { faqPageSchema } from "@/components/faqs/faq-data";
 import { siteConfig } from "@/config/site";
 import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema } from "@/lib/schema/site-schema";
+import { faqPageSchema, getPublicFaqContent } from "@/lib/site/public-content-trust";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "FAQs for International Wellness Retreat Guests",
@@ -14,7 +16,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Page() {
+export default async function Page() {
+  const faqContent = await getPublicFaqContent();
+
   return (
     <>
       <JsonLd
@@ -23,8 +27,8 @@ export default function Page() {
           { name: "FAQs", url: `${siteConfig.url}/faqs` },
         ])}
       />
-      <JsonLd data={faqPageSchema()} />
-      <FaqsPage />
+      <JsonLd data={faqPageSchema(faqContent.categories)} />
+      <FaqsPage content={faqContent} />
     </>
   );
 }

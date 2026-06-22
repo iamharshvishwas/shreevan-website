@@ -34,8 +34,23 @@ export function ConsultationQualificationForm() {
   const [submitted, setSubmitted] = useState(false);
   const [program, setProgram] = useState("Not sure yet");
   const [consent, setConsent] = useState(false);
+  const [status, setStatus] = useState("");
+  const [formValues, setFormValues] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    country: "",
+    dates: "",
+    season: "",
+    goal: "",
+    health: "",
+  });
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function updateField(field: keyof typeof formValues, value: string) {
+    setFormValues((current) => ({ ...current, [field]: value }));
+  }
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (step < steps.length - 1) {
       setStep((current) => current + 1);
@@ -43,6 +58,25 @@ export function ConsultationQualificationForm() {
     }
 
     if (consent) {
+      setStatus("Sending...");
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          source: "book-consultation",
+          ...formValues,
+          program,
+          consent,
+        }),
+      });
+
+      if (!response.ok) {
+        setStatus("Something went wrong. Please email the team directly.");
+        return;
+      }
+
       setSubmitted(true);
     }
   }
@@ -64,7 +98,7 @@ export function ConsultationQualificationForm() {
   }
 
   return (
-    <form className="qualification-form" onSubmit={handleSubmit}>
+    <form className="qualification-form" data-veda-form="Booking enquiry" onSubmit={handleSubmit}>
       <ol className="form-stepper" aria-label="Consultation request steps">
         {steps.map((item, index) => (
           <li className={index === step ? "active" : index < step ? "complete" : undefined} key={item.label}>
@@ -85,21 +119,51 @@ export function ConsultationQualificationForm() {
           <div className="form-grid">
             <div className="form-row">
               <label htmlFor="consult-name">Full name</label>
-              <input id="consult-name" name="name" autoComplete="name" required />
+              <input
+                id="consult-name"
+                name="name"
+                autoComplete="name"
+                required
+                value={formValues.name}
+                onChange={(event) => updateField("name", event.target.value)}
+              />
             </div>
             <div className="form-row">
               <label htmlFor="consult-email">Email address</label>
-              <input id="consult-email" name="email" type="email" autoComplete="email" required />
+              <input
+                id="consult-email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                value={formValues.email}
+                onChange={(event) => updateField("email", event.target.value)}
+              />
             </div>
           </div>
           <div className="form-grid">
             <div className="form-row">
               <label htmlFor="consult-phone">Phone / WhatsApp</label>
-              <input id="consult-phone" name="phone" autoComplete="tel" placeholder="+1..." />
+              <input
+                id="consult-phone"
+                name="phone"
+                autoComplete="tel"
+                placeholder="+1..."
+                value={formValues.phone}
+                onChange={(event) => updateField("phone", event.target.value)}
+              />
             </div>
             <div className="form-row">
               <label htmlFor="consult-country">Country / time zone</label>
-              <input id="consult-country" name="country" autoComplete="country-name" placeholder="US, Canada, UK..." required />
+              <input
+                id="consult-country"
+                name="country"
+                autoComplete="country-name"
+                placeholder="US, Canada, UK..."
+                required
+                value={formValues.country}
+                onChange={(event) => updateField("country", event.target.value)}
+              />
             </div>
           </div>
         </div>
@@ -126,11 +190,22 @@ export function ConsultationQualificationForm() {
           <div className="form-grid">
             <div className="form-row">
               <label htmlFor="consult-dates">Desired travel dates</label>
-              <input id="consult-dates" name="dates" placeholder="Month or date range" />
+              <input
+                id="consult-dates"
+                name="dates"
+                placeholder="Month or date range"
+                value={formValues.dates}
+                onChange={(event) => updateField("dates", event.target.value)}
+              />
             </div>
             <div className="form-row">
               <label htmlFor="consult-season">Current season of life</label>
-              <select id="consult-season" name="season" defaultValue="">
+              <select
+                id="consult-season"
+                name="season"
+                value={formValues.season}
+                onChange={(event) => updateField("season", event.target.value)}
+              >
                 <option value="" disabled>
                   Choose the closest fit
                 </option>
@@ -150,6 +225,8 @@ export function ConsultationQualificationForm() {
               rows={4}
               placeholder="A few honest lines are enough."
               required
+              value={formValues.goal}
+              onChange={(event) => updateField("goal", event.target.value)}
             />
           </div>
           <div className="form-row">
@@ -159,6 +236,8 @@ export function ConsultationQualificationForm() {
               name="health"
               rows={3}
               placeholder="Keep this brief. Sensitive details can be discussed privately if needed."
+              value={formValues.health}
+              onChange={(event) => updateField("health", event.target.value)}
             />
           </div>
         </div>
@@ -166,6 +245,15 @@ export function ConsultationQualificationForm() {
 
       {step === 2 ? (
         <div className="form-step-panel">
+          <input type="hidden" name="name" value={formValues.name} />
+          <input type="hidden" name="email" value={formValues.email} />
+          <input type="hidden" name="phone" value={formValues.phone} />
+          <input type="hidden" name="country" value={formValues.country} />
+          <input type="hidden" name="program" value={program} />
+          <input type="hidden" name="dates" value={formValues.dates} />
+          <input type="hidden" name="season" value={formValues.season} />
+          <input type="hidden" name="goal" value={formValues.goal} />
+          <input type="hidden" name="health" value={formValues.health} />
           <div className="qualification-review">
             <span>Selected program</span>
             <strong>{program}</strong>
@@ -204,6 +292,9 @@ export function ConsultationQualificationForm() {
           {step === steps.length - 1 ? "Request consultation" : "Continue"}
         </button>
       </div>
+      <p className="form-status" aria-live="polite">
+        {status}
+      </p>
     </form>
   );
 }

@@ -2,21 +2,46 @@ import type { Metadata } from "next";
 import { HomePage } from "@/components/home/home-page";
 import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema } from "@/lib/schema/site-schema";
-import { siteConfig } from "@/config/site";
+import { getPublicHomeContent } from "@/lib/site/public-home";
+import { getPublicPageContent } from "@/lib/site/public-pages";
+import { getPublicSiteOrigin, getPublicSiteSettings } from "@/lib/site/public-settings";
 
-export const metadata: Metadata = {
-  title: `${siteConfig.name} | ${siteConfig.tagline}`,
-  description: siteConfig.description,
-  alternates: {
-    canonical: "/",
-  },
-};
+export const dynamic = "force-dynamic";
 
-export default function Page() {
+export async function generateMetadata(): Promise<Metadata> {
+  const [settings, homePage] = await Promise.all([getPublicSiteSettings(), getPublicPageContent("home")]);
+  const shouldNoindex = settings.launch.indexingMode !== "indexable" || homePage.seo.noindex;
+
+  return {
+    title: homePage.seo.title,
+    description: homePage.seo.description,
+    alternates: {
+      canonical: homePage.seo.canonicalPath,
+    },
+    robots: shouldNoindex
+      ? {
+          index: false,
+          follow: false,
+          nocache: true,
+        }
+      : {
+          index: true,
+          follow: true,
+        },
+  };
+}
+
+export default async function Page() {
+  const [settings, homeContent] = await Promise.all([
+    getPublicSiteSettings(),
+    getPublicHomeContent(),
+  ]);
+  const siteOrigin = getPublicSiteOrigin(settings);
+
   return (
     <>
-      <JsonLd data={breadcrumbSchema([{ name: "Home", url: siteConfig.url }])} />
-      <HomePage />
+      <JsonLd data={breadcrumbSchema([{ name: "Home", url: siteOrigin }])} />
+      <HomePage content={homeContent} />
     </>
   );
 }
