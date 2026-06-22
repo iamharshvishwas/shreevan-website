@@ -9,14 +9,15 @@ export function SuitabilityForm() {
     event.preventDefault();
     setStatus("Sending...");
 
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
     const fullName = String(formData.get("name") ?? "");
     const email = String(formData.get("email") ?? "");
     const country = String(formData.get("country") ?? "");
     const programInterest = String(formData.get("program") ?? "");
     const resetNote = String(formData.get("note") ?? "");
 
-    const response = await fetch("/api/leads", {
+    void fetch("/api/leads", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -30,12 +31,7 @@ export function SuitabilityForm() {
         goal: resetNote,
         consent: formData.get("wellness-boundary") === "on",
       }),
-    });
-
-    if (!response.ok) {
-      setStatus("Something went wrong. Please email the team directly.");
-      return;
-    }
+    }).catch(() => {});
 
     void fetch("https://api.shreevanwellness.com/api/v1/intake/form", {
       method: "POST",
@@ -51,7 +47,7 @@ export function SuitabilityForm() {
       keepalive: true,
     }).catch(() => {});
 
-    event.currentTarget.reset();
+    form.reset();
     setStatus("Thank you. Your request has been received.");
   }
 
