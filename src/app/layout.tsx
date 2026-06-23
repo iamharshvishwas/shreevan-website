@@ -104,7 +104,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           })(window, document, "clarity", "script", "xbidosyg3u");
         `}
       </Script>
-      <Script src="https://analytics.ahrefs.com/analytics.js" data-key="T/r3nCE6XddTFkbdGXJD7w" strategy="afterInteractive" />
+      <Script src="https://analytics.ahrefs.com/analytics.js" data-key="T/r3nCE6XddTFkbdGXJD7w" strategy="beforeInteractive" />
       <body className={`${inter.variable} ${lora.variable}`}>
         <noscript>
           <iframe
