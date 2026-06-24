@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { formatPhoneWithCountryCode, WhatsAppPhoneFields } from "@/components/forms/whatsapp-phone-fields";
 
 const steps = [
   {
@@ -38,7 +39,8 @@ export function ConsultationQualificationForm() {
   const [formValues, setFormValues] = useState({
     name: "",
     email: "",
-    phone: "",
+    phoneCountryCode: "+1",
+    whatsapp: "",
     country: "",
     dates: "",
     season: "",
@@ -50,7 +52,7 @@ export function ConsultationQualificationForm() {
     setFormValues((current) => ({ ...current, [field]: value }));
   }
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (step < steps.length - 1) {
       setStep((current) => current + 1);
@@ -59,7 +61,7 @@ export function ConsultationQualificationForm() {
 
     if (consent) {
       setStatus("Sending...");
-      const response = await fetch("/api/leads", {
+      void fetch("/api/leads", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -67,15 +69,11 @@ export function ConsultationQualificationForm() {
         body: JSON.stringify({
           source: "book-consultation",
           ...formValues,
+          phone: formatPhoneWithCountryCode(formValues.phoneCountryCode, formValues.whatsapp),
           program,
           consent,
         }),
-      });
-
-      if (!response.ok) {
-        setStatus("Something went wrong. Please email the team directly.");
-        return;
-      }
+      }).catch(() => {});
 
       setSubmitted(true);
     }
@@ -141,30 +139,24 @@ export function ConsultationQualificationForm() {
               />
             </div>
           </div>
-          <div className="form-grid">
-            <div className="form-row">
-              <label htmlFor="consult-phone">Phone / WhatsApp</label>
-              <input
-                id="consult-phone"
-                name="phone"
-                autoComplete="tel"
-                placeholder="+1..."
-                value={formValues.phone}
-                onChange={(event) => updateField("phone", event.target.value)}
-              />
-            </div>
-            <div className="form-row">
-              <label htmlFor="consult-country">Country / time zone</label>
-              <input
-                id="consult-country"
-                name="country"
-                autoComplete="country-name"
-                placeholder="US, Canada, UK..."
-                required
-                value={formValues.country}
-                onChange={(event) => updateField("country", event.target.value)}
-              />
-            </div>
+          <WhatsAppPhoneFields
+            idPrefix="consult"
+            codeValue={formValues.phoneCountryCode}
+            phoneValue={formValues.whatsapp}
+            onCodeChange={(value) => updateField("phoneCountryCode", value)}
+            onPhoneChange={(value) => updateField("whatsapp", value)}
+          />
+          <div className="form-row">
+            <label htmlFor="consult-country">Country / time zone</label>
+            <input
+              id="consult-country"
+              name="country"
+              autoComplete="country-name"
+              placeholder="US, Canada, UK..."
+              required
+              value={formValues.country}
+              onChange={(event) => updateField("country", event.target.value)}
+            />
           </div>
         </div>
       ) : null}
@@ -247,7 +239,13 @@ export function ConsultationQualificationForm() {
         <div className="form-step-panel">
           <input type="hidden" name="name" value={formValues.name} />
           <input type="hidden" name="email" value={formValues.email} />
-          <input type="hidden" name="phone" value={formValues.phone} />
+          <input type="hidden" name="phoneCountryCode" value={formValues.phoneCountryCode} />
+          <input type="hidden" name="whatsapp" value={formValues.whatsapp} />
+          <input
+            type="hidden"
+            name="phone"
+            value={formatPhoneWithCountryCode(formValues.phoneCountryCode, formValues.whatsapp)}
+          />
           <input type="hidden" name="country" value={formValues.country} />
           <input type="hidden" name="program" value={program} />
           <input type="hidden" name="dates" value={formValues.dates} />

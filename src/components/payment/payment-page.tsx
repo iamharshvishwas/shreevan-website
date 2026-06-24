@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { FormEvent, useMemo, useState } from "react";
+import { WhatsAppPhoneFields } from "@/components/forms/whatsapp-phone-fields";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { siteConfig } from "@/config/site";
@@ -181,6 +182,8 @@ export function PaymentPage({ initialBookingId = "", initialProgramSlug = "" }: 
                   <input id="guest-email" name="guest-email" type="email" placeholder="name@email.com" required />
                 </div>
               </div>
+
+              <WhatsAppPhoneFields idPrefix="payment" />
 
               <div className="form-grid">
                 <div className="form-row">

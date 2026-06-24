@@ -1,11 +1,12 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { formatPhoneWithCountryCode, WhatsAppPhoneFields } from "@/components/forms/whatsapp-phone-fields";
 
 export function SuitabilityForm() {
   const [status, setStatus] = useState("");
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus("Sending...");
 
@@ -16,6 +17,9 @@ export function SuitabilityForm() {
     const country = String(formData.get("country") ?? "");
     const programInterest = String(formData.get("program") ?? "");
     const resetNote = String(formData.get("note") ?? "");
+    const phoneCountryCode = String(formData.get("phoneCountryCode") ?? "");
+    const whatsapp = String(formData.get("whatsapp") ?? "");
+    const phone = formatPhoneWithCountryCode(phoneCountryCode, whatsapp);
 
     void fetch("/api/leads", {
       method: "POST",
@@ -26,6 +30,7 @@ export function SuitabilityForm() {
         source: "home-suitability",
         name: fullName,
         email,
+        phone,
         country,
         program: programInterest,
         goal: resetNote,
@@ -40,6 +45,9 @@ export function SuitabilityForm() {
         form: "Suitability call request",
         name: fullName,
         email,
+        phone,
+        phoneCountryCode,
+        whatsapp,
         country,
         program: programInterest,
         message: resetNote,
@@ -87,6 +95,8 @@ export function SuitabilityForm() {
           </select>
         </div>
       </div>
+
+      <WhatsAppPhoneFields idPrefix="guest" />
 
       <div className="form-row">
         <label htmlFor="guest-note">What are you hoping to reset?</label>

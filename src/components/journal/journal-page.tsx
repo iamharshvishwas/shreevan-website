@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import { WhatsAppPhoneFields } from "@/components/forms/whatsapp-phone-fields";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import type { PublicJournalArticle, PublicJournalContent } from "@/lib/site/public-content-trust-types";
@@ -231,6 +232,7 @@ export function JournalPage({ content }: Readonly<{ content: PublicJournalConten
                 <h2>Get one calm note before the next program update.</h2>
                 <form className="journal-subscribe-form" data-veda-form="Journal subscription">
                   <input aria-label="Email address" name="email" type="email" placeholder="Email address" />
+                  <WhatsAppPhoneFields idPrefix="journal" />
                   <button type="submit">Subscribe</button>
                 </form>
               </div>

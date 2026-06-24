@@ -1,16 +1,20 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { formatPhoneWithCountryCode, WhatsAppPhoneFields } from "@/components/forms/whatsapp-phone-fields";
 
 export function ContactEnquiryForm() {
   const [status, setStatus] = useState("");
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus("Sending...");
 
-    const formData = new FormData(event.currentTarget);
-    const response = await fetch("/api/leads", {
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const phoneCountryCode = String(formData.get("phoneCountryCode") ?? "");
+    const whatsapp = String(formData.get("whatsapp") ?? "");
+    void fetch("/api/leads", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -19,19 +23,15 @@ export function ContactEnquiryForm() {
         source: "contact",
         name: formData.get("name"),
         email: formData.get("email"),
+        phone: formatPhoneWithCountryCode(phoneCountryCode, whatsapp),
         country: formData.get("country"),
         topic: formData.get("topic"),
         message: formData.get("message"),
         consent: formData.get("consent") === "on",
       }),
-    });
+    }).catch(() => {});
 
-    if (!response.ok) {
-      setStatus("Something went wrong. Please email the team directly.");
-      return;
-    }
-
-    event.currentTarget.reset();
+    form.reset();
     setStatus("Thank you. Your enquiry has been received.");
   }
 
@@ -63,6 +63,8 @@ export function ContactEnquiryForm() {
           </select>
         </div>
       </div>
+
+      <WhatsAppPhoneFields idPrefix="contact" />
 
       <div className="form-row">
         <label htmlFor="contact-message">Message</label>
