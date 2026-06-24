@@ -99,9 +99,9 @@ export const defaultAdminSiteSettings: AdminSiteSettings = {
     apiUrl: "https://api.shreevanwellness.com/api/v1",
   },
   launch: {
-    indexingMode: "noindex",
-    robotsPolicy: "blocked",
-    sitemapEnabled: false,
+    indexingMode: "indexable",
+    robotsPolicy: "public",
+    sitemapEnabled: true,
   },
   navigation: {
     headerCta: {
