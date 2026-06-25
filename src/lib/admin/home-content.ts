@@ -377,10 +377,10 @@ export const defaultAdminHomeContent: AdminHomeContentStore = {
     body:
       "Replace placeholder content with verified location details, guest support flow, policies and real photography before launch.",
     media: {
-      kind: "",
-      src: "",
-      alt: "",
-      caption: "Location exterior, accommodation, entrance, dining area or practice hall",
+      kind: "image",
+      src: "/images/home/location-safety-courtyard.webp",
+      alt: "Quiet retreat courtyard with guest-care staff walking through the stay area",
+      caption: "Retreat courtyard and stay setting",
       placeholder: "Image slot",
     },
     cards: [
