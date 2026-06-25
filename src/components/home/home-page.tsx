@@ -204,14 +204,26 @@ export function HomePage({
               <h2 id="international-title">{content.travel.heading}</h2>
               <p>{content.travel.body}</p>
             </div>
-            <div className="reassurance-list">
-              {content.travel.cards.map((card) => (
-                <article key={card.id}>
-                  <span>{card.tag}</span>
-                  <h3>{card.title}</h3>
-                  <p>{card.copy}</p>
-                </article>
-              ))}
+            <div className="international-panel">
+              <figure className="international-image">
+                <img
+                  src="/images/home/international-visitor-reassurance.webp"
+                  alt="Retreat host explaining arrival and stay details to international guests"
+                  width="1500"
+                  height="1120"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+              <div className="reassurance-list">
+                {content.travel.cards.map((card) => (
+                  <article key={card.id}>
+                    <span>{card.tag}</span>
+                    <h3>{card.title}</h3>
+                    <p>{card.copy}</p>
+                  </article>
+                ))}
+              </div>
             </div>
           </div>
         </section>
