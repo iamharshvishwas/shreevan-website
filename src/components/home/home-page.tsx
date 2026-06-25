@@ -3,6 +3,24 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import type { PublicHomeMedia, PublicHomeContent } from "@/lib/site/public-home-types";
 
+const includedMedia = [
+  {
+    src: "/images/home/included-guided-practice.webp",
+    alt: "Small retreat group seated for guided meditation practice in a calm hall",
+    caption: "Guided practice",
+  },
+  {
+    src: "/images/home/included-sattvic-meals.webp",
+    alt: "Simple sattvic vegetarian meal served at a wooden retreat table",
+    caption: "Sattvic meals",
+  },
+  {
+    src: "/images/home/included-accommodation.webp",
+    alt: "Calm retreat bedroom with natural light and greenery outside",
+    caption: "Stay clarity",
+  },
+];
+
 export function HomePage({
   content,
 }: Readonly<{ content: PublicHomeContent }>) {
@@ -126,6 +144,14 @@ export function HomePage({
             <div className="section-heading centered">
               <p className="eyebrow">{content.differentiation.eyebrow}</p>
               <h2 id="included-title">{content.differentiation.heading}</h2>
+            </div>
+            <div className="included-media-grid" aria-label="Included retreat experience images">
+              {includedMedia.map((item) => (
+                <figure key={item.src}>
+                  <img src={item.src} alt={item.alt} width="900" height="1205" loading="lazy" decoding="async" />
+                  <figcaption>{item.caption}</figcaption>
+                </figure>
+              ))}
             </div>
             <div className="included-grid">
               {content.differentiation.cards.map((card) => (
