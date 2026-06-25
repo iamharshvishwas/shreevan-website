@@ -82,6 +82,17 @@ export function HomePage({
               <p>{content.programPathways.copy}</p>
             </div>
 
+            <figure className="program-pathways-image">
+              <img
+                src="/images/home/program-pathways-retreat-corridor.webp"
+                alt="Retreat guests walking through a calm wellness corridor in Rishikesh"
+                width="1600"
+                height="1195"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+
             <div className="program-index">
               {content.programPathways.items.map((program, index) => (
                 <article className={`program-row${program.label ? " signature" : ""}`} key={program.id}>
