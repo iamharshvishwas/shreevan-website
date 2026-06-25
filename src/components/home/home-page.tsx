@@ -253,6 +253,17 @@ export function HomePage({
               <p className="eyebrow">{content.testimonials.eyebrow}</p>
               <h2 id="testimonials-title">{content.testimonials.heading}</h2>
             </div>
+            <figure className="testimonial-image">
+              <img
+                src="/images/home/testimonials-healing-story-reflection.webp"
+                alt="Retreat guest journaling quietly beside a window after guided reflection"
+                width="1500"
+                height="1120"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>Healing stories begin with lived reflection</figcaption>
+            </figure>
             <div className="testimonial-grid">
               {content.testimonials.items.map((testimonial) => (
                 <article key={testimonial.id}>
