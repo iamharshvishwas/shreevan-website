@@ -135,6 +135,10 @@ h3 { font-size: clamp(1.28rem, 1.55vw, 1.65rem); }
 
 .section { padding-block: var(--section-y); }
 .editorial-grid, .credibility-grid, .international-grid, .safety-grid, .consultation-grid, .rhythm-grid { display: grid; grid-template-columns: minmax(260px, 0.62fr) minmax(0, 1fr); gap: 72px; align-items: start; }
+.intent-grid { grid-template-columns: minmax(170px, 0.42fr) minmax(0, 1fr) minmax(300px, 0.72fr); gap: 56px; align-items: center; }
+.intent-grid .reading-column { max-width: 660px; }
+.intent-image { aspect-ratio: 4 / 5; min-height: 440px; margin: 0; overflow: hidden; border: 1px solid var(--line-sand); border-radius: 14px; background: var(--mist-100); box-shadow: var(--shadow); }
+.intent-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .reading-column { max-width: 790px; }
 .reading-column p, .credibility-grid > div:first-child p, .international-grid > div:first-child p, .safety-grid > div:last-child > p, .consultation-grid > div:first-child p, .rhythm-grid > div:first-child p { margin-top: 24px; color: var(--stone-600); }
 .section-heading { margin-bottom: 54px; }
@@ -1003,6 +1007,7 @@ main [id] { scroll-margin-top: 132px; }
   .residency-phase-grid, .residency-experience-grid, .residency-requirement-grid { grid-template-columns: 1fr; }
   .program-proof-grid div { border-top: 1px solid var(--line-mist); border-left: 0; padding: 18px 0; }
   .program-proof-grid div:first-child { border-top: 0; }
+  .intent-image { min-height: 360px; }
   .safety-image { min-height: 420px; }
   .story-hero { padding-block: 52px 68px; }
   .story-hero-copy .hero-actions { justify-content: flex-start; }
@@ -1037,6 +1042,7 @@ main [id] { scroll-margin-top: 132px; }
   .button { width: 100%; }
   .image-slot-wide { min-height: 280px; }
   .image-slot p { font-size: 1.35rem; }
+  .intent-image { min-height: 320px; }
   .proof-grid, .included-grid, .testimonial-grid, .program-row { grid-template-columns: 1fr; }
   .principle-grid, .contact-channel-grid, .video-story-grid, .journal-article-grid, .stay-room-grid, .stay-included-grid, .stay-meal-grid, .stay-gallery-grid, .booking-reassurance-grid, .booking-fit-lists, .booking-after-grid, .program-choice-grid, .payment-method-grid, .legal-card-list, .faq-standard-grid, .program-outcome-grid, .program-inclusion-list, .program-media-slots { grid-template-columns: 1fr; }
   .identity-list article { grid-template-columns: 1fr; gap: 10px; }

@@ -51,7 +51,7 @@ export function HomePage({
         </section>
 
         <section className="section intent-section" aria-labelledby="intent-title">
-          <div className="container editorial-grid">
+          <div className="container editorial-grid intent-grid">
             <p className="section-number">{content.intro.sectionNumber}</p>
             <div className="reading-column">
               <h2 id="intent-title">{content.intro.heading}</h2>
@@ -59,6 +59,16 @@ export function HomePage({
                 <p key={paragraph.id}>{paragraph.text}</p>
               ))}
             </div>
+            <figure className="intent-image">
+              <img
+                src="/images/home/woman-journaling-at-retreat-window.jpeg"
+                alt="Guest journaling beside a retreat window with the Ganga landscape outside"
+                width="896"
+                height="1152"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
           </div>
         </section>
 
