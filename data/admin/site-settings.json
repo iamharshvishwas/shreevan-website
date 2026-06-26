@@ -208,6 +208,12 @@
         "enabled": true,
         "links": [
           {
+            "id": "programs",
+            "label": "Immersive Programs",
+            "href": "/programs",
+            "enabled": true
+          },
+          {
             "id": "programs-3-day-ganga-reset",
             "label": "3-Day Ganga Sattva Reset",
             "href": "/programs/3-day-ganga-reset",
@@ -244,6 +250,12 @@
         "title": "Modalities",
         "enabled": true,
         "links": [
+          {
+            "id": "modalities",
+            "label": "Core Modalities",
+            "href": "/modalities",
+            "enabled": true
+          },
           {
             "id": "modalities-yoga-therapy",
             "label": "Yoga Therapy & Medicine",
@@ -334,5 +346,5 @@
       }
     ]
   },
-  "updatedAt": "2026-06-21T09:35:00.598Z"
+  "updatedAt": "2026-06-26T00:00:00.000Z"
 }

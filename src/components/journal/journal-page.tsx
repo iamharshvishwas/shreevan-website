@@ -85,10 +85,10 @@ export function JournalPage({ content }: Readonly<{ content: PublicJournalConten
               {editorPicks.map((articleId, index) => {
                 const article = articles.find((item) => item.id === articleId) ?? articles[index] ?? articles[0];
                 return (
-                  <button type="button" key={article.id} onClick={() => openArticle(article.id)}>
+                  <Link key={article.id} href={`/journal/${article.id}`}>
                     <strong>{String(index + 1).padStart(2, "0")}</strong>
                     <span>{article.title}</span>
-                  </button>
+                  </Link>
                 );
               })}
             </aside>
@@ -190,9 +190,9 @@ export function JournalPage({ content }: Readonly<{ content: PublicJournalConten
                         ))}
                       </div>
                       <div className="journal-card-actions">
-                        <button type="button" className="journal-read-button" onClick={() => openArticle(article.id)}>
+                        <Link className="journal-read-button" href={`/journal/${article.id}`}>
                           Read article
-                        </button>
+                        </Link>
                         <Link href={article.relatedHref}>{article.relatedLabel}</Link>
                       </div>
                     </div>
@@ -218,10 +218,10 @@ export function JournalPage({ content }: Readonly<{ content: PublicJournalConten
                   {editorPicks.map((articleId, index) => {
                     const article = articles.find((item) => item.id === articleId) ?? articles[index] ?? articles[0];
                     return (
-                      <button type="button" key={article.id} onClick={() => openArticle(article.id)}>
+                      <Link key={article.id} href={`/journal/${article.id}`}>
                         <strong>{String(index + 1).padStart(2, "0")}</strong>
                         <span>{article.title}</span>
-                      </button>
+                      </Link>
                     );
                   })}
                 </div>

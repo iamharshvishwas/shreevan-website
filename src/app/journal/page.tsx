@@ -72,7 +72,7 @@ export default async function Page() {
           url: pageUrl,
           items: journalContent.articles.map((article) => ({
             name: article.title,
-            url: `/journal#article-${article.id}`,
+            url: `/journal/${article.id}`,
             description: article.excerpt,
           })),
         })}

@@ -185,6 +185,46 @@ export function itemListSchema(params: {
   };
 }
 
+export function blogPostingSchema(article: {
+  title: string;
+  url: string;
+  description: string;
+  datePublished: string;
+  category: string;
+  tags: string[];
+  audience: string;
+}) {
+  const pageUrl = absoluteUrl(article.url);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": `${pageUrl}#blogposting`,
+    headline: article.title,
+    description: article.description,
+    url: pageUrl,
+    datePublished: article.datePublished,
+    dateModified: article.datePublished,
+    inLanguage: "en",
+    articleSection: article.category,
+    keywords: article.tags.join(", "),
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${pageUrl}#webpage`,
+    },
+    author: {
+      "@id": organizationId(),
+    },
+    publisher: {
+      "@id": organizationId(),
+    },
+    audience: {
+      "@type": "Audience",
+      audienceType: article.audience,
+    },
+  };
+}
+
 export function programServiceSchema(program: {
   name: string;
   url: string;
