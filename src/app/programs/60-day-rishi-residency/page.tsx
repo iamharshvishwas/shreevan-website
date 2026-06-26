@@ -1,31 +1,21 @@
 import type { Metadata } from "next";
 import { SixtyDayRishiResidencyPage } from "@/components/programs/sixty-day-rishi-residency-page";
 import { JsonLd } from "@/lib/schema/json-ld";
-import { breadcrumbSchema } from "@/lib/schema/site-schema";
+import { breadcrumbSchema, programServiceSchema, webPageSchema } from "@/lib/schema/site-schema";
 import { siteConfig } from "@/config/site";
 
 const pageUrl = `${siteConfig.url}/programs/60-day-rishi-residency`;
+const pageDescription =
+  "A 60-day Shreevan Wellness conscious living residency in Rishikesh for advanced lifestyle transformation, yogic living, mentoring and integration.";
 
-const programSchema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
+const programSchema = programServiceSchema({
   name: "60-Day Rishi Tantra Conscious Living Residency",
   serviceType: "Wellness residency program",
-  provider: {
-    "@type": "Organization",
-    name: siteConfig.name,
-    url: siteConfig.url,
-  },
-  areaServed: ["United States", "Canada", "United Kingdom", "India"],
   url: pageUrl,
-  description:
-    "A 60-day Shreevan Wellness conscious living residency in Rishikesh for advanced lifestyle transformation, yogic living, mentoring and integration.",
-  audience: {
-    "@type": "Audience",
-    audienceType:
-      "Burned-out executives, entrepreneurs, wellness professionals, digital nomads, life transition seekers and serious spiritual seekers",
-  },
-};
+  description: pageDescription,
+  audienceType:
+    "Burned-out executives, entrepreneurs, wellness professionals, digital nomads, life transition seekers and serious spiritual seekers",
+});
 
 export const metadata: Metadata = {
   title: "60-Day Rishi Tantra Conscious Living Residency",
@@ -45,6 +35,13 @@ export default function Page() {
           { name: "Programs", url: `${siteConfig.url}/programs` },
           { name: "60-Day Rishi Tantra Conscious Living Residency", url: pageUrl },
         ])}
+      />
+      <JsonLd
+        data={webPageSchema({
+          name: "60-Day Rishi Tantra Conscious Living Residency",
+          url: pageUrl,
+          description: pageDescription,
+        })}
       />
       <JsonLd data={programSchema} />
       <SixtyDayRishiResidencyPage />

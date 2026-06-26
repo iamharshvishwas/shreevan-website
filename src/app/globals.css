@@ -146,6 +146,29 @@ h3 { font-size: clamp(1.28rem, 1.55vw, 1.65rem); }
 .split-heading { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 430px); gap: 64px; align-items: end; }
 .split-heading > p { color: var(--stone-600); }
 
+.seo-hub-hero { background: radial-gradient(circle at 88% 12%, rgba(181, 139, 58, 0.14), transparent 30%), var(--sand-050); }
+.seo-hub-hero-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.42fr); gap: 72px; align-items: center; }
+.seo-hub-hero .hero-lede { max-width: 780px; margin-inline: 0; }
+.seo-hub-hero .hero-actions { justify-content: flex-start; }
+.seo-hub-note { border: 1px solid var(--line-sand); border-radius: var(--radius-card); background: rgba(255, 255, 255, 0.64); box-shadow: var(--shadow-md); padding: 28px; }
+.seo-hub-note span, .seo-info-card span { display: block; color: var(--moss-600); font-size: 0.76rem; font-weight: 850; letter-spacing: 0.1em; line-height: 1.25; text-transform: uppercase; }
+.seo-hub-note p { margin-top: 14px; color: var(--stone-600); line-height: 1.6; }
+.seo-list-section { background: var(--white); }
+.seo-card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.seo-info-card { min-height: 270px; border: 1px solid var(--line-sand); border-radius: var(--radius-card); background: var(--white); padding: 28px; }
+.seo-info-card h3 { margin-top: 18px; }
+.seo-info-card p { margin-top: 14px; color: var(--stone-600); line-height: 1.58; }
+.seo-info-card .text-link { display: inline-flex; margin-top: 24px; }
+.seo-two-column { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 72px; align-items: start; }
+.seo-check-list { display: grid; gap: 12px; margin: 28px 0 0; padding: 0; list-style: none; }
+.seo-check-list li { border: 1px solid var(--line-sand); border-radius: var(--radius-callout); background: var(--sand-050); color: var(--forest-700); padding: 16px 18px; font-weight: 780; line-height: 1.45; }
+.boundary-list li { border-color: rgba(169, 95, 69, 0.28); background: #fff8ef; }
+.seo-related-section { background: var(--sand-050); }
+.seo-final-cta { background: var(--forest-950); color: rgba(232, 240, 236, 0.78); }
+.seo-final-panel { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 42px; align-items: center; border: 1px solid rgba(211, 224, 216, 0.2); border-radius: var(--radius-card); background: rgba(255, 255, 255, 0.045); padding: 42px; }
+.seo-final-panel h2 { color: var(--white); }
+.seo-final-panel p:not(.eyebrow) { margin-top: 18px; color: rgba(232, 240, 236, 0.76); }
+
 .program-pathways-image { aspect-ratio: 16 / 7; min-height: 380px; margin: -18px 0 52px; overflow: hidden; border: 1px solid var(--line-sand); border-radius: 14px; background: var(--mist-100); box-shadow: var(--shadow); }
 .program-pathways-image img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .program-index { border-top: 1px solid var(--line-sand); }
@@ -1006,7 +1029,7 @@ main [id] { scroll-margin-top: 132px; }
   .nav-menu { position: static; min-width: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; padding: 0 0 10px 14px; }
   .nav-menu a { padding: 10px 12px; }
   .menu-toggle { display: block; }
-  .editorial-grid, .credibility-grid, .international-grid, .safety-grid, .consultation-grid, .rhythm-grid, .form-shell, .split-heading, .footer-grid, .story-hero-grid, .stories-hero-grid, .story-marker-grid, .identity-grid, .origin-grid, .care-path, .standards-grid, .featured-story-panel, .story-card-grid, .outcome-story-grid, .consent-grid, .journal-archive-hero-grid, .journal-filter-shell, .journal-layout, .journal-reader-panel, .journal-exit-panel, .stay-hero-grid, .stay-marker-grid, .stay-food-grid, .stay-reassurance-grid, .stay-confirm-panel, .stay-cta-panel, .booking-conversation-grid, .booking-path-grid, .booking-fit-grid, .booking-fit-lists, .booking-form-shell, .booking-after-grid, .booking-last-word-panel, .contact-hero-grid, .location-grid, .visitor-grid, .contact-form-shell, .booking-hero-grid, .qualification-shell, .payment-hero-grid, .payment-grid, .checkout-grid, .payment-gateway-panel, .payment-support-grid, .legal-grid, .faq-hero-grid, .faq-decision-grid, .faq-layout, .faq-topic-heading, .faq-responsible-grid, .faq-standard-grid, .faq-final-panel, .program-hero-grid, .program-fit-grid, .program-inclusions-grid, .program-media-grid, .program-cta-panel, .program-pricing-panel, .residency-positioning-panel, .residency-domain-grid, .residency-curriculum-grid, .residency-mentoring-grid, .residency-support-grid, .residency-graduation-grid { grid-template-columns: 1fr; }
+  .editorial-grid, .credibility-grid, .international-grid, .safety-grid, .consultation-grid, .rhythm-grid, .form-shell, .split-heading, .footer-grid, .story-hero-grid, .stories-hero-grid, .story-marker-grid, .identity-grid, .origin-grid, .care-path, .standards-grid, .featured-story-panel, .story-card-grid, .outcome-story-grid, .consent-grid, .journal-archive-hero-grid, .journal-filter-shell, .journal-layout, .journal-reader-panel, .journal-exit-panel, .stay-hero-grid, .stay-marker-grid, .stay-food-grid, .stay-reassurance-grid, .stay-confirm-panel, .stay-cta-panel, .booking-conversation-grid, .booking-path-grid, .booking-fit-grid, .booking-fit-lists, .booking-form-shell, .booking-after-grid, .booking-last-word-panel, .contact-hero-grid, .location-grid, .visitor-grid, .contact-form-shell, .booking-hero-grid, .qualification-shell, .payment-hero-grid, .payment-grid, .checkout-grid, .payment-gateway-panel, .payment-support-grid, .legal-grid, .faq-hero-grid, .faq-decision-grid, .faq-layout, .faq-topic-heading, .faq-responsible-grid, .faq-standard-grid, .faq-final-panel, .program-hero-grid, .program-fit-grid, .program-inclusions-grid, .program-media-grid, .program-cta-panel, .program-pricing-panel, .residency-positioning-panel, .residency-domain-grid, .residency-curriculum-grid, .residency-mentoring-grid, .residency-support-grid, .residency-graduation-grid, .seo-hub-hero-grid, .seo-two-column, .seo-final-panel { grid-template-columns: 1fr; }
   .checkout-side-panel { position: static; }
   .legal-aside { position: static; }
   .faq-category-nav { position: static; }
@@ -1063,7 +1086,7 @@ main [id] { scroll-margin-top: 132px; }
   .testimonial-image { aspect-ratio: 4 / 3; min-height: 250px; margin-bottom: 28px; }
   .proof-grid, .included-media-grid, .included-grid, .testimonial-grid, .program-row { grid-template-columns: 1fr; }
   .included-media-grid { margin-bottom: 28px; }
-  .principle-grid, .contact-channel-grid, .video-story-grid, .journal-article-grid, .stay-room-grid, .stay-included-grid, .stay-meal-grid, .stay-gallery-grid, .booking-reassurance-grid, .booking-fit-lists, .booking-after-grid, .program-choice-grid, .payment-method-grid, .legal-card-list, .faq-standard-grid, .program-outcome-grid, .program-inclusion-list, .program-media-slots { grid-template-columns: 1fr; }
+  .principle-grid, .contact-channel-grid, .video-story-grid, .journal-article-grid, .stay-room-grid, .stay-included-grid, .stay-meal-grid, .stay-gallery-grid, .booking-reassurance-grid, .booking-fit-lists, .booking-after-grid, .program-choice-grid, .payment-method-grid, .legal-card-list, .faq-standard-grid, .program-outcome-grid, .program-inclusion-list, .program-media-slots, .seo-card-grid { grid-template-columns: 1fr; }
   .identity-list article { grid-template-columns: 1fr; gap: 10px; }
   .visitor-question-list article { grid-template-columns: 1fr; gap: 10px; }
   .proof-grid div { border-top: 1px solid var(--line-mist); border-left: 0; padding: 16px 0; }
@@ -1078,7 +1101,7 @@ main [id] { scroll-margin-top: 132px; }
   .suitability-form { padding: 22px; }
   .suitability-form .button, .contact-form .button { width: 100%; }
   .booking-assurance, .booking-conversation-card, .booking-form-note, .qualification-form, .qualification-success, .payment-summary-card, .checkout-form, .checkout-side-panel, .payment-gateway-panel, .payment-terms-card, .faq-hero-card, .faq-category-nav > div, .faq-final-panel { padding: 22px; }
-  .program-outcome-panel, .program-day-card, .program-online-grid article, .program-inclusion-list li, .program-modality-grid article, .program-cta-panel, .program-phase-grid article, .program-metric-grid article, .program-deliverable-grid article, .program-pricing-panel, .program-week-journey article, .journal-reader-copy, .journal-article-body, .journal-sidebar-card, .journal-exit-panel, .stay-room-body, .stay-included-grid article, .stay-meal-grid article, .stay-cta-panel, .booking-fit-lists article, .booking-after-grid article, .booking-last-word-panel, .faq-standard-grid article, .residency-positioning-panel, .residency-domain-grid article, .residency-phase-grid article, .residency-curriculum-grid article, .residency-mentoring-grid article, .residency-support-grid article, .residency-experience-grid article, .residency-requirement-grid article { padding: 22px; }
+  .program-outcome-panel, .program-day-card, .program-online-grid article, .program-inclusion-list li, .program-modality-grid article, .program-cta-panel, .program-phase-grid article, .program-metric-grid article, .program-deliverable-grid article, .program-pricing-panel, .program-week-journey article, .journal-reader-copy, .journal-article-body, .journal-sidebar-card, .journal-exit-panel, .stay-room-body, .stay-included-grid article, .stay-meal-grid article, .stay-cta-panel, .booking-fit-lists article, .booking-after-grid article, .booking-last-word-panel, .faq-standard-grid article, .residency-positioning-panel, .residency-domain-grid article, .residency-phase-grid article, .residency-curriculum-grid article, .residency-mentoring-grid article, .residency-support-grid article, .residency-experience-grid article, .residency-requirement-grid article, .seo-info-card, .seo-hub-note, .seo-final-panel { padding: 22px; }
   .program-week-grid article, .program-outcome-category-grid article, .program-experience-group-grid article, .program-phase-grid article, .program-deliverable-grid article, .residency-domain-grid article, .residency-phase-grid article, .residency-mentoring-grid article, .residency-support-grid article, .residency-requirement-grid article { min-height: auto; }
   .booking-assurance li, .payment-checklist li { grid-template-columns: 44px minmax(0, 1fr); gap: 14px; }
   .program-summary-card { grid-template-columns: 56px minmax(0, 1fr); padding: 16px; }

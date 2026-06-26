@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { HomePage } from "@/components/home/home-page";
 import { JsonLd } from "@/lib/schema/json-ld";
-import { breadcrumbSchema } from "@/lib/schema/site-schema";
+import { breadcrumbSchema, webPageSchema } from "@/lib/schema/site-schema";
 import { getPublicHomeContent } from "@/lib/site/public-home";
 import { getPublicPageContent } from "@/lib/site/public-pages";
 import { getPublicSiteOrigin, getPublicSiteSettings } from "@/lib/site/public-settings";
@@ -32,15 +32,23 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const [settings, homeContent] = await Promise.all([
+  const [settings, homeContent, homePage] = await Promise.all([
     getPublicSiteSettings(),
     getPublicHomeContent(),
+    getPublicPageContent("home"),
   ]);
   const siteOrigin = getPublicSiteOrigin(settings);
 
   return (
     <>
       <JsonLd data={breadcrumbSchema([{ name: "Home", url: siteOrigin }])} />
+      <JsonLd
+        data={webPageSchema({
+          name: homePage.seo.title,
+          url: siteOrigin,
+          description: homePage.seo.description,
+        })}
+      />
       <HomePage content={homeContent} />
     </>
   );

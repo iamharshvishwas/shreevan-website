@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Lora } from "next/font/google";
 import Script from "next/script";
 import { JsonLd } from "@/lib/schema/json-ld";
-import { localBusinessSchema, organizationSchema } from "@/lib/schema/site-schema";
+import { localBusinessSchema, organizationSchema, websiteSchema } from "@/lib/schema/site-schema";
 import { siteConfig } from "@/config/site";
 import { CrmWidget } from "@/components/integrations/crm-widget";
 import { PublicSiteSettingsProvider } from "@/components/site/public-settings-provider";
@@ -35,6 +35,30 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${settings.brand.name}`,
     },
     description: settings.brand.description,
+    applicationName: settings.brand.name,
+    publisher: settings.brand.name,
+    openGraph: {
+      type: "website",
+      siteName: settings.brand.name,
+      title: `${settings.brand.name} | ${settings.brand.tagline}`,
+      description: settings.brand.description,
+      url: siteOrigin,
+      locale: "en_US",
+      images: [
+        {
+          url: `${siteOrigin}${siteConfig.logos.logoOnForest}`,
+          width: 1200,
+          height: 900,
+          alt: `${settings.brand.name} logo`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${settings.brand.name} | ${settings.brand.tagline}`,
+      description: settings.brand.description,
+      images: [`${siteOrigin}${siteConfig.logos.logoOnForest}`],
+    },
     icons: {
       icon: siteConfig.logos.favicon,
       shortcut: siteConfig.logos.favicon,
@@ -116,6 +140,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         </noscript>
         <PublicSiteSettingsProvider settings={settings}>
           <JsonLd data={organizationSchema(settings)} />
+          <JsonLd data={websiteSchema(settings)} />
           <JsonLd data={localBusinessSchema(settings)} />
           {children}
           <CrmWidget />

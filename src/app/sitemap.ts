@@ -4,6 +4,12 @@ import { getPublicSiteOrigin, getPublicSiteSettings } from "@/lib/site/public-se
 
 export const dynamic = "force-dynamic";
 
+function routeLastModified(lastReviewedAt: string) {
+  const parsed = new Date(lastReviewedAt);
+
+  return Number.isNaN(parsed.getTime()) ? new Date("2026-06-20T00:00:00.000Z") : parsed;
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const settings = await getPublicSiteSettings();
 
@@ -12,12 +18,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   const siteOrigin = getPublicSiteOrigin(settings);
-  const lastModified = new Date("2026-06-20T00:00:00.000Z");
   const routes = await getPublicSitemapRoutes();
 
   return routes.map((route) => ({
     url: `${siteOrigin}${route.href === "/" ? "" : route.href}`,
-    lastModified,
+    lastModified: routeLastModified(route.lastReviewedAt),
     changeFrequency: route.changeFrequency,
     priority: route.priority,
   }));

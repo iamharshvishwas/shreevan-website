@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { AboutFounderPage } from "@/components/about/about-founder-page";
 import { JsonLd } from "@/lib/schema/json-ld";
-import { breadcrumbSchema } from "@/lib/schema/site-schema";
+import { breadcrumbSchema, webPageSchema } from "@/lib/schema/site-schema";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -21,6 +21,15 @@ export default function Page() {
           { name: "Home", url: siteConfig.url },
           { name: "Our Story", url: `${siteConfig.url}/about-founder` },
         ])}
+      />
+      <JsonLd
+        data={webPageSchema({
+          type: "AboutPage",
+          name: "Our Story",
+          url: `${siteConfig.url}/about-founder`,
+          description:
+            "Meet the story and founder intention behind Shreevan Wellness, a responsible premium retreat experience in Rishikesh, India.",
+        })}
       />
       <AboutFounderPage />
     </>

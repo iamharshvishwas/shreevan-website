@@ -1,30 +1,19 @@
 import type { Metadata } from "next";
 import { ThreeDayGangaResetPage } from "@/components/programs/three-day-ganga-reset-page";
 import { JsonLd } from "@/lib/schema/json-ld";
-import { breadcrumbSchema } from "@/lib/schema/site-schema";
+import { breadcrumbSchema, programServiceSchema, webPageSchema } from "@/lib/schema/site-schema";
 import { siteConfig } from "@/config/site";
 
 const pageUrl = `${siteConfig.url}/programs/3-day-ganga-reset`;
+const pageDescription =
+  "A 3-day Shreevan Wellness retreat in Rishikesh designed to help participants pause, breathe, reconnect and leave with a simple wellness routine.";
 
-const programSchema = {
-  "@context": "https://schema.org",
-  "@type": "Service",
+const programSchema = programServiceSchema({
   name: "3-Day Ganga Sattva Reset",
-  serviceType: "Wellness retreat program",
-  provider: {
-    "@type": "Organization",
-    name: siteConfig.name,
-    url: siteConfig.url,
-  },
-  areaServed: ["United States", "Canada", "United Kingdom", "India"],
   url: pageUrl,
-  description:
-    "A 3-day Shreevan Wellness retreat in Rishikesh designed to help participants pause, breathe, reconnect and leave with a simple wellness routine.",
-  audience: {
-    "@type": "Audience",
-    audienceType: "Busy professionals, entrepreneurs, corporate employees, solo travelers and first-time retreat guests",
-  },
-};
+  description: pageDescription,
+  audienceType: "Busy professionals, entrepreneurs, corporate employees, solo travelers and first-time retreat guests",
+});
 
 export const metadata: Metadata = {
   title: "3-Day Ganga Sattva Reset",
@@ -44,6 +33,13 @@ export default function Page() {
           { name: "Programs", url: `${siteConfig.url}/programs` },
           { name: "3-Day Ganga Sattva Reset", url: pageUrl },
         ])}
+      />
+      <JsonLd
+        data={webPageSchema({
+          name: "3-Day Ganga Sattva Reset",
+          url: pageUrl,
+          description: pageDescription,
+        })}
       />
       <JsonLd data={programSchema} />
       <ThreeDayGangaResetPage />

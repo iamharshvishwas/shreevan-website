@@ -18,6 +18,7 @@ export const coreRoutes: SiteRoute[] = [
 ];
 
 export const modalityRoutes: SiteRoute[] = [
+  { href: "/modalities", label: "Core Modalities", intent: "educational" },
   { href: "/modalities/yoga-therapy", label: "Yoga Therapy & Medicine", intent: "educational" },
   { href: "/modalities/guided-meditation", label: "Guided Meditation & Mind Mastery", intent: "educational" },
   { href: "/modalities/sound-healing", label: "Sound Healing & Vibrational Therapy", intent: "educational" },
@@ -27,6 +28,7 @@ export const modalityRoutes: SiteRoute[] = [
 ];
 
 export const programRoutes: SiteRoute[] = [
+  { href: "/programs", label: "Immersive Programs", intent: "commercial" },
   { href: "/programs/3-day-ganga-reset", label: "3-Day Ganga Sattva Reset", intent: "commercial" },
   { href: "/programs/7-day-foundation", label: "7-Day Ganga Sattva Foundation", intent: "commercial" },
   { href: "/programs/14-day-transformation", label: "14-Day Ganga Sattva Transformation", intent: "commercial" },

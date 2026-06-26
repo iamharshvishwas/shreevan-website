@@ -11,5 +11,6 @@ export async function getPublicSitemapRoutes() {
       href: route.path,
       priority: route.priority,
       changeFrequency: route.changeFrequency,
+      lastReviewedAt: route.lastReviewedAt,
     }));
 }

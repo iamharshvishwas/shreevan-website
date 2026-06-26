@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { JournalPage } from "@/components/journal/journal-page";
 import { siteConfig } from "@/config/site";
 import { JsonLd } from "@/lib/schema/json-ld";
-import { breadcrumbSchema } from "@/lib/schema/site-schema";
+import { breadcrumbSchema, itemListSchema, webPageSchema } from "@/lib/schema/site-schema";
 import { getPublicJournalContent } from "@/lib/site/public-content-trust";
 
 export const dynamic = "force-dynamic";
@@ -56,7 +56,27 @@ export default async function Page() {
           { name: "Journal", url: pageUrl },
         ])}
       />
+      <JsonLd
+        data={webPageSchema({
+          type: "CollectionPage",
+          name: "Shreevan Wellness Journal",
+          url: pageUrl,
+          description:
+            "Educational wellness resources from Shreevan Wellness on retreat selection, yoga, meditation, sattvic living, Rishikesh preparation and responsible spiritual care.",
+        })}
+      />
       <JsonLd data={journalSchema} />
+      <JsonLd
+        data={itemListSchema({
+          name: "Shreevan Wellness journal articles",
+          url: pageUrl,
+          items: journalContent.articles.map((article) => ({
+            name: article.title,
+            url: `/journal#article-${article.id}`,
+            description: article.excerpt,
+          })),
+        })}
+      />
       <JournalPage content={journalContent} />
     </>
   );

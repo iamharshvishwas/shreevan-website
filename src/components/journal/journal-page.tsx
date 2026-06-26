@@ -168,7 +168,7 @@ export function JournalPage({ content }: Readonly<{ content: PublicJournalConten
 
               <div className="journal-article-grid">
                 {filteredArticles.map((article) => (
-                  <article className="journal-article-card" key={article.id}>
+                  <article className="journal-article-card" id={`article-${article.id}`} key={article.id}>
                     <button
                       type="button"
                       className="journal-article-media"

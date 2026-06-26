@@ -11,7 +11,7 @@ export type AdminSeoRoute = {
   id: string;
   label: string;
   path: string;
-  intent: "core" | "commercial" | "transactional" | "legal";
+  intent: "core" | "educational" | "commercial" | "transactional" | "legal";
   indexable: boolean;
   sitemapEnabled: boolean;
   priority: number;
@@ -135,6 +135,20 @@ export const defaultAdminSeoLeads: AdminSeoLeadsStore = {
       lastReviewedAt: "2026-06-21",
     },
     {
+      id: "programs",
+      label: "Immersive Programs",
+      path: "/programs",
+      intent: "commercial",
+      indexable: true,
+      sitemapEnabled: true,
+      priority: 0.8,
+      changeFrequency: "monthly",
+      focusKeyword: "wellness retreat programs Rishikesh",
+      qaStatus: "ready",
+      notes: "Parent program hub prevents breadcrumb links pointing to a missing route.",
+      lastReviewedAt: "2026-06-26",
+    },
+    {
       id: "3-day-ganga-reset",
       label: "3-Day Ganga Sattva Reset",
       path: "/programs/3-day-ganga-reset",
@@ -203,6 +217,104 @@ export const defaultAdminSeoLeads: AdminSeoLeadsStore = {
       qaStatus: "ready",
       notes: "Advanced pathway. Suitability boundaries should stay visible.",
       lastReviewedAt: "2026-06-21",
+    },
+    {
+      id: "modalities",
+      label: "Core Modalities",
+      path: "/modalities",
+      intent: "educational",
+      indexable: true,
+      sitemapEnabled: true,
+      priority: 0.74,
+      changeFrequency: "monthly",
+      focusKeyword: "wellness retreat modalities Rishikesh",
+      qaStatus: "ready",
+      notes: "Educational hub for modality search intent.",
+      lastReviewedAt: "2026-06-26",
+    },
+    {
+      id: "yoga-therapy",
+      label: "Yoga Therapy & Medicine",
+      path: "/modalities/yoga-therapy",
+      intent: "educational",
+      indexable: true,
+      sitemapEnabled: true,
+      priority: 0.68,
+      changeFrequency: "monthly",
+      focusKeyword: "yoga therapy retreat Rishikesh",
+      qaStatus: "ready",
+      notes: "Educational modality page linked from program pages.",
+      lastReviewedAt: "2026-06-26",
+    },
+    {
+      id: "guided-meditation",
+      label: "Guided Meditation & Mind Mastery",
+      path: "/modalities/guided-meditation",
+      intent: "educational",
+      indexable: true,
+      sitemapEnabled: true,
+      priority: 0.68,
+      changeFrequency: "monthly",
+      focusKeyword: "guided meditation retreat Rishikesh",
+      qaStatus: "ready",
+      notes: "Educational modality page linked from program and journal pages.",
+      lastReviewedAt: "2026-06-26",
+    },
+    {
+      id: "sound-healing",
+      label: "Sound Healing & Vibrational Therapy",
+      path: "/modalities/sound-healing",
+      intent: "educational",
+      indexable: true,
+      sitemapEnabled: true,
+      priority: 0.66,
+      changeFrequency: "monthly",
+      focusKeyword: "sound healing retreat Rishikesh",
+      qaStatus: "ready",
+      notes: "Educational modality page linked from program and journal pages.",
+      lastReviewedAt: "2026-06-26",
+    },
+    {
+      id: "panchkarma-detox",
+      label: "Panchkarma & Deep Detox",
+      path: "/modalities/panchkarma-detox",
+      intent: "educational",
+      indexable: true,
+      sitemapEnabled: true,
+      priority: 0.66,
+      changeFrequency: "monthly",
+      focusKeyword: "Panchkarma detox retreat India",
+      qaStatus: "ready",
+      notes: "Educational modality page with strict responsible-detox boundaries.",
+      lastReviewedAt: "2026-06-26",
+    },
+    {
+      id: "chakra-opening",
+      label: "Chakra Opening & Energy Balancing",
+      path: "/modalities/chakra-opening",
+      intent: "educational",
+      indexable: true,
+      sitemapEnabled: true,
+      priority: 0.64,
+      changeFrequency: "monthly",
+      focusKeyword: "chakra opening retreat India",
+      qaStatus: "ready",
+      notes: "Educational modality page with non-clinical spiritual language.",
+      lastReviewedAt: "2026-06-26",
+    },
+    {
+      id: "spiritual-sadhanas",
+      label: "Spiritual Sadhanas & Yogic Philosophy",
+      path: "/modalities/spiritual-sadhanas",
+      intent: "educational",
+      indexable: true,
+      sitemapEnabled: true,
+      priority: 0.66,
+      changeFrequency: "monthly",
+      focusKeyword: "spiritual sadhana retreat Rishikesh",
+      qaStatus: "ready",
+      notes: "Educational modality page for yogic philosophy and practice discipline.",
+      lastReviewedAt: "2026-06-26",
     },
     {
       id: "testimonials",
@@ -377,7 +489,11 @@ function frequencyValue(value: unknown, fallback: AdminSitemapFrequency): AdminS
 }
 
 function intentValue(value: unknown, fallback: AdminSeoRoute["intent"]): AdminSeoRoute["intent"] {
-  return value === "core" || value === "commercial" || value === "transactional" || value === "legal"
+  return value === "core" ||
+    value === "educational" ||
+    value === "commercial" ||
+    value === "transactional" ||
+    value === "legal"
     ? value
     : fallback;
 }
