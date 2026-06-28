@@ -167,6 +167,16 @@ export function AboutFounderPage() {
               </p>
             </div>
 
+            <figure className="program-pathways-image">
+              <img
+                src="/images/about/founder-principles-practice-cues.jpeg"
+                alt="Practice cues for awareness, breath, stillness and integration displayed in a retreat practice space"
+                width="2200"
+                height="1643"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
             <div className="principle-grid">
               {founderPrinciples.map(([title, copy], index) => (
                 <article key={title}>
