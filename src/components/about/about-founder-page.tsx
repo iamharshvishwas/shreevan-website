@@ -214,6 +214,16 @@ export function AboutFounderPage() {
               <p className="eyebrow">Guest care pathway</p>
               <h2 id="care-title">A serious retreat needs a clear support rhythm</h2>
             </div>
+            <figure className="program-pathways-image">
+              <img
+                src="/images/about/guest-care-pathway.jpeg"
+                alt="International retreat guests in a calm guest-care conversation with a Shreevan facilitator"
+                width="2200"
+                height="1228"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
             <div className="care-path">
               {guestCareSteps.map((step, index) => (
                 <article key={step.title}>
