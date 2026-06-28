@@ -127,7 +127,7 @@ export function AboutFounderPage() {
         </section>
 
         <section className="section founder-section" aria-labelledby="founder-title">
-          <div className="container editorial-grid">
+          <div className="container editorial-grid intent-grid">
             <p className="section-number">01 Founder intention</p>
             <div className="reading-column">
               <h2 id="founder-title">The work begins with making the space feel safe</h2>
@@ -141,6 +141,16 @@ export function AboutFounderPage() {
                 practices are presented with respect, boundaries and practical guest care.
               </p>
             </div>
+            <figure className="intent-image">
+              <img
+                src="/images/about/founder-intention-journal.jpeg"
+                alt="Founder intention notes and retreat planning materials on a wooden table"
+                width="1195"
+                height="1600"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
           </div>
         </section>
 
