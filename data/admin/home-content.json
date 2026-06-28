@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-22T08:21:36.591Z",
+  "updatedAt": "2026-06-28T00:00:00.000Z",
   "hero": {
     "eyebrow": "Premium wellness retreats in India",
     "title": "Return to Your True Self",
@@ -25,10 +25,10 @@
   },
   "mediaBand": {
     "media": {
-      "kind": "",
-      "src": "",
-      "alt": "",
-      "caption": "Real retreat setting, accommodation, practice space, meals or soft morning nature.",
+      "kind": "image",
+      "src": "/images/home/hero-after-retreat-mats.webp",
+      "alt": "Morning retreat practice mats prepared in a quiet courtyard near the mountains and river",
+      "caption": "Morning practice space prepared before guests arrive.",
       "placeholder": "Image slot"
     }
   },
