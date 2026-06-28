@@ -235,6 +235,16 @@ export function AboutFounderPage() {
                 Shreevan Wellness should never need exaggerated promises to convert the right guest.
                 The page should communicate discernment, care and professionalism from the first read.
               </p>
+              <figure className="international-image">
+                <img
+                  src="/images/about/responsible-wellness-standards.jpeg"
+                  alt="Responsible wellness documents and guest-care materials arranged on a wooden retreat table"
+                  width="1600"
+                  height="1195"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
             </div>
             <ul className="standards-list">
               {trustStandards.map((standard) => (
