@@ -333,9 +333,18 @@ export function ThreeDayGangaResetPage() {
                 or daily rhythm.
               </p>
               <div className="program-media-slots">
-                <div className="image-slot">
-                  <span>Image slot</span>
-                  <p>Practice space</p>
+                <div className="image-slot home-media-slot has-media">
+                  <img
+                    src="/images/programs/3-day-beginner-friendly-daily-practice.jpeg"
+                    alt="Beginner-friendly guided daily practice in a calm Ganga-side retreat space"
+                    width="2200"
+                    height="1642"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="home-media-caption">
+                    <span>Beginner-friendly daily practice</span>
+                  </div>
                 </div>
                 <div className="image-slot">
                   <span>Image slot</span>
