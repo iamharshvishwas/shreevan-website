@@ -181,10 +181,16 @@ export function AboutFounderPage() {
 
         <section className="section origin-section" aria-labelledby="origin-title">
           <div className="container origin-grid">
-            <div className="image-slot origin-image">
-              <span>Image slot</span>
-              <p>Rishikesh, Maa Ganga, practice hall or natural retreat surroundings</p>
-            </div>
+            <figure className="intent-image origin-image">
+              <img
+                src="/images/about/rishikesh-roots-origin.jpeg"
+                alt="Open retreat practice corridor in Rishikesh with mats facing the mountain and river landscape"
+                width="1195"
+                height="1600"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
             <div>
               <p className="eyebrow">Rishikesh roots</p>
               <h2 id="origin-title">The location is part of the experience, not a background detail</h2>
