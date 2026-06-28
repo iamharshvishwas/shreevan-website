@@ -151,10 +151,16 @@ export function ThreeDayGangaResetPage() {
             </div>
 
             <div className="program-hero-media">
-              <div className="image-slot program-hero-slot">
-                <span>Image slot</span>
-                <p>Ganga-side arrival, sunrise practice, quiet room, meal table or nature walk</p>
-              </div>
+              <figure className="intent-image program-hero-slot">
+                <img
+                  src="/images/programs/3-day-ganga-reset-arrival-calm.jpeg"
+                  alt="Guest arriving into a calm Ganga-side retreat setting in Rishikesh"
+                  width="1195"
+                  height="1600"
+                  loading="eager"
+                  decoding="async"
+                />
+              </figure>
               <aside className="program-summary-card" aria-label="Program summary">
                 <Image src={siteConfig.logos.symbol} alt="" width={72} height={72} />
                 <dl>
