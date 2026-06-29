@@ -385,9 +385,18 @@ export function SevenDayFoundationPage() {
                 they book a call.
               </p>
               <div className="program-media-slots">
-                <div className="image-slot">
-                  <span>Image slot</span>
-                  <p>Workshop circle</p>
+                <div className="image-slot home-media-slot has-media">
+                  <img
+                    src="/images/programs/7-day-foundation-workshop-circle.jpeg"
+                    alt="Guided workshop circle during the 7-day foundation retreat with group reflection and journaling"
+                    width="2200"
+                    height="1642"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="home-media-caption">
+                    <span>Workshop circle</span>
+                  </div>
                 </div>
                 <div className="image-slot">
                   <span>Image slot</span>
