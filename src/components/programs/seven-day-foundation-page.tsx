@@ -319,7 +319,7 @@ export function SevenDayFoundationPage() {
 
         <section className="section program-inclusions-section" aria-labelledby="rhythm-title">
           <div className="container program-inclusions-grid">
-            <div>
+            <div style={{ minWidth: 0 }}>
               <p className="eyebrow">Daily schedule</p>
               <h2 id="rhythm-title">A clear rhythm for body, mind and integration</h2>
               <p>
@@ -327,13 +327,25 @@ export function SevenDayFoundationPage() {
                 and evening integration.
               </p>
             </div>
-            <div className="program-rhythm-table">
-              {dailyRhythm.map(([time, activity]) => (
-                <div key={`${time}-${activity}`}>
-                  <span>{time}</span>
-                  <strong>{activity}</strong>
-                </div>
-              ))}
+            <div style={{ minWidth: 0 }}>
+              <figure className="intent-image" style={{ marginBottom: 32 }}>
+                <img
+                  src="/images/programs/7-day-foundation-integration-reflection.jpeg"
+                  alt="Guest in quiet reflection during the integration phase of the 7-day foundation retreat"
+                  width="1194"
+                  height="1600"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+              <div className="program-rhythm-table">
+                {dailyRhythm.map(([time, activity]) => (
+                  <div key={`${time}-${activity}`}>
+                    <span>{time}</span>
+                    <strong>{activity}</strong>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
