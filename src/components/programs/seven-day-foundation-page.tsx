@@ -354,19 +354,32 @@ export function SevenDayFoundationPage() {
 
         <section className="section program-inclusions-section" aria-labelledby="included-title">
           <div className="container program-inclusions-grid">
-            <div>
-              <p className="eyebrow">What is included</p>
-              <h2 id="included-title">A complete foundation package</h2>
+            <div style={{ minWidth: 0 }}>
+              <p className="eyebrow">Accommodation and inclusions</p>
+              <h2 id="included-title">Quiet Stay at Shreevan</h2>
               <p>
-                Keep final venue, accommodation category, dates, room type, pricing and transfer details
-                confirmed during consultation until the operational package is finalized.
+                Guests should be able to see the room standard, privacy and restful atmosphere before they
+                enquire. Final accommodation category, dates, pricing and transfer details can still be
+                confirmed during consultation.
               </p>
             </div>
-            <ul className="program-inclusion-list">
-              {inclusions.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+            <div style={{ minWidth: 0 }}>
+              <figure className="international-image" style={{ marginBottom: 32 }}>
+                <img
+                  src="/images/programs/7-day-foundation-quiet-stay.jpeg"
+                  alt="Quiet retreat room at Shreevan Wellness with garden-facing windows and simple comforts"
+                  width="2200"
+                  height="1642"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+              <ul className="program-inclusion-list">
+                {inclusions.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         </section>
 
