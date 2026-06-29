@@ -302,7 +302,7 @@ export function ThreeDayGangaResetPage() {
 
         <section className="section program-inclusions-section" aria-labelledby="included-title">
           <div className="container program-inclusions-grid">
-            <div>
+            <div style={{ minWidth: 0 }}>
               <p className="eyebrow">Stay and inclusions</p>
               <h2 id="included-title">Your Stay at Shreevan</h2>
               <p>
@@ -311,8 +311,8 @@ export function ThreeDayGangaResetPage() {
                 during consultation.
               </p>
             </div>
-            <div>
-              <figure className="program-pathways-image">
+            <div style={{ minWidth: 0 }}>
+              <figure className="international-image">
                 <img
                   src="/images/programs/3-day-your-stay-at-shreevan.jpeg"
                   alt="Quiet room at Shreevan Wellness with garden view and simple retreat comforts"
