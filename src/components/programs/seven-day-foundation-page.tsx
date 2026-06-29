@@ -398,9 +398,18 @@ export function SevenDayFoundationPage() {
                     <span>Workshop circle</span>
                   </div>
                 </div>
-                <div className="image-slot">
-                  <span>Image slot</span>
-                  <p>Cooking session</p>
+                <div className="image-slot home-media-slot has-media">
+                  <img
+                    src="/images/programs/7-day-foundation-cooking-session.jpeg"
+                    alt="Hands-on sattvic cooking session during the 7-day foundation retreat"
+                    width="2200"
+                    height="1642"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="home-media-caption">
+                    <span>Cooking session</span>
+                  </div>
                 </div>
               </div>
             </div>
