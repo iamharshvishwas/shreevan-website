@@ -303,18 +303,31 @@ export function ThreeDayGangaResetPage() {
         <section className="section program-inclusions-section" aria-labelledby="included-title">
           <div className="container program-inclusions-grid">
             <div>
-              <p className="eyebrow">What is included</p>
-              <h2 id="included-title">A clear, contained retreat experience</h2>
+              <p className="eyebrow">Stay and inclusions</p>
+              <h2 id="included-title">Your Stay at Shreevan</h2>
               <p>
-                Keep final venue, accommodation category, dates, pricing and transfer details confirmed
-                during consultation. The page should stay clear until the operational package is finalized.
+                Guests should be able to see the standard of comfort, privacy and simplicity before they
+                enquire. Final room category, transfers, dates and package specifics can still be confirmed
+                during consultation.
               </p>
             </div>
-            <ul className="program-inclusion-list">
-              {inclusions.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+            <div>
+              <figure className="program-pathways-image">
+                <img
+                  src="/images/programs/3-day-your-stay-at-shreevan.jpeg"
+                  alt="Quiet room at Shreevan Wellness with garden view and simple retreat comforts"
+                  width="2200"
+                  height="1642"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+              <ul className="program-inclusion-list">
+                {inclusions.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         </section>
 
