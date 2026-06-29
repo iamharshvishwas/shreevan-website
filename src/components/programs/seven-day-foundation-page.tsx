@@ -179,9 +179,15 @@ export function SevenDayFoundationPage() {
             </div>
 
             <div className="program-hero-media">
-              <div className="image-slot program-hero-slot">
-                <span>Image slot</span>
-                <p>Ganga-side yoga, workshop circle, sattvic cooking, sound healing or silent morning</p>
+              <div className="image-slot home-media-slot has-media program-hero-slot">
+                <img
+                  src="/images/programs/7-day-foundation-hero.jpeg"
+                  alt="Guest arriving into a calm Ganga-side practice space during the 7-day foundation retreat"
+                  width="1194"
+                  height="1600"
+                  loading="eager"
+                  decoding="async"
+                />
               </div>
               <aside className="program-summary-card" aria-label="Program summary">
                 <Image src={siteConfig.logos.symbol} alt="" width={72} height={72} />
