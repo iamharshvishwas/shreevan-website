@@ -346,9 +346,18 @@ export function ThreeDayGangaResetPage() {
                     <span>Beginner-friendly daily practice</span>
                   </div>
                 </div>
-                <div className="image-slot">
-                  <span>Image slot</span>
-                  <p>Sattvic meal</p>
+                <div className="image-slot home-media-slot has-media">
+                  <img
+                    src="/images/programs/3-day-sattvic-meal-care-comfort.jpeg"
+                    alt="Fresh sattvic meal served as part of a calm retreat dining experience"
+                    width="2200"
+                    height="1642"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="home-media-caption">
+                    <span>Food, care and comfort proof</span>
+                  </div>
                 </div>
               </div>
             </div>
