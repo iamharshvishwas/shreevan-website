@@ -312,7 +312,7 @@ export function ThreeDayGangaResetPage() {
               </p>
             </div>
             <div style={{ minWidth: 0 }}>
-              <figure className="international-image">
+              <figure className="international-image" style={{ marginBottom: 32 }}>
                 <img
                   src="/images/programs/3-day-your-stay-at-shreevan.jpeg"
                   alt="Quiet room at Shreevan Wellness with garden view and simple retreat comforts"
