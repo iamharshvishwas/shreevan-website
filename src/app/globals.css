@@ -67,10 +67,10 @@ p { margin: 0; }
 .announcement { background: var(--forest-950); color: var(--mist-100); padding: 10px 24px; text-align: center; font-size: 0.86rem; }
 .site-header { position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(227, 220, 203, 0.82); background: rgba(252, 248, 240, 0.96); backdrop-filter: blur(18px); }
 .site-header .container { --container: 1640px; }
-.header-inner { display: flex; align-items: center; justify-content: space-between; min-height: 74px; gap: 18px; }
-.brand { display: inline-flex; align-items: center; flex: 0 0 216px; min-width: 216px; text-decoration: none; }
-.brand-logo { display: block; width: 214px; height: auto; max-height: 62px; object-fit: contain; mix-blend-mode: multiply; }
-.main-nav { display: flex; flex: 1 1 auto; align-items: center; justify-content: center; gap: clamp(12px, 1.08vw, 22px); color: var(--forest-700); font-size: clamp(0.76rem, 0.68vw, 0.86rem); font-weight: 760; line-height: 1; }
+.header-inner { display: flex; align-items: center; justify-content: space-between; min-height: 74px; gap: 14px; }
+.brand { display: inline-flex; align-items: center; flex: 0 0 202px; min-width: 202px; text-decoration: none; }
+.brand-logo { display: block; width: 198px; height: auto; max-height: 62px; object-fit: contain; mix-blend-mode: multiply; }
+.main-nav { display: flex; flex: 1 1 auto; align-items: center; justify-content: center; gap: clamp(10px, 0.95vw, 18px); color: var(--forest-700); font-size: clamp(0.76rem, 0.68vw, 0.86rem); font-weight: 760; line-height: 1; }
 .main-nav a, .nav-summary { text-decoration: none; }
 .main-nav > a, .nav-summary, .header-actions .button { white-space: nowrap; }
 .main-nav a:hover, .nav-summary:hover { color: var(--forest-950); }
