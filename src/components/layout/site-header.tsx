@@ -144,7 +144,7 @@ export function SiteHeader() {
 
           <div className="header-actions">
             <a
-              className={`button button-secondary button-small ${styles.navSecondaryCta}`}
+              className={`button button-secondary button-small ${styles.desktopActionButton} ${styles.navSecondaryCta}`}
               href={joinClassUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -152,7 +152,10 @@ export function SiteHeader() {
               Join Class
             </a>
             {settings.navigation.headerCta ? (
-              <Link className="button button-primary button-small" href={settings.navigation.headerCta.href}>
+              <Link
+                className={`button button-primary button-small ${styles.desktopActionButton}`}
+                href={settings.navigation.headerCta.href}
+              >
                 {settings.navigation.headerCta.label}
               </Link>
             ) : null}

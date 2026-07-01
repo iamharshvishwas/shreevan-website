@@ -1,6 +1,11 @@
+.desktopActionButton {
+  min-width: 164px;
+  padding-inline: 18px;
+}
+
 .navSecondaryCta {
-  min-width: 144px;
-  padding-inline: 16px;
+  min-width: 132px;
+  padding-inline: 14px;
 }
 
 .mobileNavActions {
@@ -14,6 +19,11 @@
 }
 
 @media (max-width: 1240px) {
+  .desktopActionButton {
+    min-width: 0;
+    padding-inline: 20px;
+  }
+
   .navSecondaryCta {
     min-width: 0;
     padding-inline: 20px;
