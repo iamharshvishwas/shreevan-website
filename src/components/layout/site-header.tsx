@@ -6,8 +6,11 @@ import { useEffect, useState } from "react";
 import { siteConfig } from "@/config/site";
 import { usePublicSiteSettings } from "@/components/site/public-settings-provider";
 import type { PublicNavLink } from "@/lib/site/public-settings-types";
+import styles from "./site-header.module.css";
 
 type ActiveMenu = string | null;
+
+const joinClassUrl = "https://class.shreevanwellness.com";
 
 export function SiteHeader() {
   const settings = usePublicSiteSettings();
@@ -117,9 +120,37 @@ export function SiteHeader() {
 
           <nav className="main-nav" aria-label="Primary navigation">
             {settings.navigation.headerItems.map(renderNavItem)}
+            <div className={styles.mobileNavActions}>
+              <a
+                className={`button button-secondary button-small ${styles.navSecondaryCta} ${styles.mobileNavButton}`}
+                href={joinClassUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenus}
+              >
+                Join Class
+              </a>
+              {settings.navigation.headerCta ? (
+                <Link
+                  className={`button button-primary button-small ${styles.mobileNavButton}`}
+                  href={settings.navigation.headerCta.href}
+                  onClick={closeMenus}
+                >
+                  {settings.navigation.headerCta.label}
+                </Link>
+              ) : null}
+            </div>
           </nav>
 
           <div className="header-actions">
+            <a
+              className={`button button-secondary button-small ${styles.navSecondaryCta}`}
+              href={joinClassUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Join Class
+            </a>
             {settings.navigation.headerCta ? (
               <Link className="button button-primary button-small" href={settings.navigation.headerCta.href}>
                 {settings.navigation.headerCta.label}
