@@ -4,7 +4,8 @@ import { ModalityDetailPage } from "@/components/seo/modalities-pages";
 import { siteConfig } from "@/config/site";
 import { getModalityBySlug, modalities } from "@/lib/content/modalities";
 import { JsonLd } from "@/lib/schema/json-ld";
-import { breadcrumbSchema, educationalServiceSchema, webPageSchema } from "@/lib/schema/site-schema";
+import { breadcrumbSchema, educationalServiceSchema, faqPageSchema, webPageSchema } from "@/lib/schema/site-schema";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
 type ModalityPageProps = {
   params: Promise<{
@@ -26,13 +27,12 @@ export async function generateMetadata({ params }: ModalityPageProps): Promise<M
     return {};
   }
 
-  return {
+  return buildPageMetadata({
     title: modality.seoTitle,
     description: modality.seoDescription,
-    alternates: {
-      canonical: modality.path,
-    },
-  };
+    path: modality.path,
+    absoluteTitle: true,
+  });
 }
 
 export default async function Page({ params }: ModalityPageProps) {
@@ -73,6 +73,7 @@ export default async function Page({ params }: ModalityPageProps) {
           })),
         })}
       />
+      <JsonLd data={faqPageSchema(modality.faqs)} />
       <ModalityDetailPage modality={modality} />
     </>
   );

@@ -1,20 +1,19 @@
 import type { Metadata } from "next";
 import { ModalitiesHubPage } from "@/components/seo/modalities-pages";
 import { siteConfig } from "@/config/site";
-import { modalities } from "@/lib/content/modalities";
+import { modalities, modalitiesHubContent } from "@/lib/content/modalities";
 import { JsonLd } from "@/lib/schema/json-ld";
-import { breadcrumbSchema, itemListSchema, webPageSchema } from "@/lib/schema/site-schema";
+import { breadcrumbSchema, faqPageSchema, itemListSchema, webPageSchema } from "@/lib/schema/site-schema";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
 const pageUrl = `${siteConfig.url}/modalities`;
 
-export const metadata: Metadata = {
-  title: "Core Wellness Modalities",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Core Wellness Modalities in Rishikesh",
   description:
-    "Explore Shreevan Wellness educational modality pages for yoga therapy, guided meditation, sound healing, Panchkarma, chakra work and spiritual sadhanas.",
-  alternates: {
-    canonical: "/modalities",
-  },
-};
+    "Explore Shreevan Wellness educational modality pages for yoga therapy, guided meditation, sound healing, Panchkarma, chakra work and spiritual sadhanas with clear suitability boundaries.",
+  path: "/modalities",
+});
 
 export default function Page() {
   return (
@@ -28,10 +27,10 @@ export default function Page() {
       <JsonLd
         data={webPageSchema({
           type: "CollectionPage",
-          name: "Core Wellness Modalities",
+          name: "Core Wellness Modalities in Rishikesh",
           url: pageUrl,
           description:
-            "Educational Shreevan Wellness modality hub for practices used inside retreat programs.",
+            "Educational Shreevan Wellness modality hub for practices used inside retreat programs, including responsible boundaries and program links.",
         })}
       />
       <JsonLd
@@ -45,7 +44,8 @@ export default function Page() {
           })),
         })}
       />
-      <ModalitiesHubPage modalities={modalities} />
+      <JsonLd data={faqPageSchema(modalitiesHubContent.faqs)} />
+      <ModalitiesHubPage content={modalitiesHubContent} modalities={modalities} />
     </>
   );
 }
