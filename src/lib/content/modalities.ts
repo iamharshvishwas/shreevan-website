@@ -330,7 +330,7 @@ export const modalities: ModalityContent[] = [
       answer:
         "Yoga therapy at Shreevan means gentle, guided yoga-informed practice used to build body awareness, breath literacy and a realistic daily rhythm. It is paced through suitability, not performance.",
       boundaryNote:
-        "This page is educational. Yoga practice may support general well-being, but it is not a substitute for physiotherapy, medical care, injury treatment or emergency support.",
+        "This page is educational. Yoga practice may support general well-being, but it is not a substitute for physiotherapy, medical care, injury care or urgent professional help.",
     },
     quickAnswer: {
       simpleTerms:
@@ -514,7 +514,7 @@ export const modalities: ModalityContent[] = [
       answer:
         "Guided meditation at Shreevan is a structured way to explore attention, breath, observation and reflection. It helps guests enter stillness with support instead of pressure.",
       boundaryNote:
-        "Meditation is a wellness practice, not psychotherapy, psychiatric care, crisis care or a replacement for medication or professional support.",
+        "Meditation is a wellness practice, not psychotherapy, psychiatric care, crisis care or a substitute for prescribed care or professional support.",
     },
     quickAnswer: {
       simpleTerms:
@@ -876,7 +876,7 @@ export const modalities: ModalityContent[] = [
       answer:
         "Panchkarma and deep detox at Shreevan are discussed through readiness, food rhythm, rest, routine and responsible expectation-setting. This page explains the wellness context before any deeper recommendation is considered.",
       boundaryNote:
-        "This is not disease detox, medical cleansing, treatment, diagnosis, cure or a replacement for professional medical advice. Suitability review is essential.",
+        "This is not medical cleansing, treatment, diagnosis, cure or a replacement for professional medical advice. Suitability review is essential.",
     },
     quickAnswer: {
       simpleTerms:
@@ -1000,7 +1000,7 @@ export const modalities: ModalityContent[] = [
       {
         question: "Does Shreevan promise detox results?",
         answer:
-          "No. Shreevan does not promise disease detox, organ cleansing, weight loss, cure or guaranteed results. The responsible value is in structured routine, simpler meals, rest, reduced stimulation and guided reflection. Some guests may feel lighter or clearer, but the site does not turn that possibility into a claim. Suitability and safety come first.",
+          "No. Shreevan does not promise organ cleansing, weight loss, cure or guaranteed results. The responsible value is in structured routine, simpler meals, rest, reduced stimulation and guided reflection. Some guests may feel lighter or clearer, but the site does not turn that possibility into a claim. Suitability and safety come first.",
       },
       {
         question: "Who should be careful with Panchkarma or detox language?",
@@ -1039,7 +1039,7 @@ export const modalities: ModalityContent[] = [
       "A reflective, non-clinical modality for guests exploring yogic symbolism, attention, breath and inner awareness.",
     seoTitle: "Chakra Opening Retreat Education | Shreevan Wellness",
     seoDescription:
-      "Understand chakra opening at Shreevan Wellness as symbolic self-inquiry and reflective yogic practice without medical or guaranteed healing claims.",
+      "Understand chakra opening at Shreevan Wellness as symbolic self-inquiry and reflective yogic practice without medical or guaranteed outcome claims.",
     keywords: [
       "chakra opening retreat",
       "energy balancing retreat",
