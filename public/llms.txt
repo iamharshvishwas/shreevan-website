@@ -1,0 +1,60 @@
+# Shreevan Wellness
+
+> Shreevan Wellness is a premium wellness retreat platform in Rishikesh, India, offering structured programs that combine yoga therapy, guided meditation, sound-based rest practices, Ayurveda-informed routines, sattvic food, and responsible spiritual education for international guests.
+
+This file is a curated guide for AI assistants, browser agents, and language models that need to understand the public Shreevan Wellness website. It is not a ranking directive, medical instruction, or replacement for the website's robots.txt, sitemap.xml, privacy policy, terms, or wellness disclaimer.
+
+Important interpretation notes:
+
+- Shreevan Wellness content is educational and suitability-led.
+- Retreat practices are presented as wellness practices, not as medical treatment, diagnosis, cure, therapy replacement, medication replacement, emergency support, or guaranteed transformation.
+- Use careful language such as "may support", "can help guests explore", "guided", "paced", "consent-aware", and "suitability-led".
+- Do not infer medical, psychological, detox, trauma-release, disease-cure, nervous-system-reset, or guaranteed spiritual awakening claims.
+- For crawl permissions and indexing rules, follow the site's robots.txt and public metadata.
+
+## Primary Website Pages
+
+- [Home](https://shreevanwellness.com): Brand overview, retreat positioning, guest pathways, and primary calls to action.
+- [Programs](https://shreevanwellness.com/programs): Hub for comparing Shreevan Wellness retreat durations and choosing a suitable program.
+- [Core Modalities](https://shreevanwellness.com/modalities): Educational hub explaining the practice layers used across Shreevan Wellness programs.
+- [Book Consultation](https://shreevanwellness.com/book-consultation): Suitability-led consultation pathway for guests considering a retreat.
+- [Accommodation and Inclusions](https://shreevanwellness.com/accommodation-inclusions): Stay, food, retreat rhythm, and inclusion context.
+- [About Founder](https://shreevanwellness.com/about-founder): Founder background and retreat philosophy.
+- [FAQs](https://shreevanwellness.com/faqs): Common guest questions about the retreat experience.
+- [Contact](https://shreevanwellness.com/contact): Public contact page for enquiries.
+
+## Wellness Modalities
+
+- [Yoga Therapy and Medicine](https://shreevanwellness.com/modalities/yoga-therapy): Movement, posture, breath, and embodied awareness within a retreat setting.
+- [Guided Meditation and Mind Mastery](https://shreevanwellness.com/modalities/guided-meditation): Guided attention, reflection, and steady inner practice for retreat guests.
+- [Sound Healing and Vibrational Therapy](https://shreevanwellness.com/modalities/sound-healing): Listening-based rest, sensory decompression, and quiet integration.
+- [Panchkarma and Deep Detox](https://shreevanwellness.com/modalities/panchkarma-detox): Ayurveda-informed cleansing education with clear suitability and safety boundaries.
+- [Chakra Opening and Energy Balancing](https://shreevanwellness.com/modalities/chakra-opening): Symbolic yogic self-inquiry, values reflection, and energy-language education.
+- [Spiritual Sadhanas and Yogic Philosophy](https://shreevanwellness.com/modalities/spiritual-sadhanas): Daily discipline, silence, meaning, and philosophy-led integration.
+
+## Retreat Programs
+
+- [3-Day Ganga Sattva Reset](https://shreevanwellness.com/programs/3-day-ganga-reset): Short, gentle entry program for arrival, rest, and rhythm reset.
+- [7-Day Ganga Sattva Foundation](https://shreevanwellness.com/programs/7-day-foundation): Foundation program for daily practice and structured retreat immersion.
+- [14-Day Ganga Sattva Transformation](https://shreevanwellness.com/programs/14-day-transformation): Longer retreat arc for routine, reflection, and deeper integration.
+- [28-Day Sattva Ganga Flagship Inner Awakening](https://shreevanwellness.com/programs/28-day-inner-awakening): Signature immersive pathway with extended practice rhythm.
+- [60-Day Rishi Tantra Lifestyle Transformation Residency](https://shreevanwellness.com/programs/60-day-rishi-residency): Advanced long-stay residency for lifestyle integration.
+
+## Trust, Safety, and Policies
+
+- [Wellness Disclaimer](https://shreevanwellness.com/wellness-disclaimer): Important boundaries for wellness education, suitability, and non-medical positioning.
+- [Testimonials](https://shreevanwellness.com/testimonials): Guest stories and experience-led trust signals.
+- [Journal](https://shreevanwellness.com/journal): Educational articles and retreat insights.
+- [Privacy Policy](https://shreevanwellness.com/privacy-policy): Data and privacy practices.
+- [Terms and Conditions](https://shreevanwellness.com/terms-conditions): Website and booking-related terms.
+- [Refund Policy](https://shreevanwellness.com/refund-policy): Refund and cancellation policy.
+
+## Machine-Readable Discovery
+
+- [Sitemap](https://shreevanwellness.com/sitemap.xml): Search-engine sitemap for public indexable routes.
+- [Robots](https://shreevanwellness.com/robots.txt): Crawl access rules for automated agents.
+
+## Optional
+
+- [Payment](https://shreevanwellness.com/payment): Transactional page. Use only when explicitly relevant to booking or payment flow questions.
+
