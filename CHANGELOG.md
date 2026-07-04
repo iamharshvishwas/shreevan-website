@@ -114,3 +114,10 @@ All audit-loop fixes are logged here. Format per AUDIT_LOOP.md: what was wrong, 
 #### SEO-02 — SEO infrastructure verification (no fix needed)
 - Sitemap: production-origin URLs; `/payment` + `/admin` correctly excluded. Robots: correct disallows + sitemap pointer. Canonicals present. `/payment` = `noindex, follow`. FAQPage schema on /faqs; Organization/WebSite/LocalBusiness/Breadcrumb JSON-LD on home. 0 images missing alt across 9 audited pages; exactly one h1 per page; nav dropdowns are real buttons with `aria-expanded`. Lighthouse SEO 100.
 - llms.txt route list matches live routes (60-day name aligned in ARCH-02).
+
+### Phase 2 — Regression pass (all fixes in, production build)
+- Gates: typecheck ✅ · lint 0 errors ✅ · build ✅.
+- All 39 routes 200 on `next start`; all 6 security headers served; compressed images serve correctly (hero 245KB, logo 32KB).
+- Auth regression: wrong creds 401 / right 200 / tampered 401 / admin API guarded. Leads: valid 201 / invalid 400. Sitemap still excludes /payment.
+- Browser console: zero errors on homepage.
+- Critical/High-only re-sweep across all categories: **no new findings**. Loop complete per AUDIT_LOOP.md Phase 2 criteria.
