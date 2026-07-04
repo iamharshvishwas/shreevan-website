@@ -1,8 +1,8 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useMemo, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
-import { RichTextEditor } from "@/components/admin/rich-text-editor/rich-text-editor";
+import { countWords, readTimeLabel, RichTextEditor } from "@/components/admin/rich-text-editor/rich-text-editor";
 import type {
   AdminBlogBlock,
   AdminBlogBlockType,
@@ -32,6 +32,23 @@ const emptyCoverMedia: NonNullable<AdminJournalArticle["coverMedia"]> = {
 // intentionally kept (per Harsh's request). Flip this to true to bring the
 // old Page Builder + Structured Content UI back.
 const SHOW_LEGACY_BLOCK_BUILDER = false;
+
+const BLOG_BACKUP_STORAGE_KEY = "shreevan-blog-draft-backup";
+const BLOG_BACKUP_DEBOUNCE_MS = 2000;
+
+const SERP_TITLE_LIMIT = 60;
+const SERP_DESCRIPTION_LIMIT = 160;
+
+function truncateForSerp(value: string, limit: number) {
+  return value.length > limit ? `${value.slice(0, limit - 1).trimEnd()}…` : value;
+}
+
+function parseCommaList(value: string) {
+  return value
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
 
 const blockTypes: Array<{ type: AdminBlogBlockType; label: string; copy: string }> = [
   { type: "paragraph", label: "Paragraph", copy: "Body text" },
@@ -341,13 +358,16 @@ function prepareArticleForSave(article: AdminJournalArticle): AdminJournalArticl
   const blocks = article.blocks?.length ? article.blocks : [createBlock("paragraph")];
   const publishedAt = article.status === "published" ? article.publishedAt || now : article.publishedAt || "";
   const richText = htmlToPlainText(article.contentHtml);
+  const plainContent = richText || blocksToContent(blocks);
+  const contentWords = countWords(plainContent);
 
   return {
     ...article,
     id: slug,
     slug,
     categoryId: article.categoryId || categoryId(article.category),
-    content: richText || blocksToContent(blocks),
+    readTime: contentWords ? readTimeLabel(contentWords) : article.readTime,
+    content: plainContent,
     contentHtml: article.contentHtml ?? "",
     body: blocksToBody(blocks),
     blocks,
@@ -466,6 +486,7 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
   const [uploadState, setUploadState] = useState<UploadState>("idle");
   const [message, setMessage] = useState("");
   const [ephemeralWarning, setEphemeralWarning] = useState("");
+  const [backupPrompt, setBackupPrompt] = useState<{ savedAt: number } | null>(null);
 
   const categories = useMemo(() => blog.journalCategories.filter((category) => category !== "All"), [blog.journalCategories]);
   const activeArticle =
@@ -480,6 +501,76 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
   const coverCount = blog.journalArticles.filter((article) => article.coverMedia?.src).length;
   const schemaMessage = activeArticle ? validateSchemaJson(activeArticle.schemaJson ?? "") : "";
   const activeValidation = activeArticle ? validateArticle(activeArticle) : "";
+
+  // Offer to restore an unsaved local draft backup (browser crash / closed tab).
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      try {
+        const raw = window.localStorage.getItem(BLOG_BACKUP_STORAGE_KEY);
+
+        if (!raw) {
+          return;
+        }
+
+        const parsed = JSON.parse(raw) as { blog?: AdminBlogStore; savedAt?: number } | null;
+
+        if (parsed?.blog && JSON.stringify(parsed.blog) !== JSON.stringify(initialBlog)) {
+          setBackupPrompt({ savedAt: parsed.savedAt ?? 0 });
+        } else {
+          window.localStorage.removeItem(BLOG_BACKUP_STORAGE_KEY);
+        }
+      } catch {
+        // Corrupt/unavailable localStorage — silently skip backup restore.
+      }
+    }, 0);
+
+    return () => clearTimeout(timer);
+  }, [initialBlog]);
+
+  // Continuously back up unsaved work to localStorage while dirty.
+  useEffect(() => {
+    if (!dirty) {
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      try {
+        window.localStorage.setItem(BLOG_BACKUP_STORAGE_KEY, JSON.stringify({ blog, savedAt: Date.now() }));
+      } catch {
+        // Storage full/unavailable — autosave is best-effort.
+      }
+    }, BLOG_BACKUP_DEBOUNCE_MS);
+
+    return () => clearTimeout(timer);
+  }, [blog, dirty]);
+
+  function restoreBackup() {
+    try {
+      const raw = window.localStorage.getItem(BLOG_BACKUP_STORAGE_KEY);
+      const parsed = raw ? (JSON.parse(raw) as { blog?: AdminBlogStore } | null) : null;
+
+      if (parsed?.blog) {
+        setBlog(cloneBlogStore(parsed.blog));
+        setActiveArticleId(parsed.blog.journalArticles[0]?.id ?? "");
+        setSaveState("idle");
+        setMessage("Unsaved draft restored from local backup. Review and save.");
+      }
+    } catch {
+      setMessage("Local backup could not be restored.");
+    }
+
+    setBackupPrompt(null);
+  }
+
+  function discardBackup() {
+    try {
+      window.localStorage.removeItem(BLOG_BACKUP_STORAGE_KEY);
+    } catch {
+      // ignore
+    }
+
+    setBackupPrompt(null);
+  }
 
   const filteredArticles = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -726,6 +817,13 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
     setSaveState("saved");
     setEphemeralWarning(body.ephemeral ? body.warning ?? "" : "");
     setMessage(body.ephemeral ? "" : "Blog content saved.");
+
+    try {
+      window.localStorage.removeItem(BLOG_BACKUP_STORAGE_KEY);
+    } catch {
+      // ignore
+    }
+
     return true;
   }
 
@@ -973,6 +1071,27 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
           }}
         >
           ⚠ Temporary save: {ephemeralWarning}
+        </div>
+      ) : null}
+
+      {backupPrompt ? (
+        <div className="admin-blog-backup-banner" role="alert">
+          <div>
+            <strong>Unsaved draft found.</strong>
+            <span>
+              {" "}
+              A local backup{backupPrompt.savedAt ? ` from ${new Date(backupPrompt.savedAt).toLocaleString("en-IN")}` : ""} has
+              changes that were never saved. Restore it?
+            </span>
+          </div>
+          <div>
+            <button className="admin-primary-button" type="button" onClick={restoreBackup}>
+              Restore draft
+            </button>
+            <button className="admin-secondary-button" type="button" onClick={discardBackup}>
+              Discard
+            </button>
+          </div>
         </div>
       ) : null}
 
@@ -1261,6 +1380,20 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
 
               <SettingsPanel title="SEO">
                 <div className="admin-form-stack">
+                  <div className="admin-serp-preview" aria-label="Google search result preview">
+                    <span className="admin-serp-url">
+                      shreevanwellness.com › journal › {articleSlug(activeArticle)}
+                    </span>
+                    <span className="admin-serp-title">
+                      {truncateForSerp(activeArticle.seoTitle || `${activeArticle.title} | Shreevan Journal`, SERP_TITLE_LIMIT)}
+                    </span>
+                    <span className="admin-serp-description">
+                      {truncateForSerp(
+                        activeArticle.seoDescription || activeArticle.excerpt || "Add a meta description or excerpt to control this preview.",
+                        SERP_DESCRIPTION_LIMIT,
+                      )}
+                    </span>
+                  </div>
                   <label className="admin-field">
                     Index status
                     <select
@@ -1358,6 +1491,24 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
                         </option>
                       ))}
                     </select>
+                  </label>
+                  <label className="admin-field">
+                    Tags (comma separated — used as schema keywords)
+                    <input
+                      key={`tags-${activeArticle.id}`}
+                      defaultValue={activeArticle.tags.join(", ")}
+                      placeholder="rishikesh retreat, burnout reset, sattvic living"
+                      onChange={(event) => updateActiveArticle({ tags: parseCommaList(event.target.value) })}
+                    />
+                  </label>
+                  <label className="admin-field">
+                    Key points (one per line — key takeaways for readers and AI search)
+                    <textarea
+                      key={`keypoints-${activeArticle.id}`}
+                      defaultValue={linesToText(activeArticle.keyPoints)}
+                      rows={4}
+                      onChange={(event) => updateActiveArticle({ keyPoints: textToLines(event.target.value) })}
+                    />
                   </label>
                   <label className="admin-toggle-row admin-page-checkbox">
                     <input

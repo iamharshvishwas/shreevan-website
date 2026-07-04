@@ -129,7 +129,7 @@ export function Toolbar({
   };
 
   const currentHeading = (() => {
-    for (const level of [1, 2, 3, 4] as const) {
+    for (const level of [2, 3, 4] as const) {
       if (editor.isActive("heading", { level })) {
         return `h${level}`;
       }
@@ -169,13 +169,12 @@ export function Toolbar({
             editor
               .chain()
               .focus()
-              .toggleHeading({ level: parseInt(value.slice(1), 10) as 1 | 2 | 3 | 4 })
+              .toggleHeading({ level: parseInt(value.slice(1), 10) as 2 | 3 | 4 })
               .run();
           }
         }}
       >
         <option value="p">Paragraph</option>
-        <option value="h1">Heading 1</option>
         <option value="h2">Heading 2</option>
         <option value="h3">Heading 3</option>
         <option value="h4">Heading 4</option>

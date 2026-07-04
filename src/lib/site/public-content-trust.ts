@@ -121,6 +121,7 @@ export function toPublicJournalArticle(article: AdminJournalArticle): PublicJour
     canonicalUrl: article.canonicalUrl || article.canonicalPath || `/journal/${article.id}`,
     publishedAt: article.publishedAt ?? "",
     scheduledAt: article.scheduledAt ?? "",
+    updatedAt: article.updatedAt ?? "",
     indexStatus: article.indexStatus ?? "index",
     authorId: article.authorId ?? "admin",
     author: article.author ?? "Shreevan Wellness",

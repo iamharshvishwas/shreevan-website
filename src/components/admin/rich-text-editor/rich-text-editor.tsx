@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
@@ -18,6 +18,17 @@ import { FontSize, Indent } from "./extensions";
 import { Toolbar } from "./toolbar";
 
 const CHANGE_DEBOUNCE_MS = 300;
+const AVERAGE_READING_WPM = 220;
+
+export function countWords(text: string) {
+  const trimmed = text.trim();
+
+  return trimmed ? trimmed.split(/\s+/).length : 0;
+}
+
+export function readTimeLabel(words: number) {
+  return `${Math.max(1, Math.round(words / AVERAGE_READING_WPM))} min read`;
+}
 
 // TipTap editor ported from the Lovable "React Text Builder" export, adapted
 // to a controlled component: the blog panel owns the HTML value and saving.
@@ -34,12 +45,15 @@ export function RichTextEditor({
 }>) {
   const changeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastEmittedHtmlRef = useRef(value);
+  const [stats, setStats] = useState(() => ({ words: 0, characters: 0 }));
 
   const editor = useEditor({
     // Required for Next.js SSR: render on the client only, after hydration.
     immediatelyRender: false,
     extensions: [
-      StarterKit.configure({ link: false }),
+      // The article page already renders the post title as the page H1, so
+      // content headings are restricted to H2-H4 to avoid duplicate H1s.
+      StarterKit.configure({ link: false, heading: { levels: [2, 3, 4] } }),
       Link.configure({
         openOnClick: false,
         autolink: true,
@@ -59,7 +73,16 @@ export function RichTextEditor({
       Indent,
     ],
     content: value || "<p></p>",
+    onCreate: ({ editor: activeEditor }) => {
+      const text = activeEditor.getText();
+
+      setStats({ words: countWords(text), characters: text.length });
+    },
     onUpdate: ({ editor: activeEditor }) => {
+      const text = activeEditor.getText();
+
+      setStats({ words: countWords(text), characters: text.length });
+
       if (changeTimeoutRef.current) {
         clearTimeout(changeTimeoutRef.current);
       }
@@ -106,6 +129,11 @@ export function RichTextEditor({
       <div className="admin-rte-page">
         <EditorContent editor={editor} />
       </div>
+      <footer className="admin-rte-footer" aria-live="polite">
+        <span>{stats.words} words</span>
+        <span>{stats.characters} characters</span>
+        <span>{readTimeLabel(stats.words)}</span>
+      </footer>
     </div>
   );
 }

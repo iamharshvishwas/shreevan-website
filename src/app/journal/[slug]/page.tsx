@@ -4,7 +4,7 @@ import { JournalArticlePage } from "@/components/journal/journal-article-page";
 import { siteConfig } from "@/config/site";
 import { JsonLd } from "@/lib/schema/json-ld";
 import { blogPostingSchema, breadcrumbSchema, webPageSchema } from "@/lib/schema/site-schema";
-import { buildPageMetadata } from "@/lib/seo/page-metadata";
+import { absoluteSiteUrl, buildPageMetadata } from "@/lib/seo/page-metadata";
 import { getPublicJournalContent } from "@/lib/site/public-content-trust";
 
 type JournalArticlePageProps = {
@@ -66,6 +66,19 @@ export async function generateMetadata({ params }: JournalArticlePageProps): Pro
     title: article.seoTitle || `${article.title} | Shreevan Journal`,
     description: article.seoDescription || article.excerpt,
     path: article.canonicalPath || articlePath(article.id),
+    image: article.coverMedia.src
+      ? {
+          url: absoluteSiteUrl(article.coverMedia.src),
+          alt: article.coverMedia.alt || article.title,
+        }
+      : undefined,
+    article: {
+      publishedTime: toIsoDate(article.publishedAt || article.date),
+      modifiedTime: toIsoDate(article.updatedAt || article.publishedAt || article.date),
+      authors: [article.author],
+      section: article.category,
+      tags: article.tags,
+    },
     robots:
       article.indexStatus === "noindex"
         ? {
@@ -127,7 +140,9 @@ export default async function Page({ params }: JournalArticlePageProps) {
           title: article.title,
           url: path,
           description: article.seoDescription || article.excerpt,
-          datePublished: toIsoDate(article.date),
+          datePublished: toIsoDate(article.publishedAt || article.date),
+          dateModified: toIsoDate(article.updatedAt || article.publishedAt || article.date),
+          image: article.coverMedia.src || undefined,
           category: article.category,
           tags: article.tags,
           audience: article.audience,

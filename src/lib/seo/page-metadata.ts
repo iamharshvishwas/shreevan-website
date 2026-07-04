@@ -1,12 +1,29 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 
+type PageMetadataImage = {
+  url: string;
+  alt: string;
+  width?: number;
+  height?: number;
+};
+
+type PageMetadataArticle = {
+  publishedTime: string;
+  modifiedTime: string;
+  authors: string[];
+  section: string;
+  tags: string[];
+};
+
 type BuildPageMetadataInput = {
   title: string;
   description: string;
   path: string;
   absoluteTitle?: boolean;
   robots?: Metadata["robots"];
+  image?: PageMetadataImage;
+  article?: PageMetadataArticle;
 };
 
 export function absoluteSiteUrl(path: string) {
@@ -23,9 +40,16 @@ export function buildPageMetadata({
   path,
   absoluteTitle = false,
   robots,
+  image,
+  article,
 }: BuildPageMetadataInput): Metadata {
   const url = absoluteSiteUrl(path);
-  const imageUrl = absoluteSiteUrl(siteConfig.logos.logoOnForest);
+  const ogImage: PageMetadataImage = image ?? {
+    url: absoluteSiteUrl(siteConfig.logos.logoOnForest),
+    width: 1200,
+    height: 900,
+    alt: `${siteConfig.name} retreat brand mark`,
+  };
 
   return {
     title: absoluteTitle ? { absolute: title } : title,
@@ -34,25 +58,34 @@ export function buildPageMetadata({
       canonical: path,
     },
     openGraph: {
-      type: "website",
+      type: article ? "article" : "website",
       siteName: siteConfig.name,
       title,
       description,
       url,
       images: [
         {
-          url: imageUrl,
-          width: 1200,
-          height: 900,
-          alt: `${siteConfig.name} retreat brand mark`,
+          url: ogImage.url,
+          ...(ogImage.width ? { width: ogImage.width } : {}),
+          ...(ogImage.height ? { height: ogImage.height } : {}),
+          alt: ogImage.alt,
         },
       ],
+      ...(article
+        ? {
+            publishedTime: article.publishedTime,
+            modifiedTime: article.modifiedTime,
+            authors: article.authors,
+            section: article.section,
+            tags: article.tags,
+          }
+        : {}),
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [imageUrl],
+      images: [ogImage.url],
     },
     ...(robots ? { robots } : {}),
   };

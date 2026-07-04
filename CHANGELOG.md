@@ -128,3 +128,14 @@ All audit-loop fixes are logged here. Format per AUDIT_LOOP.md: what was wrong, 
 - New `contentHtml` field flows admin type → normalize → public type → mapper. Plain-text `content` (search/AEO) is derived from the HTML on save. Public `/journal/[slug]` and admin preview render `contentHtml` first, falling back to legacy blocks → body → keyPoints.
 - **Verified:** typecheck/lint/build clean; browser E2E — login → edit → type + heading via toolbar → save → `content-trust.json` has contentHtml + derived plain text → public journal page renders the rich HTML. Test edits reverted.
 - Note: on Vercel, inline image uploads hit the same read-only-filesystem limit as everything else (clear error shown); content itself saves via the ephemeral stopgap with its warning banner.
+
+### 2026-07-05 — Blog Tier 1: SEO + writing upgrades
+1. **OG/Twitter cards per article** — `buildPageMetadata` now accepts per-page image + article info; journal articles emit `og:type=article`, featured-image og:image (brand-logo fallback), `article:published_time/modified_time/author/section/tags`.
+2. **H1 removed from editor** — StarterKit heading levels restricted to H2–H4 (page title is the H1).
+3. **Schema dateModified fixed** — BlogPosting now uses real `updatedAt` (was duplicating datePublished); schema `image` added when a cover exists; `updatedAt` exposed through the public article type.
+4. **Auto read-time** — computed from word count (220 wpm) on save; replaces the hardcoded "5 min read".
+5. **Tags + Key points UI** — new Taxonomy fields (comma-separated tags → schema keywords; key points one-per-line).
+6. **SERP preview** — live Google-snippet preview (URL/title/description with 60/160 truncation) in the SEO panel.
+7. **Local autosave** — unsaved changes back up to localStorage every 2s; on return, a restore/discard banner offers the draft back; backup clears on successful save.
+8. **Live word/character/read-time counter** in the editor footer.
+- **Verified:** typecheck/lint/build clean; HTTP — article page emits og:type=article + article:* metas + differing datePublished/dateModified; browser — H1 absent, footer counts live, SERP preview renders, tags/key-points fields work, full autosave cycle (type → backup → reload → banner → restore → save clears backup), auto read-time persisted ("1 min read" from 3 words). Test edits reverted.

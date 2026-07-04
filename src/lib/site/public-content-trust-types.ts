@@ -90,6 +90,7 @@ export type PublicJournalArticle = {
   canonicalUrl: string;
   publishedAt: string;
   scheduledAt: string;
+  updatedAt: string;
   indexStatus: "index" | "noindex";
   authorId: string;
   author: string;

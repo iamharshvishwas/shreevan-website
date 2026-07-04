@@ -190,6 +190,8 @@ export function blogPostingSchema(article: {
   url: string;
   description: string;
   datePublished: string;
+  dateModified?: string;
+  image?: string;
   category: string;
   tags: string[];
   audience: string;
@@ -203,8 +205,9 @@ export function blogPostingSchema(article: {
     headline: article.title,
     description: article.description,
     url: pageUrl,
+    ...(article.image ? { image: absoluteUrl(article.image) } : {}),
     datePublished: article.datePublished,
-    dateModified: article.datePublished,
+    dateModified: article.dateModified || article.datePublished,
     inLanguage: "en",
     articleSection: article.category,
     keywords: article.tags.join(", "),
