@@ -15,3 +15,45 @@ All audit-loop fixes are logged here. Format per AUDIT_LOOP.md: what was wrong, 
 ### Fixes
 
 <!-- Individual fix entries appended below as the loop progresses. -->
+
+#### SEC-01 — Admin session cookie was the raw session secret (High → Fixed, commit 5f99912)
+- **Where:** `src/lib/admin/auth.ts`, `src/app/api/admin/login/route.ts:38-46` (pre-fix), `src/proxy.ts:45`, 10 admin API routes.
+- **Observed:** cookie value = `SHREEVAN_ADMIN_SESSION_SECRET` verbatim; validation `sessionValue === sessionSecret` (no server-side expiry, non-constant-time). A leaked cookie = permanent admin credential.
+- **Root cause:** Phase-1 admin scaffold used the simplest possible session model and was never hardened.
+- **Fix:** cookie now holds `expiry.HMAC-SHA256(secret, "shreevan-admin-session:"+expiry)` (Web Crypto, Node+Edge compatible), validated with constant-time compare + 8h server-side expiry; credential check also constant-time. 20 call sites made async.
+- **Verified:** typecheck + production build clean; E2E login re-test in Phase 1C.
+
+#### SEC-02 — No rate limiting on login and public lead API (High → Fixed, commit 2503e7a)
+- **Where:** `src/app/api/admin/login/route.ts`, `src/app/api/leads/route.ts`; new `src/lib/security/rate-limit.ts`.
+- **Observed:** unlimited brute-force attempts on admin login; unlimited spam submissions into the lead store.
+- **Root cause:** no abuse controls were ever added to the API layer.
+- **Fix:** in-memory fixed-window limiter — login 5/min/IP, leads 10/10min/IP, 429 + Retry-After. Limitation documented: per-instance on Vercel (best-effort damping, not a hard global limit).
+- **Verified:** typecheck + build clean; behavior test in Phase 1C.
+
+#### SEC-03 — Unbounded lead field lengths (Medium → Fixed, commit 6069e3a)
+- **Where:** `src/app/api/leads/route.ts` `stringValue()`.
+- **Observed:** a single request could write arbitrarily large strings into `data/admin/seo-leads.json`.
+- **Fix:** short fields capped at 200 chars, free-text (message/goal/health) at 2000.
+- **Verified:** typecheck clean.
+
+#### SEC-06 — README documented a fallback admin login that doesn't exist (Low/doc → Fixed, commit 4018ceb)
+- **Observed:** README:92 claimed `admin`/`shreevan-admin` fallback; code returns 500 when env vars are unset.
+- **Fix:** README now matches code.
+
+#### SEC-04 — Security headers (Verified present, no fix needed)
+- CSP + HSTS + X-Frame-Options + Referrer-Policy + Permissions-Policy + nosniff already added in the pre-audit WIP (`next.config.ts:24-56`). Note: `script-src` includes `'unsafe-inline' 'unsafe-eval'` to accommodate GTM/Next runtime — accepted trade-off; nonce-based CSP is a future hardening item.
+
+#### SEC-05 — Lead PII stored in git-tracked JSON (Medium → **Needs Harsh's decision**)
+- **Where:** `data/admin/seo-leads.json` (git-tracked; leads incl. optional health context append here).
+- **Risk:** local dev leads can end up committed to git history; health context is sensitive data in plaintext.
+- **Options:** (a) move lead inbox to an untracked file, (b) external store (fixes ARCH-01 too), (c) accept for now (0 leads currently). Deferred to Phase 3 decision list.
+
+#### SEC-07 — fs error messages pass through on admin media upload failures (Low → Deferred)
+- **Where:** `src/app/api/admin/{blog,home}/media/route.ts` catch blocks return `error.message`.
+- **Reason deferred:** routes are admin-auth-gated; disclosure value negligible. Revisit if upload code changes.
+
+#### SEC-08 — npm audit: 2 moderate (postcss <8.5.10, nested in next@16.2.9) (Deferred)
+- **Reason deferred:** advisory concerns CSS stringify XSS when processing untrusted CSS — not our usage (own CSS at build time). npm's suggested fix (`next@9.3.3`) is a breaking mis-resolution. Action: pick up the next Next.js patch release.
+
+#### Git history secrets scan — clean
+- No `.env`/key files ever committed; no hardcoded credential patterns in the last 50 revisions.

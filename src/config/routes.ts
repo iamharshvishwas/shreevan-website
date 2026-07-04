@@ -33,7 +33,7 @@ export const programRoutes: SiteRoute[] = [
   { href: "/programs/7-day-foundation", label: "7-Day Ganga Sattva Foundation", intent: "commercial" },
   { href: "/programs/14-day-transformation", label: "14-Day Ganga Sattva Transformation", intent: "commercial" },
   { href: "/programs/28-day-inner-awakening", label: "28-Day Sattva Ganga Flagship Inner Awakening", intent: "commercial" },
-  { href: "/programs/60-day-rishi-residency", label: "60-Day Rishi Tantra Lifestyle Transformation Residency", intent: "commercial" },
+  { href: "/programs/60-day-rishi-residency", label: "60-Day Rishi Tantra Conscious Living Residency", intent: "commercial" },
 ];
 
 export const utilityRoutes: SiteRoute[] = [
