@@ -8,7 +8,7 @@ const contentSecurityPolicy = [
   "form-action 'self' https://api.shreevanwellness.com",
   "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://www.clarity.ms https://*.clarity.ms https://analytics.ahrefs.com https://crm.shreevanwellness.com",
   "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://www.clarity.ms https://*.clarity.ms https://analytics.ahrefs.com https://crm.shreevanwellness.com https://api.shreevanwellness.com",
-  "img-src 'self' data: blob: https://www.googletagmanager.com https://www.google-analytics.com https://*.clarity.ms",
+  "img-src 'self' data: blob: https://www.googletagmanager.com https://www.google-analytics.com https://*.clarity.ms https://c.bing.com",
   "style-src 'self' 'unsafe-inline'",
   "font-src 'self' data:",
   "frame-src 'self' https://www.googletagmanager.com",
