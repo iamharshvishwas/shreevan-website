@@ -76,5 +76,34 @@ All audit-loop fixes are logged here. Format per AUDIT_LOOP.md: what was wrong, 
 - Fresh installs (e.g., Vercel builds) could silently jump majors. Pinned to caret ranges of build-verified versions (next ^16.2.9, react ^19.2.7, etc.).
 - **Verified:** reinstall + typecheck + build clean.
 
+#### FUNC-01 — /journal crashed with zero published articles + stale filter deps (High → Fixed, commit d86167b)
+- `journal-page.tsx:35` read `articles[0].id` unguarded; admin unpublishing all articles would crash the route. Added graceful empty state; `useMemo` deps now include `articles`.
+- **Verified:** typecheck + lint clean, /journal 200.
+
+#### FUNC-02 — Duplicate lead submissions on rapid re-clicks (Medium → Fixed, commit 9ba1ee4)
+- Suitability + contact forms never disabled submit; each click fired a lead request. Added submit lock (re-arms on field edit). Consultation form already safe (unmounts on success).
+- **Verified:** browser triple-click test → single request, button disabled.
+
+#### FUNC-03 — Full functional sweep results (no further fixes)
+- All 40 site routes return 200; unknown route 404s; `/admin` redirects unauthenticated → login (307).
+- 40 unique internal links across 19 pages — all 200.
+- `/api/leads`: valid→201, missing fields→400, no consent→400, 11th request→429. Admin auth E2E: wrong creds 401, correct 200 + signed token, tampered token 401, login rate limit 429, admin settings GET/PUT round-trip 200.
+- Browser console clean (only third-party analytics aborts on localhost). Mobile 375px renders correctly (header, hero, forms, footer).
+- **Manual-test list for Harsh:** Safari + Firefox pass; real WhatsApp/CRM intake delivery (needs live CRM); duplicate-lead check between veda-forms auto-capture and manual intake POST (SEC/RAG-documented risk).
+
+#### PERF-01 — Oversized images (High → Fixed, commit d31857a)
+- 20 images at 300KB–1.1MB → recompressed shrink-only (JPEG 1920px q78 progressive; logo PNGs palette-quantized): images folder 14.1MB → 7.3MB (57% off large files). Paths unchanged. Main logo PNG (996KB) resists compression — flagged for design-side rework (PERF-05).
+- **Verified:** browser render crisp on homepage + program page.
+
+#### PERF-02 — CSP blocked Clarity's sync beacon (Low → Fixed, commit 165e6a9)
+- `img-src` lacked `c.bing.com`; every page logged a CSP security error. Added to img-src.
+- **Verified:** curl shows updated CSP header on production server.
+
+#### PERF — Lighthouse (production, next start, homepage)
+- Performance 89 · Accessibility 97 · Best-practices 73 · SEO 100 · LCP 3.7s · CLS 0 · TBT 70ms.
+- BP capped by Microsoft Clarity third-party cookies (inherent to Clarity — accepted).
+- **PERF-03 (Deferred/recommendation):** every route is force-dynamic (admin-driven content read per request) — zero static/ISR caching; on Vercel each view is a function invocation. Recommend `unstable_cache`/revalidateTag around public content reads after the storage decision (ARCH-01) is made.
+- **PERF-04 (Deferred/recommendation):** 26 `<img>` usages → migrate to `next/image` for WebP/AVIF + lazy-load + srcset; invasive refactor, do as its own pass.
+
 #### ARCH-05 — Structure review (no fix needed)
 - `src/app` / `components` / `lib/admin` vs `lib/site` / `config` separation is consistent; admin API routes share a uniform auth+error shape; no tracked build artifacts (`.next/`, `tsbuildinfo`, `.DS_Store` all untracked). Unused-asset sweep deferred to PERF backlog (low value).
