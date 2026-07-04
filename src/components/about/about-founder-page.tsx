@@ -137,7 +137,7 @@ export function AboutFounderPage() {
                 rhythm looks like, what is included, what is not promised and how questions are handled.
               </p>
               <p>
-                Isha's role is to shape Shreevan as a grounded wellness platform where traditional
+                Isha’s role is to shape Shreevan as a grounded wellness platform where traditional
                 practices are presented with respect, boundaries and practical guest care.
               </p>
             </div>
@@ -280,7 +280,7 @@ export function AboutFounderPage() {
             <h2 id="story-cta-title">If the story resonates, the next step is a calm consultation</h2>
             <p>
               The call should help both sides understand whether Shreevan is the right environment,
-              duration and rhythm for the guest's current season of life.
+              duration and rhythm for the guest’s current season of life.
             </p>
             <Link className="button button-primary" href="/book-consultation">
               Book a consultation

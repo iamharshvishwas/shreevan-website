@@ -3,15 +3,14 @@ import { BookConsultationPage } from "@/components/consultation/book-consultatio
 import { siteConfig } from "@/config/site";
 import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema/site-schema";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Book a Suitability Consultation",
   description:
     "Request a calm Shreevan Wellness suitability consultation before choosing a Rishikesh retreat program, travel dates, stay needs or payment path.",
-  alternates: {
-    canonical: "/book-consultation",
-  },
-};
+  path: "/book-consultation",
+});
 
 export default function Page() {
   return (

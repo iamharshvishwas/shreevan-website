@@ -3,6 +3,7 @@ import { JournalPage } from "@/components/journal/journal-page";
 import { siteConfig } from "@/config/site";
 import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema, itemListSchema, webPageSchema } from "@/lib/schema/site-schema";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 import { getPublicJournalContent } from "@/lib/site/public-content-trust";
 
 export const dynamic = "force-dynamic";
@@ -36,14 +37,12 @@ const journalSchema = {
   },
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Journal | Wellness Resources",
   description:
     "Read Shreevan Wellness resources on retreat selection, yoga, meditation, sattvic living, Rishikesh preparation and responsible wellness boundaries.",
-  alternates: {
-    canonical: "/journal",
-  },
-};
+  path: "/journal",
+});
 
 export default async function Page() {
   const journalContent = await getPublicJournalContent();

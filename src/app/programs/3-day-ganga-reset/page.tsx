@@ -3,6 +3,7 @@ import { ThreeDayGangaResetPage } from "@/components/programs/three-day-ganga-re
 import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema, programServiceSchema, webPageSchema } from "@/lib/schema/site-schema";
 import { siteConfig } from "@/config/site";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
 const pageUrl = `${siteConfig.url}/programs/3-day-ganga-reset`;
 const pageDescription =
@@ -15,14 +16,12 @@ const programSchema = programServiceSchema({
   audienceType: "Busy professionals, entrepreneurs, corporate employees, solo travelers and first-time retreat guests",
 });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "3-Day Ganga Sattva Reset",
   description:
     "Explore the 3-Day Ganga Sattva Reset by Shreevan Wellness: Pause. Breathe. Reconnect. A first-timer friendly retreat for stress reset, meditation, yoga and daily routine building.",
-  alternates: {
-    canonical: "/programs/3-day-ganga-reset",
-  },
-};
+  path: "/programs/3-day-ganga-reset",
+});
 
 export default function Page() {
   return (

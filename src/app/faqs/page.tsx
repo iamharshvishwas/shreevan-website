@@ -3,18 +3,17 @@ import { FaqsPage } from "@/components/faqs/faqs-page";
 import { siteConfig } from "@/config/site";
 import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema/site-schema";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 import { faqPageSchema, getPublicFaqContent } from "@/lib/site/public-content-trust";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "FAQs for International Wellness Retreat Guests",
   description:
     "Answers for Shreevan Wellness guests comparing Rishikesh retreat programs, consultation, payment, stay, food, travel, health boundaries and realistic outcomes.",
-  alternates: {
-    canonical: "/faqs",
-  },
-};
+  path: "/faqs",
+});
 
 export default async function Page() {
   const faqContent = await getPublicFaqContent();

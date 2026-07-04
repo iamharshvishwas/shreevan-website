@@ -3,15 +3,15 @@ import { AboutFounderPage } from "@/components/about/about-founder-page";
 import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema/site-schema";
 import { siteConfig } from "@/config/site";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: `Our Story | ${siteConfig.name}`,
   description:
     "Meet the story and founder intention behind Shreevan Wellness, a responsible premium retreat experience in Rishikesh, India.",
-  alternates: {
-    canonical: "/about-founder",
-  },
-};
+  path: "/about-founder",
+  absoluteTitle: true,
+});
 
 export default function Page() {
   return (

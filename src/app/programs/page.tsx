@@ -3,20 +3,19 @@ import { ProgramsHubPage } from "@/components/seo/programs-hub-page";
 import { siteConfig } from "@/config/site";
 import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema, itemListSchema, webPageSchema } from "@/lib/schema/site-schema";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 import { getPublicProgramSummaries } from "@/lib/site/public-programs";
 
 const pageUrl = `${siteConfig.url}/programs`;
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Immersive Wellness Programs",
   description:
     "Compare Shreevan Wellness 3, 7, 14, 28 and 60-day retreat programs in Rishikesh before booking a suitability consultation.",
-  alternates: {
-    canonical: "/programs",
-  },
-};
+  path: "/programs",
+});
 
 export default async function Page() {
   const programs = await getPublicProgramSummaries();

@@ -24,6 +24,24 @@ function published<T extends { status: string }>(items: T[]) {
   return items.filter((item) => item.status === "published");
 }
 
+function publicJournalArticles(items: AdminJournalArticle[]) {
+  const now = Date.now();
+
+  return items.filter((item) => {
+    if (item.status === "published") {
+      return true;
+    }
+
+    if (item.status !== "scheduled" || !item.scheduledAt) {
+      return false;
+    }
+
+    const scheduledAt = new Date(item.scheduledAt).getTime();
+
+    return Number.isFinite(scheduledAt) && scheduledAt <= now;
+  });
+}
+
 function toTrustStandard(item: AdminTrustStandard): PublicTrustStandard {
   return {
     id: item.id,
@@ -65,10 +83,20 @@ function toVideoSlot(video: AdminVideoSlot): PublicVideoSlot {
   };
 }
 
-function toJournalArticle(article: AdminJournalArticle): PublicJournalArticle {
+export function toPublicJournalArticle(article: AdminJournalArticle): PublicJournalArticle {
+  const coverMedia = article.coverMedia ?? {
+    kind: "" as const,
+    src: "",
+    alt: "",
+    caption: "",
+    description: "",
+  };
+
   return {
     id: article.id,
+    slug: article.slug || article.id,
     category: article.category,
+    categoryId: article.categoryId || article.category.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
     title: article.title,
     excerpt: article.excerpt,
     date: article.date,
@@ -76,6 +104,29 @@ function toJournalArticle(article: AdminJournalArticle): PublicJournalArticle {
     audience: article.audience,
     tags: article.tags,
     keyPoints: article.keyPoints,
+    content: article.content ?? "",
+    body: article.body ?? [],
+    blocks: article.blocks ?? [],
+    coverMedia: {
+      kind: coverMedia.src ? "image" : "",
+      src: coverMedia.src,
+      alt: coverMedia.alt,
+      caption: coverMedia.caption,
+      description: coverMedia.description ?? "",
+    },
+    seoTitle: article.seoTitle || article.title,
+    seoDescription: article.seoDescription || article.excerpt,
+    canonicalPath: article.canonicalPath || `/journal/${article.id}`,
+    canonicalUrl: article.canonicalUrl || article.canonicalPath || `/journal/${article.id}`,
+    publishedAt: article.publishedAt ?? "",
+    scheduledAt: article.scheduledAt ?? "",
+    indexStatus: article.indexStatus ?? "index",
+    authorId: article.authorId ?? "admin",
+    author: article.author ?? "Shreevan Wellness",
+    redirectEnabled: article.redirectEnabled ?? false,
+    redirectUrl: article.redirectUrl ?? "",
+    redirectStatusCode: article.redirectStatusCode ?? 301,
+    schemaJson: article.schemaJson ?? "",
     relatedHref: article.relatedHref,
     relatedLabel: article.relatedLabel,
     contactLabel: article.contactLabel,
@@ -133,11 +184,11 @@ export async function getPublicStoryContent(): Promise<PublicStoryContent> {
 
 export async function getPublicJournalContent(): Promise<PublicJournalContent> {
   const store = await readStoreWithFallback();
-  const articles = published(store.journalArticles).map(toJournalArticle);
-  const fallbackArticles = published(defaultAdminContentTrust.journalArticles).map(toJournalArticle);
+  const articles = publicJournalArticles(store.journalArticles).map(toPublicJournalArticle);
+  const fallbackArticles = publicJournalArticles(defaultAdminContentTrust.journalArticles).map(toPublicJournalArticle);
   const sourceArticles = fallbackIfEmpty(articles, fallbackArticles);
   const featuredArticleIds = store.journalArticles
-    .filter((article) => article.status === "published" && article.featured)
+    .filter((article) => publicJournalArticles([article]).length && article.featured)
     .map((article) => article.id);
 
   return {

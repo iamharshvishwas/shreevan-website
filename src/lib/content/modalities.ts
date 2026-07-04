@@ -110,7 +110,7 @@ const programs = {
     note: "signature immersive pathway",
   },
   sixtyDay: {
-    name: "60-Day Rishi Tantra Lifestyle Transformation Residency",
+    name: "60-Day Rishi Tantra Conscious Living Residency",
     href: "/programs/60-day-rishi-residency",
     note: "advanced lifestyle residency",
   },

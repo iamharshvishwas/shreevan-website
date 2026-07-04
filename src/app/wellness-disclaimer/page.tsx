@@ -3,6 +3,7 @@ import { LegalPage, type LegalSection } from "@/components/legal/legal-page";
 import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema } from "@/lib/schema/site-schema";
 import { siteConfig } from "@/config/site";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
 const lastUpdated = "19 June 2026";
 
@@ -93,14 +94,12 @@ const sections: LegalSection[] = [
   },
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Wellness Disclaimer",
   description:
     "Health and wellness disclaimer for Shreevan Wellness explaining that retreat programs are wellness education, not medical treatment, diagnosis, cure or emergency care.",
-  alternates: {
-    canonical: "/wellness-disclaimer",
-  },
-};
+  path: "/wellness-disclaimer",
+});
 
 export default function Page() {
   return (

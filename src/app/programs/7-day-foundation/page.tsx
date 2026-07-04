@@ -3,6 +3,7 @@ import { SevenDayFoundationPage } from "@/components/programs/seven-day-foundati
 import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema, programServiceSchema, webPageSchema } from "@/lib/schema/site-schema";
 import { siteConfig } from "@/config/site";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
 const pageUrl = `${siteConfig.url}/programs/7-day-foundation`;
 const pageDescription =
@@ -15,14 +16,12 @@ const programSchema = programServiceSchema({
   audienceType: "International wellness guests seeking a deeper foundation than a short reset",
 });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "7-Day Ganga Sattva Foundation",
   description:
     "Explore the 7-Day Ganga Sattva Foundation by Shreevan Wellness: Rebuild Your Life From Within through yoga, pranayama, meditation, sattvic nutrition and habit formation.",
-  alternates: {
-    canonical: "/programs/7-day-foundation",
-  },
-};
+  path: "/programs/7-day-foundation",
+});
 
 export default function Page() {
   return (

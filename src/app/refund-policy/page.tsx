@@ -3,6 +3,7 @@ import { LegalPage, type LegalSection } from "@/components/legal/legal-page";
 import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema } from "@/lib/schema/site-schema";
 import { siteConfig } from "@/config/site";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
 const lastUpdated = "19 June 2026";
 
@@ -111,14 +112,12 @@ const sections: LegalSection[] = [
   },
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Refund Policy",
   description:
     "Refund, cancellation and transfer policy for Shreevan Wellness retreats, including non-refundable registration fee, 25-day balance due date, 10-day cancellation rules and transfer conditions.",
-  alternates: {
-    canonical: "/refund-policy",
-  },
-};
+  path: "/refund-policy",
+});
 
 export default function Page() {
   return (

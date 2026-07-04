@@ -5,9 +5,16 @@ import { formatPhoneWithCountryCode, WhatsAppPhoneFields } from "@/components/fo
 
 export function ContactEnquiryForm() {
   const [status, setStatus] = useState("");
+  const [locked, setLocked] = useState(false);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    if (locked) {
+      return;
+    }
+
+    setLocked(true);
     setStatus("Sending...");
 
     const form = event.currentTarget;
@@ -36,7 +43,12 @@ export function ContactEnquiryForm() {
   }
 
   return (
-    <form className="contact-form" data-veda-form="Contact form" onSubmit={handleSubmit}>
+    <form
+      className="contact-form"
+      data-veda-form="Contact form"
+      onSubmit={handleSubmit}
+      onChange={() => setLocked(false)}
+    >
       <div className="form-grid">
         <div className="form-row">
           <label htmlFor="contact-name">Full name</label>
@@ -76,7 +88,7 @@ export function ContactEnquiryForm() {
         <span>I understand this contact form is for general enquiries and not medical advice.</span>
       </label>
 
-      <button className="button button-primary" type="submit">
+      <button className="button button-primary" type="submit" disabled={locked}>
         Send enquiry
       </button>
       <p className="form-status" aria-live="polite">

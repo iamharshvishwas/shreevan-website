@@ -3,15 +3,15 @@ import { ContactPage } from "@/components/contact/contact-page";
 import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema/site-schema";
 import { siteConfig } from "@/config/site";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: `Contact Us | ${siteConfig.name}`,
   description:
     "Contact Shreevan Wellness in Rishikesh, India for retreat enquiries, travel questions, consultation requests and international visitor support.",
-  alternates: {
-    canonical: "/contact",
-  },
-};
+  path: "/contact",
+  absoluteTitle: true,
+});
 
 export default function Page() {
   return (

@@ -5,9 +5,16 @@ import { formatPhoneWithCountryCode, WhatsAppPhoneFields } from "@/components/fo
 
 export function SuitabilityForm() {
   const [status, setStatus] = useState("");
+  const [locked, setLocked] = useState(false);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    if (locked) {
+      return;
+    }
+
+    setLocked(true);
     setStatus("Sending...");
 
     const form = event.currentTarget;
@@ -60,7 +67,13 @@ export function SuitabilityForm() {
   }
 
   return (
-    <form className="suitability-form" method="post" data-veda-form="Home suitability request" onSubmit={handleSubmit}>
+    <form
+      className="suitability-form"
+      method="post"
+      data-veda-form="Home suitability request"
+      onSubmit={handleSubmit}
+      onChange={() => setLocked(false)}
+    >
       <div className="form-grid">
         <div className="form-row">
           <label htmlFor="guest-name">Full name</label>
@@ -108,7 +121,7 @@ export function SuitabilityForm() {
         <span>I understand this is a wellness suitability request, not medical advice.</span>
       </label>
 
-      <button className="button button-primary" type="submit">
+      <button className="button button-primary" type="submit" disabled={locked}>
         Request a suitability call
       </button>
       <p className="form-status" aria-live="polite">

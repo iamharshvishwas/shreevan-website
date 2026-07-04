@@ -89,7 +89,7 @@ SEO & Leads is available at:
 http://localhost:3000/admin/seo
 ```
 
-Local development falls back to `admin` / `shreevan-admin` when admin env vars are not set. Production requires:
+There is no built-in fallback login. Admin login returns a configuration error unless these env vars are set (locally, put them in `.env`):
 
 ```bash
 SHREEVAN_ADMIN_USER=

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { appendAdminLead } from "@/lib/admin/seo-leads";
 import type { AdminLeadInput, AdminLeadSource } from "@/lib/admin/seo-leads";
+import { clientRateLimitKey, rateLimit, rateLimitResponse } from "@/lib/security/rate-limit";
 
 export const runtime = "nodejs";
 
@@ -8,8 +9,11 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return Boolean(value && typeof value === "object" && !Array.isArray(value));
 }
 
-function stringValue(value: unknown) {
-  return typeof value === "string" ? value.trim() : "";
+const SHORT_FIELD_MAX = 200;
+const LONG_FIELD_MAX = 2000;
+
+function stringValue(value: unknown, maxLength = SHORT_FIELD_MAX) {
+  return typeof value === "string" ? value.trim().slice(0, maxLength) : "";
 }
 
 function booleanValue(value: unknown) {
@@ -23,6 +27,16 @@ function sourceValue(value: unknown): AdminLeadSource {
 }
 
 export async function POST(request: Request) {
+  const limiterKey = clientRateLimitKey(request, "leads");
+  const limiter = rateLimit(limiterKey, 10, 10 * 60_000);
+
+  if (!limiter.allowed) {
+    return rateLimitResponse(
+      limiter.retryAfterSeconds,
+      "Too many submissions from this connection. Please try again shortly.",
+    );
+  }
+
   let body: unknown;
 
   try {
@@ -43,11 +57,11 @@ export async function POST(request: Request) {
     country: stringValue(body.country),
     program: stringValue(body.program),
     topic: stringValue(body.topic),
-    message: stringValue(body.message),
-    goal: stringValue(body.goal),
+    message: stringValue(body.message, LONG_FIELD_MAX),
+    goal: stringValue(body.goal, LONG_FIELD_MAX),
     dates: stringValue(body.dates),
     season: stringValue(body.season),
-    health: stringValue(body.health),
+    health: stringValue(body.health, LONG_FIELD_MAX),
     consent: booleanValue(body.consent),
   };
 

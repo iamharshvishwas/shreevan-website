@@ -3,6 +3,7 @@ import { SixtyDayRishiResidencyPage } from "@/components/programs/sixty-day-rish
 import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema, programServiceSchema, webPageSchema } from "@/lib/schema/site-schema";
 import { siteConfig } from "@/config/site";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
 const pageUrl = `${siteConfig.url}/programs/60-day-rishi-residency`;
 const pageDescription =
@@ -17,14 +18,12 @@ const programSchema = programServiceSchema({
     "Burned-out executives, entrepreneurs, wellness professionals, digital nomads, life transition seekers and serious spiritual seekers",
 });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "60-Day Rishi Tantra Conscious Living Residency",
   description:
     "Explore Shreevan Wellness's most advanced 60-day Rishi Tantra residency: a conscious living immersion for health, habits, purpose, mentoring and long-term integration.",
-  alternates: {
-    canonical: "/programs/60-day-rishi-residency",
-  },
-};
+  path: "/programs/60-day-rishi-residency",
+});
 
 export default function Page() {
   return (
