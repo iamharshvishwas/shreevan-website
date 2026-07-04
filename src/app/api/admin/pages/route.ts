@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { isAdminRequestAuthorized } from "@/lib/admin/auth";
+import { adminWritesDisabledResponse } from "@/lib/admin/write-guard";
 import { readAdminPageContent, writeAdminPageContent } from "@/lib/admin/page-content";
 
 export const runtime = "nodejs";
@@ -15,6 +16,12 @@ export async function GET(request: Request) {
 }
 
 export async function PUT(request: Request) {
+  const writesDisabled = adminWritesDisabledResponse();
+
+  if (writesDisabled) {
+    return writesDisabled;
+  }
+
   if (!(await isAdminRequestAuthorized(request))) {
     return NextResponse.json({ error: "Unauthorized admin request." }, { status: 401 });
   }

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { isAdminRequestAuthorized } from "@/lib/admin/auth";
+import { adminWritesDisabledResponse } from "@/lib/admin/write-guard";
 import { saveAdminHomeMediaUpload } from "@/lib/admin/home-content";
 
 export const runtime = "nodejs";
@@ -16,6 +17,12 @@ function isUploadFile(value: FormDataEntryValue | null): value is File {
 }
 
 export async function POST(request: Request) {
+  const writesDisabled = adminWritesDisabledResponse();
+
+  if (writesDisabled) {
+    return writesDisabled;
+  }
+
   if (!(await isAdminRequestAuthorized(request))) {
     return NextResponse.json({ error: "Unauthorized admin request." }, { status: 401 });
   }

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { isAdminRequestAuthorized } from "@/lib/admin/auth";
+import { adminWritesDisabledResponse } from "@/lib/admin/write-guard";
 import { readAdminContentTrust, writeAdminContentTrust } from "@/lib/admin/content-trust";
 import type { AdminJournalArticle } from "@/lib/admin/content-trust";
 
@@ -48,6 +49,12 @@ export async function GET(request: Request, { params }: BlogArticleRouteProps) {
 }
 
 export async function PATCH(request: Request, { params }: BlogArticleRouteProps) {
+  const writesDisabled = adminWritesDisabledResponse();
+
+  if (writesDisabled) {
+    return writesDisabled;
+  }
+
   if (!(await isAdminRequestAuthorized(request))) {
     return NextResponse.json({ error: "Unauthorized admin request." }, { status: 401 });
   }
@@ -97,6 +104,12 @@ export async function PATCH(request: Request, { params }: BlogArticleRouteProps)
 }
 
 export async function DELETE(request: Request, { params }: BlogArticleRouteProps) {
+  const writesDisabled = adminWritesDisabledResponse();
+
+  if (writesDisabled) {
+    return writesDisabled;
+  }
+
   if (!(await isAdminRequestAuthorized(request))) {
     return NextResponse.json({ error: "Unauthorized admin request." }, { status: 401 });
   }
