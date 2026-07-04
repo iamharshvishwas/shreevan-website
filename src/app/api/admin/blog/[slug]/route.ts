@@ -1,9 +1,16 @@
 import { NextResponse } from "next/server";
 import { isAdminRequestAuthorized } from "@/lib/admin/auth";
-import { readAdminContentTrust, writeAdminContentTrust } from "@/lib/admin/content-trust";
+import { isContentTrustStorageEphemeral, readAdminContentTrust, writeAdminContentTrust } from "@/lib/admin/content-trust";
 import type { AdminJournalArticle } from "@/lib/admin/content-trust";
 
 export const runtime = "nodejs";
+
+const EPHEMERAL_WARNING =
+  "Saved, but only for this server instance. This deployment has no persistent storage yet — the post can vanish without warning on restart/redeploy, and other visitors may not see it. Copy this content somewhere safe.";
+
+function ephemeralFields() {
+  return isContentTrustStorageEphemeral() ? { ephemeral: true, warning: EPHEMERAL_WARNING } : {};
+}
 
 type BlogArticleRouteProps = {
   params: Promise<{
@@ -86,11 +93,15 @@ export async function PATCH(request: Request, { params }: BlogArticleRouteProps)
       (item) => item.id === slug || articleSlug(item) === articleSlug(body as Partial<AdminJournalArticle>),
     );
 
-    return NextResponse.json({ article: savedArticle, blog: {
-      journalCategories: contentTrust.journalCategories,
-      journalArticles: contentTrust.journalArticles,
-      updatedAt: contentTrust.updatedAt,
-    } });
+    return NextResponse.json({
+      article: savedArticle,
+      blog: {
+        journalCategories: contentTrust.journalCategories,
+        journalArticles: contentTrust.journalArticles,
+        updatedAt: contentTrust.updatedAt,
+      },
+      ...ephemeralFields(),
+    });
   } catch {
     return NextResponse.json({ error: "Blog article could not be updated." }, { status: 500 });
   }
@@ -128,6 +139,7 @@ export async function DELETE(request: Request, { params }: BlogArticleRouteProps
         journalArticles: contentTrust.journalArticles,
         updatedAt: contentTrust.updatedAt,
       },
+      ...ephemeralFields(),
     });
   } catch {
     return NextResponse.json({ error: "Blog article could not be archived." }, { status: 500 });

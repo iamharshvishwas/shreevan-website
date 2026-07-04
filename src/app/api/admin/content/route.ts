@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { isAdminRequestAuthorized } from "@/lib/admin/auth";
-import { readAdminContentTrust, writeAdminContentTrust } from "@/lib/admin/content-trust";
+import { isContentTrustStorageEphemeral, readAdminContentTrust, writeAdminContentTrust } from "@/lib/admin/content-trust";
 
 export const runtime = "nodejs";
 
@@ -25,6 +25,16 @@ export async function PUT(request: Request) {
     body = await request.json();
   } catch {
     return NextResponse.json({ error: "Invalid content payload." }, { status: 400 });
+  }
+
+  // FAQ/Content & Trust saving is intentionally NOT covered by the blog-only
+  // ephemeral /tmp stopgap: it shares this same storage file, so without this
+  // early return it would start "succeeding" silently on Vercel with no
+  // warning shown in this panel. Keep this route failing exactly as before
+  // until it gets its own explicit ephemeral-save UI, or real persistent
+  // storage lands.
+  if (isContentTrustStorageEphemeral()) {
+    return NextResponse.json({ error: "Content could not be saved in this environment." }, { status: 500 });
   }
 
   try {

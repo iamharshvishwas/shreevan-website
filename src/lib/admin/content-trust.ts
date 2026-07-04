@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
 import { dirname, extname, join } from "node:path";
 
 export type AdminContentStatus = "draft" | "published" | "scheduled" | "archived";
@@ -133,6 +134,15 @@ export type AdminContentTrustStore = {
 };
 
 const CONTENT_TRUST_PATH = join(process.cwd(), "data", "admin", "content-trust.json");
+// On Vercel the deployed bundle (including CONTENT_TRUST_PATH) is read-only, so
+// writes there throw EROFS. /tmp is writable but ephemeral and not shared across
+// serverless instances or across deploys — this is a stopgap for Blog only,
+// not a substitute for real persistent storage (Supabase, Vercel Blob/KV, etc).
+const CONTENT_TRUST_EPHEMERAL_PATH = join(tmpdir(), "shreevan-admin-content-trust.ephemeral.json");
+
+export function isContentTrustStorageEphemeral() {
+  return process.env.VERCEL === "1";
+}
 const BLOG_UPLOAD_DIR = join(process.cwd(), "public", "uploads", "blog");
 const BLOG_UPLOAD_URL_BASE = "/uploads/blog";
 const MAX_BLOG_UPLOAD_BYTES = 12 * 1024 * 1024;
@@ -1117,6 +1127,19 @@ export function normalizeAdminContentTrust(value: unknown): AdminContentTrustSto
 }
 
 export async function readAdminContentTrust() {
+  if (isContentTrustStorageEphemeral()) {
+    try {
+      const overlay = await readFile(CONTENT_TRUST_EPHEMERAL_PATH, "utf8");
+
+      return normalizeAdminContentTrust(JSON.parse(overlay));
+    } catch (error) {
+      if (!(isRecord(error) && error.code === "ENOENT")) {
+        throw error;
+      }
+      // No overlay saved yet in this instance — fall through to the bundled file.
+    }
+  }
+
   try {
     const file = await readFile(CONTENT_TRUST_PATH, "utf8");
 
@@ -1136,8 +1159,10 @@ export async function writeAdminContentTrust(value: unknown) {
     updatedAt: new Date().toISOString(),
   };
 
-  await mkdir(dirname(CONTENT_TRUST_PATH), { recursive: true });
-  await writeFile(CONTENT_TRUST_PATH, `${JSON.stringify(contentTrust, null, 2)}\n`, "utf8");
+  const targetPath = isContentTrustStorageEphemeral() ? CONTENT_TRUST_EPHEMERAL_PATH : CONTENT_TRUST_PATH;
+
+  await mkdir(dirname(targetPath), { recursive: true });
+  await writeFile(targetPath, `${JSON.stringify(contentTrust, null, 2)}\n`, "utf8");
 
   return contentTrust;
 }
