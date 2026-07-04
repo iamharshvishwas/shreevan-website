@@ -2,20 +2,26 @@
 
 import Script from "next/script";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { usePublicSiteSettings } from "@/components/site/public-settings-provider";
+
+const subscribeNever = () => () => {};
+
+// Hostname never changes during a session; assume the admin host during SSR so
+// CRM scripts only ever load after the client confirms a public host.
+function useIsAdminHost() {
+  return useSyncExternalStore(
+    subscribeNever,
+    () => window.location.hostname.startsWith("admin."),
+    () => true,
+  );
+}
 
 export function CrmWidget() {
   const pathname = usePathname();
   const settings = usePublicSiteSettings();
-  const [shouldLoad, setShouldLoad] = useState(false);
-
-  useEffect(() => {
-    const isAdminPath = pathname?.startsWith("/admin");
-    const isAdminHost = window.location.hostname.startsWith("admin.");
-
-    setShouldLoad(!isAdminPath && !isAdminHost);
-  }, [pathname]);
+  const isAdminHost = useIsAdminHost();
+  const shouldLoad = !pathname?.startsWith("/admin") && !isAdminHost;
 
   if (!shouldLoad || !settings.crm.enabled || !settings.crm.scriptUrl) {
     return null;

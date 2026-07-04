@@ -87,7 +87,7 @@ export function JournalPage({ content }: Readonly<{ content: PublicJournalConten
             </div>
 
             <aside className="journal-hero-board" aria-label="Journal highlights">
-              <span>Editor's path</span>
+              <span>Editor’s path</span>
               {editorPicks.map((articleId, index) => {
                 const article = articles.find((item) => item.id === articleId) ?? articles[index] ?? articles[0];
                 return (

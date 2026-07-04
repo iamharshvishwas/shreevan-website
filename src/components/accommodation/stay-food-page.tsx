@@ -279,7 +279,7 @@ export function StayFoodPage() {
               <p className="eyebrow">International reassurance</p>
               <h2 id="reassurance-title">The safest conversion is a well-informed guest</h2>
               <p>
-                A premium stay page should answer the practical worries silently sitting in the visitor's
+                A premium stay page should answer the practical worries silently sitting in the visitor’s
                 mind: cleanliness, food comfort, room privacy, travel readiness and what is not promised.
               </p>
             </div>

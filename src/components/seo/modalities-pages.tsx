@@ -203,7 +203,7 @@ export function ModalitiesHubPage({
               </div>
               <p>
                 Premium does not mean exaggerated. It means clear practice language, clear boundaries and a
-                consultation path that respects the guest's real context.
+                consultation path that respects the guest’s real context.
               </p>
             </div>
             <div className="modality-standards-grid">

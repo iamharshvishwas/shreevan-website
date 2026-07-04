@@ -267,7 +267,7 @@ export function HomePage({
             <div className="testimonial-grid">
               {content.testimonials.items.map((testimonial) => (
                 <article key={testimonial.id}>
-                  <p>"{testimonial.quote}"</p>
+                  <p>“{testimonial.quote}”</p>
                   <span>{testimonial.attribution}</span>
                 </article>
               ))}
