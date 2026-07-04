@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect, redirect } from "next/navigation";
 import { JournalArticlePage } from "@/components/journal/journal-article-page";
 import { siteConfig } from "@/config/site";
 import { JsonLd } from "@/lib/schema/json-ld";
 import { blogPostingSchema, breadcrumbSchema, webPageSchema } from "@/lib/schema/site-schema";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 import { getPublicJournalContent } from "@/lib/site/public-content-trust";
 
 type JournalArticlePageProps = {
@@ -22,48 +23,85 @@ function toIsoDate(date: string) {
   return Number.isNaN(parsed.getTime()) ? "2026-06-26T00:00:00.000Z" : parsed.toISOString();
 }
 
+function findArticle(journalContent: Awaited<ReturnType<typeof getPublicJournalContent>>, slug: string) {
+  return journalContent.articles.find((item) => item.id === slug || item.slug === slug);
+}
+
+function isSchemaObject(value: unknown): value is Record<string, unknown> {
+  return Boolean(value && typeof value === "object" && !Array.isArray(value));
+}
+
+function parseSchemaJson(value: string): Record<string, unknown> | null {
+  if (!value.trim()) {
+    return null;
+  }
+
+  try {
+    const parsed = JSON.parse(value) as unknown;
+
+    return isSchemaObject(parsed) ? parsed : null;
+  } catch {
+    return null;
+  }
+}
+
 export async function generateStaticParams() {
   const journalContent = await getPublicJournalContent();
 
   return journalContent.articles.map((article) => ({
-    slug: article.id,
+    slug: article.slug || article.id,
   }));
 }
 
 export async function generateMetadata({ params }: JournalArticlePageProps): Promise<Metadata> {
   const { slug } = await params;
   const journalContent = await getPublicJournalContent();
-  const article = journalContent.articles.find((item) => item.id === slug);
+  const article = findArticle(journalContent, slug);
 
   if (!article) {
     return {};
   }
 
-  return {
-    title: `${article.title} | Shreevan Journal`,
-    description: article.excerpt,
-    alternates: {
-      canonical: articlePath(article.id),
-    },
-  };
+  return buildPageMetadata({
+    title: article.seoTitle || `${article.title} | Shreevan Journal`,
+    description: article.seoDescription || article.excerpt,
+    path: article.canonicalPath || articlePath(article.id),
+    robots:
+      article.indexStatus === "noindex"
+        ? {
+            index: false,
+            follow: false,
+            nocache: true,
+          }
+        : undefined,
+  });
 }
 
 export default async function Page({ params }: JournalArticlePageProps) {
   const { slug } = await params;
   const journalContent = await getPublicJournalContent();
-  const article = journalContent.articles.find((item) => item.id === slug);
+  const article = findArticle(journalContent, slug);
 
   if (!article) {
     notFound();
   }
 
-  const path = articlePath(article.id);
+  if (article.redirectEnabled && article.redirectUrl) {
+    if (article.redirectStatusCode === 301) {
+      permanentRedirect(article.redirectUrl);
+    }
+
+    redirect(article.redirectUrl);
+  }
+
+  const path = articlePath(article.slug || article.id);
   const pageUrl = `${siteConfig.url}${path}`;
+  const manualSchema = parseSchemaJson(article.schemaJson);
   const relatedArticles = journalContent.articles
     .filter((item) => item.id !== article.id)
     .slice(0, 3)
     .map((item) => ({
-      id: item.id,
+      id: item.slug || item.id,
       title: item.title,
     }));
 
@@ -88,13 +126,14 @@ export default async function Page({ params }: JournalArticlePageProps) {
         data={blogPostingSchema({
           title: article.title,
           url: path,
-          description: article.excerpt,
+          description: article.seoDescription || article.excerpt,
           datePublished: toIsoDate(article.date),
           category: article.category,
           tags: article.tags,
           audience: article.audience,
         })}
       />
+      {manualSchema ? <JsonLd data={manualSchema} /> : null}
       <JournalArticlePage article={article} relatedArticles={relatedArticles} />
     </>
   );

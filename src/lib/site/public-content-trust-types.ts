@@ -53,7 +53,9 @@ export type PublicStoryContent = {
 
 export type PublicJournalArticle = {
   id: string;
+  slug: string;
   category: string;
+  categoryId: string;
   title: string;
   excerpt: string;
   date: string;
@@ -61,6 +63,39 @@ export type PublicJournalArticle = {
   audience: string;
   tags: string[];
   keyPoints: string[];
+  content: string;
+  body: string[];
+  blocks: Array<{
+    id: string;
+    type: "paragraph" | "heading" | "image" | "quote" | "button" | "divider" | "embed";
+    content: string;
+    level?: 2 | 3;
+    url?: string;
+    alt?: string;
+    caption?: string;
+    label?: string;
+    href?: string;
+  }>;
+  coverMedia: {
+    kind: "" | "image";
+    src: string;
+    alt: string;
+    caption: string;
+    description: string;
+  };
+  seoTitle: string;
+  seoDescription: string;
+  canonicalPath: string;
+  canonicalUrl: string;
+  publishedAt: string;
+  scheduledAt: string;
+  indexStatus: "index" | "noindex";
+  authorId: string;
+  author: string;
+  redirectEnabled: boolean;
+  redirectUrl: string;
+  redirectStatusCode: 301 | 302;
+  schemaJson: string;
   relatedHref: string;
   relatedLabel: string;
   contactLabel: string;

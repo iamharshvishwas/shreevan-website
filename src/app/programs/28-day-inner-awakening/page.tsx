@@ -3,6 +3,7 @@ import { TwentyEightDayInnerAwakeningPage } from "@/components/programs/twenty-e
 import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema, programServiceSchema, webPageSchema } from "@/lib/schema/site-schema";
 import { siteConfig } from "@/config/site";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
 const pageUrl = `${siteConfig.url}/programs/28-day-inner-awakening`;
 const pageDescription =
@@ -20,14 +21,12 @@ const programSchema = programServiceSchema({
   },
 });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "28-Day Sattva Ganga Inner Awakening",
   description:
     "Explore Shreevan Wellness's 28-day flagship Sattva Ganga Inner Awakening: Awaken, Heal, Transform and Integrate through 120-140 guided experiences in Rishikesh.",
-  alternates: {
-    canonical: "/programs/28-day-inner-awakening",
-  },
-};
+  path: "/programs/28-day-inner-awakening",
+});
 
 export default function Page() {
   return (

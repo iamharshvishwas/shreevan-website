@@ -14,6 +14,7 @@ const readinessItems = [
   ["Content & Trust", "FAQs, Healing Stories and Journal seed content now use the admin store."],
   ["SEO & Leads", "Sitemap route controls and local enquiry capture now feed the admin inbox."],
   ["Home Page Builder", "Homepage body sections, repeaters and media references now come from admin data."],
+  ["Blog Upload", "Journal article drafts, cover images, SEO fields and publishing state now have a dedicated editor."],
 ];
 
 const nextModules = [["V1 hardening", "Role permissions, audit log and external CRM sync.", "Next"]];
@@ -32,11 +33,11 @@ export function AdminDashboard() {
         <div>
           <p className="admin-kicker">Private frontend management</p>
           <h2 id="admin-dashboard-title">
-            Admin V1 now covers the homepage, settings, pages, programs, trust content, SEO and leads.
+            Admin V1 now covers the homepage, settings, pages, programs, trust content, blog upload, SEO and leads.
           </h2>
           <p>
-            The Home Page builder adds section-by-section editing, repeatable blocks and upload-ready
-            media slots for the public homepage.
+            The Home Page builder and Blog Upload manager now cover page sections, repeatable blocks,
+            article drafts and upload-ready media slots.
           </p>
         </div>
         <div className="admin-status-panel" aria-label="Admin environment">

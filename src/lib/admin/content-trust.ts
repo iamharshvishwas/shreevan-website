@@ -1,7 +1,23 @@
+import { randomUUID } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
+import { dirname, extname, join } from "node:path";
 
-export type AdminContentStatus = "draft" | "published" | "archived";
+export type AdminContentStatus = "draft" | "published" | "scheduled" | "archived";
+export type AdminBlogIndexStatus = "index" | "noindex";
+export type AdminBlogRedirectStatusCode = 301 | 302;
+export type AdminBlogBlockType = "paragraph" | "heading" | "image" | "quote" | "button" | "divider" | "embed";
+
+export type AdminBlogBlock = {
+  id: string;
+  type: AdminBlogBlockType;
+  content: string;
+  level?: 2 | 3;
+  url?: string;
+  alt?: string;
+  caption?: string;
+  label?: string;
+  href?: string;
+};
 
 export type AdminFaqLink = {
   href: string;
@@ -49,7 +65,9 @@ export type AdminVideoSlot = {
 
 export type AdminJournalArticle = {
   id: string;
+  slug?: string;
   category: string;
+  categoryId?: string;
   title: string;
   excerpt: string;
   date: string;
@@ -57,6 +75,31 @@ export type AdminJournalArticle = {
   audience: string;
   tags: string[];
   keyPoints: string[];
+  content?: string;
+  body?: string[];
+  blocks?: AdminBlogBlock[];
+  coverMedia?: {
+    kind: "" | "image";
+    src: string;
+    alt: string;
+    caption: string;
+    description?: string;
+  };
+  seoTitle?: string;
+  seoDescription?: string;
+  canonicalPath?: string;
+  canonicalUrl?: string;
+  publishedAt?: string;
+  scheduledAt?: string;
+  indexStatus?: AdminBlogIndexStatus;
+  authorId?: string;
+  author?: string;
+  redirectEnabled?: boolean;
+  redirectUrl?: string;
+  redirectStatusCode?: AdminBlogRedirectStatusCode;
+  schemaJson?: string;
+  createdAt?: string;
+  updatedAt?: string;
   relatedHref: string;
   relatedLabel: string;
   contactLabel: string;
@@ -90,6 +133,16 @@ export type AdminContentTrustStore = {
 };
 
 const CONTENT_TRUST_PATH = join(process.cwd(), "data", "admin", "content-trust.json");
+const BLOG_UPLOAD_DIR = join(process.cwd(), "public", "uploads", "blog");
+const BLOG_UPLOAD_URL_BASE = "/uploads/blog";
+const MAX_BLOG_UPLOAD_BYTES = 12 * 1024 * 1024;
+
+const allowedBlogUploadTypes = new Map([
+  ["image/jpeg", ".jpg"],
+  ["image/png", ".png"],
+  ["image/webp", ".webp"],
+  ["image/gif", ".gif"],
+]);
 
 export const defaultAdminContentTrust: AdminContentTrustStore = {
   updatedAt: "2026-06-21T00:00:00.000Z",
@@ -690,11 +743,33 @@ function booleanValue(value: unknown, fallback: boolean) {
 }
 
 function statusValue(value: unknown, fallback: AdminContentStatus): AdminContentStatus {
-  return value === "draft" || value === "published" || value === "archived" ? value : fallback;
+  return value === "draft" || value === "published" || value === "scheduled" || value === "archived"
+    ? value
+    : fallback;
 }
 
 function mediaTypeValue(value: unknown, fallback: AdminMediaItem["type"]) {
   return value === "image" || value === "video" || value === "document" || value === "embed" ? value : fallback;
+}
+
+function indexStatusValue(value: unknown, fallback: AdminBlogIndexStatus): AdminBlogIndexStatus {
+  return value === "noindex" ? "noindex" : fallback;
+}
+
+function redirectStatusCodeValue(value: unknown, fallback: AdminBlogRedirectStatusCode): AdminBlogRedirectStatusCode {
+  return value === 302 ? 302 : fallback;
+}
+
+function blogBlockTypeValue(value: unknown, fallback: AdminBlogBlockType): AdminBlogBlockType {
+  return value === "paragraph" ||
+    value === "heading" ||
+    value === "image" ||
+    value === "quote" ||
+    value === "button" ||
+    value === "divider" ||
+    value === "embed"
+    ? value
+    : fallback;
 }
 
 function stringArrayValue(value: unknown, fallback: string[]) {
@@ -703,6 +778,148 @@ function stringArrayValue(value: unknown, fallback: string[]) {
   }
 
   return value.filter((item): item is string => typeof item === "string").map((item) => item.trim()).filter(Boolean);
+}
+
+function slugify(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 70);
+}
+
+function safeBaseName(value: string) {
+  return slugify(value.replace(extname(value), "")).slice(0, 42);
+}
+
+function normalizeJournalMedia(
+  value: unknown,
+  fallback: NonNullable<AdminJournalArticle["coverMedia"]> = {
+    kind: "",
+    src: "",
+    alt: "",
+    caption: "",
+    description: "",
+  },
+): NonNullable<AdminJournalArticle["coverMedia"]> {
+  const input = isRecord(value) ? value : {};
+  const src = stringValue(input.src, fallback.src);
+
+  return {
+    kind: src ? "image" : "",
+    src,
+    alt: stringValue(input.alt, fallback.alt),
+    caption: stringValue(input.caption, fallback.caption),
+    description: stringValue(input.description, fallback.description ?? ""),
+  };
+}
+
+function blogCanonicalPath(id: string, value?: unknown) {
+  const path = typeof value === "string" ? value.trim() : "";
+
+  return path || `/journal/${id}`;
+}
+
+function categoryIdValue(value: string) {
+  return slugify(value) || "program-fit";
+}
+
+function normalizeBlogBlock(value: unknown, index: number): AdminBlogBlock {
+  const input = isRecord(value) ? value : {};
+  const type = blogBlockTypeValue(input.type, "paragraph");
+
+  return {
+    id: stringValue(input.id, `block-${index + 1}`),
+    type,
+    content: stringValue(input.content, ""),
+    level: input.level === 3 ? 3 : 2,
+    url: stringValue(input.url, ""),
+    alt: stringValue(input.alt, ""),
+    caption: stringValue(input.caption, ""),
+    label: stringValue(input.label, ""),
+    href: stringValue(input.href, ""),
+  };
+}
+
+function defaultBlogBlocks(article: Pick<AdminJournalArticle, "title" | "excerpt" | "keyPoints" | "body">) {
+  const bodyBlocks = article.body?.length ? article.body : [article.excerpt, ...article.keyPoints];
+
+  return [
+    {
+      id: "intro-heading",
+      type: "heading" as const,
+      level: 2 as const,
+      content: article.title,
+    },
+    ...bodyBlocks
+      .filter(Boolean)
+      .map((content, index) => ({
+        id: `paragraph-${index + 1}`,
+        type: "paragraph" as const,
+        content,
+      })),
+  ];
+}
+
+function normalizeBlogBlocks(value: unknown, fallback: AdminBlogBlock[]) {
+  const blocks = Array.isArray(value) ? value.map(normalizeBlogBlock) : [];
+
+  return blocks.length ? blocks : fallback;
+}
+
+function makeJournalArticleFallback(value: unknown, index: number): AdminJournalArticle {
+  const input = isRecord(value) ? value : {};
+  const title = stringValue(input.title, "New blog draft");
+  const id = stringValue(input.id, slugify(title) || `blog-draft-${index + 1}`);
+  const now = new Date().toISOString();
+
+  return {
+    id,
+    slug: id,
+    category: "Program Fit",
+    categoryId: "program-fit",
+    title,
+    excerpt: "",
+    date: new Date().toLocaleDateString("en-US", {
+      month: "long",
+      day: "2-digit",
+      year: "numeric",
+    }),
+    readTime: "5 min read",
+    audience: "",
+    tags: [],
+    keyPoints: [],
+    content: "",
+    body: [],
+    blocks: [],
+    coverMedia: {
+      kind: "",
+      src: "",
+      alt: "",
+      caption: "",
+      description: "",
+    },
+    seoTitle: "",
+    seoDescription: "",
+    canonicalPath: `/journal/${id}`,
+    canonicalUrl: `/journal/${id}`,
+    publishedAt: "",
+    scheduledAt: "",
+    indexStatus: "index",
+    authorId: "admin",
+    author: "Shreevan Wellness",
+    redirectEnabled: false,
+    redirectUrl: "",
+    redirectStatusCode: 301,
+    schemaJson: "",
+    createdAt: now,
+    updatedAt: now,
+    relatedHref: "/book-consultation",
+    relatedLabel: "Book consultation",
+    contactLabel: "Ask a question",
+    status: "draft",
+    featured: false,
+  };
 }
 
 function normalizeLinks(value: unknown, fallback: AdminFaqLink[] = []) {
@@ -776,17 +993,53 @@ function normalizeVideoSlot(value: unknown, fallback: AdminVideoSlot): AdminVide
 
 function normalizeJournalArticle(value: unknown, fallback: AdminJournalArticle): AdminJournalArticle {
   const input = isRecord(value) ? value : {};
+  const fallbackSlug = fallback.slug || fallback.id;
+  const slug = slugify(stringValue(input.slug, stringValue(input.id, fallbackSlug))) || fallbackSlug;
+  const id = slugify(stringValue(input.id, slug)) || slug;
+  const title = stringValue(input.title, fallback.title);
+  const excerpt = stringValue(input.excerpt, fallback.excerpt);
+  const category = stringValue(input.category, fallback.category);
+  const body = stringArrayValue(input.body, fallback.body ?? []);
+  const keyPoints = stringArrayValue(input.keyPoints, fallback.keyPoints);
+  const fallbackBlocks = defaultBlogBlocks({
+    title,
+    excerpt,
+    keyPoints,
+    body,
+  });
+  const now = new Date().toISOString();
 
   return {
-    id: stringValue(input.id, fallback.id),
-    category: stringValue(input.category, fallback.category),
-    title: stringValue(input.title, fallback.title),
-    excerpt: stringValue(input.excerpt, fallback.excerpt),
+    id,
+    slug,
+    category,
+    categoryId: stringValue(input.categoryId, fallback.categoryId ?? categoryIdValue(category)),
+    title,
+    excerpt,
     date: stringValue(input.date, fallback.date),
     readTime: stringValue(input.readTime, fallback.readTime),
     audience: stringValue(input.audience, fallback.audience),
     tags: stringArrayValue(input.tags, fallback.tags),
-    keyPoints: stringArrayValue(input.keyPoints, fallback.keyPoints),
+    keyPoints,
+    content: stringValue(input.content, fallback.content ?? body.join("\n\n")),
+    body,
+    blocks: normalizeBlogBlocks(input.blocks, fallback.blocks ?? fallbackBlocks),
+    coverMedia: normalizeJournalMedia(input.coverMedia, fallback.coverMedia),
+    seoTitle: stringValue(input.seoTitle, fallback.seoTitle ?? title),
+    seoDescription: stringValue(input.seoDescription, fallback.seoDescription ?? excerpt),
+    canonicalPath: blogCanonicalPath(id, input.canonicalPath ?? fallback.canonicalPath),
+    canonicalUrl: stringValue(input.canonicalUrl, fallback.canonicalUrl ?? blogCanonicalPath(id, input.canonicalPath ?? fallback.canonicalPath)),
+    publishedAt: stringValue(input.publishedAt, fallback.publishedAt ?? ""),
+    scheduledAt: stringValue(input.scheduledAt, fallback.scheduledAt ?? ""),
+    indexStatus: indexStatusValue(input.indexStatus, fallback.indexStatus ?? "index"),
+    authorId: stringValue(input.authorId, fallback.authorId ?? "admin"),
+    author: stringValue(input.author, fallback.author ?? "Shreevan Wellness"),
+    redirectEnabled: booleanValue(input.redirectEnabled, fallback.redirectEnabled ?? false),
+    redirectUrl: stringValue(input.redirectUrl, fallback.redirectUrl ?? ""),
+    redirectStatusCode: redirectStatusCodeValue(input.redirectStatusCode, fallback.redirectStatusCode ?? 301),
+    schemaJson: stringValue(input.schemaJson, fallback.schemaJson ?? ""),
+    createdAt: stringValue(input.createdAt, fallback.createdAt ?? now),
+    updatedAt: stringValue(input.updatedAt, fallback.updatedAt ?? now),
     relatedHref: stringValue(input.relatedHref, fallback.relatedHref),
     relatedLabel: stringValue(input.relatedLabel, fallback.relatedLabel),
     contactLabel: stringValue(input.contactLabel, fallback.contactLabel),
@@ -822,6 +1075,20 @@ function normalizeById<T extends { id: string }>(
   return defaults.map((fallback) => normalizeItem(incomingById.get(fallback.id), fallback));
 }
 
+function normalizeJournalArticles(incoming: unknown, defaults: AdminJournalArticle[]) {
+  const incomingItems = Array.isArray(incoming) ? incoming.filter(isRecord) : [];
+  const incomingById = new Map(
+    incomingItems.map((item) => [typeof item.id === "string" ? item.id : "", item] as const),
+  );
+  const defaultIds = new Set(defaults.map((item) => item.id));
+  const defaultArticles = defaults.map((fallback) => normalizeJournalArticle(incomingById.get(fallback.id), fallback));
+  const customArticles = incomingItems
+    .filter((item) => typeof item.id === "string" && item.id && !defaultIds.has(item.id))
+    .map((item, index) => normalizeJournalArticle(item, makeJournalArticleFallback(item, index)));
+
+  return [...defaultArticles, ...customArticles];
+}
+
 export function normalizeAdminContentTrust(value: unknown): AdminContentTrustStore {
   const input = isRecord(value) ? value : {};
 
@@ -843,7 +1110,7 @@ export function normalizeAdminContentTrust(value: unknown): AdminContentTrustSto
     outcomeRows: normalizeById(input.outcomeRows, defaultAdminContentTrust.outcomeRows, normalizeTrustStandard),
     consentStandards: stringArrayValue(input.consentStandards, defaultAdminContentTrust.consentStandards),
     journalCategories: stringArrayValue(input.journalCategories, defaultAdminContentTrust.journalCategories),
-    journalArticles: normalizeById(input.journalArticles, defaultAdminContentTrust.journalArticles, normalizeJournalArticle),
+    journalArticles: normalizeJournalArticles(input.journalArticles, defaultAdminContentTrust.journalArticles),
     mediaItems: normalizeById(input.mediaItems, defaultAdminContentTrust.mediaItems, normalizeMediaItem),
     updatedAt: stringValue(input.updatedAt, defaultAdminContentTrust.updatedAt),
   };
@@ -873,4 +1140,36 @@ export async function writeAdminContentTrust(value: unknown) {
   await writeFile(CONTENT_TRUST_PATH, `${JSON.stringify(contentTrust, null, 2)}\n`, "utf8");
 
   return contentTrust;
+}
+
+export async function saveAdminBlogCoverUpload(file: {
+  arrayBuffer: () => Promise<ArrayBuffer>;
+  name: string;
+  size: number;
+  type: string;
+}) {
+  const extension = allowedBlogUploadTypes.get(file.type);
+
+  if (!extension) {
+    throw new Error("Only JPG, PNG, WEBP and GIF image files are supported for blog covers.");
+  }
+
+  if (file.size <= 0) {
+    throw new Error("The uploaded file is empty.");
+  }
+
+  if (file.size > MAX_BLOG_UPLOAD_BYTES) {
+    throw new Error("Blog cover image must be 12MB or smaller.");
+  }
+
+  const bytes = Buffer.from(await file.arrayBuffer());
+  const fileName = `${safeBaseName(file.name) || "blog-cover"}-${randomUUID()}${extension}`;
+
+  await mkdir(BLOG_UPLOAD_DIR, { recursive: true });
+  await writeFile(join(BLOG_UPLOAD_DIR, fileName), bytes);
+
+  return {
+    kind: "image" as const,
+    src: `${BLOG_UPLOAD_URL_BASE}/${fileName}`,
+  };
 }

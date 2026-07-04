@@ -492,6 +492,16 @@
         "Longer retreats are better when the guest needs practice consistency, deeper mentoring and structured integration.",
         "The right duration should be chosen after readiness, travel effort and emotional bandwidth are discussed."
       ],
+      "body": [],
+      "coverMedia": {
+        "kind": "",
+        "src": "",
+        "alt": "",
+        "caption": ""
+      },
+      "seoTitle": "How to choose between a 3, 7, 14, 28 or 60-day retreat",
+      "seoDescription": "A clear decision guide for matching your current life season with the right level of reset, transformation or residency.",
+      "canonicalPath": "/journal/choose-retreat-duration",
       "relatedHref": "/programs/28-day-inner-awakening",
       "relatedLabel": "Compare flagship program",
       "contactLabel": "Ask which duration fits",
@@ -516,6 +526,16 @@
         "Daily practice reduces decision fatigue because the guest is held by a clear schedule.",
         "The strongest outcome is not escape. It is a steadier way to return."
       ],
+      "body": [],
+      "coverMedia": {
+        "kind": "",
+        "src": "",
+        "alt": "",
+        "caption": ""
+      },
+      "seoTitle": "Why a retreat can reset rhythm in a way a vacation rarely can",
+      "seoDescription": "A grounded look at why structure, practice, food, rest and environment matter when someone is truly depleted.",
+      "canonicalPath": "/journal/vacation-vs-retreat",
       "relatedHref": "/programs/7-day-foundation",
       "relatedLabel": "Explore 7-day foundation",
       "contactLabel": "Discuss reset timing",
@@ -540,6 +560,16 @@
         "Simple meals, sleep rhythm and quiet mornings support the work done in practice sessions.",
         "Guests should understand food boundaries before booking, especially when travelling internationally."
       ],
+      "body": [],
+      "coverMedia": {
+        "kind": "",
+        "src": "",
+        "alt": "",
+        "caption": ""
+      },
+      "seoTitle": "A beginner's guide to sattvic food, sleep and daily rhythm",
+      "seoDescription": "What sattvic living means inside a retreat, and why food, rest and routine are part of the transformation process.",
+      "canonicalPath": "/journal/sattvic-living-guide",
       "relatedHref": "/accommodation-inclusions",
       "relatedLabel": "See stay and food",
       "contactLabel": "Ask about food comfort",
@@ -564,6 +594,16 @@
         "Discomfort is not failure. It is often the first honest point of awareness.",
         "The aim is practice continuity, not a dramatic spiritual experience."
       ],
+      "body": [],
+      "coverMedia": {
+        "kind": "",
+        "src": "",
+        "alt": "",
+        "caption": ""
+      },
+      "seoTitle": "What guided meditation feels like for first-time seekers",
+      "seoDescription": "A calm explanation of what to expect when meditation is new, uncomfortable or difficult to maintain alone.",
+      "canonicalPath": "/journal/guided-meditation-first-time",
       "relatedHref": "/modalities/guided-meditation",
       "relatedLabel": "Understand meditation",
       "contactLabel": "Check practice readiness",
@@ -588,6 +628,16 @@
         "Travel readiness matters because the transformation begins before the guest arrives.",
         "The right questions should be asked before payment, not after booking pressure."
       ],
+      "body": [],
+      "coverMedia": {
+        "kind": "",
+        "src": "",
+        "alt": "",
+        "caption": ""
+      },
+      "seoTitle": "Preparing for a Ganga-side wellness stay in Rishikesh",
+      "seoDescription": "What international visitors should know about arrival mindset, location questions, practical comfort and retreat boundaries.",
+      "canonicalPath": "/journal/rishikesh-preparation",
       "relatedHref": "/contact",
       "relatedLabel": "View contact and location",
       "contactLabel": "Ask travel questions",
@@ -612,6 +662,16 @@
         "Panchkarma education needs clear suitability checks and boundaries.",
         "Guests should disclose relevant health context during consultation before deeper practices are recommended."
       ],
+      "body": [],
+      "coverMedia": {
+        "kind": "",
+        "src": "",
+        "alt": "",
+        "caption": ""
+      },
+      "seoTitle": "The role of Panchkarma in a responsible detox retreat",
+      "seoDescription": "How to speak about detox clearly, traditionally and responsibly without drifting into cure claims.",
+      "canonicalPath": "/journal/panchkarma-responsible-detox",
       "relatedHref": "/modalities/panchkarma-detox",
       "relatedLabel": "Read Panchkarma modality",
       "contactLabel": "Check detox suitability",
@@ -636,6 +696,16 @@
         "A good retreat should make people feel held, not pushed.",
         "Trust grows when boundaries, expectations and the guide's role are visible."
       ],
+      "body": [],
+      "coverMedia": {
+        "kind": "",
+        "src": "",
+        "alt": "",
+        "caption": ""
+      },
+      "seoTitle": "Why serious seekers need structure, not pressure",
+      "seoDescription": "A founder-led reflection on why Shreevan Wellness prioritises rhythm, consent and discernment over intensity.",
+      "canonicalPath": "/journal/structure-not-pressure",
       "relatedHref": "/about-founder",
       "relatedLabel": "Read our story",
       "contactLabel": "Speak with the team",
@@ -660,6 +730,16 @@
         "The guest needs enough life space to practise, reflect and integrate without rushing.",
         "Completion should create a practical blueprint for the next 12 months."
       ],
+      "body": [],
+      "coverMedia": {
+        "kind": "",
+        "src": "",
+        "alt": "",
+        "caption": ""
+      },
+      "seoTitle": "When a longer residency makes more sense than a short reset",
+      "seoDescription": "How to know when the 60-day path is appropriate for integration, identity work and a serious lifestyle redesign.",
+      "canonicalPath": "/journal/long-residency-fit",
       "relatedHref": "/programs/60-day-rishi-residency",
       "relatedLabel": "Explore 60-day residency",
       "contactLabel": "Discuss residency fit",
@@ -684,6 +764,16 @@
         "Silence gives the body and mind fewer demands to process.",
         "The value is often felt in the combination of environment, rhythm and guided rest."
       ],
+      "body": [],
+      "coverMedia": {
+        "kind": "",
+        "src": "",
+        "alt": "",
+        "caption": ""
+      },
+      "seoTitle": "Sound healing, silence and nervous-system rest",
+      "seoDescription": "A practical introduction to why sound, silence and stillness are used in retreat spaces for deep rest.",
+      "canonicalPath": "/journal/sound-healing-silence",
       "relatedHref": "/modalities/sound-healing",
       "relatedLabel": "Explore sound healing",
       "contactLabel": "Ask about gentle practices",
@@ -720,5 +810,5 @@
       "notes": "Future phase should support upload URLs and alt text per article."
     }
   ],
-  "updatedAt": "2026-06-21T16:57:04.405Z"
+  "updatedAt": "2026-06-26T22:56:19.290Z"
 }

@@ -3,6 +3,7 @@ import { FourteenDayTransformationPage } from "@/components/programs/fourteen-da
 import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema, programServiceSchema, webPageSchema } from "@/lib/schema/site-schema";
 import { siteConfig } from "@/config/site";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
 const pageUrl = `${siteConfig.url}/programs/14-day-transformation`;
 const pageDescription =
@@ -15,14 +16,12 @@ const programSchema = programServiceSchema({
   audienceType: "Burned-out professionals, leaders, entrepreneurs, transition seekers and structured spiritual seekers",
 });
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "14-Day Ganga Sattva Transformation",
   description:
     "Explore the 14-Day Ganga Sattva Transformation by Shreevan Wellness: Transform Your Mind, Body & Life through yoga, meditation, emotional healing, purpose work and life-design practices.",
-  alternates: {
-    canonical: "/programs/14-day-transformation",
-  },
-};
+  path: "/programs/14-day-transformation",
+});
 
 export default function Page() {
   return (

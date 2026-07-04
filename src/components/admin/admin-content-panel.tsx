@@ -234,7 +234,7 @@ export function AdminContentPanel({
           <h2 id="admin-content-title">Manage trust-building content across FAQs, stories and journal.</h2>
           <p>
             Phase 5 connects public FAQ, Healing Stories and Journal content to one guarded admin store,
-            while media remains a structured launch checklist until upload support is added.
+            while dedicated blog publishing now lives in the Blog Upload section.
           </p>
         </div>
         <div className="admin-status-panel" aria-label="Content manager status">
@@ -290,8 +290,8 @@ export function AdminContentPanel({
             <p className="admin-kicker">Frontend wiring</p>
             <h2>Trust pages live now</h2>
             <p>
-              FAQs, Healing Stories and Journal read published content from this store. Draft media
-              items stay internal until asset upload support is added.
+              FAQs, Healing Stories and Journal read published content from this store. New article
+              drafting and cover uploads are handled from Blog Upload.
             </p>
           </div>
         </aside>

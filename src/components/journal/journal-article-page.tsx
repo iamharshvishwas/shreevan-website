@@ -3,6 +3,45 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import type { PublicJournalArticle } from "@/lib/site/public-content-trust-types";
 
+function JournalBlock({ block }: Readonly<{ block: PublicJournalArticle["blocks"][number] }>) {
+  if (block.type === "heading") {
+    return block.level === 3 ? <h3>{block.content}</h3> : <h2>{block.content}</h2>;
+  }
+
+  if (block.type === "image") {
+    return block.url ? (
+      <figure className="journal-richtext-image">
+        <img src={block.url} alt={block.alt || block.caption || ""} />
+        {block.caption ? <figcaption>{block.caption}</figcaption> : null}
+      </figure>
+    ) : null;
+  }
+
+  if (block.type === "quote") {
+    return <blockquote>{block.content}</blockquote>;
+  }
+
+  if (block.type === "button") {
+    return block.href ? (
+      <p>
+        <Link className="button button-primary" href={block.href}>
+          {block.label || block.content || "Read more"}
+        </Link>
+      </p>
+    ) : null;
+  }
+
+  if (block.type === "divider") {
+    return <hr />;
+  }
+
+  if (block.type === "embed") {
+    return block.content ? <pre className="journal-richtext-embed">{block.content}</pre> : null;
+  }
+
+  return <p>{block.content}</p>;
+}
+
 export function JournalArticlePage({
   article,
   relatedArticles,
@@ -10,6 +49,9 @@ export function JournalArticlePage({
   article: PublicJournalArticle;
   relatedArticles: Array<Pick<PublicJournalArticle, "id" | "title">>;
 }>) {
+  const hasBuilderBlocks = article.blocks.length > 0;
+  const hasArticleBody = article.body.length > 0;
+
   return (
     <>
       <a className="skip-link" href="#main">
@@ -52,25 +94,52 @@ export function JournalArticlePage({
           <div className="container journal-detail-layout">
             <div className="journal-detail-body">
               <h2 id="article-body-title">What this article helps you evaluate</h2>
-              <p>
-                Shreevan Wellness articles are written to help serious international visitors understand
-                retreat fit, practice expectations, stay comfort and responsible wellness boundaries before
-                they book a consultation or commit to a program.
-              </p>
+              {article.coverMedia.src ? (
+                <figure className="journal-detail-cover">
+                  <img src={article.coverMedia.src} alt={article.coverMedia.alt || article.title} />
+                  {article.coverMedia.caption ? <figcaption>{article.coverMedia.caption}</figcaption> : null}
+                </figure>
+              ) : null}
 
-              <div className="journal-detail-points">
-                {article.keyPoints.map((point, index) => (
-                  <section key={point} aria-labelledby={`point-${index + 1}`}>
-                    <span>{String(index + 1).padStart(2, "0")}</span>
-                    <h3 id={`point-${index + 1}`}>{point}</h3>
-                    <p>
-                      Treat this as a practical decision filter. Notice whether the point applies to your
-                      current rhythm, travel effort, support needs and readiness for a structured retreat
-                      environment.
-                    </p>
-                  </section>
-                ))}
-              </div>
+              {hasBuilderBlocks ? (
+                <div className="journal-detail-richtext">
+                  {article.blocks.map((block) => (
+                    <JournalBlock block={block} key={block.id} />
+                  ))}
+                </div>
+              ) : hasArticleBody ? (
+                <div className="journal-detail-richtext">
+                  {article.body.map((block, index) =>
+                    block.startsWith("## ") ? (
+                      <h2 key={`${block}-${index}`}>{block.replace(/^##\s+/, "")}</h2>
+                    ) : (
+                      <p key={`${block}-${index}`}>{block}</p>
+                    ),
+                  )}
+                </div>
+              ) : (
+                <>
+                  <p>
+                    Shreevan Wellness articles are written to help serious international visitors understand
+                    retreat fit, practice expectations, stay comfort and responsible wellness boundaries before
+                    they book a consultation or commit to a program.
+                  </p>
+
+                  <div className="journal-detail-points">
+                    {article.keyPoints.map((point, index) => (
+                      <section key={point} aria-labelledby={`point-${index + 1}`}>
+                        <span>{String(index + 1).padStart(2, "0")}</span>
+                        <h3 id={`point-${index + 1}`}>{point}</h3>
+                        <p>
+                          Treat this as a practical decision filter. Notice whether the point applies to your
+                          current rhythm, travel effort, support needs and readiness for a structured retreat
+                          environment.
+                        </p>
+                      </section>
+                    ))}
+                  </div>
+                </>
+              )}
 
               <div className="journal-detail-tags" aria-label="Article topics">
                 {article.tags.map((tag) => (

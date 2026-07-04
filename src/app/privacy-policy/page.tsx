@@ -3,6 +3,7 @@ import { LegalPage, type LegalSection } from "@/components/legal/legal-page";
 import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema } from "@/lib/schema/site-schema";
 import { siteConfig } from "@/config/site";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
 const lastUpdated = "19 June 2026";
 
@@ -116,14 +117,12 @@ const sections: LegalSection[] = [
   },
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Privacy Policy",
   description:
     "Privacy Policy for Shreevan Wellness covering data collection, marketing consent, cookies, third-party integrations, user rights and international visitor privacy standards.",
-  alternates: {
-    canonical: "/privacy-policy",
-  },
-};
+  path: "/privacy-policy",
+});
 
 export default function Page() {
   return (

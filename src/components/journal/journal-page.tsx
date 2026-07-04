@@ -13,11 +13,17 @@ function formatArticleSearch(article: PublicJournalArticle) {
     article.title,
     article.excerpt,
     article.audience,
+    article.content,
     ...article.tags,
     ...article.keyPoints,
+    ...article.blocks.map((block) => [block.content, block.label, block.caption, block.alt].filter(Boolean).join(" ")),
   ]
     .join(" ")
     .toLowerCase();
+}
+
+function articleHref(article: PublicJournalArticle) {
+  return `/journal/${article.slug || article.id}`;
 }
 
 export function JournalPage({ content }: Readonly<{ content: PublicJournalContent }>) {
@@ -85,7 +91,7 @@ export function JournalPage({ content }: Readonly<{ content: PublicJournalConten
               {editorPicks.map((articleId, index) => {
                 const article = articles.find((item) => item.id === articleId) ?? articles[index] ?? articles[0];
                 return (
-                  <Link key={article.id} href={`/journal/${article.id}`}>
+                  <Link key={article.id} href={articleHref(article)}>
                     <strong>{String(index + 1).padStart(2, "0")}</strong>
                     <span>{article.title}</span>
                   </Link>
@@ -124,6 +130,12 @@ export function JournalPage({ content }: Readonly<{ content: PublicJournalConten
             <div className="journal-main-column">
               <article className="journal-reader-panel" id="journal-reader" aria-labelledby="journal-reader-title">
                 <div className="journal-reader-media" aria-hidden="true">
+                  {activeArticle.coverMedia.src ? (
+                    <img
+                      src={activeArticle.coverMedia.src}
+                      alt=""
+                    />
+                  ) : null}
                   <span>{activeArticle.category}</span>
                 </div>
                 <div className="journal-reader-copy">
@@ -175,6 +187,12 @@ export function JournalPage({ content }: Readonly<{ content: PublicJournalConten
                       onClick={() => openArticle(article.id)}
                       aria-label={`Read ${article.title}`}
                     >
+                      {article.coverMedia.src ? (
+                        <img
+                          src={article.coverMedia.src}
+                          alt=""
+                        />
+                      ) : null}
                       <span>{article.category}</span>
                     </button>
                     <div className="journal-article-body">
@@ -190,7 +208,7 @@ export function JournalPage({ content }: Readonly<{ content: PublicJournalConten
                         ))}
                       </div>
                       <div className="journal-card-actions">
-                        <Link className="journal-read-button" href={`/journal/${article.id}`}>
+                        <Link className="journal-read-button" href={articleHref(article)}>
                           Read article
                         </Link>
                         <Link href={article.relatedHref}>{article.relatedLabel}</Link>
@@ -218,7 +236,7 @@ export function JournalPage({ content }: Readonly<{ content: PublicJournalConten
                   {editorPicks.map((articleId, index) => {
                     const article = articles.find((item) => item.id === articleId) ?? articles[index] ?? articles[0];
                     return (
-                      <Link key={article.id} href={`/journal/${article.id}`}>
+                      <Link key={article.id} href={articleHref(article)}>
                         <strong>{String(index + 1).padStart(2, "0")}</strong>
                         <span>{article.title}</span>
                       </Link>

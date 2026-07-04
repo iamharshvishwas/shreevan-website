@@ -3,6 +3,7 @@ import { LegalPage, type LegalSection } from "@/components/legal/legal-page";
 import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema } from "@/lib/schema/site-schema";
 import { siteConfig } from "@/config/site";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
 const lastUpdated = "19 June 2026";
 
@@ -109,14 +110,12 @@ const sections: LegalSection[] = [
   },
 ];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Terms & Conditions",
   description:
     "Terms and Conditions for Shreevan Wellness covering booking, registration fee, payment, participant responsibilities, accommodation rules, liability, program changes and intellectual property.",
-  alternates: {
-    canonical: "/terms-conditions",
-  },
-};
+  path: "/terms-conditions",
+});
 
 export default function Page() {
   return (

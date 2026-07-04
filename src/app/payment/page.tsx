@@ -1,19 +1,17 @@
 import type { Metadata } from "next";
 import { PaymentPage } from "@/components/payment/payment-page";
-import { siteConfig } from "@/config/site";
+import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Secure Payment",
   description:
     "Secure Shreevan Wellness checkout for approved retreat bookings after consultation, program confirmation and invoice review.",
-  alternates: {
-    canonical: "/payment",
-  },
+  path: "/payment",
   robots: {
     index: false,
-    follow: false,
+    follow: true,
   },
-};
+});
 
 type PaymentSearchParams = Promise<{
   booking?: string;
