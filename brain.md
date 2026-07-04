@@ -108,6 +108,8 @@ Canonical route registry: `src/config/routes.ts` (intents: core/educational/comm
 | `data/admin/page-content.json` | Per-page SEO + hero seeds (home connected; others seeded) | `/admin/pages` |
 | `data/admin/program-content.json` | Program titles, order, labels, outcomes, SEO, highlights, inclusions | `/admin/programs` |
 | `data/admin/content-trust.json` | FAQs (6 categories), story/testimonial slots, journal categories + 9 articles, consent standards, media slots | `/admin/content` + `/admin/blog` |
+
+> Blog editing (2026-07-05): `/admin/blog` uses a TipTap rich text editor (`src/components/admin/rich-text-editor/`) writing to `contentHtml` per article; the old block builder is kept behind `SHOW_LEGACY_BLOCK_BUILDER=false` in `admin-blog-panel.tsx`. Public `/journal/[slug]` renders `contentHtml` first, then legacy blocks/body. On Vercel, blog saves use an ephemeral /tmp overlay (stopgap with UI warning) — real persistent storage still pending.
 | `data/admin/seo-leads.json` | 26 route-level sitemap/SEO controls (priority, changefreq, focus keyword, QA status), lead routing config, local lead inbox (currently 0 leads) | `/admin/seo` |
 
 Read path: `src/lib/admin/*` (read/write for admin) and `src/lib/site/public-*` (public runtime readers with defaults). Public pages consume admin JSON at runtime (`force-dynamic` on sitemap/robots).
