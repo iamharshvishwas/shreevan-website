@@ -63,7 +63,7 @@ All audit-loop fixes are logged here. Format per AUDIT_LOOP.md: what was wrong, 
 - **Observed:** Vercel serverless filesystems are ephemeral — admin panel saves, uploads (`public/images/uploads/*`) and lead-inbox appends will silently vanish (or 500 on read-only paths) in production.
 - **Options:** (a) external store (Vercel Blob/KV, Supabase — Supabase MCP already available), (b) treat admin as local-only authoring + redeploy-to-publish workflow, (c) move hosting to a VPS. Deferred to Phase 3 decision list; too large/architectural for an unapproved audit fix.
 
-#### ARCH-02 — 60-day program name inconsistent across the site (Medium → Fixed, commit 88d69ad)
+#### ARCH-02 — 60-day program name inconsistent across the site (Medium → Fixed, commit fcaa3ea)
 - Page H1/program-content/RAG say "Conscious Living Residency"; routes.ts, header+footer nav labels, llms.txt, modalities.ts and one FAQ answer said "Lifestyle Transformation Residency". Aligned all 7 occurrences to the canonical name (route path untouched).
 - **Verified:** JSON parse OK, typecheck + build clean.
 

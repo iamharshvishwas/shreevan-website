@@ -32,9 +32,9 @@ export function JournalPage({ content }: Readonly<{ content: PublicJournalConten
   const editorPicks = content.editorPicks.length ? content.editorPicks : articles.slice(0, 3).map((article) => article.id);
   const [activeCategory, setActiveCategory] = useState("All");
   const [query, setQuery] = useState("");
-  const [activeArticleId, setActiveArticleId] = useState(articles[0].id);
+  const [activeArticleId, setActiveArticleId] = useState(articles[0]?.id ?? "");
 
-  const activeArticle = articles.find((article) => article.id === activeArticleId) ?? articles[0];
+  const activeArticle = articles.find((article) => article.id === activeArticleId) ?? articles[0] ?? null;
 
   const filteredArticles = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -44,7 +44,7 @@ export function JournalPage({ content }: Readonly<{ content: PublicJournalConten
       const matchesQuery = !normalizedQuery || formatArticleSearch(article).includes(normalizedQuery);
       return matchesCategory && matchesQuery;
     });
-  }, [activeCategory, query]);
+  }, [articles, activeCategory, query]);
 
   function openArticle(articleId: string) {
     setActiveArticleId(articleId);
@@ -56,6 +56,39 @@ export function JournalPage({ content }: Readonly<{ content: PublicJournalConten
   function chooseCategory(category: string) {
     setActiveCategory(category);
     setQuery("");
+  }
+
+  if (!activeArticle) {
+    return (
+      <>
+        <a className="skip-link" href="#main">
+          Skip to content
+        </a>
+        <SiteHeader />
+        <main id="main">
+          <section className="section journal-archive-hero" aria-labelledby="journal-title">
+            <div className="container">
+              <p className="eyebrow">Shreevan Journal</p>
+              <h1 id="journal-title">New journal articles are on the way</h1>
+              <p className="hero-lede">
+                We are preparing thoughtful articles on retreat selection, burnout rhythm, meditation,
+                sattvic living and preparing for Rishikesh. In the meantime, explore our programs or
+                start a conversation.
+              </p>
+              <div className="hero-actions">
+                <Link className="button button-primary" href="/programs">
+                  Explore programs
+                </Link>
+                <Link className="button button-secondary" href="/book-consultation">
+                  Book a consultation
+                </Link>
+              </div>
+            </div>
+          </section>
+        </main>
+        <SiteFooter />
+      </>
+    );
   }
 
   return (
