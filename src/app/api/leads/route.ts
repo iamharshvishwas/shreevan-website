@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { appendAdminLead } from "@/lib/admin/seo-leads";
 import type { AdminLeadInput, AdminLeadSource } from "@/lib/admin/seo-leads";
+import { clientRateLimitKey, rateLimit, rateLimitResponse } from "@/lib/security/rate-limit";
 
 export const runtime = "nodejs";
 
@@ -23,6 +24,16 @@ function sourceValue(value: unknown): AdminLeadSource {
 }
 
 export async function POST(request: Request) {
+  const limiterKey = clientRateLimitKey(request, "leads");
+  const limiter = rateLimit(limiterKey, 10, 10 * 60_000);
+
+  if (!limiter.allowed) {
+    return rateLimitResponse(
+      limiter.retryAfterSeconds,
+      "Too many submissions from this connection. Please try again shortly.",
+    );
+  }
+
   let body: unknown;
 
   try {

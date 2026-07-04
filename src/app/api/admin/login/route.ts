@@ -7,6 +7,7 @@ import {
   isSecureAdminCookie,
   validateAdminCredentials,
 } from "@/lib/admin/auth";
+import { clientRateLimitKey, rateLimit, rateLimitResponse } from "@/lib/security/rate-limit";
 
 type LoginBody = {
   username?: string;
@@ -14,6 +15,13 @@ type LoginBody = {
 };
 
 export async function POST(request: Request) {
+  const limiterKey = clientRateLimitKey(request, "admin-login");
+  const limiter = rateLimit(limiterKey, 5, 60_000);
+
+  if (!limiter.allowed) {
+    return rateLimitResponse(limiter.retryAfterSeconds, "Too many login attempts. Try again shortly.");
+  }
+
   let body: LoginBody;
 
   try {
