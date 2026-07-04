@@ -57,3 +57,24 @@ All audit-loop fixes are logged here. Format per AUDIT_LOOP.md: what was wrong, 
 
 #### Git history secrets scan — clean
 - No `.env`/key files ever committed; no hardcoded credential patterns in the last 50 revisions.
+
+#### ARCH-01 — File-JSON CMS cannot persist on Vercel (Critical → **Needs Harsh's decision**)
+- **Where:** all writes in `src/lib/admin/*.ts` target `data/admin/*.json`; hosting confirmed as Vercel.
+- **Observed:** Vercel serverless filesystems are ephemeral — admin panel saves, uploads (`public/images/uploads/*`) and lead-inbox appends will silently vanish (or 500 on read-only paths) in production.
+- **Options:** (a) external store (Vercel Blob/KV, Supabase — Supabase MCP already available), (b) treat admin as local-only authoring + redeploy-to-publish workflow, (c) move hosting to a VPS. Deferred to Phase 3 decision list; too large/architectural for an unapproved audit fix.
+
+#### ARCH-02 — 60-day program name inconsistent across the site (Medium → Fixed, commit 88d69ad)
+- Page H1/program-content/RAG say "Conscious Living Residency"; routes.ts, header+footer nav labels, llms.txt, modalities.ts and one FAQ answer said "Lifestyle Transformation Residency". Aligned all 7 occurrences to the canonical name (route path untouched).
+- **Verified:** JSON parse OK, typecheck + build clean.
+
+#### ARCH-03 — Lint gate was dead (High/tooling → Fixed, commit 3ee41a2)
+- `next lint` was removed in Next 16 and ESLint was never installed, so `npm run lint` errored since the Next 16 upgrade. Installed eslint 9 + eslint-config-next flat config, script now `eslint .`.
+- Fixed surfaced errors: 6 unescaped JSX quotes (typographic now), setState-in-effect in `crm-widget.tsx:17` (→ `useSyncExternalStore`, same load behavior).
+- **Verified:** lint 0 errors / 28 warnings, typecheck + build clean.
+
+#### ARCH-04 — All dependencies pinned to "latest" (Medium → Fixed, commit 51df97a)
+- Fresh installs (e.g., Vercel builds) could silently jump majors. Pinned to caret ranges of build-verified versions (next ^16.2.9, react ^19.2.7, etc.).
+- **Verified:** reinstall + typecheck + build clean.
+
+#### ARCH-05 — Structure review (no fix needed)
+- `src/app` / `components` / `lib/admin` vs `lib/site` / `config` separation is consistent; admin API routes share a uniform auth+error shape; no tracked build artifacts (`.next/`, `tsbuildinfo`, `.DS_Store` all untracked). Unused-asset sweep deferred to PERF backlog (low value).
