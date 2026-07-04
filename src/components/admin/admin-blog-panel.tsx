@@ -2,6 +2,7 @@
 
 import { ChangeEvent, FormEvent, useMemo, useState } from "react";
 import type { ReactNode } from "react";
+import { RichTextEditor } from "@/components/admin/rich-text-editor/rich-text-editor";
 import type {
   AdminBlogBlock,
   AdminBlogBlockType,
@@ -26,6 +27,11 @@ const emptyCoverMedia: NonNullable<AdminJournalArticle["coverMedia"]> = {
   caption: "",
   description: "",
 };
+
+// The legacy block builder is replaced by the rich text editor but its code is
+// intentionally kept (per Harsh's request). Flip this to true to bring the
+// old Page Builder + Structured Content UI back.
+const SHOW_LEGACY_BLOCK_BUILDER = false;
 
 const blockTypes: Array<{ type: AdminBlogBlockType; label: string; copy: string }> = [
   { type: "paragraph", label: "Paragraph", copy: "Body text" },
@@ -198,8 +204,27 @@ function blocksToBody(blocks: AdminBlogBlock[] = []) {
     .filter(Boolean);
 }
 
+function htmlToPlainText(html = "") {
+  return html
+    .replace(/<(style|script)[^>]*>[\s\S]*?<\/\1>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function articleHasContent(article: AdminJournalArticle) {
-  return Boolean(blocksToContent(article.blocks).trim() || article.content?.trim() || article.body?.length);
+  return Boolean(
+    htmlToPlainText(article.contentHtml).trim() ||
+      blocksToContent(article.blocks).trim() ||
+      article.content?.trim() ||
+      article.body?.length,
+  );
 }
 
 function previewHref(article: AdminJournalArticle) {
@@ -315,13 +340,15 @@ function prepareArticleForSave(article: AdminJournalArticle): AdminJournalArticl
   const now = new Date().toISOString();
   const blocks = article.blocks?.length ? article.blocks : [createBlock("paragraph")];
   const publishedAt = article.status === "published" ? article.publishedAt || now : article.publishedAt || "";
+  const richText = htmlToPlainText(article.contentHtml);
 
   return {
     ...article,
     id: slug,
     slug,
     categoryId: article.categoryId || categoryId(article.category),
-    content: blocksToContent(blocks),
+    content: richText || blocksToContent(blocks),
+    contentHtml: article.contentHtml ?? "",
     body: blocksToBody(blocks),
     blocks,
     coverMedia: {
@@ -368,6 +395,7 @@ function createDraftArticle(id: string, category: string): AdminJournalArticle {
     tags: [],
     keyPoints: [],
     content: "",
+    contentHtml: "",
     body: [],
     blocks: [createBlock("heading"), createBlock("paragraph")],
     coverMedia: emptyCoverMedia,
@@ -793,6 +821,32 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
     event.target.value = "";
   }
 
+  async function uploadEditorImage(file: File): Promise<string | null> {
+    setUploadState("uploading");
+    setMessage("");
+
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch("/api/admin/blog/media", {
+      method: "POST",
+      body: formData,
+    });
+    const body = (await response.json().catch(() => null)) as
+      | { media?: { kind: "image"; src: string }; error?: string }
+      | null;
+
+    if (!response.ok || !body?.media) {
+      setUploadState("error");
+      setMessage(body?.error ?? "Inline blog image upload failed.");
+      return null;
+    }
+
+    setUploadState("idle");
+    setMessage("Inline image uploaded. Save blog to apply.");
+    return body.media.src;
+  }
+
   function handleRevert() {
     setBlog(cloneBlogStore(savedBlog));
     setActiveArticleId(savedBlog.journalArticles[0]?.id ?? "");
@@ -1095,43 +1149,62 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
             <input value={activeArticle.title} onChange={(event) => handleTitleChange(event.target.value)} />
           </label>
 
-          <div className="admin-blog-cms-grid">
-            <aside className="admin-blog-builder-panel" aria-label="Drag and drop page builder">
-              <p className="admin-kicker">Page builder</p>
-              <h2>Blocks</h2>
-              <div className="admin-blog-block-palette">
-                {blockTypes.map((block) => (
-                  <button type="button" key={block.type} onClick={() => addBlock(block.type)}>
-                    <strong>{block.label}</strong>
-                    <small>{block.copy}</small>
-                  </button>
-                ))}
-              </div>
-              <p>
-                Reorder controls are active now. The block model is ready for a drag-and-drop library later
-                without changing saved content.
-              </p>
-            </aside>
-
-            <section className="admin-blog-content-canvas" aria-labelledby="blog-content-title">
-              <div className="admin-blog-canvas-heading">
-                <div>
-                  <p className="admin-kicker">Blog content</p>
-                  <h2 id="blog-content-title">Structured content</h2>
-                </div>
-                <span>{activeArticle.blocks?.length ?? 0} blocks</span>
-              </div>
-              <div className="admin-blog-block-list">
-                {activeArticle.blocks?.length ? (
-                  activeArticle.blocks.map((block, index) => renderBlockEditor(block, index))
-                ) : (
-                  <div className="admin-blog-empty">
-                    <strong>No blocks yet.</strong>
-                    <p>Add a paragraph or heading from the builder panel.</p>
+          <div className={SHOW_LEGACY_BLOCK_BUILDER ? "admin-blog-cms-grid" : "admin-blog-cms-grid admin-blog-cms-grid--rte"}>
+            {SHOW_LEGACY_BLOCK_BUILDER ? (
+              <>
+                <aside className="admin-blog-builder-panel" aria-label="Drag and drop page builder">
+                  <p className="admin-kicker">Page builder</p>
+                  <h2>Blocks</h2>
+                  <div className="admin-blog-block-palette">
+                    {blockTypes.map((block) => (
+                      <button type="button" key={block.type} onClick={() => addBlock(block.type)}>
+                        <strong>{block.label}</strong>
+                        <small>{block.copy}</small>
+                      </button>
+                    ))}
                   </div>
-                )}
-              </div>
-            </section>
+                  <p>
+                    Reorder controls are active now. The block model is ready for a drag-and-drop library later
+                    without changing saved content.
+                  </p>
+                </aside>
+
+                <section className="admin-blog-content-canvas" aria-labelledby="blog-content-title">
+                  <div className="admin-blog-canvas-heading">
+                    <div>
+                      <p className="admin-kicker">Blog content</p>
+                      <h2 id="blog-content-title">Structured content</h2>
+                    </div>
+                    <span>{activeArticle.blocks?.length ?? 0} blocks</span>
+                  </div>
+                  <div className="admin-blog-block-list">
+                    {activeArticle.blocks?.length ? (
+                      activeArticle.blocks.map((block, index) => renderBlockEditor(block, index))
+                    ) : (
+                      <div className="admin-blog-empty">
+                        <strong>No blocks yet.</strong>
+                        <p>Add a paragraph or heading from the builder panel.</p>
+                      </div>
+                    )}
+                  </div>
+                </section>
+              </>
+            ) : (
+              <section className="admin-blog-content-canvas admin-blog-rte-canvas" aria-labelledby="blog-content-title">
+                <div className="admin-blog-canvas-heading">
+                  <div>
+                    <p className="admin-kicker">Blog content</p>
+                    <h2 id="blog-content-title">Write your article</h2>
+                  </div>
+                </div>
+                <RichTextEditor
+                  documentKey={activeArticle.id}
+                  value={activeArticle.contentHtml ?? ""}
+                  onChange={(html) => updateActiveArticle({ contentHtml: html })}
+                  onUploadImage={uploadEditorImage}
+                />
+              </section>
+            )}
 
             <aside className="admin-blog-settings-sidebar" aria-label="Blog settings">
               <SettingsPanel title="Preview / Publish">

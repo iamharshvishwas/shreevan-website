@@ -77,6 +77,7 @@ export type AdminJournalArticle = {
   tags: string[];
   keyPoints: string[];
   content?: string;
+  contentHtml?: string;
   body?: string[];
   blocks?: AdminBlogBlock[];
   coverMedia?: {
@@ -1032,6 +1033,7 @@ function normalizeJournalArticle(value: unknown, fallback: AdminJournalArticle):
     tags: stringArrayValue(input.tags, fallback.tags),
     keyPoints,
     content: stringValue(input.content, fallback.content ?? body.join("\n\n")),
+    contentHtml: stringValue(input.contentHtml, fallback.contentHtml ?? ""),
     body,
     blocks: normalizeBlogBlocks(input.blocks, fallback.blocks ?? fallbackBlocks),
     coverMedia: normalizeJournalMedia(input.coverMedia, fallback.coverMedia),

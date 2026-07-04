@@ -121,3 +121,10 @@ All audit-loop fixes are logged here. Format per AUDIT_LOOP.md: what was wrong, 
 - Auth regression: wrong creds 401 / right 200 / tampered 401 / admin API guarded. Leads: valid 201 / invalid 400. Sitemap still excludes /payment.
 - Browser console: zero errors on homepage.
 - Critical/High-only re-sweep across all categories: **no new findings**. Loop complete per AUDIT_LOOP.md Phase 2 criteria.
+
+### 2026-07-05 — Blog: rich text editor replaces the block builder
+- The Page Builder blocks palette + Structured Content canvas are hidden behind `SHOW_LEGACY_BLOCK_BUILDER = false` in `admin-blog-panel.tsx` (code kept, per Harsh — flip the flag to restore).
+- New `src/components/admin/rich-text-editor/` — TipTap v3 editor ported from Harsh's Lovable "React Text Builder" export: headings/fonts/sizes, bold/italic/strike, text color + highlight, align/indent, lists, quote, code block, links, images (URL, upload via existing `/api/admin/blog/media`, resize + float), tables, symbols, undo/redo. Toolbar rebuilt with native controls + admin design tokens (no Radix/shadcn deps).
+- New `contentHtml` field flows admin type → normalize → public type → mapper. Plain-text `content` (search/AEO) is derived from the HTML on save. Public `/journal/[slug]` and admin preview render `contentHtml` first, falling back to legacy blocks → body → keyPoints.
+- **Verified:** typecheck/lint/build clean; browser E2E — login → edit → type + heading via toolbar → save → `content-trust.json` has contentHtml + derived plain text → public journal page renders the rich HTML. Test edits reverted.
+- Note: on Vercel, inline image uploads hit the same read-only-filesystem limit as everything else (clear error shown); content itself saves via the ephemeral stopgap with its warning banner.

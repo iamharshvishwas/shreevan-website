@@ -64,6 +64,7 @@ export type PublicJournalArticle = {
   tags: string[];
   keyPoints: string[];
   content: string;
+  contentHtml: string;
   body: string[];
   blocks: Array<{
     id: string;

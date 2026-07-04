@@ -105,6 +105,7 @@ export function toPublicJournalArticle(article: AdminJournalArticle): PublicJour
     tags: article.tags,
     keyPoints: article.keyPoints,
     content: article.content ?? "",
+    contentHtml: article.contentHtml ?? "",
     body: article.body ?? [],
     blocks: article.blocks ?? [],
     coverMedia: {

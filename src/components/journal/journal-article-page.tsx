@@ -49,6 +49,7 @@ export function JournalArticlePage({
   article: PublicJournalArticle;
   relatedArticles: Array<Pick<PublicJournalArticle, "id" | "title">>;
 }>) {
+  const hasRichText = article.contentHtml.trim().length > 0;
   const hasBuilderBlocks = article.blocks.length > 0;
   const hasArticleBody = article.body.length > 0;
 
@@ -101,7 +102,15 @@ export function JournalArticlePage({
                 </figure>
               ) : null}
 
-              {hasBuilderBlocks ? (
+              {hasRichText ? (
+                // Rich text authored in the admin TipTap editor. Only
+                // authenticated admins can write this HTML (same trust model
+                // as any CMS post body).
+                <div
+                  className="journal-detail-richtext journal-detail-richtext--html"
+                  dangerouslySetInnerHTML={{ __html: article.contentHtml }}
+                />
+              ) : hasBuilderBlocks ? (
                 <div className="journal-detail-richtext">
                   {article.blocks.map((block) => (
                     <JournalBlock block={block} key={block.id} />
