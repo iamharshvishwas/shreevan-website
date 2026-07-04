@@ -30,7 +30,7 @@ function articleSlug(article: Partial<AdminJournalArticle>) {
 }
 
 export async function GET(request: Request) {
-  if (!isAdminRequestAuthorized(request)) {
+  if (!(await isAdminRequestAuthorized(request))) {
     return NextResponse.json({ error: "Unauthorized admin request." }, { status: 401 });
   }
 
@@ -40,7 +40,7 @@ export async function GET(request: Request) {
 }
 
 export async function PUT(request: Request) {
-  if (!isAdminRequestAuthorized(request)) {
+  if (!(await isAdminRequestAuthorized(request))) {
     return NextResponse.json({ error: "Unauthorized admin request." }, { status: 401 });
   }
 
@@ -71,7 +71,7 @@ export async function PUT(request: Request) {
 }
 
 export async function POST(request: Request) {
-  if (!isAdminRequestAuthorized(request)) {
+  if (!(await isAdminRequestAuthorized(request))) {
     return NextResponse.json({ error: "Unauthorized admin request." }, { status: 401 });
   }
 

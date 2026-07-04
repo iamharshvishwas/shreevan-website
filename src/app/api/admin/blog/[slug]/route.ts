@@ -32,7 +32,7 @@ function findArticleIndex(articles: AdminJournalArticle[], slug: string) {
 }
 
 export async function GET(request: Request, { params }: BlogArticleRouteProps) {
-  if (!isAdminRequestAuthorized(request)) {
+  if (!(await isAdminRequestAuthorized(request))) {
     return NextResponse.json({ error: "Unauthorized admin request." }, { status: 401 });
   }
 
@@ -48,7 +48,7 @@ export async function GET(request: Request, { params }: BlogArticleRouteProps) {
 }
 
 export async function PATCH(request: Request, { params }: BlogArticleRouteProps) {
-  if (!isAdminRequestAuthorized(request)) {
+  if (!(await isAdminRequestAuthorized(request))) {
     return NextResponse.json({ error: "Unauthorized admin request." }, { status: 401 });
   }
 
@@ -97,7 +97,7 @@ export async function PATCH(request: Request, { params }: BlogArticleRouteProps)
 }
 
 export async function DELETE(request: Request, { params }: BlogArticleRouteProps) {
-  if (!isAdminRequestAuthorized(request)) {
+  if (!(await isAdminRequestAuthorized(request))) {
     return NextResponse.json({ error: "Unauthorized admin request." }, { status: 401 });
   }
 

@@ -16,7 +16,7 @@ function isUploadFile(value: FormDataEntryValue | null): value is File {
 }
 
 export async function POST(request: Request) {
-  if (!isAdminRequestAuthorized(request)) {
+  if (!(await isAdminRequestAuthorized(request))) {
     return NextResponse.json({ error: "Unauthorized admin request." }, { status: 401 });
   }
 

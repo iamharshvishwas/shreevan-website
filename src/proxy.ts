@@ -26,7 +26,7 @@ function shouldRewriteAdminHost(pathname: string, isAdminSubdomain: boolean) {
   return isAdminSubdomain && !pathname.startsWith("/admin") && !pathname.startsWith("/api");
 }
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const isAdminSubdomain = isAdminHost(request.headers.get("host"));
   const pathname = request.nextUrl.pathname;
   const effectivePath = effectiveAdminPath(pathname, isAdminSubdomain);
@@ -42,7 +42,7 @@ export function proxy(request: NextRequest) {
   }
 
   const session = request.cookies.get(ADMIN_SESSION_COOKIE)?.value;
-  const hasSession = isValidAdminSession(session);
+  const hasSession = await isValidAdminSession(session);
   const isLoginPage = effectivePath === ADMIN_LOGIN_PATH;
 
   if (!hasSession && !isLoginPage) {
