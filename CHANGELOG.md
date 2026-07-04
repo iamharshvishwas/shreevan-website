@@ -107,3 +107,10 @@ All audit-loop fixes are logged here. Format per AUDIT_LOOP.md: what was wrong, 
 
 #### ARCH-05 — Structure review (no fix needed)
 - `src/app` / `components` / `lib/admin` vs `lib/site` / `config` separation is consistent; admin API routes share a uniform auth+error shape; no tracked build artifacts (`.next/`, `tsbuildinfo`, `.DS_Store` all untracked). Unused-asset sweep deferred to PERF backlog (low value).
+
+#### SEO-01 — WCAG contrast failure on gold text (Medium → Fixed, commit fd57fef)
+- Gold-500 text on sand = 2.77:1 (< 3:1 large-text minimum). New `--gold-600` (3.93:1) applied to text elements (.program-no, modality numerals); decorative dots unchanged. Lighthouse a11y 97 → **100**.
+
+#### SEO-02 — SEO infrastructure verification (no fix needed)
+- Sitemap: production-origin URLs; `/payment` + `/admin` correctly excluded. Robots: correct disallows + sitemap pointer. Canonicals present. `/payment` = `noindex, follow`. FAQPage schema on /faqs; Organization/WebSite/LocalBusiness/Breadcrumb JSON-LD on home. 0 images missing alt across 9 audited pages; exactly one h1 per page; nav dropdowns are real buttons with `aria-expanded`. Lighthouse SEO 100.
+- llms.txt route list matches live routes (60-day name aligned in ARCH-02).
