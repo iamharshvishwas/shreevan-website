@@ -115,6 +115,9 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           data-key="T/r3nCE6XddTFkbdGXJD7w"
           strategy="beforeInteractive"
         />
+        <JsonLd data={organizationSchema(settings)} />
+        <JsonLd data={websiteSchema(settings)} />
+        <JsonLd data={localBusinessSchema(settings)} />
       </head>
       <body className={`${inter.variable} ${lora.variable}`}>
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-86YTRFY4KK" strategy="afterInteractive" />
@@ -144,9 +147,6 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           />
         </noscript>
         <PublicSiteSettingsProvider settings={settings}>
-          <JsonLd data={organizationSchema(settings)} />
-          <JsonLd data={websiteSchema(settings)} />
-          <JsonLd data={localBusinessSchema(settings)} />
           {children}
           <CrmWidget />
         </PublicSiteSettingsProvider>

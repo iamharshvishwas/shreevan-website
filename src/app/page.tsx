@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { HomePage } from "@/components/home/home-page";
 import { JsonLd } from "@/lib/schema/json-ld";
-import { breadcrumbSchema, webPageSchema } from "@/lib/schema/site-schema";
+import { homeFaqs } from "@/lib/content/home-aeo";
+import { breadcrumbSchema, faqPageSchema, webPageSchema } from "@/lib/schema/site-schema";
 import { buildPageMetadata } from "@/lib/seo/page-metadata";
 import { getPublicHomeContent } from "@/lib/site/public-home";
 import { getPublicPageContent } from "@/lib/site/public-pages";
@@ -48,6 +49,7 @@ export default async function Page() {
           description: homePage.seo.description,
         })}
       />
+      <JsonLd data={faqPageSchema(homeFaqs)} />
       <HomePage content={homeContent} />
     </>
   );

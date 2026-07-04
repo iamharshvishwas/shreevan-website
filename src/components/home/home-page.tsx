@@ -1,6 +1,7 @@
 import { SuitabilityForm } from "@/components/forms/suitability-form";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { homeAnswerSummary, homeFaqs, homeReferenceLinks } from "@/lib/content/home-aeo";
 import type { PublicHomeMedia, PublicHomeContent } from "@/lib/site/public-home-types";
 
 const includedMedia = [
@@ -65,6 +66,24 @@ export function HomePage({
                 <span>{item.copy}</span>
               </div>
             ))}
+          </div>
+        </section>
+
+        <section className="section home-answer-section" aria-labelledby="home-answer-title">
+          <div className="container home-answer-panel">
+            <div className="home-answer-copy">
+              <p className="eyebrow">{homeAnswerSummary.eyebrow}</p>
+              <h2 id="home-answer-title">{homeAnswerSummary.heading}</h2>
+              <p>{homeAnswerSummary.answer}</p>
+            </div>
+            <div className="home-answer-cards" aria-label="Quick answer summary">
+              {homeAnswerSummary.cards.map((card) => (
+                <article key={card.id}>
+                  <span>{card.label}</span>
+                  <p>{card.text}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -224,6 +243,16 @@ export function HomePage({
                   </article>
                 ))}
               </div>
+              <div className="source-link-panel" aria-label="Official travel references">
+                <p>Official travel references for international visitors</p>
+                <div>
+                  {homeReferenceLinks.map((link) => (
+                    <a key={link.id} href={link.href} target="_blank" rel="noopener noreferrer">
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -270,6 +299,32 @@ export function HomePage({
                   <p>“{testimonial.quote}”</p>
                   <span>{testimonial.attribution}</span>
                 </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="section home-faq-section" aria-labelledby="home-faq-title">
+          <div className="container home-faq-grid">
+            <div className="home-faq-intro">
+              <p className="eyebrow">Common questions</p>
+              <h2 id="home-faq-title">Quick answers before you enquire</h2>
+              <p>
+                These answers are intentionally direct so guests can understand fit, boundaries and next steps before
+                starting a suitability call.
+              </p>
+              <a className="button button-secondary" href="/faqs">
+                View all FAQs
+              </a>
+            </div>
+            <div className="faq-question-list">
+              {homeFaqs.map((faq, index) => (
+                <details className="faq-item" key={faq.question} open={index === 0}>
+                  <summary>{faq.question}</summary>
+                  <div className="faq-answer">
+                    <p>{faq.answer}</p>
+                  </div>
+                </details>
               ))}
             </div>
           </div>

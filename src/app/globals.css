@@ -134,6 +134,14 @@ h3 { font-size: clamp(1.28rem, 1.55vw, 1.65rem); }
 .proof-grid strong { color: var(--forest-900); font-size: 0.96rem; }
 .proof-grid span { margin-top: 4px; color: var(--stone-600); font-size: 0.88rem; line-height: 1.45; }
 
+.home-answer-section { background: linear-gradient(180deg, var(--white), var(--sand-050)); padding-block: 56px; }
+.home-answer-panel { display: grid; grid-template-columns: minmax(280px, 0.62fr) minmax(0, 1fr); gap: 42px; align-items: stretch; border: 1px solid var(--line-sand); border-radius: var(--radius-card); background: rgba(255, 255, 255, 0.76); box-shadow: var(--shadow-sm); padding: clamp(24px, 4vw, 42px); }
+.home-answer-copy p:not(.eyebrow) { max-width: 680px; margin-top: 18px; color: var(--stone-600); line-height: 1.64; }
+.home-answer-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.home-answer-cards article { border: 1px solid var(--line-mist); border-radius: var(--radius-callout); background: var(--sand-050); padding: 20px; }
+.home-answer-cards span { color: var(--gold-600); font-size: 0.72rem; font-weight: 850; letter-spacing: 0.08em; line-height: 1.2; text-transform: uppercase; }
+.home-answer-cards p { margin-top: 12px; color: var(--forest-900); font-size: 0.95rem; line-height: 1.52; }
+
 .section { padding-block: var(--section-y); }
 .editorial-grid, .credibility-grid, .international-grid, .safety-grid, .consultation-grid, .rhythm-grid { display: grid; grid-template-columns: minmax(260px, 0.62fr) minmax(0, 1fr); gap: 72px; align-items: start; }
 .intent-grid { grid-template-columns: minmax(170px, 0.42fr) minmax(0, 1fr) minmax(300px, 0.72fr); gap: 56px; align-items: center; }
@@ -274,6 +282,11 @@ dd { margin: 6px 0 0; color: var(--stone-600); line-height: 1.45; }
 .reassurance-list article { border: 1px solid var(--line-sand); border-radius: 14px; background: var(--white); padding: 24px; }
 .reassurance-list span, .testimonial-grid span { display: inline-flex; margin-bottom: 18px; border-radius: 999px; background: var(--mist-100); color: var(--forest-700); padding: 6px 10px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
 .reassurance-list p { margin-top: 10px; color: var(--stone-600); }
+.source-link-panel { border: 1px solid var(--line-sand); border-radius: var(--radius-card); background: var(--sand-050); padding: 20px; }
+.source-link-panel p { color: var(--forest-900); font-size: 0.92rem; font-weight: 850; line-height: 1.35; }
+.source-link-panel div { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.source-link-panel a { border: 1px solid var(--line-mist); border-radius: var(--radius-pill); background: var(--white); color: var(--forest-700); padding: 8px 12px; font-size: 0.78rem; font-weight: 850; line-height: 1.2; text-decoration: none; }
+.source-link-panel a:hover { border-color: var(--forest-900); background: var(--mist-100); color: var(--forest-950); }
 .safety-image { min-height: 560px; border-radius: 14px; box-shadow: var(--shadow); }
 .safety-list { display: grid; gap: 18px; margin-top: 34px; }
 .safety-list article { border-top: 1px solid var(--line-sand); padding-top: 22px; }
@@ -282,6 +295,12 @@ dd { margin: 6px 0 0; color: var(--stone-600); line-height: 1.45; }
 .testimonial-image figcaption { position: absolute; left: 22px; bottom: 22px; max-width: calc(100% - 44px); border-radius: var(--radius-pill); background: rgba(15, 42, 34, 0.78); color: var(--white); padding: 8px 13px; font-size: 0.78rem; font-weight: 850; letter-spacing: 0.08em; line-height: 1.2; text-transform: uppercase; }
 .testimonial-grid p { color: var(--forest-900); font-family: var(--font-heading); font-size: 1.2rem; line-height: 1.45; }
 .testimonial-grid span { margin: 26px 0 0; }
+
+.home-faq-section { background: var(--white); }
+.home-faq-grid { display: grid; grid-template-columns: minmax(260px, 0.36fr) minmax(0, 1fr); gap: 72px; align-items: start; }
+.home-faq-intro { position: sticky; top: 118px; }
+.home-faq-intro p:not(.eyebrow) { margin-top: 18px; color: var(--stone-600); line-height: 1.62; }
+.home-faq-intro .button { margin-top: 24px; }
 
 .consultation-grid .button { margin-top: 32px; }
 .consultation-steps { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
@@ -1133,10 +1152,11 @@ main [id] { scroll-margin-top: 132px; }
   .nav-menu { position: static; min-width: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; padding: 0 0 10px 14px; }
   .nav-menu a { padding: 10px 12px; }
   .menu-toggle { display: block; }
-  .editorial-grid, .credibility-grid, .international-grid, .safety-grid, .consultation-grid, .rhythm-grid, .form-shell, .split-heading, .footer-grid, .story-hero-grid, .stories-hero-grid, .story-marker-grid, .identity-grid, .origin-grid, .care-path, .standards-grid, .featured-story-panel, .story-card-grid, .outcome-story-grid, .consent-grid, .journal-archive-hero-grid, .journal-filter-shell, .journal-layout, .journal-reader-panel, .journal-detail-hero-grid, .journal-detail-layout, .journal-exit-panel, .stay-hero-grid, .stay-marker-grid, .stay-food-grid, .stay-reassurance-grid, .stay-confirm-panel, .stay-cta-panel, .booking-conversation-grid, .booking-path-grid, .booking-fit-grid, .booking-fit-lists, .booking-form-shell, .booking-after-grid, .booking-last-word-panel, .contact-hero-grid, .location-grid, .visitor-grid, .contact-form-shell, .booking-hero-grid, .qualification-shell, .payment-hero-grid, .payment-grid, .checkout-grid, .payment-gateway-panel, .payment-support-grid, .legal-grid, .faq-hero-grid, .faq-decision-grid, .faq-layout, .faq-topic-heading, .faq-responsible-grid, .faq-standard-grid, .faq-final-panel, .program-hero-grid, .program-fit-grid, .program-inclusions-grid, .program-media-grid, .program-cta-panel, .program-pricing-panel, .residency-positioning-panel, .residency-domain-grid, .residency-curriculum-grid, .residency-mentoring-grid, .residency-support-grid, .residency-graduation-grid, .seo-hub-hero-grid, .seo-two-column, .seo-final-panel, .modality-quick-grid, .modality-article-grid, .modality-retreat-grid, .modality-suitability-grid, .modality-connection-grid, .modality-decision-grid, .modality-standards-grid { grid-template-columns: 1fr; }
+  .editorial-grid, .credibility-grid, .international-grid, .safety-grid, .consultation-grid, .rhythm-grid, .form-shell, .split-heading, .footer-grid, .home-answer-panel, .home-faq-grid, .story-hero-grid, .stories-hero-grid, .story-marker-grid, .identity-grid, .origin-grid, .care-path, .standards-grid, .featured-story-panel, .story-card-grid, .outcome-story-grid, .consent-grid, .journal-archive-hero-grid, .journal-filter-shell, .journal-layout, .journal-reader-panel, .journal-detail-hero-grid, .journal-detail-layout, .journal-exit-panel, .stay-hero-grid, .stay-marker-grid, .stay-food-grid, .stay-reassurance-grid, .stay-confirm-panel, .stay-cta-panel, .booking-conversation-grid, .booking-path-grid, .booking-fit-grid, .booking-fit-lists, .booking-form-shell, .booking-after-grid, .booking-last-word-panel, .contact-hero-grid, .location-grid, .visitor-grid, .contact-form-shell, .booking-hero-grid, .qualification-shell, .payment-hero-grid, .payment-grid, .checkout-grid, .payment-gateway-panel, .payment-support-grid, .legal-grid, .faq-hero-grid, .faq-decision-grid, .faq-layout, .faq-topic-heading, .faq-responsible-grid, .faq-standard-grid, .faq-final-panel, .program-hero-grid, .program-fit-grid, .program-inclusions-grid, .program-media-grid, .program-cta-panel, .program-pricing-panel, .residency-positioning-panel, .residency-domain-grid, .residency-curriculum-grid, .residency-mentoring-grid, .residency-support-grid, .residency-graduation-grid, .seo-hub-hero-grid, .seo-two-column, .seo-final-panel, .modality-quick-grid, .modality-article-grid, .modality-retreat-grid, .modality-suitability-grid, .modality-connection-grid, .modality-decision-grid, .modality-standards-grid { grid-template-columns: 1fr; }
   .checkout-side-panel { position: static; }
   .legal-aside { position: static; }
   .faq-category-nav { position: static; }
+  .home-faq-intro { position: static; }
   .modality-article-nav { position: static; }
   .journal-filter-band { position: static; }
   .journal-sidebar, .journal-detail-sidebar { position: static; }
@@ -1191,7 +1211,7 @@ main [id] { scroll-margin-top: 132px; }
   .testimonial-image { aspect-ratio: 4 / 3; min-height: 250px; margin-bottom: 28px; }
   .proof-grid, .included-media-grid, .included-grid, .testimonial-grid, .program-row { grid-template-columns: 1fr; }
   .included-media-grid { margin-bottom: 28px; }
-  .principle-grid, .contact-channel-grid, .video-story-grid, .journal-article-grid, .stay-room-grid, .stay-included-grid, .stay-meal-grid, .stay-gallery-grid, .booking-reassurance-grid, .booking-fit-lists, .booking-after-grid, .program-choice-grid, .payment-method-grid, .legal-card-list, .faq-standard-grid, .program-outcome-grid, .program-inclusion-list, .program-media-slots, .seo-card-grid, .modality-quick-grid, .modality-retreat-grid, .modality-suitability-grid, .modality-connection-grid, .modality-decision-grid, .modality-standards-grid { grid-template-columns: 1fr; }
+  .principle-grid, .contact-channel-grid, .video-story-grid, .journal-article-grid, .stay-room-grid, .stay-included-grid, .stay-meal-grid, .stay-gallery-grid, .booking-reassurance-grid, .booking-fit-lists, .booking-after-grid, .program-choice-grid, .payment-method-grid, .legal-card-list, .home-answer-cards, .faq-standard-grid, .program-outcome-grid, .program-inclusion-list, .program-media-slots, .seo-card-grid, .modality-quick-grid, .modality-retreat-grid, .modality-suitability-grid, .modality-connection-grid, .modality-decision-grid, .modality-standards-grid { grid-template-columns: 1fr; }
   .identity-list article { grid-template-columns: 1fr; gap: 10px; }
   .visitor-question-list article { grid-template-columns: 1fr; gap: 10px; }
   .journal-detail-points section { grid-template-columns: 1fr; }
@@ -1207,7 +1227,7 @@ main [id] { scroll-margin-top: 132px; }
   .form-intro h2 { font-size: clamp(2.08rem, 10.5vw, 3rem); }
   .suitability-form { padding: 22px; }
   .suitability-form .button, .contact-form .button { width: 100%; }
-  .booking-assurance, .booking-conversation-card, .booking-form-note, .qualification-form, .qualification-success, .payment-summary-card, .checkout-form, .checkout-side-panel, .payment-gateway-panel, .payment-terms-card, .faq-hero-card, .faq-category-nav > div, .faq-final-panel { padding: 22px; }
+  .booking-assurance, .booking-conversation-card, .booking-form-note, .qualification-form, .qualification-success, .payment-summary-card, .checkout-form, .checkout-side-panel, .payment-gateway-panel, .payment-terms-card, .home-answer-panel, .faq-hero-card, .faq-category-nav > div, .faq-final-panel { padding: 22px; }
   .program-outcome-panel, .program-day-card, .program-online-grid article, .program-inclusion-list li, .program-modality-grid article, .program-cta-panel, .program-phase-grid article, .program-metric-grid article, .program-deliverable-grid article, .program-pricing-panel, .program-week-journey article, .journal-reader-copy, .journal-article-body, .journal-sidebar-card, .journal-exit-panel, .stay-room-body, .stay-included-grid article, .stay-meal-grid article, .stay-cta-panel, .booking-fit-lists article, .booking-after-grid article, .booking-last-word-panel, .faq-standard-grid article, .residency-positioning-panel, .residency-domain-grid article, .residency-phase-grid article, .residency-curriculum-grid article, .residency-mentoring-grid article, .residency-support-grid article, .residency-experience-grid article, .residency-requirement-grid article, .seo-info-card, .seo-hub-note, .seo-final-panel, .modality-quick-card, .modality-article-block, .modality-retreat-card, .modality-suitability-grid article, .modality-connection-grid article, .modality-decision-card, .modality-standards-grid article { padding: 22px; }
   .program-week-grid article, .program-outcome-category-grid article, .program-experience-group-grid article, .program-phase-grid article, .program-deliverable-grid article, .residency-domain-grid article, .residency-phase-grid article, .residency-mentoring-grid article, .residency-support-grid article, .residency-requirement-grid article { min-height: auto; }
   .booking-assurance li, .payment-checklist li { grid-template-columns: 44px minmax(0, 1fr); gap: 14px; }
@@ -1253,7 +1273,7 @@ main [id] { scroll-margin-top: 132px; }
   .faq-answer { padding: 18px 20px 20px; }
   .faq-topic-heading { gap: 10px; }
   .faq-link-row { display: grid; grid-template-columns: 1fr; }
-  .journal-reader-actions, .journal-exit-actions, .stay-cta-actions, .booking-last-actions, .faq-final-actions { display: grid; grid-template-columns: 1fr; }
+  .source-link-panel div, .journal-reader-actions, .journal-exit-actions, .stay-cta-actions, .booking-last-actions, .faq-final-actions { display: grid; grid-template-columns: 1fr; }
   .journal-hero-board, .journal-reader-panel, .journal-article-card, .journal-sidebar-card, .journal-exit-panel, .stay-room-card, .stay-cta-panel, .booking-conversation-card, .booking-fit-lists article, .booking-last-word-panel, .faq-hero-card, .faq-item, .faq-final-panel, .modality-quick-card, .modality-article-block, .modality-retreat-card, .modality-suitability-grid article, .modality-connection-grid article, .modality-decision-card, .modality-standards-grid article { border-radius: 12px; }
 }
 
