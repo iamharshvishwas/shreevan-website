@@ -63,6 +63,9 @@ export type PublicJournalArticle = {
   audience: string;
   tags: string[];
   keyPoints: string[];
+  focusKeyword: string;
+  faqs: Array<{ id: string; question: string; answer: string }>;
+  tocEnabled: boolean;
   content: string;
   contentHtml: string;
   body: string[];

@@ -64,6 +64,12 @@ export type AdminVideoSlot = {
   status: AdminContentStatus;
 };
 
+export type AdminArticleFaq = {
+  id: string;
+  question: string;
+  answer: string;
+};
+
 export type AdminJournalArticle = {
   id: string;
   slug?: string;
@@ -76,6 +82,9 @@ export type AdminJournalArticle = {
   audience: string;
   tags: string[];
   keyPoints: string[];
+  focusKeyword?: string;
+  faqs?: AdminArticleFaq[];
+  tocEnabled?: boolean;
   content?: string;
   contentHtml?: string;
   body?: string[];
@@ -1002,6 +1011,21 @@ function normalizeVideoSlot(value: unknown, fallback: AdminVideoSlot): AdminVide
   };
 }
 
+function normalizeArticleFaqs(value: unknown, fallback: AdminArticleFaq[]): AdminArticleFaq[] {
+  if (!Array.isArray(value)) {
+    return fallback;
+  }
+
+  return value
+    .filter(isRecord)
+    .map((item, index) => ({
+      id: stringValue(item.id, `faq-${index + 1}`),
+      question: stringValue(item.question, ""),
+      answer: stringValue(item.answer, ""),
+    }))
+    .filter((item) => item.question.trim() || item.answer.trim());
+}
+
 function normalizeJournalArticle(value: unknown, fallback: AdminJournalArticle): AdminJournalArticle {
   const input = isRecord(value) ? value : {};
   const fallbackSlug = fallback.slug || fallback.id;
@@ -1032,6 +1056,9 @@ function normalizeJournalArticle(value: unknown, fallback: AdminJournalArticle):
     audience: stringValue(input.audience, fallback.audience),
     tags: stringArrayValue(input.tags, fallback.tags),
     keyPoints,
+    focusKeyword: stringValue(input.focusKeyword, fallback.focusKeyword ?? ""),
+    faqs: normalizeArticleFaqs(input.faqs, fallback.faqs ?? []),
+    tocEnabled: booleanValue(input.tocEnabled, fallback.tocEnabled ?? true),
     content: stringValue(input.content, fallback.content ?? body.join("\n\n")),
     contentHtml: stringValue(input.contentHtml, fallback.contentHtml ?? ""),
     body,
@@ -1189,8 +1216,32 @@ export async function saveAdminBlogCoverUpload(file: {
     throw new Error("Blog cover image must be 12MB or smaller.");
   }
 
-  const bytes = Buffer.from(await file.arrayBuffer());
-  const fileName = `${safeBaseName(file.name) || "blog-cover"}-${randomUUID()}${extension}`;
+  const originalBytes = Buffer.from(await file.arrayBuffer());
+  let bytes = originalBytes;
+  let finalExtension = extension;
+
+  // Compress on upload: resize to a 1920px ceiling and re-encode as WebP q80.
+  // GIFs are kept as-is (animation); if compression fails or doesn't help,
+  // the original bytes are stored unchanged.
+  if (extension !== ".gif") {
+    try {
+      const { default: sharp } = await import("sharp");
+      const compressed = await sharp(originalBytes)
+        .rotate()
+        .resize({ width: 1920, height: 1920, fit: "inside", withoutEnlargement: true })
+        .webp({ quality: 80 })
+        .toBuffer();
+
+      if (compressed.length < originalBytes.length) {
+        bytes = compressed;
+        finalExtension = ".webp";
+      }
+    } catch {
+      // sharp unavailable or unsupported input — store the original upload.
+    }
+  }
+
+  const fileName = `${safeBaseName(file.name) || "blog-cover"}-${randomUUID()}${finalExtension}`;
 
   await mkdir(BLOG_UPLOAD_DIR, { recursive: true });
   await writeFile(join(BLOG_UPLOAD_DIR, fileName), bytes);

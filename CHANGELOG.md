@@ -139,3 +139,12 @@ All audit-loop fixes are logged here. Format per AUDIT_LOOP.md: what was wrong, 
 7. **Local autosave** — unsaved changes back up to localStorage every 2s; on return, a restore/discard banner offers the draft back; backup clears on successful save.
 8. **Live word/character/read-time counter** in the editor footer.
 - **Verified:** typecheck/lint/build clean; HTTP — article page emits og:type=article + article:* metas + differing datePublished/dateModified; browser — H1 absent, footer counts live, SERP preview renders, tags/key-points fields work, full autosave cycle (type → backup → reload → banner → restore → save clears backup), auto read-time persisted ("1 min read" from 3 words). Test edits reverted.
+
+### 2026-07-05 — Blog Tier 2: SEO power features
+1. **Focus keyword + SEO checklist** — per-post focus keyword with live Yoast-style checks: keyword in title / meta / slug / first 70 words (AEO direct-answer rule) / H2-H3; content length tiers (600/1200 words); internal-link count; program-or-consultation link check. Pure client-side analysis in `src/lib/content/article-seo.ts`.
+2. **Internal link suggestions** — sidebar panel listing consultation page, program pages, top modalities and related published posts with live already-linked detection + copy-path buttons.
+3. **Per-article FAQ + FAQPage schema** — Q&A editor in the sidebar; renders as an accessible details/summary section on the article and emits FAQPage JSON-LD.
+4. **Auto table of contents** — H2/H3 extracted server-side, stable ids injected into headings, "On this page" nav renders when 2+ headings exist; per-article toggle.
+5. **Image compression on upload** — blog uploads now resize to a 1920px ceiling and re-encode as WebP q80 via sharp (GIFs untouched; falls back to original bytes on failure). Verified: 2.7MB 3000px JPEG → 544KB WebP.
+6. **Author E-E-A-T profiles** — `src/lib/content/authors.ts` (factual bios, no invented credentials); author byline box on articles; BlogPosting author is now a Person (name + jobTitle + worksFor Organization).
+- **Verified:** gates clean; public page shows TOC with working anchor ids, FAQ section, FAQPage + Person schemas, author box; admin checklist gives accurate pass/fail against real content; linked-state detection correct; upload compression measured. Test content reverted.

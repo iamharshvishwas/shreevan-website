@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { extractHeadings, injectHeadingIds } from "@/lib/content/article-seo";
+import { findArticleAuthor } from "@/lib/content/authors";
 import type { PublicJournalArticle } from "@/lib/site/public-content-trust-types";
 
 function JournalBlock({ block }: Readonly<{ block: PublicJournalArticle["blocks"][number] }>) {
@@ -52,6 +54,11 @@ export function JournalArticlePage({
   const hasRichText = article.contentHtml.trim().length > 0;
   const hasBuilderBlocks = article.blocks.length > 0;
   const hasArticleBody = article.body.length > 0;
+  const tocItems = hasRichText && article.tocEnabled ? extractHeadings(article.contentHtml) : [];
+  const showToc = tocItems.length >= 2;
+  const richTextHtml = showToc ? injectHeadingIds(article.contentHtml) : article.contentHtml;
+  const articleFaqs = article.faqs.filter((faq) => faq.question.trim() && faq.answer.trim());
+  const author = findArticleAuthor(article.authorId, article.author);
 
   return (
     <>
@@ -102,13 +109,26 @@ export function JournalArticlePage({
                 </figure>
               ) : null}
 
+              {showToc ? (
+                <nav className="journal-toc" aria-label="On this page">
+                  <span>On this page</span>
+                  <ol>
+                    {tocItems.map((item) => (
+                      <li key={item.id} className={item.level === 3 ? "journal-toc-sub" : undefined}>
+                        <a href={`#${item.id}`}>{item.text}</a>
+                      </li>
+                    ))}
+                  </ol>
+                </nav>
+              ) : null}
+
               {hasRichText ? (
                 // Rich text authored in the admin TipTap editor. Only
                 // authenticated admins can write this HTML (same trust model
                 // as any CMS post body).
                 <div
                   className="journal-detail-richtext journal-detail-richtext--html"
-                  dangerouslySetInnerHTML={{ __html: article.contentHtml }}
+                  dangerouslySetInnerHTML={{ __html: richTextHtml }}
                 />
               ) : hasBuilderBlocks ? (
                 <div className="journal-detail-richtext">
@@ -150,11 +170,30 @@ export function JournalArticlePage({
                 </>
               )}
 
+              {articleFaqs.length ? (
+                <section className="journal-article-faq" aria-labelledby="article-faq-title">
+                  <h2 id="article-faq-title">Common questions on this topic</h2>
+                  {articleFaqs.map((faq) => (
+                    <details key={faq.id}>
+                      <summary>{faq.question}</summary>
+                      <p>{faq.answer}</p>
+                    </details>
+                  ))}
+                </section>
+              ) : null}
+
               <div className="journal-detail-tags" aria-label="Article topics">
                 {article.tags.map((tag) => (
                   <span key={tag}>{tag}</span>
                 ))}
               </div>
+
+              <aside className="journal-author-box" aria-label="About the author">
+                <span className="journal-author-kicker">Written by</span>
+                <strong>{author.name}</strong>
+                <em>{author.role}</em>
+                {author.bio ? <p>{author.bio}</p> : null}
+              </aside>
             </div>
 
             <aside className="journal-detail-sidebar" aria-label="Related journal paths">

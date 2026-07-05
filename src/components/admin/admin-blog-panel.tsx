@@ -3,7 +3,10 @@
 import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { countWords, readTimeLabel, RichTextEditor } from "@/components/admin/rich-text-editor/rich-text-editor";
+import { analyzeArticleSeo } from "@/lib/content/article-seo";
+import { modalityRoutes, programRoutes } from "@/config/routes";
 import type {
+  AdminArticleFaq,
   AdminBlogBlock,
   AdminBlogBlockType,
   AdminBlogIndexStatus,
@@ -414,6 +417,9 @@ function createDraftArticle(id: string, category: string): AdminJournalArticle {
     audience: "",
     tags: [],
     keyPoints: [],
+    focusKeyword: "",
+    faqs: [],
+    tocEnabled: true,
     content: "",
     contentHtml: "",
     body: [],
@@ -501,6 +507,44 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
   const coverCount = blog.journalArticles.filter((article) => article.coverMedia?.src).length;
   const schemaMessage = activeArticle ? validateSchemaJson(activeArticle.schemaJson ?? "") : "";
   const activeValidation = activeArticle ? validateArticle(activeArticle) : "";
+
+  const seoChecks = useMemo(
+    () =>
+      activeArticle
+        ? analyzeArticleSeo({
+            focusKeyword: activeArticle.focusKeyword ?? "",
+            title: activeArticle.title,
+            seoTitle: activeArticle.seoTitle ?? "",
+            seoDescription: activeArticle.seoDescription ?? "",
+            excerpt: activeArticle.excerpt,
+            slug: articleSlug(activeArticle),
+            contentHtml: activeArticle.contentHtml ?? "",
+          })
+        : [],
+    [activeArticle],
+  );
+
+  const linkSuggestions = useMemo(() => {
+    if (!activeArticle) {
+      return [];
+    }
+
+    const relatedPosts = blog.journalArticles
+      .filter((article) => article.id !== activeArticle.id && article.status === "published")
+      .sort((a, b) => (a.category === activeArticle.category ? -1 : 0) - (b.category === activeArticle.category ? -1 : 0))
+      .slice(0, 3)
+      .map((article) => ({ label: article.title, href: `/journal/${articleSlug(article)}` }));
+
+    return [
+      { label: "Book Consultation", href: "/book-consultation" },
+      ...programRoutes.filter((route) => route.href !== "/programs").map((route) => ({ label: route.label, href: route.href })),
+      ...modalityRoutes.filter((route) => route.href !== "/modalities").slice(0, 3).map((route) => ({ label: route.label, href: route.href })),
+      ...relatedPosts,
+    ].map((item) => ({
+      ...item,
+      linked: (activeArticle.contentHtml ?? "").includes(`href="${item.href}"`),
+    }));
+  }, [activeArticle, blog.journalArticles]);
 
   // Offer to restore an unsaved local draft backup (browser crash / closed tab).
   useEffect(() => {
@@ -701,6 +745,45 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
     setBlogWithArticle(activeArticle.id, {
       blocks: (activeArticle.blocks ?? []).filter((block) => block.id !== blockId),
     });
+  }
+
+  function updateArticleFaq(faqId: string, patch: Partial<AdminArticleFaq>) {
+    if (!activeArticle) {
+      return;
+    }
+
+    setBlogWithArticle(activeArticle.id, {
+      faqs: (activeArticle.faqs ?? []).map((faq) => (faq.id === faqId ? { ...faq, ...patch } : faq)),
+    });
+  }
+
+  function addArticleFaq() {
+    if (!activeArticle) {
+      return;
+    }
+
+    setBlogWithArticle(activeArticle.id, {
+      faqs: [...(activeArticle.faqs ?? []), { id: `faq-${crypto.randomUUID()}`, question: "", answer: "" }],
+    });
+  }
+
+  function removeArticleFaq(faqId: string) {
+    if (!activeArticle) {
+      return;
+    }
+
+    setBlogWithArticle(activeArticle.id, {
+      faqs: (activeArticle.faqs ?? []).filter((faq) => faq.id !== faqId),
+    });
+  }
+
+  async function copyLinkSuggestion(href: string) {
+    try {
+      await navigator.clipboard.writeText(href);
+      setMessage(`Copied ${href} — paste it on selected text with the link button.`);
+    } catch {
+      setMessage(`Could not copy automatically. Link path: ${href}`);
+    }
   }
 
   function handleCreateArticle() {
@@ -1395,6 +1478,33 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
                     </span>
                   </div>
                   <label className="admin-field">
+                    Focus keyword
+                    <input
+                      value={activeArticle.focusKeyword ?? ""}
+                      placeholder="e.g. 7 day wellness retreat rishikesh"
+                      onChange={(event) => updateActiveArticle({ focusKeyword: event.target.value })}
+                    />
+                  </label>
+                  <ul className="admin-seo-checklist" aria-label="SEO checklist">
+                    {seoChecks.map((check) => (
+                      <li key={check.id} className={`is-${check.status}`}>
+                        <span aria-hidden="true">{check.status === "pass" ? "✓" : check.status === "fail" ? "✗" : "•"}</span>
+                        <span>
+                          {check.label}
+                          {check.detail ? <small> — {check.detail}</small> : null}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  <label className="admin-toggle-row admin-page-checkbox">
+                    <input
+                      type="checkbox"
+                      checked={activeArticle.tocEnabled ?? true}
+                      onChange={(event) => updateActiveArticle({ tocEnabled: event.target.checked })}
+                    />
+                    <span>Show table of contents (auto from H2/H3, needs 2+)</span>
+                  </label>
+                  <label className="admin-field">
                     Index status
                     <select
                       value={activeArticle.indexStatus ?? "index"}
@@ -1429,6 +1539,66 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
                       onChange={(event) => updateActiveArticle({ canonicalUrl: event.target.value })}
                     />
                   </label>
+                </div>
+              </SettingsPanel>
+
+              <SettingsPanel title="Internal links" open={false}>
+                <div className="admin-form-stack">
+                  <p className="admin-blog-muted">
+                    Link every article to a program, modality or the consultation page. Copy a path, select
+                    text in the editor, then use the link button.
+                  </p>
+                  <ul className="admin-link-suggestions">
+                    {linkSuggestions.map((item) => (
+                      <li key={item.href} className={item.linked ? "is-linked" : undefined}>
+                        <span>
+                          {item.linked ? "✓ " : ""}
+                          {item.label}
+                        </span>
+                        {item.linked ? (
+                          <em>Linked</em>
+                        ) : (
+                          <button className="admin-secondary-button" type="button" onClick={() => void copyLinkSuggestion(item.href)}>
+                            Copy
+                          </button>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </SettingsPanel>
+
+              <SettingsPanel title="Article FAQ (schema)" open={false}>
+                <div className="admin-form-stack">
+                  <p className="admin-blog-muted">
+                    2-3 short Q&amp;As render at the end of the article and emit FAQPage schema — strong for
+                    AI Overviews and answer engines.
+                  </p>
+                  {(activeArticle.faqs ?? []).map((faq, index) => (
+                    <div className="admin-article-faq-row" key={faq.id}>
+                      <label className="admin-field">
+                        Question {index + 1}
+                        <input
+                          value={faq.question}
+                          onChange={(event) => updateArticleFaq(faq.id, { question: event.target.value })}
+                        />
+                      </label>
+                      <label className="admin-field">
+                        Answer
+                        <textarea
+                          rows={3}
+                          value={faq.answer}
+                          onChange={(event) => updateArticleFaq(faq.id, { answer: event.target.value })}
+                        />
+                      </label>
+                      <button className="admin-secondary-button" type="button" onClick={() => removeArticleFaq(faq.id)}>
+                        Remove question
+                      </button>
+                    </div>
+                  ))}
+                  <button className="admin-secondary-button" type="button" onClick={addArticleFaq}>
+                    Add question
+                  </button>
                 </div>
               </SettingsPanel>
 

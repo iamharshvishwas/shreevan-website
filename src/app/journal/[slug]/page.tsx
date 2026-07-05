@@ -3,7 +3,8 @@ import { notFound, permanentRedirect, redirect } from "next/navigation";
 import { JournalArticlePage } from "@/components/journal/journal-article-page";
 import { siteConfig } from "@/config/site";
 import { JsonLd } from "@/lib/schema/json-ld";
-import { blogPostingSchema, breadcrumbSchema, webPageSchema } from "@/lib/schema/site-schema";
+import { findArticleAuthor } from "@/lib/content/authors";
+import { blogPostingSchema, breadcrumbSchema, faqPageSchema, webPageSchema } from "@/lib/schema/site-schema";
 import { absoluteSiteUrl, buildPageMetadata } from "@/lib/seo/page-metadata";
 import { getPublicJournalContent } from "@/lib/site/public-content-trust";
 
@@ -110,6 +111,8 @@ export default async function Page({ params }: JournalArticlePageProps) {
   const path = articlePath(article.slug || article.id);
   const pageUrl = `${siteConfig.url}${path}`;
   const manualSchema = parseSchemaJson(article.schemaJson);
+  const author = findArticleAuthor(article.authorId, article.author);
+  const articleFaqs = article.faqs.filter((faq) => faq.question.trim() && faq.answer.trim());
   const relatedArticles = journalContent.articles
     .filter((item) => item.id !== article.id)
     .slice(0, 3)
@@ -146,8 +149,16 @@ export default async function Page({ params }: JournalArticlePageProps) {
           category: article.category,
           tags: article.tags,
           audience: article.audience,
+          author: {
+            name: author.name,
+            role: author.role,
+            sameAs: author.sameAs,
+          },
         })}
       />
+      {articleFaqs.length ? (
+        <JsonLd data={faqPageSchema(articleFaqs.map((faq) => ({ question: faq.question, answer: faq.answer })))} />
+      ) : null}
       {manualSchema ? <JsonLd data={manualSchema} /> : null}
       <JournalArticlePage article={article} relatedArticles={relatedArticles} />
     </>

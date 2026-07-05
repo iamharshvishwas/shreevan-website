@@ -195,6 +195,11 @@ export function blogPostingSchema(article: {
   category: string;
   tags: string[];
   audience: string;
+  author?: {
+    name: string;
+    role?: string;
+    sameAs?: string[];
+  };
 }) {
   const pageUrl = absoluteUrl(article.url);
 
@@ -215,9 +220,19 @@ export function blogPostingSchema(article: {
       "@type": "WebPage",
       "@id": `${pageUrl}#webpage`,
     },
-    author: {
-      "@id": organizationId(),
-    },
+    author: article.author
+      ? {
+          "@type": "Person",
+          name: article.author.name,
+          ...(article.author.role ? { jobTitle: article.author.role } : {}),
+          ...(article.author.sameAs?.length ? { sameAs: article.author.sameAs } : {}),
+          worksFor: {
+            "@id": organizationId(),
+          },
+        }
+      : {
+          "@id": organizationId(),
+        },
     publisher: {
       "@id": organizationId(),
     },
