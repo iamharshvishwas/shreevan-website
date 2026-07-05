@@ -1,7 +1,6 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
 import { coreRoutes, modalityRoutes, programRoutes, utilityRoutes } from "@/config/routes";
 import { siteConfig } from "@/config/site";
+import { getSupabaseAdminClient } from "@/lib/supabase/client";
 
 export type AdminNavLink = {
   id: string;
@@ -59,7 +58,6 @@ export type AdminSiteSettings = {
   updatedAt: string;
 };
 
-const SETTINGS_PATH = join(process.cwd(), "data", "admin", "site-settings.json");
 
 function routeToNavLink(route: { href: string; label: string }): AdminNavLink {
   return {
@@ -289,17 +287,26 @@ export function normalizeAdminSiteSettings(value: unknown): AdminSiteSettings {
 }
 
 export async function readAdminSiteSettings() {
-  try {
-    const file = await readFile(SETTINGS_PATH, "utf8");
+  const client = getSupabaseAdminClient();
+  const { data, error } = await client.from("site_settings").select("*").eq("id", "singleton").maybeSingle();
 
-    return normalizeAdminSiteSettings(JSON.parse(file));
-  } catch (error) {
-    if (isRecord(error) && error.code === "ENOENT") {
-      return defaultAdminSiteSettings;
-    }
-
-    throw error;
+  if (error) {
+    throw new Error(`readAdminSiteSettings: ${error.message}`);
   }
+
+  if (!data) {
+    return defaultAdminSiteSettings;
+  }
+
+  return normalizeAdminSiteSettings({
+    brand: data.brand,
+    contact: data.contact,
+    social: data.social,
+    crm: data.crm,
+    launch: data.launch,
+    navigation: data.navigation,
+    updatedAt: data.updated_at,
+  });
 }
 
 export async function writeAdminSiteSettings(value: unknown) {
@@ -308,8 +315,24 @@ export async function writeAdminSiteSettings(value: unknown) {
     updatedAt: new Date().toISOString(),
   };
 
-  await mkdir(dirname(SETTINGS_PATH), { recursive: true });
-  await writeFile(SETTINGS_PATH, `${JSON.stringify(settings, null, 2)}\n`, "utf8");
+  const client = getSupabaseAdminClient();
+  const { error } = await client.from("site_settings").upsert(
+    {
+      id: "singleton",
+      brand: settings.brand,
+      contact: settings.contact,
+      social: settings.social,
+      crm: settings.crm,
+      launch: settings.launch,
+      navigation: settings.navigation,
+      updated_at: settings.updatedAt,
+    },
+    { onConflict: "id" },
+  );
+
+  if (error) {
+    throw new Error(`writeAdminSiteSettings: ${error.message}`);
+  }
 
   return settings;
 }

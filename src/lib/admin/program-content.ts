@@ -1,6 +1,5 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
 import { siteConfig } from "@/config/site";
+import { getSupabaseAdminClient } from "@/lib/supabase/client";
 
 export type AdminProgramStatus = "draft" | "published" | "archived";
 
@@ -33,7 +32,6 @@ export type AdminProgramContentStore = {
   updatedAt: string;
 };
 
-const PROGRAM_CONTENT_PATH = join(process.cwd(), "data", "admin", "program-content.json");
 
 export const defaultAdminProgramContent: AdminProgramContentStore = {
   updatedAt: "2026-06-21T00:00:00.000Z",
@@ -313,18 +311,46 @@ export function normalizeAdminProgramContent(value: unknown): AdminProgramConten
   };
 }
 
+function rowToManagedProgram(row: Record<string, unknown>): unknown {
+  return {
+    id: row.id,
+    title: row.title,
+    path: row.path,
+    status: row.status,
+    connected: row.connected,
+    order: row.order_num,
+    label: row.label,
+    duration: row.duration,
+    summary: row.summary,
+    outcome: row.outcome,
+    audience: row.audience,
+    investment: row.investment,
+    seo: row.seo,
+    highlights: row.highlights,
+    inclusions: row.inclusions,
+    notes: row.notes,
+  };
+}
+
 export async function readAdminProgramContent() {
-  try {
-    const file = await readFile(PROGRAM_CONTENT_PATH, "utf8");
+  const client = getSupabaseAdminClient();
+  const { data, error } = await client.from("managed_programs").select("*").order("order_num", { ascending: true });
 
-    return normalizeAdminProgramContent(JSON.parse(file));
-  } catch (error) {
-    if (isRecord(error) && error.code === "ENOENT") {
-      return defaultAdminProgramContent;
-    }
-
-    throw error;
+  if (error) {
+    throw new Error(`readAdminProgramContent: ${error.message}`);
   }
+
+  if (!data?.length) {
+    return defaultAdminProgramContent;
+  }
+
+  return normalizeAdminProgramContent({
+    programs: data.map(rowToManagedProgram),
+    updatedAt: data.reduce(
+      (latest, row) => (typeof row.updated_at === "string" && row.updated_at > latest ? row.updated_at : latest),
+      "",
+    ),
+  });
 }
 
 export async function writeAdminProgramContent(value: unknown) {
@@ -333,8 +359,42 @@ export async function writeAdminProgramContent(value: unknown) {
     updatedAt: new Date().toISOString(),
   };
 
-  await mkdir(dirname(PROGRAM_CONTENT_PATH), { recursive: true });
-  await writeFile(PROGRAM_CONTENT_PATH, `${JSON.stringify(programContent, null, 2)}\n`, "utf8");
+  const client = getSupabaseAdminClient();
+  const rows = programContent.programs.map((program) => ({
+    id: program.id,
+    title: program.title,
+    path: program.path,
+    status: program.status,
+    connected: program.connected,
+    order_num: program.order,
+    label: program.label,
+    duration: program.duration,
+    summary: program.summary,
+    outcome: program.outcome,
+    audience: program.audience,
+    investment: program.investment,
+    seo: program.seo,
+    highlights: program.highlights,
+    inclusions: program.inclusions,
+    notes: program.notes,
+    updated_at: programContent.updatedAt,
+  }));
+
+  const { error: upsertError } = await client.from("managed_programs").upsert(rows, { onConflict: "id" });
+
+  if (upsertError) {
+    throw new Error(`managed_programs upsert failed: ${upsertError.message}`);
+  }
+
+  const keepIds = rows.map((row) => row.id);
+  const { error: deleteError } = await client
+    .from("managed_programs")
+    .delete()
+    .not("id", "in", `(${keepIds.join(",")})`);
+
+  if (deleteError) {
+    throw new Error(`managed_programs cleanup failed: ${deleteError.message}`);
+  }
 
   return programContent;
 }

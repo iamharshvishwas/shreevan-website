@@ -1,6 +1,7 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { dirname, extname, join } from "node:path";
 import { randomUUID } from "node:crypto";
+import { extname } from "node:path";
+import { getSupabaseAdminClient } from "@/lib/supabase/client";
+import { uploadAdminMedia } from "@/lib/supabase/storage";
 
 export type AdminHomeMediaKind = "" | "image" | "video";
 
@@ -125,9 +126,6 @@ export type AdminHomeContentStore = {
   };
 };
 
-const HOME_CONTENT_PATH = join(process.cwd(), "data", "admin", "home-content.json");
-const HOME_UPLOAD_DIR = join(process.cwd(), "public", "uploads", "home");
-const HOME_UPLOAD_URL_BASE = "/uploads/home";
 const MAX_UPLOAD_BYTES = 20 * 1024 * 1024;
 
 const allowedUploadTypes = new Map<string, { extension: string; kind: Exclude<AdminHomeMediaKind, ""> }>([
@@ -734,17 +732,33 @@ export function normalizeAdminHomeContent(value: unknown): AdminHomeContentStore
 }
 
 export async function readAdminHomeContent() {
-  try {
-    const file = await readFile(HOME_CONTENT_PATH, "utf8");
+  const client = getSupabaseAdminClient();
+  const { data, error } = await client.from("home_content").select("*").eq("id", "singleton").maybeSingle();
 
-    return normalizeAdminHomeContent(JSON.parse(file));
-  } catch (error) {
-    if (isRecord(error) && error.code === "ENOENT") {
-      return defaultAdminHomeContent;
-    }
-
-    throw error;
+  if (error) {
+    throw new Error(`readAdminHomeContent: ${error.message}`);
   }
+
+  if (!data) {
+    return defaultAdminHomeContent;
+  }
+
+  return normalizeAdminHomeContent({
+    hero: data.hero,
+    mediaBand: data.media_band,
+    proofStrip: data.proof_strip,
+    intro: data.intro,
+    programPathways: data.program_pathways,
+    differentiation: data.differentiation,
+    rhythm: data.rhythm,
+    team: data.team,
+    travel: data.travel,
+    location: data.location,
+    testimonials: data.testimonials,
+    consultation: data.consultation,
+    leadForm: data.lead_form,
+    updatedAt: data.updated_at,
+  });
 }
 
 export async function writeAdminHomeContent(value: unknown) {
@@ -753,8 +767,31 @@ export async function writeAdminHomeContent(value: unknown) {
     updatedAt: new Date().toISOString(),
   };
 
-  await mkdir(dirname(HOME_CONTENT_PATH), { recursive: true });
-  await writeFile(HOME_CONTENT_PATH, `${JSON.stringify(homeContent, null, 2)}\n`, "utf8");
+  const client = getSupabaseAdminClient();
+  const { error } = await client.from("home_content").upsert(
+    {
+      id: "singleton",
+      hero: homeContent.hero,
+      media_band: homeContent.mediaBand,
+      proof_strip: homeContent.proofStrip,
+      intro: homeContent.intro,
+      program_pathways: homeContent.programPathways,
+      differentiation: homeContent.differentiation,
+      rhythm: homeContent.rhythm,
+      team: homeContent.team,
+      travel: homeContent.travel,
+      location: homeContent.location,
+      testimonials: homeContent.testimonials,
+      consultation: homeContent.consultation,
+      lead_form: homeContent.leadForm,
+      updated_at: homeContent.updatedAt,
+    },
+    { onConflict: "id" },
+  );
+
+  if (error) {
+    throw new Error(`writeAdminHomeContent: ${error.message}`);
+  }
 
   return homeContent;
 }
@@ -788,14 +825,64 @@ export async function saveAdminHomeMediaUpload(file: {
     throw new Error("Upload must be 20MB or smaller.");
   }
 
-  const bytes = Buffer.from(await file.arrayBuffer());
-  const fileName = `${safeBaseName(file.name) || "home-media"}-${randomUUID()}${uploadType.extension}`;
+  const originalBytes = Buffer.from(await file.arrayBuffer());
+  let bytes = originalBytes;
+  let finalExtension = uploadType.extension;
+  let finalContentType = file.type;
 
-  await mkdir(HOME_UPLOAD_DIR, { recursive: true });
-  await writeFile(join(HOME_UPLOAD_DIR, fileName), bytes);
+  // Images get the same compression treatment as blog covers (1920px ceiling,
+  // WebP q80); GIFs keep animation and videos pass through untouched.
+  if (uploadType.kind === "image" && file.type !== "image/gif") {
+    try {
+      const { default: sharp } = await import("sharp");
+      const compressed = await sharp(originalBytes)
+        .rotate()
+        .resize({ width: 1920, height: 1920, fit: "inside", withoutEnlargement: true })
+        .webp({ quality: 80 })
+        .toBuffer();
+
+      if (compressed.length < originalBytes.length) {
+        bytes = compressed;
+        finalExtension = ".webp";
+        finalContentType = "image/webp";
+      }
+    } catch {
+      // sharp unavailable or unsupported input — store the original upload.
+    }
+  }
+
+  const fileName = `${safeBaseName(file.name) || "home-media"}-${randomUUID()}${finalExtension}`;
+  const { path: storagePath, publicUrl } = await uploadAdminMedia({
+    origin: "home",
+    bytes,
+    filename: fileName,
+    contentType: finalContentType,
+  });
+
+  const client = getSupabaseAdminClient();
+  const { error: mediaItemError } = await client.from("media_items").insert({
+    id: `home-upload-${randomUUID()}`,
+    title: file.name,
+    type: uploadType.kind,
+    placement: "home builder",
+    asset_hint: "",
+    status: "published",
+    notes: "",
+    storage_bucket: "admin-media",
+    storage_path: storagePath,
+    public_url: publicUrl,
+    mime_type: finalContentType,
+    size_bytes: bytes.length,
+  });
+
+  if (mediaItemError) {
+    // The upload itself succeeded — don't fail the request over the
+    // library-registry insert; the asset just won't show in the picker.
+    console.error("media_items insert failed for home upload:", mediaItemError.message);
+  }
 
   return {
     kind: uploadType.kind,
-    src: `${HOME_UPLOAD_URL_BASE}/${fileName}`,
+    src: publicUrl,
   };
 }

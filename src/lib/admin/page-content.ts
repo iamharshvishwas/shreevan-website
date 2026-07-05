@@ -1,6 +1,5 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
 import { siteConfig } from "@/config/site";
+import { getSupabaseAdminClient } from "@/lib/supabase/client";
 
 export type AdminPageStatus = "draft" | "published" | "archived";
 
@@ -34,7 +33,6 @@ export type AdminPageContentStore = {
   updatedAt: string;
 };
 
-const PAGE_CONTENT_PATH = join(process.cwd(), "data", "admin", "page-content.json");
 
 export const defaultAdminPageContent: AdminPageContentStore = {
   updatedAt: "2026-06-21T00:00:00.000Z",
@@ -289,18 +287,39 @@ export function normalizeAdminPageContent(value: unknown): AdminPageContentStore
   };
 }
 
+function rowToManagedPage(row: Record<string, unknown>): unknown {
+  return {
+    id: row.id,
+    title: row.title,
+    path: row.path,
+    template: row.template,
+    status: row.status,
+    connected: row.connected,
+    seo: row.seo,
+    hero: row.hero,
+    notes: row.notes,
+  };
+}
+
 export async function readAdminPageContent() {
-  try {
-    const file = await readFile(PAGE_CONTENT_PATH, "utf8");
+  const client = getSupabaseAdminClient();
+  const { data, error } = await client.from("managed_pages").select("*");
 
-    return normalizeAdminPageContent(JSON.parse(file));
-  } catch (error) {
-    if (isRecord(error) && error.code === "ENOENT") {
-      return defaultAdminPageContent;
-    }
-
-    throw error;
+  if (error) {
+    throw new Error(`readAdminPageContent: ${error.message}`);
   }
+
+  if (!data?.length) {
+    return defaultAdminPageContent;
+  }
+
+  return normalizeAdminPageContent({
+    pages: data.map(rowToManagedPage),
+    updatedAt: data.reduce(
+      (latest, row) => (typeof row.updated_at === "string" && row.updated_at > latest ? row.updated_at : latest),
+      "",
+    ),
+  });
 }
 
 export async function writeAdminPageContent(value: unknown) {
@@ -309,8 +328,35 @@ export async function writeAdminPageContent(value: unknown) {
     updatedAt: new Date().toISOString(),
   };
 
-  await mkdir(dirname(PAGE_CONTENT_PATH), { recursive: true });
-  await writeFile(PAGE_CONTENT_PATH, `${JSON.stringify(pageContent, null, 2)}\n`, "utf8");
+  const client = getSupabaseAdminClient();
+  const rows = pageContent.pages.map((page) => ({
+    id: page.id,
+    title: page.title,
+    path: page.path,
+    template: page.template,
+    status: page.status,
+    connected: page.connected,
+    seo: page.seo,
+    hero: page.hero,
+    notes: page.notes,
+    updated_at: pageContent.updatedAt,
+  }));
+
+  const { error: upsertError } = await client.from("managed_pages").upsert(rows, { onConflict: "id" });
+
+  if (upsertError) {
+    throw new Error(`managed_pages upsert failed: ${upsertError.message}`);
+  }
+
+  const keepIds = rows.map((row) => row.id);
+  const { error: deleteError } = await client
+    .from("managed_pages")
+    .delete()
+    .not("id", "in", `(${keepIds.join(",")})`);
+
+  if (deleteError) {
+    throw new Error(`managed_pages cleanup failed: ${deleteError.message}`);
+  }
 
   return pageContent;
 }

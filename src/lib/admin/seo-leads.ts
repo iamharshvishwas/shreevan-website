@@ -1,6 +1,5 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
 import { randomUUID } from "node:crypto";
+import { getSupabaseAdminClient } from "@/lib/supabase/client";
 
 export type AdminSeoQaStatus = "ready" | "needs-review" | "blocked";
 export type AdminLeadStatus = "new" | "reviewed" | "contacted" | "closed";
@@ -59,7 +58,6 @@ export type AdminSeoLeadsStore = {
 
 export type AdminLeadInput = Partial<Omit<AdminLead, "id" | "status" | "createdAt">>;
 
-const SEO_LEADS_PATH = join(process.cwd(), "data", "admin", "seo-leads.json");
 
 export const defaultAdminSeoLeads: AdminSeoLeadsStore = {
   updatedAt: "2026-06-21T00:00:00.000Z",
@@ -581,18 +579,97 @@ export function normalizeAdminSeoLeads(value: unknown): AdminSeoLeadsStore {
   };
 }
 
+function rowToSeoRoute(row: Record<string, unknown>): unknown {
+  return {
+    id: row.id,
+    label: row.label,
+    path: row.path,
+    intent: row.intent,
+    indexable: row.indexable,
+    sitemapEnabled: row.sitemap_enabled,
+    priority: row.priority,
+    changeFrequency: row.change_frequency,
+    focusKeyword: row.focus_keyword,
+    qaStatus: row.qa_status,
+    notes: row.notes,
+    lastReviewedAt: row.last_reviewed_at,
+  };
+}
+
+function rowToLead(row: Record<string, unknown>): unknown {
+  return {
+    id: row.id,
+    source: row.source,
+    status: row.status,
+    name: row.name,
+    email: row.email,
+    phone: row.phone,
+    country: row.country,
+    program: row.program,
+    topic: row.topic,
+    message: row.message,
+    goal: row.goal,
+    dates: row.dates,
+    season: row.season,
+    health: row.health,
+    consent: row.consent,
+    createdAt: row.created_at,
+  };
+}
+
+function leadRoutingToRow(routing: AdminLeadRouting, updatedAt: string) {
+  return {
+    id: "singleton",
+    inbox_email: routing.inboxEmail,
+    lead_owner: routing.leadOwner,
+    response_sla: routing.responseSla,
+    crm_stage: routing.crmStage,
+    whatsapp_escalation: routing.whatsappEscalation,
+    qualification_checklist: routing.qualificationChecklist,
+    updated_at: updatedAt,
+  };
+}
+
 export async function readAdminSeoLeads() {
-  try {
-    const file = await readFile(SEO_LEADS_PATH, "utf8");
+  const client = getSupabaseAdminClient();
 
-    return normalizeAdminSeoLeads(JSON.parse(file));
-  } catch (error) {
-    if (isRecord(error) && error.code === "ENOENT") {
-      return defaultAdminSeoLeads;
-    }
+  const [routesRes, routingRes, leadsRes] = await Promise.all([
+    client.from("seo_routes").select("*"),
+    client.from("lead_routing").select("*").eq("id", "singleton").maybeSingle(),
+    client.from("leads").select("*").order("created_at", { ascending: false }),
+  ]);
 
-    throw error;
+  if (routesRes.error) {
+    throw new Error(`readAdminSeoLeads routes: ${routesRes.error.message}`);
   }
+  if (routingRes.error) {
+    throw new Error(`readAdminSeoLeads routing: ${routingRes.error.message}`);
+  }
+  if (leadsRes.error) {
+    throw new Error(`readAdminSeoLeads leads: ${leadsRes.error.message}`);
+  }
+
+  if (!routesRes.data?.length && !routingRes.data) {
+    return defaultAdminSeoLeads;
+  }
+
+  const routing = routingRes.data;
+
+  return normalizeAdminSeoLeads({
+    routes: (routesRes.data ?? []).map(rowToSeoRoute),
+    leadRouting: routing
+      ? {
+          inboxEmail: routing.inbox_email,
+          leadOwner: routing.lead_owner,
+          responseSla: routing.response_sla,
+          crmStage: routing.crm_stage,
+          whatsappEscalation: routing.whatsapp_escalation,
+          qualificationChecklist: routing.qualification_checklist,
+        }
+      : undefined,
+    leads: (leadsRes.data ?? []).map(rowToLead),
+    updatedAt: routing?.updated_at ?? defaultAdminSeoLeads.updatedAt,
+  });
 }
 
 export async function writeAdminSeoLeads(value: unknown) {
@@ -601,26 +678,85 @@ export async function writeAdminSeoLeads(value: unknown) {
     updatedAt: new Date().toISOString(),
   };
 
-  await mkdir(dirname(SEO_LEADS_PATH), { recursive: true });
-  await writeFile(SEO_LEADS_PATH, `${JSON.stringify(seoLeads, null, 2)}\n`, "utf8");
+  const client = getSupabaseAdminClient();
 
+  const routeRows = seoLeads.routes.map((route) => ({
+    id: route.id,
+    label: route.label,
+    path: route.path,
+    intent: route.intent,
+    indexable: route.indexable,
+    sitemap_enabled: route.sitemapEnabled,
+    priority: route.priority,
+    change_frequency: route.changeFrequency,
+    focus_keyword: route.focusKeyword,
+    qa_status: route.qaStatus,
+    notes: route.notes,
+    last_reviewed_at: route.lastReviewedAt,
+    updated_at: seoLeads.updatedAt,
+  }));
+
+  const { error: routesUpsertError } = await client.from("seo_routes").upsert(routeRows, { onConflict: "id" });
+
+  if (routesUpsertError) {
+    throw new Error(`seo_routes upsert failed: ${routesUpsertError.message}`);
+  }
+
+  const keepRouteIds = routeRows.map((row) => row.id);
+  const { error: routesDeleteError } = await client
+    .from("seo_routes")
+    .delete()
+    .not("id", "in", `(${keepRouteIds.join(",")})`);
+
+  if (routesDeleteError) {
+    throw new Error(`seo_routes cleanup failed: ${routesDeleteError.message}`);
+  }
+
+  const { error: routingError } = await client
+    .from("lead_routing")
+    .upsert(leadRoutingToRow(seoLeads.leadRouting, seoLeads.updatedAt), { onConflict: "id" });
+
+  if (routingError) {
+    throw new Error(`lead_routing upsert failed: ${routingError.message}`);
+  }
+
+  // Leads are append-only via appendAdminLead(); this writer intentionally
+  // does NOT touch the leads table, so a routes/routing save from the SEO
+  // panel can never drop captured leads.
   return seoLeads;
 }
 
 export async function appendAdminLead(value: AdminLeadInput) {
-  const current = await readAdminSeoLeads();
   const lead = normalizeLead({
     ...value,
     id: randomUUID(),
     status: "new",
     createdAt: new Date().toISOString(),
   });
-  const seoLeads = {
-    ...current,
-    leads: [lead, ...current.leads],
-  };
 
-  await writeAdminSeoLeads(seoLeads);
+  const client = getSupabaseAdminClient();
+  const { error } = await client.from("leads").insert({
+    id: lead.id,
+    source: lead.source,
+    status: lead.status,
+    name: lead.name,
+    email: lead.email,
+    phone: lead.phone,
+    country: lead.country,
+    program: lead.program,
+    topic: lead.topic,
+    message: lead.message,
+    goal: lead.goal,
+    dates: lead.dates,
+    season: lead.season,
+    health: lead.health,
+    consent: lead.consent,
+    created_at: lead.createdAt,
+  });
+
+  if (error) {
+    throw new Error(`appendAdminLead: ${error.message}`);
+  }
 
   return lead;
 }
