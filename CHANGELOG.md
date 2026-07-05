@@ -148,3 +148,14 @@ All audit-loop fixes are logged here. Format per AUDIT_LOOP.md: what was wrong, 
 5. **Image compression on upload** — blog uploads now resize to a 1920px ceiling and re-encode as WebP q80 via sharp (GIFs untouched; falls back to original bytes on failure). Verified: 2.7MB 3000px JPEG → 544KB WebP.
 6. **Author E-E-A-T profiles** — `src/lib/content/authors.ts` (factual bios, no invented credentials); author byline box on articles; BlogPosting author is now a Person (name + jobTitle + worksFor Organization).
 - **Verified:** gates clean; public page shows TOC with working anchor ids, FAQ section, FAQPage + Person schemas, author box; admin checklist gives accurate pass/fail against real content; linked-state detection correct; upload compression measured. Test content reverted.
+
+### 2026-07-05 — ARCH-01 resolved for Blog/Content: Supabase cutover live
+Migrated `content-trust.ts` (blog/journal, FAQs, story slots, media items) from `data/admin/content-trust.json` to Supabase Postgres. This is the real fix behind ARCH-01, not a workaround — admin saves now persist on Vercel because they go to a real database instead of the read-only deployed filesystem.
+
+- Schema: `supabase/migrations/0001_content_trust_core.sql` (journal_articles, faq_categories, story_slots, media_items, content_trust_lists, article_revisions) + `0002_full_site_modules.sql` (site_settings, home_content, managed_pages, managed_programs, seo_routes, lead_routing, leads — scope expanded to the whole site per Harsh's request; these 5 remaining modules' code cutover is still pending, tracked separately).
+- One-time data import: `scripts/migrate-json-to-supabase.ts` (`npm run migrate:content-trust`) — reuses each module's existing `normalizeAdminXxx()`, row-count-verified per table. Run successfully against the live project.
+- `content-trust.ts` internals rewritten to read/write Postgres; signatures unchanged, zero call-site changes needed. Ephemeral `/tmp` stopgap and its UI banner deleted entirely.
+- `saveAdminBlogCoverUpload` now uploads to a new `admin-media` public Supabase Storage bucket (sharp compression untouched) and registers each upload in `media_items` for future media-library reuse.
+- Revision snapshots: `article_revisions` gets a row only when an article's `updatedAt` actually changed (not on every unrelated store save), pruned to the last 20 per article.
+- `/api/admin/content` (FAQ/story editor) no longer hard-blocks writes on Vercel — fixed as a side effect.
+- Verified end-to-end against the live Supabase project: public page reads, an admin edit confirmed via direct Supabase REST query (bypassing the app), revision-snapshot on/off behavior, a real image upload (WebP, publicly reachable, registry row correct after fixing a `storage_path` bug caught during this test), and the previously-blocked `/api/admin/content` route now returning 200. All test data cleaned up afterward.
