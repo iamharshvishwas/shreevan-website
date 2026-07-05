@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { tmpdir } from "node:os";
-import { dirname, extname, join } from "node:path";
+import { extname } from "node:path";
+import { getSupabaseAdminClient } from "@/lib/supabase/client";
+import { uploadAdminMedia } from "@/lib/supabase/storage";
 
 export type AdminContentStatus = "draft" | "published" | "scheduled" | "archived";
 export type AdminBlogIndexStatus = "index" | "noindex";
@@ -143,19 +143,8 @@ export type AdminContentTrustStore = {
   updatedAt: string;
 };
 
-const CONTENT_TRUST_PATH = join(process.cwd(), "data", "admin", "content-trust.json");
-// On Vercel the deployed bundle (including CONTENT_TRUST_PATH) is read-only, so
-// writes there throw EROFS. /tmp is writable but ephemeral and not shared across
-// serverless instances or across deploys — this is a stopgap for Blog only,
-// not a substitute for real persistent storage (Supabase, Vercel Blob/KV, etc).
-const CONTENT_TRUST_EPHEMERAL_PATH = join(tmpdir(), "shreevan-admin-content-trust.ephemeral.json");
-
-export function isContentTrustStorageEphemeral() {
-  return process.env.VERCEL === "1";
-}
-const BLOG_UPLOAD_DIR = join(process.cwd(), "public", "uploads", "blog");
-const BLOG_UPLOAD_URL_BASE = "/uploads/blog";
 const MAX_BLOG_UPLOAD_BYTES = 12 * 1024 * 1024;
+const REVISIONS_TO_KEEP = 20;
 
 const allowedBlogUploadTypes = new Map([
   ["image/jpeg", ".jpg"],
@@ -1155,43 +1144,368 @@ export function normalizeAdminContentTrust(value: unknown): AdminContentTrustSto
   };
 }
 
-export async function readAdminContentTrust() {
-  if (isContentTrustStorageEphemeral()) {
-    try {
-      const overlay = await readFile(CONTENT_TRUST_EPHEMERAL_PATH, "utf8");
+function rowToJournalArticle(row: Record<string, unknown>): unknown {
+  return {
+    id: row.id,
+    slug: row.slug,
+    category: row.category,
+    categoryId: row.category_id,
+    title: row.title,
+    excerpt: row.excerpt,
+    date: row.date_label,
+    readTime: row.read_time,
+    audience: row.audience,
+    tags: row.tags,
+    keyPoints: row.key_points,
+    focusKeyword: row.focus_keyword,
+    faqs: row.faqs,
+    tocEnabled: row.toc_enabled,
+    content: row.content,
+    contentHtml: row.content_html,
+    body: row.body,
+    blocks: row.blocks,
+    coverMedia: row.cover_media,
+    seoTitle: row.seo_title,
+    seoDescription: row.seo_description,
+    canonicalPath: row.canonical_path,
+    canonicalUrl: row.canonical_url,
+    publishedAt: row.published_at,
+    scheduledAt: row.scheduled_at,
+    indexStatus: row.index_status,
+    authorId: row.author_id,
+    author: row.author,
+    redirectEnabled: row.redirect_enabled,
+    redirectUrl: row.redirect_url,
+    redirectStatusCode: row.redirect_status_code,
+    schemaJson: row.schema_json,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+    relatedHref: row.related_href,
+    relatedLabel: row.related_label,
+    contactLabel: row.contact_label,
+    status: row.status,
+    featured: row.featured,
+  };
+}
 
-      return normalizeAdminContentTrust(JSON.parse(overlay));
-    } catch (error) {
-      if (!(isRecord(error) && error.code === "ENOENT")) {
-        throw error;
-      }
-      // No overlay saved yet in this instance — fall through to the bundled file.
+function rowToFaqCategory(row: Record<string, unknown>): unknown {
+  return { id: row.id, label: row.label, intent: row.intent, status: row.status, faqs: row.faqs };
+}
+
+function rowToStorySlot(row: Record<string, unknown>): unknown {
+  return {
+    id: row.id,
+    label: row.label,
+    title: row.title,
+    context: row.context,
+    proof: row.proof,
+    status: row.status,
+  };
+}
+
+function rowToMediaItem(row: Record<string, unknown>): unknown {
+  return {
+    id: row.id,
+    title: row.title,
+    type: row.type,
+    placement: row.placement,
+    assetHint: row.asset_hint,
+    status: row.status,
+    notes: row.notes,
+  };
+}
+
+function latestUpdatedAt(rows: Array<{ updated_at?: unknown }>) {
+  let latest = "";
+
+  for (const row of rows) {
+    if (typeof row.updated_at === "string" && row.updated_at > latest) {
+      latest = row.updated_at;
     }
   }
 
-  try {
-    const file = await readFile(CONTENT_TRUST_PATH, "utf8");
+  return latest || new Date().toISOString();
+}
 
-    return normalizeAdminContentTrust(JSON.parse(file));
-  } catch (error) {
-    if (isRecord(error) && error.code === "ENOENT") {
-      return defaultAdminContentTrust;
-    }
+async function deleteRowsNotIn(
+  client: ReturnType<typeof getSupabaseAdminClient>,
+  table: string,
+  idColumn: string,
+  keepIds: string[],
+) {
+  const query = client.from(table).delete();
+  const { error } =
+    keepIds.length > 0
+      ? await query.not(idColumn, "in", `(${keepIds.join(",")})`)
+      : await query.not(idColumn, "is", null);
 
-    throw error;
+  if (error) {
+    throw new Error(`${table} cleanup failed: ${error.message}`);
   }
 }
 
-export async function writeAdminContentTrust(value: unknown) {
+export async function readAdminContentTrust(): Promise<AdminContentTrustStore> {
+  const client = getSupabaseAdminClient();
+
+  const [articlesRes, faqRes, storyRes, mediaRes, listsRes] = await Promise.all([
+    client.from("journal_articles").select("*").order("created_at", { ascending: true }),
+    client.from("faq_categories").select("*").order("sort_order", { ascending: true }),
+    client.from("story_slots").select("*").order("sort_order", { ascending: true }),
+    client.from("media_items").select("*"),
+    client.from("content_trust_lists").select("*"),
+  ]);
+
+  for (const result of [articlesRes, faqRes, storyRes, mediaRes, listsRes]) {
+    if (result.error) {
+      throw new Error(`readAdminContentTrust: ${result.error.message}`);
+    }
+  }
+
+  const listsByKey = new Map((listsRes.data ?? []).map((row) => [row.list_key as string, row.items]));
+  const allRows = [
+    ...(articlesRes.data ?? []),
+    ...(faqRes.data ?? []),
+    ...(storyRes.data ?? []),
+    ...(mediaRes.data ?? []),
+    ...(listsRes.data ?? []),
+  ];
+
+  return normalizeAdminContentTrust({
+    journalArticles: (articlesRes.data ?? []).map(rowToJournalArticle),
+    faqCategories: (faqRes.data ?? []).map(rowToFaqCategory),
+    storySlots: (storyRes.data ?? []).map(rowToStorySlot),
+    mediaItems: (mediaRes.data ?? []).map(rowToMediaItem),
+    responsibleStandards: listsByKey.get("responsibleStandards") ?? [],
+    storyTrustMarkers: listsByKey.get("storyTrustMarkers") ?? [],
+    outcomeRows: listsByKey.get("outcomeRows") ?? [],
+    videoSlots: listsByKey.get("videoSlots") ?? [],
+    faqResearchSignals: listsByKey.get("faqResearchSignals") ?? [],
+    consentStandards: listsByKey.get("consentStandards") ?? [],
+    journalCategories: listsByKey.get("journalCategories") ?? [],
+    updatedAt: latestUpdatedAt(allRows),
+  });
+}
+
+// Inserts one revision snapshot per journal article whose updatedAt actually
+// changed in this write, then prunes older snapshots beyond REVISIONS_TO_KEEP.
+// Comparing against the previously stored updatedAt (rather than snapshotting
+// on every write) avoids flooding an article's history when an unrelated save
+// (e.g. an FAQ edit) round-trips the whole content-trust store.
+async function snapshotArticleRevisions(
+  client: ReturnType<typeof getSupabaseAdminClient>,
+  articles: AdminJournalArticle[],
+  previousUpdatedAtById: Map<string, string>,
+) {
+  const changed = articles.filter((article) => previousUpdatedAtById.get(article.id) !== article.updatedAt);
+
+  if (!changed.length) {
+    return;
+  }
+
+  const { error: insertError } = await client
+    .from("article_revisions")
+    .insert(changed.map((article) => ({ article_id: article.id, snapshot: article })));
+
+  if (insertError) {
+    throw new Error(`article_revisions insert failed: ${insertError.message}`);
+  }
+
+  for (const article of changed) {
+    const { data: staleRevisions, error: staleError } = await client
+      .from("article_revisions")
+      .select("id")
+      .eq("article_id", article.id)
+      .order("saved_at", { ascending: false })
+      .range(REVISIONS_TO_KEEP, REVISIONS_TO_KEEP + 100);
+
+    if (staleError) {
+      throw new Error(`article_revisions prune lookup failed: ${staleError.message}`);
+    }
+
+    if (staleRevisions?.length) {
+      const { error: pruneError } = await client
+        .from("article_revisions")
+        .delete()
+        .in(
+          "id",
+          staleRevisions.map((row) => row.id as number),
+        );
+
+      if (pruneError) {
+        throw new Error(`article_revisions prune failed: ${pruneError.message}`);
+      }
+    }
+  }
+}
+
+export async function writeAdminContentTrust(value: unknown): Promise<AdminContentTrustStore> {
+  const client = getSupabaseAdminClient();
+  const now = new Date().toISOString();
   const contentTrust = {
     ...normalizeAdminContentTrust(value),
-    updatedAt: new Date().toISOString(),
+    updatedAt: now,
   };
 
-  const targetPath = isContentTrustStorageEphemeral() ? CONTENT_TRUST_EPHEMERAL_PATH : CONTENT_TRUST_PATH;
+  const { data: previousArticles, error: previousArticlesError } = await client
+    .from("journal_articles")
+    .select("id, updated_at");
 
-  await mkdir(dirname(targetPath), { recursive: true });
-  await writeFile(targetPath, `${JSON.stringify(contentTrust, null, 2)}\n`, "utf8");
+  if (previousArticlesError) {
+    throw new Error(`journal_articles lookup failed: ${previousArticlesError.message}`);
+  }
+
+  const previousUpdatedAtById = new Map(
+    (previousArticles ?? []).map((row) => [row.id as string, row.updated_at as string]),
+  );
+
+  const journalRows = contentTrust.journalArticles.map((article) => ({
+    id: article.id,
+    slug: article.slug || article.id,
+    category: article.category,
+    category_id: article.categoryId || "",
+    title: article.title,
+    excerpt: article.excerpt,
+    date_label: article.date,
+    read_time: article.readTime,
+    audience: article.audience,
+    tags: article.tags,
+    key_points: article.keyPoints,
+    focus_keyword: article.focusKeyword ?? "",
+    faqs: article.faqs ?? [],
+    toc_enabled: article.tocEnabled ?? true,
+    content: article.content ?? "",
+    content_html: article.contentHtml ?? "",
+    body: article.body ?? [],
+    blocks: article.blocks ?? [],
+    cover_media: article.coverMedia ?? {},
+    seo_title: article.seoTitle ?? "",
+    seo_description: article.seoDescription ?? "",
+    canonical_path: article.canonicalPath ?? "",
+    canonical_url: article.canonicalUrl ?? "",
+    published_at: article.publishedAt || null,
+    scheduled_at: article.scheduledAt || null,
+    index_status: article.indexStatus ?? "index",
+    author_id: article.authorId ?? "admin",
+    author: article.author ?? "Shreevan Wellness",
+    redirect_enabled: article.redirectEnabled ?? false,
+    redirect_url: article.redirectUrl ?? "",
+    redirect_status_code: article.redirectStatusCode ?? 301,
+    schema_json: article.schemaJson ?? "",
+    related_href: article.relatedHref,
+    related_label: article.relatedLabel,
+    contact_label: article.contactLabel,
+    status: article.status,
+    featured: article.featured,
+    created_at: article.createdAt || now,
+    updated_at: article.updatedAt || now,
+  }));
+
+  const { error: journalUpsertError } = await client.from("journal_articles").upsert(journalRows, { onConflict: "id" });
+
+  if (journalUpsertError) {
+    throw new Error(`journal_articles upsert failed: ${journalUpsertError.message}`);
+  }
+
+  await deleteRowsNotIn(
+    client,
+    "journal_articles",
+    "id",
+    journalRows.map((row) => row.id),
+  );
+
+  await snapshotArticleRevisions(client, contentTrust.journalArticles, previousUpdatedAtById);
+
+  const faqRows = contentTrust.faqCategories.map((category, index) => ({
+    id: category.id,
+    label: category.label,
+    intent: category.intent,
+    status: category.status,
+    faqs: category.faqs,
+    sort_order: index,
+  }));
+
+  const { error: faqUpsertError } = await client.from("faq_categories").upsert(faqRows, { onConflict: "id" });
+
+  if (faqUpsertError) {
+    throw new Error(`faq_categories upsert failed: ${faqUpsertError.message}`);
+  }
+
+  await deleteRowsNotIn(
+    client,
+    "faq_categories",
+    "id",
+    faqRows.map((row) => row.id),
+  );
+
+  const storyRows = contentTrust.storySlots.map((slot, index) => ({
+    id: slot.id,
+    label: slot.label,
+    title: slot.title,
+    context: slot.context,
+    proof: slot.proof,
+    status: slot.status,
+    sort_order: index,
+  }));
+
+  const { error: storyUpsertError } = await client.from("story_slots").upsert(storyRows, { onConflict: "id" });
+
+  if (storyUpsertError) {
+    throw new Error(`story_slots upsert failed: ${storyUpsertError.message}`);
+  }
+
+  await deleteRowsNotIn(
+    client,
+    "story_slots",
+    "id",
+    storyRows.map((row) => row.id),
+  );
+
+  // media_items: intentionally omits storage_*/mime_type/etc columns so this
+  // upsert never clobbers metadata the media-library upload flow set on an
+  // existing row — Postgres upsert only overwrites columns present in the
+  // payload.
+  const mediaRows = contentTrust.mediaItems.map((item) => ({
+    id: item.id,
+    title: item.title,
+    type: item.type,
+    placement: item.placement,
+    asset_hint: item.assetHint,
+    status: item.status,
+    notes: item.notes,
+  }));
+
+  const { error: mediaUpsertError } = await client.from("media_items").upsert(mediaRows, { onConflict: "id" });
+
+  if (mediaUpsertError) {
+    throw new Error(`media_items upsert failed: ${mediaUpsertError.message}`);
+  }
+
+  await deleteRowsNotIn(
+    client,
+    "media_items",
+    "id",
+    mediaRows.map((row) => row.id),
+  );
+
+  const listRows = (
+    [
+      "responsibleStandards",
+      "storyTrustMarkers",
+      "outcomeRows",
+      "videoSlots",
+      "faqResearchSignals",
+      "consentStandards",
+      "journalCategories",
+    ] as const
+  ).map((key) => ({ list_key: key, items: contentTrust[key] }));
+
+  const { error: listsUpsertError } = await client
+    .from("content_trust_lists")
+    .upsert(listRows, { onConflict: "list_key" });
+
+  if (listsUpsertError) {
+    throw new Error(`content_trust_lists upsert failed: ${listsUpsertError.message}`);
+  }
 
   return contentTrust;
 }
@@ -1219,6 +1533,7 @@ export async function saveAdminBlogCoverUpload(file: {
   const originalBytes = Buffer.from(await file.arrayBuffer());
   let bytes = originalBytes;
   let finalExtension = extension;
+  let finalContentType = file.type;
 
   // Compress on upload: resize to a 1920px ceiling and re-encode as WebP q80.
   // GIFs are kept as-is (animation); if compression fails or doesn't help,
@@ -1235,6 +1550,7 @@ export async function saveAdminBlogCoverUpload(file: {
       if (compressed.length < originalBytes.length) {
         bytes = compressed;
         finalExtension = ".webp";
+        finalContentType = "image/webp";
       }
     } catch {
       // sharp unavailable or unsupported input — store the original upload.
@@ -1242,12 +1558,37 @@ export async function saveAdminBlogCoverUpload(file: {
   }
 
   const fileName = `${safeBaseName(file.name) || "blog-cover"}-${randomUUID()}${finalExtension}`;
+  const { path: storagePath, publicUrl } = await uploadAdminMedia({
+    origin: "blog",
+    bytes,
+    filename: fileName,
+    contentType: finalContentType,
+  });
 
-  await mkdir(BLOG_UPLOAD_DIR, { recursive: true });
-  await writeFile(join(BLOG_UPLOAD_DIR, fileName), bytes);
+  const client = getSupabaseAdminClient();
+  const { error: mediaItemError } = await client.from("media_items").insert({
+    id: `blog-upload-${randomUUID()}`,
+    title: file.name,
+    type: "image",
+    placement: "blog cover/inline",
+    asset_hint: "",
+    status: "published",
+    notes: "",
+    storage_bucket: "admin-media",
+    storage_path: storagePath,
+    public_url: publicUrl,
+    mime_type: finalContentType,
+    size_bytes: bytes.length,
+  });
+
+  if (mediaItemError) {
+    // The upload itself succeeded — don't fail the whole request over the
+    // library-registry insert, just skip making this upload reusable via the picker.
+    console.error("media_items insert failed for blog upload:", mediaItemError.message);
+  }
 
   return {
     kind: "image" as const,
-    src: `${BLOG_UPLOAD_URL_BASE}/${fileName}`,
+    src: publicUrl,
   };
 }

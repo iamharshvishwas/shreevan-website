@@ -1,16 +1,9 @@
 import { NextResponse } from "next/server";
 import { isAdminRequestAuthorized } from "@/lib/admin/auth";
-import { isContentTrustStorageEphemeral, readAdminContentTrust, writeAdminContentTrust } from "@/lib/admin/content-trust";
+import { readAdminContentTrust, writeAdminContentTrust } from "@/lib/admin/content-trust";
 import type { AdminJournalArticle } from "@/lib/admin/content-trust";
 
 export const runtime = "nodejs";
-
-const EPHEMERAL_WARNING =
-  "Saved, but only for this server instance. This deployment has no persistent storage yet — the post can vanish without warning on restart/redeploy, and other visitors may not see it. Copy this content somewhere safe.";
-
-function ephemeralFields() {
-  return isContentTrustStorageEphemeral() ? { ephemeral: true, warning: EPHEMERAL_WARNING } : {};
-}
 
 type BlogArticleRouteProps = {
   params: Promise<{
@@ -100,7 +93,6 @@ export async function PATCH(request: Request, { params }: BlogArticleRouteProps)
         journalArticles: contentTrust.journalArticles,
         updatedAt: contentTrust.updatedAt,
       },
-      ...ephemeralFields(),
     });
   } catch {
     return NextResponse.json({ error: "Blog article could not be updated." }, { status: 500 });
@@ -139,7 +131,6 @@ export async function DELETE(request: Request, { params }: BlogArticleRouteProps
         journalArticles: contentTrust.journalArticles,
         updatedAt: contentTrust.updatedAt,
       },
-      ...ephemeralFields(),
     });
   } catch {
     return NextResponse.json({ error: "Blog article could not be archived." }, { status: 500 });

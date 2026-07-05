@@ -491,7 +491,6 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
   const [saveState, setSaveState] = useState<SaveState>("idle");
   const [uploadState, setUploadState] = useState<UploadState>("idle");
   const [message, setMessage] = useState("");
-  const [ephemeralWarning, setEphemeralWarning] = useState("");
   const [backupPrompt, setBackupPrompt] = useState<{ savedAt: number } | null>(null);
 
   const categories = useMemo(() => blog.journalCategories.filter((category) => category !== "All"), [blog.journalCategories]);
@@ -799,14 +798,12 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
     setView("editor");
     setSaveState("idle");
     setMessage("New blog draft created.");
-    setEphemeralWarning("");
   }
 
   function handleEditArticle(article: AdminJournalArticle) {
     setActiveArticleId(article.id);
     setView("editor");
     setMessage("");
-    setEphemeralWarning("");
   }
 
   function handleTitleChange(title: string) {
@@ -880,9 +877,7 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
       },
       body: JSON.stringify(preparedBlog),
     });
-    const body = (await response.json().catch(() => null)) as
-      | { blog?: AdminBlogStore; error?: string; ephemeral?: boolean; warning?: string }
-      | null;
+    const body = (await response.json().catch(() => null)) as { blog?: AdminBlogStore; error?: string } | null;
 
     if (!response.ok || !body?.blog) {
       setSaveState("error");
@@ -898,8 +893,7 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
         "",
     );
     setSaveState("saved");
-    setEphemeralWarning(body.ephemeral ? body.warning ?? "" : "");
-    setMessage(body.ephemeral ? "" : "Blog content saved.");
+    setMessage("Blog content saved.");
 
     try {
       window.localStorage.removeItem(BLOG_BACKUP_STORAGE_KEY);
@@ -1034,7 +1028,6 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
     setView("list");
     setSaveState("idle");
     setMessage("Unsaved blog changes reverted.");
-    setEphemeralWarning("");
   }
 
   function renderBlockEditor(block: AdminBlogBlock, index: number) {
@@ -1141,22 +1134,6 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
 
   return (
     <main className="admin-dashboard admin-settings-page admin-blog-page" aria-labelledby="admin-blog-title">
-      {ephemeralWarning ? (
-        <div
-          role="alert"
-          style={{
-            background: "#fff3cd",
-            border: "2px solid #b58b3a",
-            borderRadius: 8,
-            padding: "12px 16px",
-            fontWeight: 600,
-            color: "#5c3d0e",
-          }}
-        >
-          ⚠ Temporary save: {ephemeralWarning}
-        </div>
-      ) : null}
-
       {backupPrompt ? (
         <div className="admin-blog-backup-banner" role="alert">
           <div>
