@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { Eye, EyeOff } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { FormEvent, useMemo, useState } from "react";
 import { siteConfig } from "@/config/site";
@@ -9,6 +10,7 @@ export function AdminLoginForm() {
   const searchParams = useSearchParams();
   const [status, setStatus] = useState<"idle" | "submitting" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const nextPath = useMemo(() => {
     const requestedPath = searchParams.get("next");
@@ -79,7 +81,23 @@ export function AdminLoginForm() {
           </label>
           <label>
             <span>Password</span>
-            <input name="password" type="password" autoComplete="current-password" required />
+            <div className="admin-password-field">
+              <input
+                name="password"
+                type={showPassword ? "text" : "password"}
+                autoComplete="current-password"
+                required
+              />
+              <button
+                type="button"
+                className="admin-password-toggle"
+                onClick={() => setShowPassword((current) => !current)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                aria-pressed={showPassword}
+              >
+                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+              </button>
+            </div>
           </label>
 
           <button className="admin-primary-button" type="submit" disabled={status === "submitting"}>
