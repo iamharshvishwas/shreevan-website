@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 import { extname } from "node:path";
 import { getSupabaseAdminClient } from "@/lib/supabase/client";
 import { uploadAdminMedia } from "@/lib/supabase/storage";
+import { CACHE_TAGS, revalidatePublicContent } from "@/lib/site/content-cache";
 
 export type AdminHomeMediaKind = "" | "image" | "video";
 
@@ -792,6 +793,8 @@ export async function writeAdminHomeContent(value: unknown) {
   if (error) {
     throw new Error(`writeAdminHomeContent: ${error.message}`);
   }
+
+  await revalidatePublicContent(CACHE_TAGS.home);
 
   return homeContent;
 }

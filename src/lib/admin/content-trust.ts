@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 import { extname } from "node:path";
 import { getSupabaseAdminClient } from "@/lib/supabase/client";
 import { uploadAdminMedia } from "@/lib/supabase/storage";
+import { CACHE_TAGS, revalidatePublicContent } from "@/lib/site/content-cache";
 
 export type AdminContentStatus = "draft" | "published" | "scheduled" | "archived";
 export type AdminBlogIndexStatus = "index" | "noindex";
@@ -1506,6 +1507,8 @@ export async function writeAdminContentTrust(value: unknown): Promise<AdminConte
   if (listsUpsertError) {
     throw new Error(`content_trust_lists upsert failed: ${listsUpsertError.message}`);
   }
+
+  await revalidatePublicContent(CACHE_TAGS.contentTrust);
 
   return contentTrust;
 }

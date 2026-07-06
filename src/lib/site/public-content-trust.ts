@@ -1,6 +1,8 @@
 import "server-only";
 
+import { unstable_cache } from "next/cache";
 import { defaultAdminContentTrust, readAdminContentTrust } from "@/lib/admin/content-trust";
+import { CACHE_TAGS } from "@/lib/site/content-cache";
 import type {
   AdminContentTrustStore,
   AdminFaqCategory,
@@ -146,7 +148,8 @@ async function readStoreWithFallback(): Promise<AdminContentTrustStore> {
   return readAdminContentTrust();
 }
 
-export async function getPublicFaqContent(): Promise<PublicFaqContent> {
+export const getPublicFaqContent = unstable_cache(
+  async function getPublicFaqContent(): Promise<PublicFaqContent> {
   const store = await readStoreWithFallback();
   const categories = published(store.faqCategories).map(toFaqCategory).filter((category) => category.faqs.length);
   const fallbackCategories = published(defaultAdminContentTrust.faqCategories)
@@ -161,9 +164,13 @@ export async function getPublicFaqContent(): Promise<PublicFaqContent> {
       published(defaultAdminContentTrust.responsibleStandards).map(toTrustStandard),
     ),
   };
-}
+  },
+  ["public-faq-content"],
+  { tags: [CACHE_TAGS.contentTrust] },
+);
 
-export async function getPublicStoryContent(): Promise<PublicStoryContent> {
+export const getPublicStoryContent = unstable_cache(
+  async function getPublicStoryContent(): Promise<PublicStoryContent> {
   const store = await readStoreWithFallback();
 
   return {
@@ -185,9 +192,13 @@ export async function getPublicStoryContent(): Promise<PublicStoryContent> {
     ),
     consentStandards: fallbackIfEmpty(store.consentStandards, defaultAdminContentTrust.consentStandards),
   };
-}
+  },
+  ["public-story-content"],
+  { tags: [CACHE_TAGS.contentTrust] },
+);
 
-export async function getPublicJournalContent(): Promise<PublicJournalContent> {
+export const getPublicJournalContent = unstable_cache(
+  async function getPublicJournalContent(): Promise<PublicJournalContent> {
   const store = await readStoreWithFallback();
   const articles = publicJournalArticles(store.journalArticles).map(toPublicJournalArticle);
   const fallbackArticles = publicJournalArticles(defaultAdminContentTrust.journalArticles).map(toPublicJournalArticle);
@@ -201,7 +212,10 @@ export async function getPublicJournalContent(): Promise<PublicJournalContent> {
     articles: sourceArticles,
     editorPicks: fallbackIfEmpty(featuredArticleIds, defaultAdminContentTrust.journalArticles.filter((article) => article.featured).map((article) => article.id)),
   };
-}
+  },
+  ["public-journal-content"],
+  { tags: [CACHE_TAGS.contentTrust] },
+);
 
 export function faqPageSchema(categories: PublicFaqCategory[]) {
   return {

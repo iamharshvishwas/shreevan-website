@@ -1,5 +1,6 @@
 import { siteConfig } from "@/config/site";
 import { getSupabaseAdminClient } from "@/lib/supabase/client";
+import { CACHE_TAGS, revalidatePublicContent } from "@/lib/site/content-cache";
 
 export type AdminProgramStatus = "draft" | "published" | "archived";
 
@@ -395,6 +396,8 @@ export async function writeAdminProgramContent(value: unknown) {
   if (deleteError) {
     throw new Error(`managed_programs cleanup failed: ${deleteError.message}`);
   }
+
+  await revalidatePublicContent(CACHE_TAGS.programs);
 
   return programContent;
 }

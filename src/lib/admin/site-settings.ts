@@ -1,6 +1,7 @@
 import { coreRoutes, modalityRoutes, programRoutes, utilityRoutes } from "@/config/routes";
 import { siteConfig } from "@/config/site";
 import { getSupabaseAdminClient } from "@/lib/supabase/client";
+import { CACHE_TAGS, revalidatePublicContent } from "@/lib/site/content-cache";
 
 export type AdminNavLink = {
   id: string;
@@ -333,6 +334,8 @@ export async function writeAdminSiteSettings(value: unknown) {
   if (error) {
     throw new Error(`writeAdminSiteSettings: ${error.message}`);
   }
+
+  await revalidatePublicContent(CACHE_TAGS.settings);
 
   return settings;
 }

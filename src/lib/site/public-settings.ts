@@ -1,7 +1,9 @@
 import "server-only";
 
+import { unstable_cache } from "next/cache";
 import type { AdminFooterColumn, AdminNavLink } from "@/lib/admin/site-settings";
 import { readAdminSiteSettings } from "@/lib/admin/site-settings";
+import { CACHE_TAGS } from "@/lib/site/content-cache";
 import { defaultPublicSiteSettings } from "@/lib/site/public-settings-defaults";
 import type { PublicFooterColumn, PublicNavLink, PublicSiteSettings } from "@/lib/site/public-settings-types";
 
@@ -49,7 +51,8 @@ export function getPublicSiteOrigin(settings: PublicSiteSettings) {
   return settings.brand.primaryDomain.replace(/\/+$/, "") || defaultPublicSiteSettings.brand.primaryDomain;
 }
 
-export async function getPublicSiteSettings(): Promise<PublicSiteSettings> {
+export const getPublicSiteSettings = unstable_cache(
+  async function getPublicSiteSettings(): Promise<PublicSiteSettings> {
   const settings = await readAdminSiteSettings();
   const headerItems = settings.navigation.headerItems
     .map(publicLink)
@@ -93,4 +96,7 @@ export async function getPublicSiteSettings(): Promise<PublicSiteSettings> {
       footerColumns,
     },
   };
-}
+  },
+  ["public-site-settings"],
+  { tags: [CACHE_TAGS.settings] },
+);

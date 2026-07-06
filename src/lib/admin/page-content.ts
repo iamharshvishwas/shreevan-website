@@ -1,5 +1,6 @@
 import { siteConfig } from "@/config/site";
 import { getSupabaseAdminClient } from "@/lib/supabase/client";
+import { CACHE_TAGS, revalidatePublicContent } from "@/lib/site/content-cache";
 
 export type AdminPageStatus = "draft" | "published" | "archived";
 
@@ -357,6 +358,8 @@ export async function writeAdminPageContent(value: unknown) {
   if (deleteError) {
     throw new Error(`managed_pages cleanup failed: ${deleteError.message}`);
   }
+
+  await revalidatePublicContent(CACHE_TAGS.pages);
 
   return pageContent;
 }

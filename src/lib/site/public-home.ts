@@ -1,5 +1,7 @@
 import "server-only";
 
+import { unstable_cache } from "next/cache";
+import { CACHE_TAGS } from "@/lib/site/content-cache";
 import { defaultAdminHomeContent, readAdminHomeContent } from "@/lib/admin/home-content";
 import type {
   AdminHomeContentStore,
@@ -167,8 +169,12 @@ function toPublicHomeContent(store: AdminHomeContentStore, fallback: AdminHomeCo
   };
 }
 
-export async function getPublicHomeContent() {
-  const store = await readAdminHomeContent();
+export const getPublicHomeContent = unstable_cache(
+  async function getPublicHomeContent() {
+    const store = await readAdminHomeContent();
 
-  return toPublicHomeContent(store, defaultAdminHomeContent);
-}
+    return toPublicHomeContent(store, defaultAdminHomeContent);
+  },
+  ["public-home-content"],
+  { tags: [CACHE_TAGS.home] },
+);

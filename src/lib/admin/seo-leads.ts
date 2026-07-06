@@ -1,5 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { getSupabaseAdminClient } from "@/lib/supabase/client";
+import { CACHE_TAGS, revalidatePublicContent } from "@/lib/site/content-cache";
 
 export type AdminSeoQaStatus = "ready" | "needs-review" | "blocked";
 export type AdminLeadStatus = "new" | "reviewed" | "contacted" | "closed";
@@ -719,6 +720,8 @@ export async function writeAdminSeoLeads(value: unknown) {
   if (routingError) {
     throw new Error(`lead_routing upsert failed: ${routingError.message}`);
   }
+
+  await revalidatePublicContent(CACHE_TAGS.seo);
 
   // Leads are append-only via appendAdminLead(); this writer intentionally
   // does NOT touch the leads table, so a routes/routing save from the SEO

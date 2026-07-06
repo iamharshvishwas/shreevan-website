@@ -1,7 +1,9 @@
 import "server-only";
 
+import { unstable_cache } from "next/cache";
 import { readAdminPageContent } from "@/lib/admin/page-content";
 import type { AdminManagedPage } from "@/lib/admin/page-content";
+import { CACHE_TAGS } from "@/lib/site/content-cache";
 import type { PublicManagedPageContent } from "@/lib/site/public-pages-types";
 
 function cleanText(value: string, fallback: string) {
@@ -33,10 +35,14 @@ function toPublicPage(page: AdminManagedPage, fallback: AdminManagedPage): Publi
   };
 }
 
-export async function getPublicPageContent(pageId: string) {
-  const store = await readAdminPageContent();
-  const fallback = store.pages.find((page) => page.id === pageId) ?? store.pages[0];
-  const page = store.pages.find((item) => item.id === pageId) ?? fallback;
+export const getPublicPageContent = unstable_cache(
+  async function getPublicPageContent(pageId: string) {
+    const store = await readAdminPageContent();
+    const fallback = store.pages.find((page) => page.id === pageId) ?? store.pages[0];
+    const page = store.pages.find((item) => item.id === pageId) ?? fallback;
 
-  return toPublicPage(page, fallback);
-}
+    return toPublicPage(page, fallback);
+  },
+  ["public-page-content"],
+  { tags: [CACHE_TAGS.pages] },
+);

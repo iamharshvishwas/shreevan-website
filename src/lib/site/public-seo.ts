@@ -1,6 +1,8 @@
 import "server-only";
 
+import { unstable_cache } from "next/cache";
 import { readAdminSeoLeads } from "@/lib/admin/seo-leads";
+import { CACHE_TAGS } from "@/lib/site/content-cache";
 import { getPublicJournalContent } from "@/lib/site/public-content-trust";
 
 function toSitemapDate(date: string) {
@@ -9,7 +11,8 @@ function toSitemapDate(date: string) {
   return Number.isNaN(parsed.getTime()) ? "2026-06-26" : parsed.toISOString();
 }
 
-export async function getPublicSitemapRoutes() {
+export const getPublicSitemapRoutes = unstable_cache(
+  async function getPublicSitemapRoutes() {
   const [store, journalContent] = await Promise.all([readAdminSeoLeads(), getPublicJournalContent()]);
 
   const configuredRoutes = store.routes
@@ -32,4 +35,7 @@ export async function getPublicSitemapRoutes() {
     .filter((route) => !configuredHrefs.has(route.href));
 
   return [...configuredRoutes, ...journalRoutes];
-}
+  },
+  ["public-sitemap-routes"],
+  { tags: [CACHE_TAGS.seo, CACHE_TAGS.contentTrust] },
+);
