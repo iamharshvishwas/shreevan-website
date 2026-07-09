@@ -52,6 +52,21 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        // RFC 8288 Web Linking: advertise the machine-readable, full-content
+        // representations of the site for AI agents/crawlers. rel="alternate"
+        // is the honest, IANA-registered relation here -- this site has no
+        // public API, so an "api-catalog"/"service-doc" relation would be
+        // inaccurate rather than genuinely useful.
+        source: "/",
+        headers: [
+          {
+            key: "Link",
+            value:
+              '</llms-full.txt>; rel="alternate"; type="text/plain", </llms.txt>; rel="alternate"; type="text/plain"',
+          },
+        ],
+      },
     ];
   },
   async redirects() {
