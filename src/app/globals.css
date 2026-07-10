@@ -1090,17 +1090,25 @@ main [id] { scroll-margin-top: 132px; }
 .faq-final-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-end; }
 
 .site-footer { padding-block: 72px; border-top: 1px solid rgba(211, 224, 216, 0.2); background: #102a23; color: rgba(232, 240, 236, 0.76); }
-.footer-grid { display: grid; grid-template-columns: minmax(220px, 1.2fr) minmax(160px, 0.75fr) minmax(190px, 0.9fr) minmax(190px, 0.9fr) minmax(170px, 0.8fr); gap: 36px; }
+.footer-grid { display: grid; grid-template-columns: minmax(230px, 0.85fr) minmax(150px, 0.58fr) minmax(210px, 0.78fr) minmax(250px, 0.94fr) minmax(260px, 0.95fr); gap: 34px; align-items: start; }
 .site-footer img { width: 160px; border-radius: 14px; }
 .site-footer p { margin-top: 22px; color: var(--white); font-family: var(--font-heading); font-size: clamp(2rem, 3vw, 3rem); line-height: 1.15; }
 .site-footer h2 { margin: 0 0 18px; color: var(--white); font-family: var(--font-body); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
 .site-footer a, .site-footer span { display: block; margin-top: 12px; color: rgba(232, 240, 236, 0.76); font-size: 0.95rem; text-decoration: none; }
 .site-footer a:hover { color: var(--white); }
-.footer-stack { display: grid; gap: 30px; }
-.footer-social-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.footer-brand-block { max-width: 280px; }
+.footer-stack { display: grid; gap: 28px; }
+.footer-contact-block { max-width: 100%; }
+.footer-contact-block a { width: fit-content; max-width: 100%; overflow-wrap: anywhere; line-height: 1.45; }
+.footer-social-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; max-width: 250px; }
 .site-footer .footer-social-link { display: inline-flex; width: 38px; height: 38px; align-items: center; justify-content: center; margin: 0; border: 1px solid rgba(211, 224, 216, 0.35); border-radius: 999px; color: var(--white); transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease; }
 .site-footer .footer-social-link:hover { border-color: var(--gold-500); background: var(--gold-500); color: var(--forest-900); transform: translateY(-2px); }
 .site-footer .footer-social-link:focus-visible { outline: 3px solid var(--gold-500); outline-offset: 3px; }
+
+@media (max-width: 1320px) {
+  .footer-grid { grid-template-columns: minmax(220px, 0.9fr) repeat(3, minmax(170px, 1fr)); }
+  .footer-stack { grid-column: 2 / -1; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+}
 
 @media (max-width: 1240px) {
   .header-inner { min-height: 76px; }
@@ -1157,6 +1165,7 @@ main [id] { scroll-margin-top: 132px; }
   .nav-menu a { padding: 10px 12px; }
   .menu-toggle { display: block; }
   .editorial-grid, .credibility-grid, .international-grid, .safety-grid, .consultation-grid, .rhythm-grid, .form-shell, .split-heading, .footer-grid, .home-answer-panel, .home-faq-grid, .story-hero-grid, .stories-hero-grid, .story-marker-grid, .identity-grid, .origin-grid, .care-path, .standards-grid, .featured-story-panel, .story-card-grid, .outcome-story-grid, .consent-grid, .journal-archive-hero-grid, .journal-filter-shell, .journal-layout, .journal-reader-panel, .journal-detail-hero-grid, .journal-detail-layout, .journal-exit-panel, .stay-hero-grid, .stay-marker-grid, .stay-food-grid, .stay-reassurance-grid, .stay-confirm-panel, .stay-cta-panel, .booking-conversation-grid, .booking-path-grid, .booking-fit-grid, .booking-fit-lists, .booking-form-shell, .booking-after-grid, .booking-last-word-panel, .contact-hero-grid, .location-grid, .visitor-grid, .contact-form-shell, .booking-hero-grid, .qualification-shell, .payment-hero-grid, .payment-grid, .checkout-grid, .payment-gateway-panel, .payment-support-grid, .legal-grid, .faq-hero-grid, .faq-decision-grid, .faq-layout, .faq-topic-heading, .faq-responsible-grid, .faq-standard-grid, .faq-final-panel, .program-hero-grid, .program-fit-grid, .program-inclusions-grid, .program-media-grid, .program-cta-panel, .program-pricing-panel, .residency-positioning-panel, .residency-domain-grid, .residency-curriculum-grid, .residency-mentoring-grid, .residency-support-grid, .residency-graduation-grid, .seo-hub-hero-grid, .seo-two-column, .seo-final-panel, .modality-quick-grid, .modality-article-grid, .modality-retreat-grid, .modality-suitability-grid, .modality-connection-grid, .modality-decision-grid, .modality-standards-grid { grid-template-columns: 1fr; }
+  .footer-stack { grid-column: auto; grid-template-columns: 1fr; }
   .checkout-side-panel { position: static; }
   .legal-aside { position: static; }
   .faq-category-nav { position: static; }

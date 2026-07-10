@@ -39,10 +39,27 @@ export function SiteFooter() {
   return (
     <footer className="site-footer">
       <div className="container footer-grid">
-        <div>
+        <div className="footer-brand-block">
           <Image src={siteConfig.logos.markOnForest} alt="Shreevan Wellness" width={160} height={160} />
           <p>{settings.brand.tagline}</p>
           <span>{settings.brand.location}</span>
+          {socialLinks.length ? (
+            <div aria-label="Follow Shreevan Wellness" className="footer-social-links">
+              {socialLinks.map(({ label, href, Icon }) => (
+                <a
+                  aria-label={`Follow Shreevan Wellness on ${label}`}
+                  className="footer-social-link"
+                  href={href}
+                  key={label}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  title={label}
+                >
+                  <Icon aria-hidden="true" size={18} strokeWidth={1.9} />
+                </a>
+              ))}
+            </div>
+          ) : null}
         </div>
 
         {settings.navigation.footerColumns.slice(0, 3).map((column) => (
@@ -68,7 +85,7 @@ export function SiteFooter() {
             </nav>
           ))}
 
-          <div>
+          <div className="footer-contact-block">
             <h2>Contact</h2>
             <a href={`mailto:${settings.contact.email}`}>{settings.contact.email}</a>
             {phoneLink ? <a href={phoneLink}>{settings.contact.phone}</a> : null}
@@ -76,23 +93,6 @@ export function SiteFooter() {
               <a href={whatsappLink} rel="noopener noreferrer" target="_blank">
                 WhatsApp us
               </a>
-            ) : null}
-            {socialLinks.length ? (
-              <div aria-label="Follow Shreevan Wellness" className="footer-social-links">
-                {socialLinks.map(({ label, href, Icon }) => (
-                  <a
-                    aria-label={`Follow Shreevan Wellness on ${label}`}
-                    className="footer-social-link"
-                    href={href}
-                    key={label}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    title={label}
-                  >
-                    <Icon aria-hidden="true" size={18} strokeWidth={1.9} />
-                  </a>
-                ))}
-              </div>
             ) : null}
           </div>
         </div>
