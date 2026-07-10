@@ -63,7 +63,7 @@ export type AdminLeadInput = Partial<Omit<AdminLead, "id" | "status" | "createdA
 export const defaultAdminSeoLeads: AdminSeoLeadsStore = {
   updatedAt: "2026-06-21T00:00:00.000Z",
   leadRouting: {
-    inboxEmail: "hello@shreevanwellness.com",
+    inboxEmail: "contact@shreevanwellness.com",
     leadOwner: "Shreevan guest care",
     responseSla: "Reply within 24-48 hours",
     crmStage: "New suitability request",

@@ -9,17 +9,20 @@
     "description": "Premium structured wellness retreats in Rishikesh, India for international guests seeking guided reconnection, rhythm and responsible transformation."
   },
   "contact": {
-    "email": "hello@shreevanwellness.com",
-    "phone": "",
-    "whatsapp": "",
+    "email": "contact@shreevanwellness.com",
+    "phone": "+91 91155 17667",
+    "whatsapp": "+91 91155 17667",
     "address": "Rishikesh, Uttarakhand, India",
     "responseTime": "Within 24-48 hours"
   },
   "social": {
-    "instagram": "",
-    "youtube": "",
+    "instagram": "https://www.instagram.com/shreevanwellness/",
+    "youtube": "https://www.youtube.com/@shreevanwellness",
     "linkedin": "",
-    "facebook": ""
+    "facebook": "https://www.facebook.com/profile.php?id=61591196888263",
+    "x": "https://x.com/shreevanwell",
+    "trustpilot": "https://www.trustpilot.com/review/shreevanwellness.com",
+    "tripadvisor": "https://www.tripadvisor.in/Profile/shreevanwellness"
   },
   "crm": {
     "enabled": true,

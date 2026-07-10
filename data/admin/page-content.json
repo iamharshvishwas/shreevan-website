@@ -92,7 +92,7 @@
         "primaryCtaLabel": "Book Consultation",
         "primaryCtaHref": "/book-consultation",
         "secondaryCtaLabel": "Email Us",
-        "secondaryCtaHref": "mailto:hello@shreevanwellness.com"
+        "secondaryCtaHref": "mailto:contact@shreevanwellness.com"
       },
       "notes": "Seeded for Phase 3; public wiring comes after homepage validation."
     },

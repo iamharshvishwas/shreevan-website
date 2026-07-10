@@ -4,6 +4,7 @@ import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema/site-schema";
 import { siteConfig } from "@/config/site";
 import { buildPageMetadata } from "@/lib/seo/page-metadata";
+import { getPublicSiteSettings } from "@/lib/site/public-settings";
 
 export const metadata: Metadata = buildPageMetadata({
   title: `Contact Us | ${siteConfig.name}`,
@@ -13,7 +14,9 @@ export const metadata: Metadata = buildPageMetadata({
   absoluteTitle: true,
 });
 
-export default function Page() {
+export default async function Page() {
+  const settings = await getPublicSiteSettings();
+
   return (
     <>
       <JsonLd
@@ -31,7 +34,7 @@ export default function Page() {
             "Contact Shreevan Wellness in Rishikesh, India for retreat enquiries, travel questions, consultation requests and international visitor support.",
         })}
       />
-      <ContactPage />
+      <ContactPage settings={settings} />
     </>
   );
 }

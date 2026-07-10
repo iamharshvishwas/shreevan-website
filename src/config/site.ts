@@ -4,7 +4,7 @@ export const siteConfig = {
   founder: "Isha Dutta",
   location: "Rishikesh, India",
   url: "https://shreevanwellness.com",
-  email: "hello@shreevanwellness.com",
+  email: "contact@shreevanwellness.com",
   logoPath: "/images/brand/shreevan-wellness-logo.png",
   logos: {
     primary: "/images/brand/shreevan-wellness-logo.png",

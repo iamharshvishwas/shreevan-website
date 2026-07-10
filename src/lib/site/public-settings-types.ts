@@ -33,6 +33,9 @@ export type PublicSiteSettings = {
     youtube: string;
     linkedin: string;
     facebook: string;
+    x: string;
+    trustpilot: string;
+    tripadvisor: string;
   };
   crm: {
     enabled: boolean;

@@ -322,6 +322,17 @@ export function AdminSettingsPanel({ initialSettings }: Readonly<{ initialSettin
                 value={settings.social.facebook}
                 onChange={(value) => updateSocial("facebook", value)}
               />
+              <AdminTextField label="X" value={settings.social.x} onChange={(value) => updateSocial("x", value)} />
+              <AdminTextField
+                label="Trustpilot"
+                value={settings.social.trustpilot}
+                onChange={(value) => updateSocial("trustpilot", value)}
+              />
+              <AdminTextField
+                label="Tripadvisor"
+                value={settings.social.tripadvisor}
+                onChange={(value) => updateSocial("tripadvisor", value)}
+              />
             </div>
           ) : null}
 

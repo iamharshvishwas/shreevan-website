@@ -40,6 +40,9 @@ export type AdminSiteSettings = {
     youtube: string;
     linkedin: string;
     facebook: string;
+    x: string;
+    trustpilot: string;
+    tripadvisor: string;
   };
   crm: {
     enabled: boolean;
@@ -81,16 +84,19 @@ export const defaultAdminSiteSettings: AdminSiteSettings = {
   },
   contact: {
     email: siteConfig.email,
-    phone: "",
-    whatsapp: "",
+    phone: "+91 91155 17667",
+    whatsapp: "+91 91155 17667",
     address: "Rishikesh, Uttarakhand, India",
     responseTime: "Within 24-48 hours",
   },
   social: {
-    instagram: "",
-    youtube: "",
+    instagram: "https://www.instagram.com/shreevanwellness/",
+    youtube: "https://www.youtube.com/@shreevanwellness",
     linkedin: "",
-    facebook: "",
+    facebook: "https://www.facebook.com/profile.php?id=61591196888263",
+    x: "https://x.com/shreevanwell",
+    trustpilot: "https://www.trustpilot.com/review/shreevanwellness.com",
+    tripadvisor: "https://www.tripadvisor.in/Profile/shreevanwellness",
   },
   crm: {
     enabled: true,
@@ -264,6 +270,9 @@ export function normalizeAdminSiteSettings(value: unknown): AdminSiteSettings {
       youtube: stringValue(social.youtube, defaultAdminSiteSettings.social.youtube),
       linkedin: stringValue(social.linkedin, defaultAdminSiteSettings.social.linkedin),
       facebook: stringValue(social.facebook, defaultAdminSiteSettings.social.facebook),
+      x: stringValue(social.x, defaultAdminSiteSettings.social.x),
+      trustpilot: stringValue(social.trustpilot, defaultAdminSiteSettings.social.trustpilot),
+      tripadvisor: stringValue(social.tripadvisor, defaultAdminSiteSettings.social.tripadvisor),
     },
     crm: {
       enabled: booleanValue(crm.enabled, defaultAdminSiteSettings.crm.enabled),

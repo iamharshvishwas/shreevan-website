@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { AtSign, Camera, CirclePlay, CircleUserRound, MapPinned, MessageCircle, Star } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { usePublicSiteSettings } from "@/components/site/public-settings-provider";
 
@@ -26,11 +27,14 @@ export function SiteFooter() {
   const phoneLink = settings.contact.phone ? phoneHref(settings.contact.phone) : "";
   const whatsappLink = settings.contact.whatsapp ? whatsappHref(settings.contact.whatsapp) : "";
   const socialLinks = [
-    ["Instagram", settings.social.instagram],
-    ["YouTube", settings.social.youtube],
-    ["LinkedIn", settings.social.linkedin],
-    ["Facebook", settings.social.facebook],
-  ].filter((item): item is [string, string] => Boolean(item[1]));
+    { label: "Instagram", href: settings.social.instagram, Icon: Camera },
+    { label: "Facebook", href: settings.social.facebook, Icon: MessageCircle },
+    { label: "YouTube", href: settings.social.youtube, Icon: CirclePlay },
+    { label: "X", href: settings.social.x, Icon: AtSign },
+    { label: "LinkedIn", href: settings.social.linkedin, Icon: CircleUserRound },
+    { label: "Trustpilot", href: settings.social.trustpilot, Icon: Star },
+    { label: "Tripadvisor", href: settings.social.tripadvisor, Icon: MapPinned },
+  ].filter((item) => Boolean(item.href));
 
   return (
     <footer className="site-footer">
@@ -68,12 +72,28 @@ export function SiteFooter() {
             <h2>Contact</h2>
             <a href={`mailto:${settings.contact.email}`}>{settings.contact.email}</a>
             {phoneLink ? <a href={phoneLink}>{settings.contact.phone}</a> : null}
-            {whatsappLink ? <a href={whatsappLink}>WhatsApp</a> : null}
-            {socialLinks.map(([label, href]) => (
-              <a href={href} key={label} rel="noreferrer" target="_blank">
-                {label}
+            {whatsappLink ? (
+              <a href={whatsappLink} rel="noopener noreferrer" target="_blank">
+                WhatsApp us
               </a>
-            ))}
+            ) : null}
+            {socialLinks.length ? (
+              <div aria-label="Follow Shreevan Wellness" className="footer-social-links">
+                {socialLinks.map(({ label, href, Icon }) => (
+                  <a
+                    aria-label={`Follow Shreevan Wellness on ${label}`}
+                    className="footer-social-link"
+                    href={href}
+                    key={label}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    title={label}
+                  >
+                    <Icon aria-hidden="true" size={18} strokeWidth={1.9} />
+                  </a>
+                ))}
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

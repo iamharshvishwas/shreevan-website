@@ -2,31 +2,44 @@ import Link from "next/link";
 import { ContactEnquiryForm } from "@/components/forms/contact-enquiry-form";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
-import { siteConfig } from "@/config/site";
+import type { PublicSiteSettings } from "@/lib/site/public-settings-types";
 
-const contactChannels = [
-  {
-    label: "Email",
-    title: siteConfig.email,
-    copy: "Best for retreat questions, collaboration enquiries and details you want answered carefully.",
-    href: `mailto:${siteConfig.email}`,
-    action: "Email Shreevan",
-  },
-  {
-    label: "Consultation",
-    title: "Free suitability call",
-    copy: "Best if you are considering a retreat and want help choosing the right program depth.",
-    href: "/book-consultation",
-    action: "Book consultation",
-  },
-  {
-    label: "WhatsApp",
-    title: "Official WhatsApp before launch",
-    copy: "Add the verified WhatsApp Business number here once the support workflow is connected.",
-    href: "#contact-form",
-    action: "Use enquiry form",
-  },
-];
+function whatsappHref(value: string) {
+  const normalized = value.replace(/[^\d]/g, "");
+
+  return normalized ? `https://wa.me/${normalized}` : "";
+}
+
+function contactChannels(settings: PublicSiteSettings) {
+  const whatsapp = whatsappHref(settings.contact.whatsapp);
+
+  return [
+    {
+      label: "Email",
+      title: settings.contact.email,
+      copy: "Best for retreat questions, collaboration enquiries and details you want answered carefully.",
+      href: `mailto:${settings.contact.email}`,
+      action: "Email Shreevan",
+      external: true,
+    },
+    {
+      label: "Consultation",
+      title: "Free suitability call",
+      copy: "Best if you are considering a retreat and want help choosing the right program depth.",
+      href: "/book-consultation",
+      action: "Book consultation",
+      external: false,
+    },
+    {
+      label: "WhatsApp",
+      title: settings.contact.whatsapp,
+      copy: "A direct route for practical questions before you decide whether a consultation is the right next step.",
+      href: whatsapp,
+      action: "Message on WhatsApp",
+      external: true,
+    },
+  ].filter((channel) => Boolean(channel.href));
+}
 
 const visitorQuestions = [
   ["Where exactly is the retreat?", "Rishikesh, Uttarakhand, India. The exact stay address should be shared with confirmed guests after suitability and booking steps."],
@@ -40,7 +53,9 @@ const responseStandards = [
   "Medical emergencies or urgent health questions should go to qualified local services, not this website.",
 ];
 
-export function ContactPage() {
+export function ContactPage({ settings }: Readonly<{ settings: PublicSiteSettings }>) {
+  const channels = contactChannels(settings);
+
   return (
     <>
       <a className="skip-link" href="#main">
@@ -62,14 +77,14 @@ export function ContactPage() {
                 <Link className="button button-primary" href="/book-consultation">
                   Book consultation
                 </Link>
-                <a className="button button-secondary" href={`mailto:${siteConfig.email}`}>
+                <a className="button button-secondary" href={`mailto:${settings.contact.email}`}>
                   Email us
                 </a>
               </div>
             </div>
 
             <aside className="contact-summary" aria-label="Contact summary">
-              <span>{siteConfig.location}</span>
+              <span>{settings.brand.location}</span>
               <p>
                 Premium structured wellness retreats on the sacred banks of Maa Ganga in Rishikesh,
                 India.
@@ -78,7 +93,13 @@ export function ContactPage() {
                 <div>
                   <dt>Primary email</dt>
                   <dd>
-                    <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+                    <a href={`mailto:${settings.contact.email}`}>{settings.contact.email}</a>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Call or WhatsApp</dt>
+                  <dd>
+                    <a href={`tel:${settings.contact.phone.replace(/[^\d+]/g, "")}`}>{settings.contact.phone}</a>
                   </dd>
                 </div>
                 <div>
@@ -104,14 +125,25 @@ export function ContactPage() {
             </div>
 
             <div className="contact-channel-grid">
-              {contactChannels.map((channel) => (
+              {channels.map((channel) => (
                 <article key={channel.label}>
                   <span>{channel.label}</span>
                   <h3>{channel.title}</h3>
                   <p>{channel.copy}</p>
-                  <Link className="text-link" href={channel.href}>
-                    {channel.action}
-                  </Link>
+                  {channel.external ? (
+                    <a
+                      className="text-link"
+                      href={channel.href}
+                      rel="noopener noreferrer"
+                      target={channel.label === "WhatsApp" ? "_blank" : undefined}
+                    >
+                      {channel.action}
+                    </a>
+                  ) : (
+                    <Link className="text-link" href={channel.href}>
+                      {channel.action}
+                    </Link>
+                  )}
                 </article>
               ))}
             </div>
