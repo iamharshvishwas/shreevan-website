@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
+import { headers } from "next/headers";
 import { getPublicSiteOrigin, getPublicSiteSettings } from "@/lib/site/public-settings";
+import { isAdminHostname } from "@/lib/site/is-admin-host";
 
 export const dynamic = "force-dynamic";
 
@@ -61,7 +63,29 @@ const AI_CRAWLER_USER_AGENTS = [
   "AI2Bot",
 ] as const;
 
+// Paths that are never public, on either host.
+const NEVER_PUBLIC_PATHS = ["/admin", "/payment"];
+
 export default async function robots(): Promise<MetadataRoute.Robots> {
+  const requestHeaders = await headers();
+
+  // The admin subdomain is served by this same app (proxy.ts rewrites it),
+  // but /robots.txt bypasses that rewrite (its matcher excludes dotted
+  // paths) and previously fell through to this same, permissive policy —
+  // meaning every crawler this file explicitly allows was also being told
+  // it could crawl the admin panel. Block it outright here, independent of
+  // the site's public/blocked launch state.
+  if (isAdminHostname(requestHeaders.get("host"))) {
+    return {
+      rules: [
+        {
+          userAgent: "*",
+          disallow: "/",
+        },
+      ],
+    };
+  }
+
   const settings = await getPublicSiteSettings();
   const siteOrigin = getPublicSiteOrigin(settings);
 
@@ -71,12 +95,12 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
         {
           userAgent: "*",
           allow: "/",
-          disallow: ["/admin/", "/payment"],
+          disallow: NEVER_PUBLIC_PATHS,
         },
         ...AI_CRAWLER_USER_AGENTS.map((userAgent) => ({
           userAgent,
           allow: "/",
-          disallow: ["/admin/", "/payment"],
+          disallow: NEVER_PUBLIC_PATHS,
         })),
       ],
       host: siteOrigin,

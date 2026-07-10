@@ -1,14 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ADMIN_SESSION_COOKIE, isValidAdminSession } from "./lib/admin/auth";
+import { isAdminHostname } from "./lib/site/is-admin-host";
 
 const ADMIN_LOGIN_PATH = "/admin/login";
 const ADMIN_DASHBOARD_PATH = "/admin";
-
-function isAdminHost(hostHeader: string | null) {
-  const hostname = hostHeader?.split(":")[0].toLowerCase() ?? "";
-
-  return hostname.startsWith("admin.");
-}
 
 function effectiveAdminPath(pathname: string, isAdminSubdomain: boolean) {
   if (!isAdminSubdomain || pathname.startsWith("/admin") || pathname.startsWith("/api")) {
@@ -26,19 +21,31 @@ function shouldRewriteAdminHost(pathname: string, isAdminSubdomain: boolean) {
   return isAdminSubdomain && !pathname.startsWith("/admin") && !pathname.startsWith("/api");
 }
 
+// Marks the request as admin-area for downstream Server Components (e.g. the
+// root layout, to skip loading third-party analytics/ad scripts there) that
+// can't otherwise tell -- headers() has no pathname, and the admin subdomain
+// rewrite happens here in middleware before any layout renders.
+function withAdminAreaHeader(request: NextRequest, isAdminArea: boolean) {
+  const requestHeaders = new Headers(request.headers);
+
+  requestHeaders.set("x-shreevan-admin-area", isAdminArea ? "1" : "0");
+
+  return { request: { headers: requestHeaders } };
+}
+
 export async function proxy(request: NextRequest) {
-  const isAdminSubdomain = isAdminHost(request.headers.get("host"));
+  const isAdminSubdomain = isAdminHostname(request.headers.get("host"));
   const pathname = request.nextUrl.pathname;
   const effectivePath = effectiveAdminPath(pathname, isAdminSubdomain);
   const isAdminArea = isAdminRoute(effectivePath);
   const isAdminApi = pathname.startsWith("/api/admin/");
 
   if (!isAdminArea && !isAdminApi) {
-    return NextResponse.next();
+    return NextResponse.next(withAdminAreaHeader(request, false));
   }
 
   if (isAdminApi) {
-    return NextResponse.next();
+    return NextResponse.next(withAdminAreaHeader(request, true));
   }
 
   const session = request.cookies.get(ADMIN_SESSION_COOKIE)?.value;
@@ -66,10 +73,10 @@ export async function proxy(request: NextRequest) {
     const rewriteUrl = request.nextUrl.clone();
     rewriteUrl.pathname = effectivePath;
 
-    return NextResponse.rewrite(rewriteUrl);
+    return NextResponse.rewrite(rewriteUrl, withAdminAreaHeader(request, true));
   }
 
-  return NextResponse.next();
+  return NextResponse.next(withAdminAreaHeader(request, true));
 }
 
 export const config = {
