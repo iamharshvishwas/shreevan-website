@@ -40,6 +40,16 @@ export async function proxy(request: NextRequest) {
   const isAdminArea = isAdminRoute(effectivePath);
   const isAdminApi = pathname.startsWith("/api/admin/");
 
+  // Admin is reachable ONLY via admin.shreevanwellness.com. This is not the
+  // auth boundary (the session check below already covers both hosts) -- it's
+  // about not letting /admin and /api/admin/* exist at all on the well-known,
+  // commonly-probed main domain. A redirect here would still confirm "yes,
+  // an admin panel exists, here's where" to any bot/scanner hitting /admin;
+  // 404 gives away nothing.
+  if (!isAdminSubdomain && (isAdminArea || isAdminApi)) {
+    return new NextResponse(null, { status: 404 });
+  }
+
   if (!isAdminArea && !isAdminApi) {
     return NextResponse.next(withAdminAreaHeader(request, false));
   }
