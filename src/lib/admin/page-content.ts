@@ -1,4 +1,5 @@
 import { siteConfig } from "@/config/site";
+import { siteRoutes, type SiteRoute } from "@/config/routes";
 import { getSupabaseAdminClient } from "@/lib/supabase/client";
 import { CACHE_TAGS, revalidatePublicContent } from "@/lib/site/content-cache";
 
@@ -34,6 +35,75 @@ export type AdminPageContentStore = {
   updatedAt: string;
 };
 
+const seededRoutePaths = new Set([
+  "/",
+  "/about-founder",
+  "/accommodation-inclusions",
+  "/contact",
+  "/faqs",
+  "/payment",
+]);
+
+function routePageId(path: string) {
+  return path === "/" ? "home" : path.replace(/^\/+|\/+$/g, "").replace(/[^a-z0-9]+/gi, "-");
+}
+
+function routeTemplate(route: SiteRoute): AdminManagedPage["template"] {
+  if (route.intent === "legal") {
+    return "legal";
+  }
+
+  if (route.href === "/payment") {
+    return "commerce";
+  }
+
+  return "standard";
+}
+
+function routeNotes(route: SiteRoute) {
+  if (route.href === "/faqs" || route.href === "/testimonials") {
+    return "The live content for this page is managed in Content & Trust.";
+  }
+
+  if (route.href === "/programs" || route.href.startsWith("/programs/")) {
+    return "The live content for this page is managed in Programs.";
+  }
+
+  return "Page details are ready for editorial review. Connect its public template before relying on this editor for live content changes.";
+}
+
+function createRoutePage(route: SiteRoute): AdminManagedPage {
+  return {
+    id: routePageId(route.href),
+    title: route.label,
+    path: route.href,
+    template: routeTemplate(route),
+    status: "published",
+    connected: false,
+    seo: {
+      title: `${route.label} | ${siteConfig.name}`,
+      description: `${route.label} information for ${siteConfig.name}.`,
+      canonicalPath: route.href,
+      noindex: route.noindex ?? false,
+    },
+    hero: {
+      eyebrow: route.label,
+      title: route.label,
+      lede: `Learn more about ${route.label.toLowerCase()} at ${siteConfig.name}.`,
+      primaryCtaLabel: "Book Consultation",
+      primaryCtaHref: "/book-consultation",
+      secondaryCtaLabel: "Contact Us",
+      secondaryCtaHref: "/contact",
+    },
+    notes: routeNotes(route),
+  };
+}
+
+// Journal articles belong to Blog Upload, not the Pages manager. The Journal
+// landing page is also kept there so the full blog workflow stays together.
+const additionalPublicPages = siteRoutes.filter(
+  (route) => route.href !== "/journal" && !seededRoutePaths.has(route.href),
+);
 
 export const defaultAdminPageContent: AdminPageContentStore = {
   updatedAt: "2026-06-21T00:00:00.000Z",
@@ -183,6 +253,7 @@ export const defaultAdminPageContent: AdminPageContentStore = {
       },
       notes: "Keep noindex until the secure checkout flow is final.",
     },
+    ...additionalPublicPages.map(createRoutePage),
   ],
 };
 

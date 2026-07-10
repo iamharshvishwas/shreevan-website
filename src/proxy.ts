@@ -57,6 +57,16 @@ function shouldRewriteAdminHost(pathname: string, isAdminSubdomain: boolean) {
   return isAdminSubdomain && !pathname.startsWith("/admin") && !pathname.startsWith("/api");
 }
 
+function isLocalDevelopmentHost(hostHeader: string | null) {
+  if (process.env.NODE_ENV === "production") {
+    return false;
+  }
+
+  const hostname = hostHeader?.split(":")[0]?.toLowerCase() ?? "";
+
+  return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1";
+}
+
 // Marks the request as admin-area for downstream Server Components (e.g. the
 // root layout, to skip loading third-party analytics/ad scripts there) that
 // can't otherwise tell -- headers() has no pathname, and the admin subdomain
@@ -70,7 +80,9 @@ function withAdminAreaHeader(request: NextRequest, isAdminArea: boolean) {
 }
 
 export async function proxy(request: NextRequest) {
-  const isAdminSubdomain = isAdminHostname(request.headers.get("host"));
+  const hostHeader = request.headers.get("host");
+  const isAdminSubdomain = isAdminHostname(hostHeader);
+  const isLocalAdminDevelopment = isLocalDevelopmentHost(hostHeader);
   const pathname = request.nextUrl.pathname;
   const effectivePath = effectiveAdminPath(pathname, isAdminSubdomain);
   const isAdminArea = isAdminRoute(effectivePath);
@@ -82,7 +94,7 @@ export async function proxy(request: NextRequest) {
   // commonly-probed main domain. A redirect here would still confirm "yes,
   // an admin panel exists, here's where" to any bot/scanner hitting /admin;
   // 404 gives away nothing.
-  if (!isAdminSubdomain && (isAdminArea || isAdminApi)) {
+  if (!isAdminSubdomain && !isLocalAdminDevelopment && (isAdminArea || isAdminApi)) {
     return new NextResponse(null, { status: 404 });
   }
 

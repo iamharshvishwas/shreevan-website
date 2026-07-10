@@ -13,7 +13,7 @@ export default async function AdminPagesPage() {
   const pageContent = await readAdminPageContent();
 
   return (
-    <AdminShell activeSection="pages" kicker="Phase 3" title="Pages">
+    <AdminShell activeSection="pages" kicker="Page Manager" title="Pages">
       <AdminPagesPanel initialPageContent={pageContent} />
     </AdminShell>
   );

@@ -1,13 +1,20 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import Link from "next/link";
+import { useMemo, useState } from "react";
+import { siteConfig } from "@/config/site";
 import type { AdminManagedPage, AdminPageContentStore, AdminPageStatus } from "@/lib/admin/page-content";
 
-type SaveState = "idle" | "saving" | "saved" | "error";
+type StatusFilter = "all" | AdminPageStatus;
+type ManagerFilter = "all" | "page-editor" | "dedicated-manager";
+type SortMode = "website-order" | "title-asc" | "status-asc";
 
-function clonePageContent(pageContent: AdminPageContentStore): AdminPageContentStore {
-  return JSON.parse(JSON.stringify(pageContent)) as AdminPageContentStore;
-}
+type PageManager = {
+  href: string;
+  label: string;
+  source: string;
+  dedicated: boolean;
+};
 
 function formatUpdatedAt(value: string) {
   const date = new Date(value);
@@ -34,317 +41,235 @@ function statusLabel(status: AdminPageStatus) {
   return "Draft";
 }
 
+function templateLabel(template: AdminManagedPage["template"]) {
+  if (template === "home") {
+    return "Home builder";
+  }
+
+  if (template === "commerce") {
+    return "Payment";
+  }
+
+  if (template === "legal") {
+    return "Legal";
+  }
+
+  return "Standard";
+}
+
+function pageManager(page: AdminManagedPage): PageManager {
+  if (page.id === "home") {
+    return { href: "/admin/home", label: "Open builder", source: "Home builder", dedicated: true };
+  }
+
+  if (page.path === "/programs" || page.path.startsWith("/programs/")) {
+    return { href: "/admin/programs", label: "Open programs", source: "Programs", dedicated: true };
+  }
+
+  if (page.path === "/faqs" || page.path === "/testimonials") {
+    return { href: "/admin/content", label: "Open content", source: "Content & Trust", dedicated: true };
+  }
+
+  return {
+    href: `/admin/pages/${encodeURIComponent(page.id)}`,
+    label: "Edit",
+    source: "Page editor",
+    dedicated: false,
+  };
+}
+
+function pagePreviewHref(page: AdminManagedPage) {
+  return new URL(page.path, siteConfig.url).toString();
+}
+
+function matchesSearch(page: AdminManagedPage, query: string) {
+  if (!query) {
+    return true;
+  }
+
+  const haystack = [page.title, page.path, page.template, page.seo.title, page.hero.title]
+    .join(" ")
+    .toLowerCase();
+
+  return haystack.includes(query);
+}
+
 export function AdminPagesPanel({
   initialPageContent,
 }: Readonly<{ initialPageContent: AdminPageContentStore }>) {
-  const [pageContent, setPageContent] = useState(() => clonePageContent(initialPageContent));
-  const [savedPageContent, setSavedPageContent] = useState(() => clonePageContent(initialPageContent));
-  const [activePageId, setActivePageId] = useState(initialPageContent.pages[0]?.id ?? "home");
-  const [saveState, setSaveState] = useState<SaveState>("idle");
-  const [message, setMessage] = useState("");
+  const [query, setQuery] = useState("");
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
+  const [managerFilter, setManagerFilter] = useState<ManagerFilter>("all");
+  const [sortMode, setSortMode] = useState<SortMode>("website-order");
 
-  const activePage = pageContent.pages.find((page) => page.id === activePageId) ?? pageContent.pages[0];
-  const dirty = useMemo(
-    () => JSON.stringify(pageContent) !== JSON.stringify(savedPageContent),
-    [pageContent, savedPageContent],
-  );
-  const publishedCount = pageContent.pages.filter((page) => page.status === "published").length;
-  const connectedCount = pageContent.pages.filter((page) => page.connected).length;
+  const draftCount = initialPageContent.pages.filter((page) => page.status === "draft").length;
+  const dedicatedManagerCount = initialPageContent.pages.filter((page) => pageManager(page).dedicated).length;
+  const pageEditorCount = initialPageContent.pages.length - dedicatedManagerCount;
+  const noindexCount = initialPageContent.pages.filter((page) => page.seo.noindex).length;
+  const filteredPages = useMemo(() => {
+    const normalizedQuery = query.trim().toLowerCase();
+    const pages = initialPageContent.pages.filter((page) => {
+      const matchesStatus = statusFilter === "all" || page.status === statusFilter;
+      const manager = pageManager(page);
+      const matchesManager =
+        managerFilter === "all" ||
+        (managerFilter === "dedicated-manager" ? manager.dedicated : !manager.dedicated);
 
-  function updateActivePage(patch: Partial<AdminManagedPage>) {
-    setPageContent((current) => ({
-      ...current,
-      pages: current.pages.map((page) => (page.id === activePageId ? { ...page, ...patch } : page)),
-    }));
-  }
-
-  function updateSeo(field: keyof AdminManagedPage["seo"], value: string | boolean) {
-    setPageContent((current) => ({
-      ...current,
-      pages: current.pages.map((page) =>
-        page.id === activePageId ? { ...page, seo: { ...page.seo, [field]: value } } : page,
-      ),
-    }));
-  }
-
-  function updateHero(field: keyof AdminManagedPage["hero"], value: string) {
-    setPageContent((current) => ({
-      ...current,
-      pages: current.pages.map((page) =>
-        page.id === activePageId ? { ...page, hero: { ...page.hero, [field]: value } } : page,
-      ),
-    }));
-  }
-
-  async function handleSave(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setSaveState("saving");
-    setMessage("");
-
-    const response = await fetch("/api/admin/pages", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(pageContent),
+      return matchesStatus && matchesManager && matchesSearch(page, normalizedQuery);
     });
 
-    const body = (await response.json().catch(() => null)) as
-      | { pageContent?: AdminPageContentStore; error?: string }
-      | null;
+    return pages.sort((left, right) => {
+      if (sortMode === "title-asc") {
+        return left.title.localeCompare(right.title);
+      }
 
-    if (!response.ok || !body?.pageContent) {
-      setSaveState("error");
-      setMessage(body?.error ?? "Page content could not be saved.");
-      return;
-    }
+      if (sortMode === "status-asc") {
+        return statusLabel(left.status).localeCompare(statusLabel(right.status));
+      }
 
-    setPageContent(clonePageContent(body.pageContent));
-    setSavedPageContent(clonePageContent(body.pageContent));
-    setSaveState("saved");
-    setMessage("Page content saved.");
-  }
-
-  function handleRevert() {
-    setPageContent(clonePageContent(savedPageContent));
-    setSaveState("idle");
-    setMessage("Unsaved changes reverted.");
-  }
-
-  if (!activePage) {
-    return null;
-  }
+      return initialPageContent.pages.indexOf(left) - initialPageContent.pages.indexOf(right);
+    });
+  }, [initialPageContent.pages, managerFilter, query, sortMode, statusFilter]);
 
   return (
-    <main className="admin-dashboard admin-settings-page" aria-labelledby="admin-pages-title">
+    <main className="admin-dashboard admin-pages-index" aria-labelledby="admin-pages-title">
       <section className="admin-dashboard-hero admin-settings-hero">
         <div>
-          <p className="admin-kicker">Page content manager</p>
-          <h2 id="admin-pages-title">Manage page-level SEO and hero content.</h2>
+          <p className="admin-kicker">Page manager</p>
+          <h2 id="admin-pages-title">Manage website pages, SEO and publishing state.</h2>
           <p>
-            Phase 3 starts with a controlled page registry. The Home page is connected to the public
-            frontend now; the remaining seeded pages are ready for the next wiring pass.
+            Every public website page is listed here, except Journal articles which stay in Blog
+            Upload. Choose a page to open its correct content manager or page settings.
           </p>
         </div>
-        <div className="admin-status-panel" aria-label="Page manager status">
-          <span>Page State</span>
+        <div className="admin-status-panel" aria-label="Page overview">
+          <span>Page overview</span>
           <dl>
             <div>
-              <dt>Save status</dt>
-              <dd>{dirty ? "Unsaved changes" : "Saved"}</dd>
-            </div>
-            <div>
               <dt>Updated</dt>
-              <dd>{formatUpdatedAt(savedPageContent.updatedAt)}</dd>
+              <dd>{formatUpdatedAt(initialPageContent.updatedAt)}</dd>
             </div>
             <div>
-              <dt>Published</dt>
-              <dd>{publishedCount} pages</dd>
+              <dt>Listed pages</dt>
+              <dd>{initialPageContent.pages.length} pages</dd>
             </div>
             <div>
-              <dt>Connected</dt>
-              <dd>{connectedCount} live page</dd>
+              <dt>Drafts</dt>
+              <dd>{draftCount} page{draftCount === 1 ? "" : "s"}</dd>
+            </div>
+            <div>
+              <dt>Dedicated managers</dt>
+              <dd>{dedicatedManagerCount} pages</dd>
+            </div>
+            <div>
+              <dt>Page editor</dt>
+              <dd>{pageEditorCount} pages</dd>
+            </div>
+            <div>
+              <dt>Hidden from Google</dt>
+              <dd>{noindexCount} page{noindexCount === 1 ? "" : "s"}</dd>
             </div>
           </dl>
         </div>
       </section>
 
-      <form className="admin-settings-layout" onSubmit={handleSave}>
-        <aside className="admin-settings-aside" aria-label="Managed pages">
-          <div className="admin-page-list" role="tablist" aria-label="Managed page list">
-            {pageContent.pages.map((page) => (
-              <button
-                className={activePageId === page.id ? "is-active" : ""}
-                type="button"
-                role="tab"
-                aria-selected={activePageId === page.id}
-                aria-label={`${page.title}, ${page.path}, ${statusLabel(page.status)}${
-                  page.connected ? ", connected" : ""
-                }`}
-                key={page.id}
-                onClick={() => setActivePageId(page.id)}
-              >
-                <span>{page.title}</span>
-                <small>{page.path}</small>
-                <em className={`admin-page-status is-${page.status}`}>{statusLabel(page.status)}</em>
-                {page.connected ? <strong>Connected</strong> : null}
-              </button>
-            ))}
+      <section className="admin-panel admin-page-list-panel" aria-labelledby="page-list-heading">
+        <div className="admin-page-list-heading">
+          <div>
+            <p className="admin-kicker">Pages</p>
+            <h2 id="page-list-heading">Website pages</h2>
           </div>
+          <span className="admin-page-list-count">{initialPageContent.pages.length} total</span>
+        </div>
 
-          <div className="admin-panel admin-settings-note">
-            <p className="admin-kicker">Frontend wiring</p>
-            <h2>Home live now</h2>
-            <p>
-              Save changes on Home to update the public homepage hero and metadata. Other pages are
-              editable seeds until their templates are connected.
-            </p>
+        <div className="admin-page-filters">
+          <label className="admin-field">
+            Search pages
+            <input
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Search title, path or SEO title"
+            />
+          </label>
+          <label className="admin-field">
+            Status
+            <select value={statusFilter} onChange={(event) => setStatusFilter(event.target.value as StatusFilter)}>
+              <option value="all">All statuses</option>
+              <option value="published">Published</option>
+              <option value="draft">Draft</option>
+              <option value="archived">Archived</option>
+            </select>
+          </label>
+          <label className="admin-field">
+            Manage in
+            <select value={managerFilter} onChange={(event) => setManagerFilter(event.target.value as ManagerFilter)}>
+              <option value="all">All pages</option>
+              <option value="page-editor">Page editor</option>
+              <option value="dedicated-manager">Dedicated manager</option>
+            </select>
+          </label>
+          <label className="admin-field">
+            Sort
+            <select value={sortMode} onChange={(event) => setSortMode(event.target.value as SortMode)}>
+              <option value="website-order">Website order</option>
+              <option value="title-asc">Title A-Z</option>
+              <option value="status-asc">Status</option>
+            </select>
+          </label>
+        </div>
+
+        <div className="admin-page-table" role="table" aria-label="Website pages">
+          <div className="admin-page-table-head" role="row">
+            <span>Page</span>
+            <span>Path</span>
+            <span>Template</span>
+            <span>Status</span>
+            <span>Manage in</span>
+            <span>Search</span>
+            <span>Actions</span>
           </div>
-        </aside>
+          {filteredPages.length ? (
+            filteredPages.map((page) => {
+              const manager = pageManager(page);
 
-        <section className="admin-panel admin-settings-editor">
-          <div className="admin-panel-heading admin-settings-heading">
-            <div>
-              <p className="admin-kicker">Phase 3 editor</p>
-              <h2>{activePage.title}</h2>
-            </div>
-            <span>{activePage.connected ? "Live connected" : "Seeded"}</span>
-          </div>
-
-          <div className="admin-form-stack">
-            <div className="admin-form-grid">
-              <label className="admin-field">
-                Page label
-                <input
-                  value={activePage.title}
-                  onChange={(event) => updateActivePage({ title: event.target.value })}
-                />
-              </label>
-              <label className="admin-field">
-                Public path
-                <input
-                  value={activePage.path}
-                  onChange={(event) => updateActivePage({ path: event.target.value })}
-                />
-              </label>
-              <label className="admin-field">
-                Status
-                <select
-                  value={activePage.status}
-                  onChange={(event) => updateActivePage({ status: event.target.value as AdminPageStatus })}
-                >
-                  <option value="published">Published</option>
-                  <option value="draft">Draft</option>
-                  <option value="archived">Archived</option>
-                </select>
-              </label>
-              <label className="admin-toggle-row admin-page-checkbox">
-                <input
-                  type="checkbox"
-                  checked={activePage.seo.noindex}
-                  onChange={(event) => updateSeo("noindex", event.target.checked)}
-                />
-                <span>Noindex this page</span>
-              </label>
-            </div>
-
-            <div className="admin-settings-warning">
-              <strong>Publishing boundary</strong>
-              <p>
-                A page must be published before its public template consumes the saved content. Draft
-                and archived pages fall back to the last safe defaults on connected templates.
-              </p>
-            </div>
-
-            <div className="admin-form-stack">
-              <div className="admin-panel-heading admin-settings-subheading">
-                <div>
-                  <p className="admin-kicker">SEO</p>
-                  <h3>Search and sharing metadata</h3>
+              return (
+              <article className="admin-page-row" key={page.id} role="row">
+                <div className="admin-page-title-cell" role="cell">
+                  <Link href={manager.href}>{page.title}</Link>
+                  <small>
+                    {manager.dedicated ? `Managed in ${manager.source}` : page.hero.title || "Page content and SEO"}
+                  </small>
                 </div>
-              </div>
-              <label className="admin-field">
-                Meta title
-                <input value={activePage.seo.title} onChange={(event) => updateSeo("title", event.target.value)} />
-              </label>
-              <label className="admin-field">
-                Meta description
-                <textarea
-                  value={activePage.seo.description}
-                  onChange={(event) => updateSeo("description", event.target.value)}
-                />
-              </label>
-              <label className="admin-field">
-                Canonical path
-                <input
-                  value={activePage.seo.canonicalPath}
-                  onChange={(event) => updateSeo("canonicalPath", event.target.value)}
-                />
-              </label>
-            </div>
-
-            <div className="admin-form-stack">
-              <div className="admin-panel-heading admin-settings-subheading">
-                <div>
-                  <p className="admin-kicker">Hero</p>
-                  <h3>First viewport copy</h3>
+                <code role="cell">{page.path}</code>
+                <span role="cell">{templateLabel(page.template)}</span>
+                <em className={`admin-page-status is-${page.status}`} role="cell">
+                  {statusLabel(page.status)}
+                </em>
+                <span className={manager.dedicated ? "admin-page-live-state is-live" : "admin-page-live-state"} role="cell">
+                  {manager.source}
+                </span>
+                <span role="cell">{page.seo.noindex ? "Hidden" : "Index"}</span>
+                <div className="admin-page-actions" role="cell">
+                  <Link className="admin-secondary-button" href={manager.href}>
+                    {manager.label}
+                  </Link>
+                  {page.connected ? (
+                    <a className="admin-secondary-button" href={pagePreviewHref(page)} target="_blank" rel="noreferrer">
+                      View site
+                    </a>
+                  ) : null}
                 </div>
-              </div>
-              <label className="admin-field">
-                Eyebrow
-                <input
-                  value={activePage.hero.eyebrow}
-                  onChange={(event) => updateHero("eyebrow", event.target.value)}
-                />
-              </label>
-              <label className="admin-field">
-                Headline
-                <input
-                  value={activePage.hero.title}
-                  onChange={(event) => updateHero("title", event.target.value)}
-                />
-              </label>
-              <label className="admin-field">
-                Lead copy
-                <textarea value={activePage.hero.lede} onChange={(event) => updateHero("lede", event.target.value)} />
-              </label>
-              <div className="admin-form-grid">
-                <label className="admin-field">
-                  Primary CTA label
-                  <input
-                    value={activePage.hero.primaryCtaLabel}
-                    onChange={(event) => updateHero("primaryCtaLabel", event.target.value)}
-                  />
-                </label>
-                <label className="admin-field">
-                  Primary CTA href
-                  <input
-                    value={activePage.hero.primaryCtaHref}
-                    onChange={(event) => updateHero("primaryCtaHref", event.target.value)}
-                  />
-                </label>
-                <label className="admin-field">
-                  Secondary CTA label
-                  <input
-                    value={activePage.hero.secondaryCtaLabel}
-                    onChange={(event) => updateHero("secondaryCtaLabel", event.target.value)}
-                  />
-                </label>
-                <label className="admin-field">
-                  Secondary CTA href
-                  <input
-                    value={activePage.hero.secondaryCtaHref}
-                    onChange={(event) => updateHero("secondaryCtaHref", event.target.value)}
-                  />
-                </label>
-              </div>
+              </article>
+              );
+            })
+          ) : (
+            <div className="admin-page-empty">
+              <strong>No pages match this view.</strong>
+              <p>Adjust the filters or search for a different page.</p>
             </div>
-
-            <label className="admin-field">
-              Internal notes
-              <textarea
-                value={activePage.notes}
-                onChange={(event) => updateActivePage({ notes: event.target.value })}
-              />
-            </label>
-          </div>
-
-          <div className="admin-settings-savebar">
-            <div>
-              <strong>{dirty ? "Unsaved page changes" : "Page content saved"}</strong>
-              <p className={saveState === "error" ? "is-error" : undefined}>{message || "Review before publishing."}</p>
-            </div>
-            <div>
-              <button className="admin-secondary-button" type="button" onClick={handleRevert} disabled={!dirty}>
-                Revert
-              </button>
-              <button className="admin-primary-button" type="submit" disabled={!dirty || saveState === "saving"}>
-                {saveState === "saving" ? "Saving..." : "Save page content"}
-              </button>
-            </div>
-          </div>
-        </section>
-      </form>
+          )}
+        </div>
+      </section>
     </main>
   );
 }
