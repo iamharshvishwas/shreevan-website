@@ -1,9 +1,83 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CalendarDays, CheckCircle2, Clock3, IndianRupee, MapPin, MessageCircle, ShieldCheck } from "lucide-react";
-import { SiteFooter } from "@/components/layout/site-footer";
-import { SiteHeader } from "@/components/layout/site-header";
+import { CalendarDays, CheckCircle2, Clock3, IndianRupee, MapPin, MessageCircle, Phone, ShieldCheck } from "lucide-react";
 import { SawanRetreatForm, SawanWhatsAppLink } from "@/components/campaigns/sawan-retreat-form";
+import { siteConfig } from "@/config/site";
+
+type CampaignVideo = {
+  mp4: string;
+  webm?: string;
+  poster: string;
+};
+
+const phoneNumber = "+91 91155 17667";
+const heroPoster = "/images/campaigns/sawan-shiv-sadhana-retreat-main.jpeg";
+const isSawanBookingClosed = () => new Date() >= new Date("2026-08-30T18:30:00.000Z");
+
+function getHeroVideo(): CampaignVideo | null {
+  return null;
+}
+
+function SawanCampaignHeader() {
+  return (
+    <header className="sawan-campaign-header" aria-label="Sawan retreat campaign header">
+      <div className="container sawan-campaign-header-inner">
+        <Link className="sawan-campaign-logo" href="/sawan-shiv-sadhana-retreat" aria-label="Shreevan Wellness Sawan Retreat">
+          <Image
+            src={siteConfig.logos.horizontalLockup}
+            alt="Shreevan Wellness"
+            width={626}
+            height={160}
+            priority
+          />
+        </Link>
+        <div className="sawan-campaign-contact" aria-label="Booking contact">
+          <a href="tel:+919115517667">
+            <Phone aria-hidden="true" size={18} />
+            {phoneNumber}
+          </a>
+          <SawanWhatsAppLink className="button button-primary sawan-header-whatsapp" label="Header_WhatsAppClick">
+            <MessageCircle aria-hidden="true" size={18} />
+            WhatsApp
+          </SawanWhatsAppLink>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+function SawanCampaignFooter() {
+  return (
+    <footer className="sawan-campaign-footer">
+      <div className="container sawan-campaign-footer-inner">
+        <div>
+          <Image
+            src={siteConfig.logos.avatar}
+            alt=""
+            width={72}
+            height={72}
+            loading="lazy"
+          />
+          <p>Shreevan Wellness</p>
+          <span>Rishikesh, India</span>
+        </div>
+        <nav aria-label="Campaign legal links">
+          <Link href="/privacy-policy">Privacy Policy</Link>
+          <Link href="/terms-conditions">Terms & Conditions</Link>
+          <Link href="/refund-policy">Refund Policy</Link>
+          <Link href="/wellness-disclaimer">Wellness Disclaimer</Link>
+        </nav>
+        <address>
+          <a href="tel:+919115517667">{phoneNumber}</a>
+          <SawanWhatsAppLink className="text-link" label="Footer_WhatsAppClick">
+            WhatsApp for booking details
+          </SawanWhatsAppLink>
+          <a href="mailto:contact@shreevanwellness.com">contact@shreevanwellness.com</a>
+        </address>
+      </div>
+    </footer>
+  );
+}
 
 const facts = [
   { icon: Clock3, label: "Duration", value: "3 Nights / 4 Days" },
@@ -135,12 +209,15 @@ const faqs = [
 export const sawanRetreatFaqs = faqs;
 
 export function SawanShivSadhanaPage() {
+  const bookingClosed = isSawanBookingClosed();
+  const heroVideo = getHeroVideo();
+
   return (
     <>
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <SiteHeader />
+      <SawanCampaignHeader />
       <main id="main" className="sawan-page">
         <section className="sawan-hero" aria-labelledby="sawan-title">
           <div className="container sawan-hero-grid">
@@ -152,7 +229,7 @@ export function SawanShivSadhanaPage() {
                 meditation, Ganga Aarti, sattvik meals and quiet stay in Rishikesh.
               </p>
               <div className="sawan-hero-actions">
-                <SawanWhatsAppLink className="button button-primary" label="hero_whatsapp">
+                <SawanWhatsAppLink className="button button-primary" label="Hero_WhatsAppClick">
                   <MessageCircle aria-hidden="true" size={20} />
                   WhatsApp for Booking Details
                 </SawanWhatsAppLink>
@@ -165,13 +242,28 @@ export function SawanShivSadhanaPage() {
               </p>
             </div>
             <div className="sawan-hero-card" aria-label="Retreat key facts">
-              <Image
-                src="/images/campaigns/sawan-shiv-sadhana-retreat-main.jpeg"
-                alt="Sawan Special Shiv Sadhana Retreat campaign artwork for Shreevan Wellness Rishikesh"
-                width={828}
-                height={1280}
-                priority
-              />
+              {heroVideo ? (
+                <video
+                  aria-label="Short preview of the Sawan Shiv Sadhana Retreat experience"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  poster={heroVideo.poster}
+                  preload="metadata"
+                >
+                  {heroVideo.webm ? <source src={heroVideo.webm} type="video/webm" /> : null}
+                  <source src={heroVideo.mp4} type="video/mp4" />
+                </video>
+              ) : (
+                <Image
+                  src={heroPoster}
+                  alt="Sawan Special Shiv Sadhana Retreat campaign artwork for Shreevan Wellness Rishikesh"
+                  width={828}
+                  height={1280}
+                  priority
+                />
+              )}
             </div>
           </div>
           <div className="container sawan-fact-grid" aria-label="Retreat details">
@@ -201,7 +293,7 @@ export function SawanShivSadhanaPage() {
                 The experience is devotional and structured, but not extreme. It is designed for guests who want
                 a clear retreat rhythm, practical care and transparent booking details before they travel.
               </p>
-              <SawanWhatsAppLink className="text-link sawan-text-cta" label="why_sawan_whatsapp">
+              <SawanWhatsAppLink className="text-link sawan-text-cta" label="WhySawan_WhatsAppClick">
                 Ask if this retreat suits you
               </SawanWhatsAppLink>
             </div>
@@ -319,6 +411,24 @@ export function SawanShivSadhanaPage() {
             <div>
               <p className="eyebrow light">Responsible Spiritual Wellness</p>
               <h2 id="responsible-title">Devotional practice, not medical treatment</h2>
+              <div className="sawan-proof-grid" aria-label="Retreat credibility proof to verify before launch">
+                {/* [INSERT VERIFIED DATA] Replace these placeholders only with documented founder credentials, operating history, ratings or testimonials. */}
+                <article>
+                  <span>Facilitator</span>
+                  <strong>Led by Dr. Isha Dutta</strong>
+                  <p>[INSERT VERIFIED CREDENTIAL LINE]</p>
+                </article>
+                <article>
+                  <span>Retreat history</span>
+                  <strong>[INSERT VERIFIED DATA]</strong>
+                  <p>Years operating or retreats hosted count.</p>
+                </article>
+                <article>
+                  <span>Guest proof</span>
+                  <strong>[INSERT VERIFIED DATA]</strong>
+                  <p>Google rating badge or short verified testimonial quote.</p>
+                </article>
+              </div>
               <p>
                 Shreevan Wellness presents this as a devotional spiritual wellness retreat, not as medical
                 treatment, therapy, diagnosis, detox or guaranteed healing. Practices such as chanting,
@@ -333,15 +443,22 @@ export function SawanShivSadhanaPage() {
           <div className="container sawan-booking-grid">
             <div className="sawan-price-card">
               <p className="eyebrow">Booking Details</p>
-              <h2 id="booking-title">Reserve your Sawan retreat slot</h2>
-              <div className="sawan-price">Starts from ₹21,000 only</div>
+              <h2 id="booking-title">
+                {bookingClosed ? "This Sawan batch is now closed" : "Reserve your Sawan retreat slot"}
+              </h2>
+              <div className="sawan-price">{bookingClosed ? "Next dates by request" : "Starts from ₹21,000 only"}</div>
+              <p className="sawan-urgency-line">
+                {bookingClosed
+                  ? "This Sawan batch is now closed — message us about the next available dates."
+                  : "Sawan retreat batches run only until 30 August."}
+              </p>
               <ul>
                 <li>3 Nights / 4 Days</li>
                 <li>Available between 30 July - 30 August</li>
                 <li>Rishikesh, India</li>
                 <li>Date availability and stay details confirmed before payment</li>
               </ul>
-              <SawanWhatsAppLink className="button button-primary" label="price_whatsapp">
+              <SawanWhatsAppLink className="button button-primary" label="PriceSection_WhatsAppClick">
                 WhatsApp +91 91155 17667
               </SawanWhatsAppLink>
             </div>
@@ -349,8 +466,9 @@ export function SawanShivSadhanaPage() {
               <p className="eyebrow">Request Details</p>
               <h2>Ask before you book</h2>
               <p>
-                Share a few details and the team will confirm availability, stay details, inclusions and next
-                booking steps.
+                {bookingClosed
+                  ? "Share a few details and the team will guide you toward the next available dates."
+                  : "Share a few details and the team will confirm availability, stay details, inclusions and next booking steps."}
               </p>
               <SawanRetreatForm />
             </div>
@@ -372,7 +490,7 @@ export function SawanShivSadhanaPage() {
               ))}
             </div>
             <div className="sawan-faq-cta">
-              <SawanWhatsAppLink className="button button-secondary" label="faq_whatsapp">
+              <SawanWhatsAppLink className="button button-secondary" label="FAQ_WhatsAppClick">
                 Ask a booking question on WhatsApp
               </SawanWhatsAppLink>
             </div>
@@ -383,15 +501,20 @@ export function SawanShivSadhanaPage() {
           <div className="container sawan-final-panel">
             <div>
               <p className="eyebrow light">Sawan Special</p>
-              <h2 id="final-title">Spend Sawan in a guided rhythm of devotion, silence and reflection.</h2>
+              <h2 id="final-title">
+                {bookingClosed
+                  ? "This Sawan batch is now closed — message us about the next available dates."
+                  : "Spend Sawan in a guided rhythm of devotion, silence and reflection."}
+              </h2>
               <p>
-                If the dates, practice and stay feel aligned, message the team and confirm whether this retreat
-                is suitable for you.
+                {bookingClosed
+                  ? "Saved links and shared posts can still help you reach the team for the next retreat window."
+                  : "Booking window closes with Sawan on 30 August. If the dates, practice and stay feel aligned, message the team and confirm whether this retreat is suitable for you."}
               </p>
             </div>
             <div className="sawan-final-actions">
-              <SawanWhatsAppLink className="button button-light" label="final_whatsapp">
-                Book your Sawan retreat slot
+              <SawanWhatsAppLink className="button button-light" label="FinalCTA_WhatsAppClick">
+                {bookingClosed ? "Ask for next retreat dates" : "Book your Sawan retreat slot"}
               </SawanWhatsAppLink>
               <Link className="button button-secondary" href="/contact">
                 Ask questions before booking
@@ -401,11 +524,11 @@ export function SawanShivSadhanaPage() {
         </section>
       </main>
       <div className="sawan-sticky-cta">
-        <SawanWhatsAppLink className="button button-primary" label="sticky_mobile_whatsapp">
+        <SawanWhatsAppLink className="button button-primary" label="StickyMobile_WhatsAppClick">
           WhatsApp for retreat details
         </SawanWhatsAppLink>
       </div>
-      <SiteFooter />
+      <SawanCampaignFooter />
     </>
   );
 }

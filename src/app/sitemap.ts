@@ -4,6 +4,8 @@ import { getPublicSiteOrigin, getPublicSiteSettings } from "@/lib/site/public-se
 
 export const dynamic = "force-dynamic";
 
+const sitemapExcludedPaths = new Set(["/sawan-shiv-sadhana-retreat"]);
+
 function routeLastModified(lastReviewedAt: string) {
   const parsed = new Date(lastReviewedAt);
 
@@ -18,7 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   const siteOrigin = getPublicSiteOrigin(settings);
-  const routes = await getPublicSitemapRoutes();
+  const routes = (await getPublicSitemapRoutes()).filter((route) => !sitemapExcludedPaths.has(route.href));
 
   return routes.map((route) => ({
     url: `${siteOrigin}${route.href === "/" ? "" : route.href}`,

@@ -4,22 +4,49 @@ import type { FormEvent, ReactNode } from "react";
 import { useState } from "react";
 import { formatPhoneWithCountryCode, WhatsAppPhoneFields } from "@/components/forms/whatsapp-phone-fields";
 
-type TrackingEventName = "Lead" | "Contact" | "WhatsAppClick";
+type WhatsAppTrackingLabel =
+  | "Hero_WhatsAppClick"
+  | "WhySawan_WhatsAppClick"
+  | "PriceSection_WhatsAppClick"
+  | "FAQ_WhatsAppClick"
+  | "FinalCTA_WhatsAppClick"
+  | "StickyMobile_WhatsAppClick"
+  | "Header_WhatsAppClick"
+  | "Footer_WhatsAppClick";
 
-function trackCampaignEvent(eventName: TrackingEventName, label: string) {
+type TrackingLabel = WhatsAppTrackingLabel | "FormSubmit_Lead";
+
+function trackCampaignEvent(label: TrackingLabel, kind: "whatsapp" | "lead") {
   const trackedWindow = window as typeof window & {
-    fbq?: (eventType: string, eventName: string, data?: Record<string, string>) => void;
+    fbq?: (eventType: "track" | "trackCustom", eventName: string, data?: Record<string, string>) => void;
     dataLayer?: Array<Record<string, string>>;
   };
 
-  trackedWindow.fbq?.("track", eventName, {
+  trackedWindow.fbq?.("trackCustom", label, {
     content_name: "Sawan Special Shiv Sadhana Retreat",
     content_category: "seasonal_retreat",
-    label,
   });
+
+  if (kind === "whatsapp") {
+    trackedWindow.fbq?.("track", "Contact", {
+      content_name: "Sawan Special Shiv Sadhana Retreat",
+      content_category: "seasonal_retreat",
+      label,
+    });
+  }
+
+  if (kind === "lead") {
+    trackedWindow.fbq?.("track", "Lead", {
+      content_name: "Sawan Special Shiv Sadhana Retreat",
+      content_category: "seasonal_retreat",
+      label,
+    });
+  }
+
   trackedWindow.dataLayer?.push({
-    event: `sawan_${label}`,
+    event: label,
     campaign: "sawan_shiv_sadhana_retreat",
+    interaction_type: kind,
   });
 }
 
@@ -40,7 +67,6 @@ export function SawanRetreatForm() {
     const form = event.currentTarget;
     const formData = new FormData(form);
     const name = String(formData.get("name") ?? "");
-    const email = String(formData.get("email") ?? "");
     const phoneCountryCode = String(formData.get("phoneCountryCode") ?? "");
     const whatsapp = String(formData.get("whatsapp") ?? "");
     const phone = formatPhoneWithCountryCode(phoneCountryCode, whatsapp);
@@ -56,7 +82,7 @@ export function SawanRetreatForm() {
       body: JSON.stringify({
         source: "home-suitability",
         name,
-        email,
+        email: "",
         phone,
         country: "India",
         program: "Sawan Special Shiv Sadhana Retreat",
@@ -64,7 +90,7 @@ export function SawanRetreatForm() {
         dates: preferredDate,
         season: "Sawan",
         message: `Preferred date: ${preferredDate || "Not specified"}\nGuests: ${guests || "Not specified"}\n${message}`,
-        consent: formData.get("consent") === "on",
+        consent: formData.get("wellnessConsent") === "on" && formData.get("contactConsent") === "on",
       }),
     }).catch(() => {});
 
@@ -74,18 +100,20 @@ export function SawanRetreatForm() {
       body: JSON.stringify({
         form: "Sawan Shiv Sadhana Retreat enquiry",
         name,
-        email,
+        email: "",
         phone,
         phoneCountryCode,
         whatsapp,
         country: "India",
         program: "Sawan Special Shiv Sadhana Retreat",
         message: `Preferred date: ${preferredDate || "Not specified"}\nGuests: ${guests || "Not specified"}\n${message}`,
+        wellnessConsent: formData.get("wellnessConsent") === "on",
+        contactConsent: formData.get("contactConsent") === "on",
       }),
       keepalive: true,
     }).catch(() => {});
 
-    trackCampaignEvent("Lead", "form_submit");
+    trackCampaignEvent("FormSubmit_Lead", "lead");
     form.reset();
     setStatus("Thank you. Our team will share availability, stay details and booking next steps.");
   }
@@ -102,13 +130,9 @@ export function SawanRetreatForm() {
           <label htmlFor="sawan-name">Full name</label>
           <input id="sawan-name" name="name" autoComplete="name" required />
         </div>
-        <div className="form-row">
-          <label htmlFor="sawan-email">Email address</label>
-          <input id="sawan-email" name="email" type="email" autoComplete="email" required />
-        </div>
       </div>
 
-      <WhatsAppPhoneFields defaultCode="+91" idPrefix="sawan" />
+      <WhatsAppPhoneFields defaultCode="+91" idPrefix="sawan" required />
 
       <div className="form-grid">
         <div className="form-row">
@@ -133,8 +157,12 @@ export function SawanRetreatForm() {
       </div>
 
       <label className="checkbox-row">
-        <input type="checkbox" name="consent" required />
+        <input type="checkbox" name="wellnessConsent" required />
         <span>I understand this is a spiritual wellness retreat enquiry, not medical advice.</span>
+      </label>
+      <label className="checkbox-row">
+        <input type="checkbox" name="contactConsent" required />
+        <span>I agree to be contacted via WhatsApp/Email regarding this enquiry.</span>
       </label>
 
       <button className="button button-primary" type="submit" disabled={locked}>
@@ -147,12 +175,12 @@ export function SawanRetreatForm() {
   );
 }
 
-export function trackSawanWhatsAppClick(label: string) {
+export function trackSawanWhatsAppClick(label: WhatsAppTrackingLabel) {
   if (typeof window === "undefined") {
     return;
   }
 
-  trackCampaignEvent("WhatsAppClick", label);
+  trackCampaignEvent(label, "whatsapp");
 }
 
 export function SawanWhatsAppLink({
@@ -162,13 +190,13 @@ export function SawanWhatsAppLink({
 }: Readonly<{
   children: ReactNode;
   className: string;
-  label: string;
+  label: WhatsAppTrackingLabel;
 }>) {
   return (
     <a
       className={className}
       href="https://wa.me/919115517667?text=Namaste%20Shreevan%20Wellness%2C%20I%20want%20details%20for%20the%20Sawan%20Special%20Shiv%20Sadhana%20Retreat."
-      onClick={() => trackCampaignEvent("WhatsAppClick", label)}
+      onClick={() => trackCampaignEvent(label, "whatsapp")}
       rel="noopener noreferrer"
       target="_blank"
     >

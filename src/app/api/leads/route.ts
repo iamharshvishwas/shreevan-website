@@ -65,8 +65,8 @@ export async function POST(request: Request) {
     consent: booleanValue(body.consent),
   };
 
-  if (!leadInput.name || !leadInput.email) {
-    return NextResponse.json({ error: "Name and email are required." }, { status: 400 });
+  if (!leadInput.name || (!leadInput.email && !leadInput.phone)) {
+    return NextResponse.json({ error: "Name and either email or phone are required." }, { status: 400 });
   }
 
   if (!leadInput.consent) {

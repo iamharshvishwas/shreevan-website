@@ -1849,6 +1849,53 @@ main [id] { scroll-margin-top: 132px; }
    Sawan Shiv Sadhana campaign landing page
    ============================================================ */
 
+.sawan-campaign-header {
+  border-bottom: 1px solid var(--line-sand);
+  background: rgba(255, 251, 244, 0.96);
+}
+
+.sawan-campaign-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(18px, 3vw, 40px);
+  min-height: 92px;
+  padding-block: 12px;
+}
+
+.sawan-campaign-logo {
+  display: inline-flex;
+  align-items: center;
+  max-width: min(320px, 54vw);
+}
+
+.sawan-campaign-logo img {
+  width: 100%;
+  height: auto;
+}
+
+.sawan-campaign-contact {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.sawan-campaign-contact > a:not(.button) {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--forest-800);
+  font-size: 0.98rem;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.sawan-header-whatsapp {
+  min-height: 46px;
+  padding-inline: 20px;
+}
+
 .sawan-page { background: var(--sand-050); }
 
 .sawan-hero {
@@ -1901,11 +1948,14 @@ main [id] { scroll-margin-top: 132px; }
   background: var(--white);
   box-shadow: var(--shadow-lg);
   padding: 12px;
+  aspect-ratio: 828 / 1280;
+  overflow: hidden;
 }
 
-.sawan-hero-card img {
+.sawan-hero-card img,
+.sawan-hero-card video {
   width: 100%;
-  height: auto;
+  height: 100%;
   border-radius: 12px;
   object-fit: cover;
 }
@@ -2152,6 +2202,45 @@ main [id] { scroll-margin-top: 132px; }
   color: var(--gold-500);
 }
 
+.sawan-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.sawan-proof-grid article {
+  border: 1px solid rgba(211, 224, 216, 0.18);
+  border-radius: var(--radius-callout);
+  background: rgba(255, 255, 255, 0.055);
+  padding: 16px;
+}
+
+.sawan-proof-grid span {
+  display: block;
+  color: var(--gold-500);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.sawan-proof-grid strong {
+  display: block;
+  margin-top: 10px;
+  color: var(--white);
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.sawan-proof-grid p {
+  margin-top: 8px;
+  color: rgba(232, 240, 236, 0.72);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
 .sawan-responsible-panel ul {
   display: grid;
   gap: 12px;
@@ -2178,6 +2267,18 @@ main [id] { scroll-margin-top: 132px; }
   font-family: var(--font-heading);
   font-size: clamp(2.1rem, 4vw, 4.2rem);
   line-height: 1.05;
+}
+
+.sawan-urgency-line {
+  display: inline-flex;
+  max-width: 520px;
+  border: 1px solid var(--line-sand);
+  border-radius: var(--radius-callout);
+  background: var(--sand-050);
+  color: var(--forest-800) !important;
+  font-size: 0.98rem;
+  font-weight: 850;
+  padding: 12px 14px;
 }
 
 .sawan-price-card p {
@@ -2230,6 +2331,8 @@ main [id] { scroll-margin-top: 132px; }
 .sawan-form .checkbox-row { align-items: flex-start; }
 .sawan-form .button { justify-self: start; margin-top: 2px; }
 
+.sawan-form > .form-grid:first-child { grid-template-columns: 1fr; }
+
 .sawan-faq-section { background: var(--sand-050); }
 .sawan-faq-cta {
   display: flex;
@@ -2247,6 +2350,51 @@ main [id] { scroll-margin-top: 132px; }
 
 .sawan-sticky-cta { display: none; }
 
+.sawan-campaign-footer {
+  background: var(--forest-950);
+  color: rgba(232, 240, 236, 0.76);
+}
+
+.sawan-campaign-footer-inner {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(280px, 1.1fr) minmax(220px, 0.75fr);
+  gap: clamp(28px, 5vw, 72px);
+  padding-block: clamp(36px, 5vw, 64px);
+}
+
+.sawan-campaign-footer img {
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.sawan-campaign-footer p {
+  margin-top: 16px;
+  color: var(--white);
+  font-size: 1.2rem;
+  font-weight: 850;
+}
+
+.sawan-campaign-footer span {
+  display: block;
+  margin-top: 8px;
+}
+
+.sawan-campaign-footer nav,
+.sawan-campaign-footer address {
+  display: grid;
+  gap: 12px;
+  font-style: normal;
+}
+
+.sawan-campaign-footer a {
+  color: rgba(232, 240, 236, 0.78);
+  font-weight: 750;
+}
+
+.sawan-campaign-footer a:hover {
+  color: var(--white);
+}
+
 @media (max-width: 1180px) {
   .sawan-hero-grid,
   .sawan-split,
@@ -2261,6 +2409,8 @@ main [id] { scroll-margin-top: 132px; }
   .sawan-hero-copy { max-width: none; }
   .sawan-highlight-grid,
   .sawan-timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sawan-proof-grid,
+  .sawan-campaign-footer-inner { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 860px) {
@@ -2269,9 +2419,19 @@ main [id] { scroll-margin-top: 132px; }
   .sawan-form .form-grid { grid-template-columns: 1fr; }
   .sawan-poster-stack { grid-template-columns: 1fr; }
   .sawan-poster-stack img:first-child { transform: none; }
+  .sawan-campaign-header-inner,
+  .sawan-campaign-contact {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
 
 @media (max-width: 640px) {
+  .sawan-campaign-logo { max-width: 260px; }
+  .sawan-campaign-contact,
+  .sawan-campaign-contact > a,
+  .sawan-header-whatsapp { width: 100%; }
+  .sawan-campaign-contact > a:not(.button) { justify-content: center; }
   .sawan-hero { padding-block: 46px 34px; }
   .sawan-hero-copy h1 { font-size: clamp(3rem, 14vw, 4.2rem); }
   .sawan-hero-actions .button,

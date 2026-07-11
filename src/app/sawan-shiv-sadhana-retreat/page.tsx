@@ -13,17 +13,34 @@ const pageDescription =
 const pageUrl = `${siteConfig.url}${pagePath}`;
 const campaignImage = absoluteSiteUrl("/images/campaigns/sawan-shiv-sadhana-retreat-main.jpeg");
 
-export const metadata: Metadata = buildPageMetadata({
-  title: pageTitle,
-  description: pageDescription,
-  path: pagePath,
-  image: {
-    url: campaignImage,
-    width: 828,
-    height: 1280,
-    alt: "Sawan Special Shiv Sadhana Retreat at Shreevan Wellness Rishikesh",
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  ...buildPageMetadata({
+    title: pageTitle,
+    description: pageDescription,
+    path: pagePath,
+    robots: {
+      index: false,
+      follow: true,
+      googleBot: {
+        index: false,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+    image: {
+      url: campaignImage,
+      width: 828,
+      height: 1280,
+      alt: "Sawan Special Shiv Sadhana Retreat at Shreevan Wellness Rishikesh",
+    },
+  }),
+  alternates: {
+    canonical: pageUrl,
   },
-});
+};
 
 export default function Page() {
   return (

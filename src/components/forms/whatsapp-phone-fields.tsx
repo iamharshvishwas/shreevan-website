@@ -21,6 +21,7 @@ type WhatsAppPhoneFieldsProps = {
   codeValue?: string;
   phoneValue?: string;
   defaultCode?: string;
+  required?: boolean;
   onCodeChange?: (value: string) => void;
   onPhoneChange?: (value: string) => void;
 };
@@ -39,6 +40,7 @@ export function WhatsAppPhoneFields({
   codeValue,
   phoneValue,
   defaultCode = "+1",
+  required = false,
   onCodeChange,
   onPhoneChange,
 }: Readonly<WhatsAppPhoneFieldsProps>) {
@@ -70,6 +72,7 @@ export function WhatsAppPhoneFields({
           autoComplete="tel-national"
           placeholder="Phone number"
           value={phoneValue}
+          required={required}
           onChange={(event) => onPhoneChange?.(event.target.value)}
         />
       </div>
