@@ -1844,3 +1844,455 @@ main [id] { scroll-margin-top: 132px; }
 .admin-link-suggestions em { color: #1f7a4d; font-style: normal; font-size: 0.78rem; font-weight: 700; }
 
 .admin-article-faq-row { display: grid; gap: 8px; border: 1px solid var(--line-sand); border-radius: 10px; padding: 12px; }
+
+/* ============================================================
+   Sawan Shiv Sadhana campaign landing page
+   ============================================================ */
+
+.sawan-page { background: var(--sand-050); }
+
+.sawan-hero {
+  overflow: hidden;
+  padding-block: clamp(64px, 8vw, 104px) 48px;
+  background:
+    radial-gradient(circle at 92% 12%, rgba(181, 139, 58, 0.14), transparent 34%),
+    linear-gradient(180deg, var(--sand-050), #fbf7ee);
+}
+
+.sawan-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(320px, 0.43fr);
+  gap: clamp(36px, 5.2vw, 74px);
+  align-items: center;
+}
+
+.sawan-hero-copy { max-width: 860px; }
+.sawan-hero-copy h1 { font-size: clamp(3.65rem, 6.2vw, 7rem); line-height: 0.98; }
+
+.sawan-hero-lede {
+  max-width: 760px;
+  margin-top: 24px;
+  color: var(--stone-600);
+  font-size: clamp(1.05rem, 1.22vw, 1.24rem);
+  line-height: 1.64;
+}
+
+.sawan-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.sawan-hero-actions .button { gap: 10px; }
+
+.sawan-trust-note {
+  max-width: 680px;
+  margin-top: 18px;
+  color: var(--forest-700);
+  font-size: 0.93rem;
+  font-weight: 820;
+  line-height: 1.5;
+}
+
+.sawan-hero-card {
+  border: 1px solid var(--line-sand);
+  border-radius: 18px;
+  background: var(--white);
+  box-shadow: var(--shadow-lg);
+  padding: 12px;
+}
+
+.sawan-hero-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.sawan-fact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.sawan-fact {
+  display: grid;
+  gap: 8px;
+  border: 1px solid var(--line-sand);
+  border-radius: var(--radius-callout);
+  background: rgba(255, 255, 255, 0.74);
+  padding: 18px;
+}
+
+.sawan-fact svg { color: var(--gold-600); }
+.sawan-fact span {
+  color: var(--moss-600);
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+.sawan-fact strong {
+  color: var(--forest-900);
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.sawan-sawan-section { background: var(--white); }
+
+.sawan-split,
+.sawan-care-grid,
+.sawan-booking-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1fr);
+  gap: clamp(36px, 5.2vw, 72px);
+  align-items: start;
+}
+
+.sawan-split h2,
+.sawan-care-grid h2,
+.sawan-price-card h2 { max-width: 780px; }
+
+.sawan-reading-card,
+.sawan-price-card,
+.sawan-form-card,
+.sawan-boundary-card {
+  border: 1px solid var(--line-sand);
+  border-radius: var(--radius-card);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.sawan-reading-card { padding: clamp(24px, 3.2vw, 40px); }
+.sawan-reading-card p {
+  color: var(--stone-600);
+  line-height: 1.72;
+}
+.sawan-reading-card p + p { margin-top: 16px; }
+.sawan-text-cta { display: inline-flex; margin-top: 24px; }
+
+.sawan-highlights-section { background: var(--sand-050); }
+.sawan-highlight-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.sawan-highlight-card {
+  min-height: 250px;
+  border: 1px solid var(--line-sand);
+  border-radius: var(--radius-card);
+  background: var(--white);
+  padding: 24px;
+}
+
+.sawan-highlight-card svg { color: var(--gold-600); }
+.sawan-highlight-card h3 { margin-top: 18px; font-size: clamp(1.16rem, 1.35vw, 1.4rem); }
+.sawan-highlight-card p {
+  margin-top: 12px;
+  color: var(--stone-600);
+  font-size: 0.96rem;
+  line-height: 1.55;
+}
+
+.sawan-rhythm-section,
+.sawan-responsible-section,
+.sawan-final-section {
+  background: var(--forest-950);
+  color: rgba(232, 240, 236, 0.78);
+}
+
+.sawan-rhythm-section h2,
+.sawan-rhythm-section h3,
+.sawan-responsible-section h2,
+.sawan-final-section h2 { color: var(--white); }
+
+.sawan-rhythm-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.52fr) minmax(0, 1fr);
+  gap: clamp(36px, 5.2vw, 72px);
+  align-items: start;
+}
+
+.sawan-rhythm-grid p:not(.eyebrow),
+.sawan-responsible-panel p:not(.eyebrow),
+.sawan-final-panel p {
+  margin-top: 20px;
+  color: rgba(232, 240, 236, 0.76);
+}
+
+.sawan-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.sawan-timeline article {
+  min-height: 280px;
+  border: 1px solid rgba(211, 224, 216, 0.2);
+  border-radius: var(--radius-card);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 24px;
+}
+
+.sawan-timeline span {
+  display: block;
+  color: var(--gold-500);
+  font-family: var(--font-heading);
+  font-size: 1.55rem;
+  line-height: 1;
+}
+
+.sawan-timeline h3 { margin-top: 22px; font-size: clamp(1.18rem, 1.5vw, 1.5rem); }
+.sawan-timeline p { margin-top: 12px; color: rgba(232, 240, 236, 0.72); line-height: 1.55; }
+
+.sawan-fit-section,
+.sawan-booking-section { background: var(--white); }
+
+.sawan-fit-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.sawan-fit-grid article {
+  border: 1px solid var(--line-sand);
+  border-radius: var(--radius-card);
+  background: var(--sand-050);
+  padding: 26px;
+}
+
+.sawan-fit-grid h3 { font-size: clamp(1.18rem, 1.5vw, 1.46rem); }
+.sawan-fit-grid ul,
+.sawan-care-list {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sawan-fit-grid li,
+.sawan-care-list li {
+  position: relative;
+  color: var(--stone-600);
+  line-height: 1.5;
+  padding-left: 24px;
+}
+
+.sawan-fit-grid li::before,
+.sawan-care-list li::before {
+  content: "";
+  position: absolute;
+  top: 0.65em;
+  left: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: var(--radius-pill);
+  background: var(--gold-500);
+}
+
+.sawan-boundary-card {
+  background: var(--mist-100);
+}
+
+.sawan-boundary-card p {
+  margin-top: 18px;
+  color: var(--stone-600);
+  line-height: 1.62;
+}
+
+.sawan-care-section {
+  background: linear-gradient(180deg, var(--sand-050), var(--white));
+}
+
+.sawan-care-grid p {
+  margin-top: 22px;
+  color: var(--stone-600);
+  line-height: 1.66;
+}
+
+.sawan-poster-stack {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: end;
+}
+
+.sawan-poster-stack img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line-sand);
+  border-radius: var(--radius-card);
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+}
+
+.sawan-poster-stack img:first-child { transform: translateY(-18px); }
+
+.sawan-responsible-panel,
+.sawan-final-panel {
+  display: grid;
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+  border: 1px solid rgba(211, 224, 216, 0.18);
+  border-radius: var(--radius-card);
+  background: rgba(255, 255, 255, 0.045);
+  padding: clamp(28px, 4.2vw, 52px);
+}
+
+.sawan-responsible-panel { grid-template-columns: auto minmax(0, 1fr); }
+.sawan-final-panel { grid-template-columns: minmax(0, 1fr) minmax(280px, 0.48fr); }
+
+.sawan-responsible-panel > svg {
+  align-self: start;
+  color: var(--gold-500);
+}
+
+.sawan-responsible-panel ul {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sawan-responsible-panel li {
+  border: 1px solid rgba(211, 224, 216, 0.18);
+  border-radius: var(--radius-callout);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(232, 240, 236, 0.78);
+  padding: 16px 18px;
+  line-height: 1.5;
+}
+
+.sawan-price-card,
+.sawan-form-card { padding: clamp(24px, 3.2vw, 42px); }
+
+.sawan-price {
+  margin-top: 26px;
+  color: var(--forest-900);
+  font-family: var(--font-heading);
+  font-size: clamp(2.1rem, 4vw, 4.2rem);
+  line-height: 1.05;
+}
+
+.sawan-price-card p {
+  margin-top: 18px;
+  color: var(--stone-600);
+  line-height: 1.62;
+}
+
+.sawan-price-card ul {
+  display: grid;
+  gap: 10px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sawan-price-card li {
+  position: relative;
+  color: var(--stone-600);
+  line-height: 1.45;
+  padding-left: 22px;
+}
+
+.sawan-price-card li::before {
+  content: "";
+  position: absolute;
+  top: 0.63em;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--gold-500);
+}
+
+.sawan-price-card .button { margin-top: 28px; }
+.sawan-form-card > p { margin-top: 12px; color: var(--stone-600); }
+
+.sawan-form {
+  display: grid;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.sawan-form .form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.sawan-form .checkbox-row { align-items: flex-start; }
+.sawan-form .button { justify-self: start; margin-top: 2px; }
+
+.sawan-faq-section { background: var(--sand-050); }
+.sawan-faq-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.sawan-final-panel h2 { max-width: 880px; }
+.sawan-final-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.sawan-sticky-cta { display: none; }
+
+@media (max-width: 1180px) {
+  .sawan-hero-grid,
+  .sawan-split,
+  .sawan-care-grid,
+  .sawan-booking-grid,
+  .sawan-rhythm-grid,
+  .sawan-responsible-panel,
+  .sawan-final-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .sawan-hero-copy { max-width: none; }
+  .sawan-highlight-grid,
+  .sawan-timeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 860px) {
+  .sawan-fact-grid,
+  .sawan-fit-grid,
+  .sawan-form .form-grid { grid-template-columns: 1fr; }
+  .sawan-poster-stack { grid-template-columns: 1fr; }
+  .sawan-poster-stack img:first-child { transform: none; }
+}
+
+@media (max-width: 640px) {
+  .sawan-hero { padding-block: 46px 34px; }
+  .sawan-hero-copy h1 { font-size: clamp(3rem, 14vw, 4.2rem); }
+  .sawan-hero-actions .button,
+  .sawan-price-card .button,
+  .sawan-faq-cta .button,
+  .sawan-final-actions,
+  .sawan-final-actions .button { width: 100%; }
+  .sawan-highlight-grid,
+  .sawan-timeline { grid-template-columns: 1fr; }
+  .sawan-highlight-card,
+  .sawan-timeline article { min-height: auto; }
+  .sawan-sticky-cta {
+    position: fixed;
+    right: 14px;
+    bottom: 14px;
+    left: 14px;
+    z-index: 170;
+    display: block;
+  }
+  .sawan-sticky-cta .button {
+    width: 100%;
+    box-shadow: var(--shadow-lg);
+  }
+}
