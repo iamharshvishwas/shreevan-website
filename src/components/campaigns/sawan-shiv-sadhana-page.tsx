@@ -11,11 +11,32 @@ type CampaignVideo = {
 };
 
 const phoneNumber = "+91 91155 17667";
-const heroPoster = "/images/campaigns/sawan-shiv-sadhana-retreat-main.jpeg";
 const isSawanBookingClosed = () => new Date() >= new Date("2026-08-30T18:30:00.000Z");
 
 function getHeroVideo(): CampaignVideo | null {
   return null;
+}
+
+function SawanMediaFrame({
+  eyebrow,
+  title,
+  copy,
+  variant = "landscape",
+}: Readonly<{
+  eyebrow: string;
+  title: string;
+  copy: string;
+  variant?: "landscape" | "portrait" | "wide";
+}>) {
+  return (
+    <div className={`sawan-media-frame sawan-media-frame-${variant}`} role="img" aria-label={`${title} media placeholder`}>
+      <div>
+        <span>{eyebrow}</span>
+        <strong>{title}</strong>
+        <p>{copy}</p>
+      </div>
+    </div>
+  );
 }
 
 function SawanCampaignHeader() {
@@ -114,6 +135,24 @@ const highlights = [
   {
     title: "Comfortable Stay",
     copy: "Accommodation details, room type and availability are confirmed clearly before payment.",
+  },
+];
+
+const highlightMediaSlots = [
+  {
+    eyebrow: "Image slot",
+    title: "Rudra Abhishek / Shivling ritual moment",
+    copy: "Use real devotional practice footage or a respectful ritual still. Avoid exaggerated divine effects.",
+  },
+  {
+    eyebrow: "Image or video slot",
+    title: "Guided meditation and silence practice",
+    copy: "Show a calm, beginner-friendly group or facilitator-led practice in the retreat setting.",
+  },
+  {
+    eyebrow: "Image slot",
+    title: "Ganga Aarti / Rishikesh context",
+    copy: "Use authentic Rishikesh/Ganga atmosphere that connects the retreat to place and season.",
   },
 ];
 
@@ -256,12 +295,11 @@ export function SawanShivSadhanaPage() {
                   <source src={heroVideo.mp4} type="video/mp4" />
                 </video>
               ) : (
-                <Image
-                  src={heroPoster}
-                  alt="Sawan Special Shiv Sadhana Retreat campaign artwork for Shreevan Wellness Rishikesh"
-                  width={828}
-                  height={1280}
-                  priority
+                <SawanMediaFrame
+                  eyebrow="Hero image / short video slot"
+                  title="Sawan Shiv Sadhana Retreat visual"
+                  copy="Add a 15-20 sec muted retreat video or a strong poster image here. Recommended: real Rishikesh/property/ritual footage."
+                  variant="portrait"
                 />
               )}
             </div>
@@ -310,6 +348,11 @@ export function SawanShivSadhanaPage() {
                 or medical promises.
               </p>
             </div>
+            <div className="sawan-media-strip" aria-label="Retreat media slots">
+              {highlightMediaSlots.map((slot) => (
+                <SawanMediaFrame key={slot.title} {...slot} />
+              ))}
+            </div>
             <div className="sawan-highlight-grid">
               {highlights.map((item) => (
                 <article className="sawan-highlight-card" key={item.title}>
@@ -331,6 +374,11 @@ export function SawanShivSadhanaPage() {
                 The final schedule may vary slightly based on date, group size and local arrangements. The core
                 rhythm remains simple: arrival, devotional practice, meditation, reflection, meals and rest.
               </p>
+              <SawanMediaFrame
+                eyebrow="Video slot"
+                title="4-day retreat rhythm preview"
+                copy="Use a short vertical-to-horizontal edit showing arrival, practice space, meal, quiet walk and Ganga context."
+              />
             </div>
             <div className="sawan-timeline">
               {rhythm.map((item) => (
@@ -387,19 +435,17 @@ export function SawanShivSadhanaPage() {
               </ul>
             </div>
             <div className="sawan-poster-stack">
-              <Image
-                src="/images/campaigns/sawan-shiv-sadhana-retreat-highlights.jpeg"
-                alt="Retreat highlights for Sawan Shiv Sadhana Retreat"
-                width={1080}
-                height={1350}
-                loading="lazy"
+              <SawanMediaFrame
+                eyebrow="Image slot"
+                title="Comfortable stay / room clarity"
+                copy="Show the actual room, bedding, bathroom standard or stay environment that guests can expect before payment."
+                variant="portrait"
               />
-              <Image
-                src="/images/campaigns/sawan-shiv-sadhana-retreat-outcomes.jpeg"
-                alt="Responsible outcomes summary for Sawan Shiv Sadhana Retreat"
-                width={1080}
-                height={1350}
-                loading="lazy"
+              <SawanMediaFrame
+                eyebrow="Image slot"
+                title="Sattvik meals / care proof"
+                copy="Show simple vegetarian food, dining setup or guest-care detail. Keep it real and non-luxury exaggerated."
+                variant="portrait"
               />
             </div>
           </div>
