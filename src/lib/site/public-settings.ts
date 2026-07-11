@@ -11,6 +11,12 @@ function cleanText(value: string, fallback: string) {
   return value.trim() || fallback;
 }
 
+function cleanContactEmail(value: string) {
+  const email = cleanText(value, defaultPublicSiteSettings.contact.email);
+
+  return email.toLowerCase() === "hello@shreevanwellness.com" ? defaultPublicSiteSettings.contact.email : email;
+}
+
 function publicLink(link: AdminNavLink): PublicNavLink | null {
   const label = link.label.trim();
   const href = link.href.trim();
@@ -72,7 +78,7 @@ export const getPublicSiteSettings = unstable_cache(
       description: cleanText(settings.brand.description, defaultPublicSiteSettings.brand.description),
     },
     contact: {
-      email: cleanText(settings.contact.email, defaultPublicSiteSettings.contact.email),
+      email: cleanContactEmail(settings.contact.email),
       phone: cleanText(settings.contact.phone, defaultPublicSiteSettings.contact.phone),
       whatsapp: cleanText(settings.contact.whatsapp, defaultPublicSiteSettings.contact.whatsapp),
       address: cleanText(settings.contact.address, defaultPublicSiteSettings.contact.address),
