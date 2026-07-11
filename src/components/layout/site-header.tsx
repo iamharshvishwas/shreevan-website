@@ -3,19 +3,38 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { Mail, Phone } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { usePublicSiteSettings } from "@/components/site/public-settings-provider";
 import type { PublicNavLink } from "@/lib/site/public-settings-types";
+import { SocialIcon, type SocialIconName } from "@/components/social/social-icons";
 import styles from "./site-header.module.css";
 
 type ActiveMenu = string | null;
+type SocialLink = { label: string; href: string; icon: SocialIconName };
 
 const joinClassUrl = "https://class.shreevanwellness.com";
+
+function phoneHref(value: string) {
+  const normalized = value.replace(/[^\d+]/g, "");
+
+  return normalized ? `tel:${normalized}` : "";
+}
 
 export function SiteHeader() {
   const settings = usePublicSiteSettings();
   const [isOpen, setIsOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<ActiveMenu>(null);
+  const phoneLink = settings.contact.phone ? phoneHref(settings.contact.phone) : "";
+  const allSocialLinks: SocialLink[] = [
+    { label: "Instagram", href: settings.social.instagram, icon: "instagram" },
+    { label: "Facebook", href: settings.social.facebook, icon: "facebook" },
+    { label: "YouTube", href: settings.social.youtube, icon: "youtube" },
+    { label: "X", href: settings.social.x, icon: "x" },
+    { label: "Trustpilot", href: settings.social.trustpilot, icon: "trustpilot" },
+    { label: "Tripadvisor", href: settings.social.tripadvisor, icon: "tripadvisor" },
+  ];
+  const socialLinks = allSocialLinks.filter((item) => Boolean(item.href));
 
   function handleMenuHover(menu: ActiveMenu) {
     setActiveMenu(menu);
@@ -102,7 +121,37 @@ export function SiteHeader() {
   return (
     <>
       <div className="announcement">
-        <p>Now accepting enquiries for upcoming Shreevan Wellness retreats.</p>
+        <div className="container announcement-inner">
+          <div className="announcement-contact" aria-label="Contact Shreevan Wellness">
+            <a href={`mailto:${settings.contact.email}`}>
+              <Mail aria-hidden="true" size={14} strokeWidth={2} />
+              <span>{settings.contact.email}</span>
+            </a>
+            {phoneLink ? (
+              <a href={phoneLink}>
+                <Phone aria-hidden="true" size={14} strokeWidth={2} />
+                <span>{settings.contact.phone}</span>
+              </a>
+            ) : null}
+          </div>
+          <p>Now accepting enquiries for upcoming Shreevan Wellness retreats.</p>
+          {socialLinks.length ? (
+            <div className="announcement-social" aria-label="Follow Shreevan Wellness">
+              {socialLinks.map(({ label, href, icon }) => (
+                <a
+                  aria-label={`Follow Shreevan Wellness on ${label}`}
+                  href={href}
+                  key={label}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  title={label}
+                >
+                  <SocialIcon height={16} name={icon} width={16} />
+                </a>
+              ))}
+            </div>
+          ) : null}
+        </div>
       </div>
 
       <header className="site-header">
