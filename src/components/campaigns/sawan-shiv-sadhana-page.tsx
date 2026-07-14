@@ -39,6 +39,38 @@ function SawanMediaFrame({
   );
 }
 
+function SawanCampaignImage({
+  src,
+  alt,
+  variant = "landscape",
+  priority = false,
+}: Readonly<{
+  src: string;
+  alt: string;
+  variant?: "landscape" | "portrait" | "wide";
+  priority?: boolean;
+}>) {
+  return (
+    <div
+      className={`sawan-media-frame sawan-media-frame-${variant}`}
+      style={{ background: "var(--white)", borderStyle: "solid", padding: 0, position: "relative" }}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        priority={priority}
+        sizes={
+          variant === "portrait"
+            ? "(max-width: 720px) 100vw, (max-width: 1100px) 42vw, 28vw"
+            : "(max-width: 720px) 100vw, (max-width: 1100px) 50vw, 34vw"
+        }
+        style={{ objectFit: "cover" }}
+      />
+    </div>
+  );
+}
+
 function SawanCampaignHeader() {
   return (
     <header className="sawan-campaign-header" aria-label="Sawan retreat campaign header">
@@ -140,19 +172,19 @@ const highlights = [
 
 const highlightMediaSlots = [
   {
-    eyebrow: "Image slot",
     title: "Rudra Abhishek / Shivling ritual moment",
-    copy: "Use real devotional practice footage or a respectful ritual still. Avoid exaggerated divine effects.",
+    alt: "Guest performing a respectful Rudra Abhishek ritual at the Shreevan Wellness retreat in Rishikesh",
+    src: "/images/campaigns/sawan-shiv-sadhana/rudra-abhishek.webp",
   },
   {
-    eyebrow: "Image or video slot",
     title: "Guided meditation and silence practice",
-    copy: "Show a calm, beginner-friendly group or facilitator-led practice in the retreat setting.",
+    alt: "Small guided meditation group seated together in a Himalayan retreat setting",
+    src: "/images/campaigns/sawan-shiv-sadhana/guided-meditation-group.webp",
   },
   {
-    eyebrow: "Image slot",
     title: "Ganga Aarti / Rishikesh context",
-    copy: "Use authentic Rishikesh/Ganga atmosphere that connects the retreat to place and season.",
+    alt: "Guests attending an evening Ganga Aarti on the riverbank in Rishikesh",
+    src: "/images/campaigns/sawan-shiv-sadhana/ganga-aarti-rishikesh.webp",
   },
 ];
 
@@ -295,11 +327,11 @@ export function SawanShivSadhanaPage() {
                   <source src={heroVideo.mp4} type="video/mp4" />
                 </video>
               ) : (
-                <SawanMediaFrame
-                  eyebrow="Hero image / short video slot"
-                  title="Sawan Shiv Sadhana Retreat visual"
-                  copy="Add a 15-20 sec muted retreat video or a strong poster image here. Recommended: real Rishikesh/property/ritual footage."
+                <SawanCampaignImage
+                  src="/images/campaigns/sawan-shiv-sadhana/hero-shiv-sadhana-retreat.webp"
+                  alt="Guest in quiet meditation beside a Shivling at a Rishikesh retreat overlooking the Ganga"
                   variant="portrait"
+                  priority
                 />
               )}
             </div>
@@ -350,7 +382,7 @@ export function SawanShivSadhanaPage() {
             </div>
             <div className="sawan-media-strip" aria-label="Retreat media slots">
               {highlightMediaSlots.map((slot) => (
-                <SawanMediaFrame key={slot.title} {...slot} />
+                <SawanCampaignImage key={slot.title} {...slot} />
               ))}
             </div>
             <div className="sawan-highlight-grid">
@@ -441,10 +473,9 @@ export function SawanShivSadhanaPage() {
                 copy="Show the actual room, bedding, bathroom standard or stay environment that guests can expect before payment."
                 variant="portrait"
               />
-              <SawanMediaFrame
-                eyebrow="Image slot"
-                title="Sattvik meals / care proof"
-                copy="Show simple vegetarian food, dining setup or guest-care detail. Keep it real and non-luxury exaggerated."
+              <SawanCampaignImage
+                src="/images/campaigns/sawan-shiv-sadhana/sattvik-meal-care.webp"
+                alt="Sattvik vegetarian meal served with care at the Shreevan Wellness retreat"
                 variant="portrait"
               />
             </div>
