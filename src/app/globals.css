@@ -2245,9 +2245,9 @@ main [id] { scroll-margin-top: 132px; }
 
 .sawan-poster-stack {
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
-  align-items: end;
+  align-items: center;
 }
 
 .sawan-poster-stack img,
@@ -2258,9 +2258,6 @@ main [id] { scroll-margin-top: 132px; }
   background: var(--white);
   box-shadow: var(--shadow-md);
 }
-
-.sawan-poster-stack img:first-child,
-.sawan-poster-stack .sawan-media-frame:first-child { transform: translateY(-18px); }
 
 .sawan-responsible-panel,
 .sawan-final-panel {

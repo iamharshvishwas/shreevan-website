@@ -471,12 +471,12 @@ export function SawanShivSadhanaPage() {
                 eyebrow="Image slot"
                 title="Comfortable stay / room clarity"
                 copy="Show the actual room, bedding, bathroom standard or stay environment that guests can expect before payment."
-                variant="portrait"
+                variant="landscape"
               />
               <SawanCampaignImage
                 src="/images/campaigns/sawan-shiv-sadhana/sattvik-meal-care.webp"
                 alt="Sattvik vegetarian meal served with care at the Shreevan Wellness retreat"
-                variant="portrait"
+                variant="landscape"
               />
             </div>
           </div>
