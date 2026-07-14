@@ -13,6 +13,148 @@ type CampaignVideo = {
 const phoneNumber = "+91 91155 17667";
 const isSawanBookingClosed = () => new Date() >= new Date("2026-08-30T18:30:00.000Z");
 
+const sawanMobileContainmentStyles = `
+@media (max-width: 760px) {
+  .sawan-page,
+  .sawan-page * {
+    box-sizing: border-box;
+  }
+
+  .sawan-page {
+    max-width: 100vw;
+    overflow-x: clip;
+  }
+
+  .sawan-page .container,
+  .sawan-campaign-header .container,
+  .sawan-campaign-footer .container {
+    width: min(100%, calc(100vw - 32px));
+    max-width: calc(100vw - 32px);
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .sawan-rhythm-section,
+  .sawan-fit-section,
+  .sawan-booking-section {
+    overflow-x: clip;
+  }
+
+  .sawan-rhythm-grid,
+  .sawan-fit-grid,
+  .sawan-booking-grid,
+  .sawan-split,
+  .sawan-care-grid,
+  .sawan-hero-grid,
+  .sawan-form .form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sawan-rhythm-grid > *,
+  .sawan-fit-grid > *,
+  .sawan-booking-grid > *,
+  .sawan-form-card,
+  .sawan-price-card,
+  .sawan-media-frame {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .sawan-rhythm-section {
+    padding-block: 56px;
+  }
+
+  .sawan-rhythm-grid h2,
+  .sawan-fit-section h2,
+  .sawan-form-card h2,
+  .sawan-price-card h2 {
+    max-width: 100%;
+    font-size: clamp(2.35rem, 11.2vw, 3.7rem);
+    line-height: 1.02;
+    overflow-wrap: anywhere;
+  }
+
+  .sawan-rhythm-grid p:not(.eyebrow),
+  .sawan-booking-grid p,
+  .sawan-fit-grid li {
+    max-width: 100%;
+    font-size: 1.02rem;
+    line-height: 1.62;
+  }
+
+  .sawan-rhythm-grid .sawan-media-frame,
+  .sawan-media-frame {
+    width: 100%;
+  }
+
+  .sawan-fit-grid article,
+  .sawan-form-card,
+  .sawan-price-card {
+    padding: 22px;
+    border-radius: 22px;
+  }
+
+  .sawan-fit-grid li,
+  .sawan-care-list li,
+  .sawan-price-card li {
+    padding-left: 22px;
+  }
+
+  .sawan-form .button,
+  .sawan-form .field,
+  .sawan-form input,
+  .sawan-form select,
+  .sawan-form textarea {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .sawan-sticky-cta {
+    left: 14px;
+    right: 86px;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    width: auto;
+    max-width: none;
+    transform: none;
+  }
+
+  .sawan-sticky-cta .button {
+    min-height: 56px;
+    justify-content: center;
+    padding-inline: 14px;
+    font-size: 0.98rem;
+    line-height: 1.15;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 420px) {
+  .sawan-page .container,
+  .sawan-campaign-header .container,
+  .sawan-campaign-footer .container {
+    width: min(100%, calc(100vw - 28px));
+    max-width: calc(100vw - 28px);
+  }
+
+  .sawan-rhythm-grid h2,
+  .sawan-fit-section h2,
+  .sawan-form-card h2,
+  .sawan-price-card h2 {
+    font-size: clamp(2.1rem, 10.8vw, 3.25rem);
+  }
+
+  .sawan-sticky-cta {
+    left: 12px;
+    right: 78px;
+  }
+
+  .sawan-sticky-cta .button {
+    padding-inline: 12px;
+    font-size: 0.92rem;
+  }
+}
+`;
+
 function getHeroVideo(): CampaignVideo | null {
   return null;
 }
@@ -606,6 +748,7 @@ export function SawanShivSadhanaPage() {
         </SawanWhatsAppLink>
       </div>
       <SawanCampaignFooter />
+      <style>{sawanMobileContainmentStyles}</style>
     </>
   );
 }
