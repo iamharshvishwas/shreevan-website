@@ -234,9 +234,15 @@ export function FourteenDayTransformationPage() {
             </div>
 
             <div className="program-hero-media">
-              <div className="image-slot program-hero-slot">
-                <span>Image slot</span>
-                <p>Transformation workshop, Ganga walk, sound bath, silent retreat or closing ceremony</p>
+              <div className="image-slot home-media-slot has-media program-hero-slot">
+                <img
+                  src="/images/programs/14-day-transformation-hero-arrival.webp"
+                  alt="Guest arriving at Shreevan Wellness for the 14-day Ganga Sattva Transformation retreat in Rishikesh"
+                  width="2400"
+                  height="1792"
+                  loading="eager"
+                  decoding="async"
+                />
               </div>
               <aside className="program-summary-card" aria-label="Program summary">
                 <Image src={siteConfig.logos.symbol} alt="" width={72} height={72} />
@@ -454,13 +460,31 @@ export function FourteenDayTransformationPage() {
                 coaching and graduation. The page should feel grounded, not mystical or overpromising.
               </p>
               <div className="program-media-slots">
-                <div className="image-slot">
-                  <span>Image slot</span>
-                  <p>Group coaching circle</p>
+                <div className="image-slot home-media-slot has-media">
+                  <img
+                    src="/images/programs/14-day-transformation-coaching-circle.webp"
+                    alt="Small group coaching circle with notebooks during the 14-day transformation retreat"
+                    width="2400"
+                    height="1792"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="home-media-caption">
+                    <span>Group coaching circle</span>
+                  </div>
                 </div>
-                <div className="image-slot">
-                  <span>Image slot</span>
-                  <p>Silent reflection</p>
+                <div className="image-slot home-media-slot has-media">
+                  <img
+                    src="/images/programs/14-day-transformation-silent-reflection.webp"
+                    alt="Guest in silent reflection beside mountain-facing windows during the 14-day retreat"
+                    width="2400"
+                    height="1792"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="home-media-caption">
+                    <span>Silent reflection</span>
+                  </div>
                 </div>
               </div>
             </div>
