@@ -201,16 +201,16 @@ export const getPublicJournalContent = unstable_cache(
   async function getPublicJournalContent(): Promise<PublicJournalContent> {
   const store = await readStoreWithFallback();
   const articles = publicJournalArticles(store.journalArticles).map(toPublicJournalArticle);
-  const fallbackArticles = publicJournalArticles(defaultAdminContentTrust.journalArticles).map(toPublicJournalArticle);
-  const sourceArticles = fallbackIfEmpty(articles, fallbackArticles);
   const featuredArticleIds = store.journalArticles
     .filter((article) => publicJournalArticles([article]).length && article.featured)
     .map((article) => article.id);
 
   return {
     categories: fallbackIfEmpty(store.journalCategories, defaultAdminContentTrust.journalCategories),
-    articles: sourceArticles,
-    editorPicks: fallbackIfEmpty(featuredArticleIds, defaultAdminContentTrust.journalArticles.filter((article) => article.featured).map((article) => article.id)),
+    // An empty list is a valid publishing state. Do not revive seeded articles
+    // when every saved post is draft, archived, or scheduled for the future.
+    articles,
+    editorPicks: featuredArticleIds,
   };
   },
   ["public-journal-content"],
