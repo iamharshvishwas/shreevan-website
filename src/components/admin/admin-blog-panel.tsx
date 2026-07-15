@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { countWords, readTimeLabel, RichTextEditor } from "@/components/admin/rich-text-editor/rich-text-editor";
 import { analyzeArticleSeo } from "@/lib/content/article-seo";
@@ -22,6 +22,7 @@ type UploadState = "idle" | "uploading" | "error";
 type BlogView = "list" | "editor";
 type StatusFilter = "all" | AdminContentStatus;
 type SortMode = "updated-desc" | "title-asc" | "status-asc" | "date-desc";
+type BulkAction = "" | "publish" | "draft" | "archive";
 
 const emptyCoverMedia: NonNullable<AdminJournalArticle["coverMedia"]> = {
   kind: "",
@@ -492,6 +493,9 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
   const [uploadState, setUploadState] = useState<UploadState>("idle");
   const [message, setMessage] = useState("");
   const [backupPrompt, setBackupPrompt] = useState<{ savedAt: number } | null>(null);
+  const [selectedArticleIds, setSelectedArticleIds] = useState<string[]>([]);
+  const [bulkAction, setBulkAction] = useState<BulkAction>("");
+  const selectAllRef = useRef<HTMLInputElement>(null);
 
   const categories = useMemo(() => blog.journalCategories.filter((category) => category !== "All"), [blog.journalCategories]);
   const activeArticle =
@@ -650,6 +654,21 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
       return (b.updatedAt ?? "").localeCompare(a.updatedAt ?? "");
     });
   }, [blog.journalArticles, categoryFilter, query, sortMode, statusFilter]);
+  const selectedArticleIdSet = useMemo(() => new Set(selectedArticleIds), [selectedArticleIds]);
+  const visibleArticleIds = useMemo(() => filteredArticles.map((article) => article.id), [filteredArticles]);
+  const selectedVisibleCount = visibleArticleIds.filter((id) => selectedArticleIdSet.has(id)).length;
+  const allVisibleSelected = visibleArticleIds.length > 0 && selectedVisibleCount === visibleArticleIds.length;
+
+  useEffect(() => {
+    const knownIds = new Set(blog.journalArticles.map((article) => article.id));
+    setSelectedArticleIds((current) => current.filter((id) => knownIds.has(id)));
+  }, [blog.journalArticles]);
+
+  useEffect(() => {
+    if (selectAllRef.current) {
+      selectAllRef.current.indeterminate = selectedVisibleCount > 0 && !allVisibleSelected;
+    }
+  }, [allVisibleSelected, selectedVisibleCount]);
 
   function setBlogWithArticle(articleId: string, patch: Partial<AdminJournalArticle>) {
     setBlog((current) => ({
@@ -855,6 +874,57 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
 
     setBlogWithArticle(articleId, { status: "archived" });
     setMessage("Blog archived. Save to hide it from public Journal.");
+  }
+
+  function toggleArticleSelection(articleId: string) {
+    setSelectedArticleIds((current) =>
+      current.includes(articleId) ? current.filter((id) => id !== articleId) : [...current, articleId],
+    );
+  }
+
+  function toggleVisibleArticleSelection() {
+    setSelectedArticleIds((current) => {
+      if (allVisibleSelected) {
+        const visibleIds = new Set(visibleArticleIds);
+        return current.filter((id) => !visibleIds.has(id));
+      }
+
+      return [...new Set([...current, ...visibleArticleIds])];
+    });
+  }
+
+  async function applyBulkAction() {
+    if (!bulkAction) {
+      setSaveState("error");
+      setMessage("Choose a bulk action first.");
+      return;
+    }
+
+    if (!selectedArticleIds.length) {
+      setSaveState("error");
+      setMessage("Select at least one blog post before applying a bulk action.");
+      return;
+    }
+
+    const status: AdminContentStatus =
+      bulkAction === "publish" ? "published" : bulkAction === "draft" ? "draft" : "archived";
+    const selectedIds = new Set(selectedArticleIds);
+    const nextBlog: AdminBlogStore = {
+      ...blog,
+      journalArticles: blog.journalArticles.map((article) =>
+        selectedIds.has(article.id)
+          ? { ...article, status, scheduledAt: "" }
+          : article,
+      ),
+    };
+    const actionLabel = bulkAction === "publish" ? "published" : bulkAction === "draft" ? "moved to draft" : "archived";
+    const saved = await persistBlog(nextBlog);
+
+    if (saved) {
+      setSelectedArticleIds([]);
+      setBulkAction("");
+      setMessage(`${selectedIds.size} post${selectedIds.size === 1 ? "" : "s"} ${actionLabel}.`);
+    }
   }
 
   async function persistBlog(nextBlog: AdminBlogStore, nextActiveId = activeArticleId) {
@@ -1244,8 +1314,34 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
             </label>
           </div>
 
+          <div className="admin-blog-bulk-toolbar" aria-label="Bulk actions">
+            <strong>{selectedArticleIds.length ? `${selectedArticleIds.length} selected` : "Select posts"}</strong>
+            <label className="admin-field">
+              Bulk action
+              <select value={bulkAction} onChange={(event) => setBulkAction(event.target.value as BulkAction)}>
+                <option value="">Choose action</option>
+                <option value="publish">Publish</option>
+                <option value="draft">Move to Draft</option>
+                <option value="archive">Archive</option>
+              </select>
+            </label>
+            <button className="admin-secondary-button" type="button" onClick={() => void applyBulkAction()} disabled={saveState === "saving"}>
+              Apply
+            </button>
+            {selectedArticleIds.length ? <button className="admin-text-button" type="button" onClick={() => setSelectedArticleIds([])}>Clear selection</button> : null}
+          </div>
+
           <div className="admin-blog-table" role="table" aria-label="Blog posts">
             <div className="admin-blog-table-head" role="row">
+              <span className="admin-blog-select-cell">
+                <input
+                  ref={selectAllRef}
+                  type="checkbox"
+                  checked={allVisibleSelected}
+                  onChange={toggleVisibleArticleSelection}
+                  aria-label="Select all visible blog posts"
+                />
+              </span>
               <span>Title</span>
               <span>Slug</span>
               <span>Category</span>
@@ -1259,6 +1355,14 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
             {filteredArticles.length ? (
               filteredArticles.map((article) => (
                 <article className="admin-blog-row" key={article.id} role="row">
+                  <span className="admin-blog-select-cell">
+                    <input
+                      type="checkbox"
+                      checked={selectedArticleIdSet.has(article.id)}
+                      onChange={() => toggleArticleSelection(article.id)}
+                      aria-label={`Select ${article.title}`}
+                    />
+                  </span>
                   <div className="admin-blog-title-cell">
                     <strong>{article.title}</strong>
                     <small>{article.excerpt || "No excerpt yet"}</small>

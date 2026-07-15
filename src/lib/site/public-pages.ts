@@ -3,6 +3,7 @@ import "server-only";
 import { unstable_cache } from "next/cache";
 import { readAdminPageContent } from "@/lib/admin/page-content";
 import type { AdminManagedPage } from "@/lib/admin/page-content";
+import { normalizeAdminAboutStoryContent } from "@/lib/admin/about-story-content";
 import { CACHE_TAGS } from "@/lib/site/content-cache";
 import type { PublicManagedPageContent } from "@/lib/site/public-pages-types";
 
@@ -44,5 +45,15 @@ export const getPublicPageContent = unstable_cache(
     return toPublicPage(page, fallback);
   },
   ["public-page-content"],
+  { tags: [CACHE_TAGS.pages] },
+);
+
+export const getPublicAboutStoryContent = unstable_cache(
+  async function getPublicAboutStoryContent() {
+    const store = await readAdminPageContent();
+    const page = store.pages.find((item) => item.id === "about-founder");
+    return normalizeAdminAboutStoryContent(page?.content?.aboutStory);
+  },
+  ["public-about-story-content"],
   { tags: [CACHE_TAGS.pages] },
 );

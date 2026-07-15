@@ -4,34 +4,34 @@ import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema/site-schema";
 import { siteConfig } from "@/config/site";
 import { buildPageMetadata } from "@/lib/seo/page-metadata";
+import { getPublicAboutStoryContent, getPublicPageContent } from "@/lib/site/public-pages";
 
-export const metadata: Metadata = buildPageMetadata({
-  title: `Our Story | ${siteConfig.name}`,
-  description:
-    "Meet the story and founder intention behind Shreevan Wellness, a responsible premium retreat experience in Rishikesh, India.",
-  path: "/about-founder",
-  absoluteTitle: true,
-});
+export const dynamic = "force-dynamic";
 
-export default function Page() {
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getPublicPageContent("about-founder");
+  return buildPageMetadata({ title: page.seo.title, description: page.seo.description, path: page.seo.canonicalPath, absoluteTitle: true, robots: page.seo.noindex ? { index: false, follow: false } : { index: true, follow: true } });
+}
+
+export default async function Page() {
+  const [page, content] = await Promise.all([getPublicPageContent("about-founder"), getPublicAboutStoryContent()]);
   return (
     <>
       <JsonLd
         data={breadcrumbSchema([
           { name: "Home", url: siteConfig.url },
-          { name: "Our Story", url: `${siteConfig.url}/about-founder` },
+          { name: page.seo.title, url: `${siteConfig.url}${page.path}` },
         ])}
       />
       <JsonLd
         data={webPageSchema({
           type: "AboutPage",
-          name: "Our Story",
-          url: `${siteConfig.url}/about-founder`,
-          description:
-            "Meet the story and founder intention behind Shreevan Wellness, a responsible premium retreat experience in Rishikesh, India.",
+          name: page.seo.title,
+          url: `${siteConfig.url}${page.path}`,
+          description: page.seo.description,
         })}
       />
-      <AboutFounderPage />
+      <AboutFounderPage content={content} />
     </>
   );
 }

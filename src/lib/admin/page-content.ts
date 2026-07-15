@@ -2,6 +2,11 @@ import { siteConfig } from "@/config/site";
 import { siteRoutes, type SiteRoute } from "@/config/routes";
 import { getSupabaseAdminClient } from "@/lib/supabase/client";
 import { CACHE_TAGS, revalidatePublicContent } from "@/lib/site/content-cache";
+import {
+  defaultAdminAboutStoryContent,
+  normalizeAdminAboutStoryContent,
+  type AdminAboutStoryContent,
+} from "@/lib/admin/about-story-content";
 
 export type AdminPageStatus = "draft" | "published" | "archived";
 
@@ -26,6 +31,9 @@ export type AdminManagedPage = {
     primaryCtaHref: string;
     secondaryCtaLabel: string;
     secondaryCtaHref: string;
+  };
+  content?: {
+    aboutStory?: AdminAboutStoryContent;
   };
   notes: string;
 };
@@ -155,7 +163,8 @@ export const defaultAdminPageContent: AdminPageContentStore = {
         secondaryCtaLabel: "Explore Programs",
         secondaryCtaHref: "/#programs",
       },
-      notes: "Seeded for Phase 3; public wiring comes after homepage validation.",
+      content: { aboutStory: defaultAdminAboutStoryContent },
+      notes: "Connected to the public Our Story page, including section content and media.",
     },
     {
       id: "accommodation-inclusions",
@@ -283,6 +292,7 @@ function normalizePage(value: unknown, fallback: AdminManagedPage): AdminManaged
   const input = isRecord(value) ? value : {};
   const seo = isRecord(input.seo) ? input.seo : {};
   const hero = isRecord(input.hero) ? input.hero : {};
+  const content = isRecord(input.content) ? input.content : {};
 
   return {
     id: stringValue(input.id, fallback.id),
@@ -306,6 +316,10 @@ function normalizePage(value: unknown, fallback: AdminManagedPage): AdminManaged
       secondaryCtaLabel: stringValue(hero.secondaryCtaLabel, fallback.hero.secondaryCtaLabel),
       secondaryCtaHref: stringValue(hero.secondaryCtaHref, fallback.hero.secondaryCtaHref),
     },
+    content:
+      fallback.content?.aboutStory || content.aboutStory
+        ? { aboutStory: normalizeAdminAboutStoryContent(content.aboutStory ?? fallback.content?.aboutStory) }
+        : undefined,
     notes: stringValue(input.notes, fallback.notes),
   };
 }
@@ -369,6 +383,7 @@ function rowToManagedPage(row: Record<string, unknown>): unknown {
     connected: row.connected,
     seo: row.seo,
     hero: row.hero,
+    content: row.content,
     notes: row.notes,
   };
 }
@@ -410,6 +425,7 @@ export async function writeAdminPageContent(value: unknown) {
     connected: page.connected,
     seo: page.seo,
     hero: page.hero,
+    content: page.content ?? {},
     notes: page.notes,
     updated_at: pageContent.updatedAt,
   }));

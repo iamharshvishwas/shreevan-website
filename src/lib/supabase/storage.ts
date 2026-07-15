@@ -3,7 +3,7 @@ import { getSupabaseAdminClient } from "@/lib/supabase/client";
 
 const MEDIA_BUCKET = "admin-media";
 
-export type MediaOrigin = "blog" | "home";
+export type MediaOrigin = "blog" | "home" | "page";
 
 type UploadAdminMediaInput = {
   origin: MediaOrigin;

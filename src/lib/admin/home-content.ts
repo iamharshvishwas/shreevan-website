@@ -808,7 +808,7 @@ function safeBaseName(value: string) {
     .slice(0, 42);
 }
 
-export async function saveAdminHomeMediaUpload(file: {
+export async function saveAdminMediaUpload(origin: "home" | "page", file: {
   arrayBuffer: () => Promise<ArrayBuffer>;
   name: string;
   size: number;
@@ -854,9 +854,9 @@ export async function saveAdminHomeMediaUpload(file: {
     }
   }
 
-  const fileName = `${safeBaseName(file.name) || "home-media"}-${randomUUID()}${finalExtension}`;
+  const fileName = `${safeBaseName(file.name) || `${origin}-media`}-${randomUUID()}${finalExtension}`;
   const { path: storagePath, publicUrl } = await uploadAdminMedia({
-    origin: "home",
+    origin,
     bytes,
     filename: fileName,
     contentType: finalContentType,
@@ -864,10 +864,10 @@ export async function saveAdminHomeMediaUpload(file: {
 
   const client = getSupabaseAdminClient();
   const { error: mediaItemError } = await client.from("media_items").insert({
-    id: `home-upload-${randomUUID()}`,
+    id: `${origin}-upload-${randomUUID()}`,
     title: file.name,
     type: uploadType.kind,
-    placement: "home builder",
+    placement: `${origin} builder`,
     asset_hint: "",
     status: "published",
     notes: "",
@@ -881,11 +881,20 @@ export async function saveAdminHomeMediaUpload(file: {
   if (mediaItemError) {
     // The upload itself succeeded — don't fail the request over the
     // library-registry insert; the asset just won't show in the picker.
-    console.error("media_items insert failed for home upload:", mediaItemError.message);
+    console.error(`media_items insert failed for ${origin} upload:`, mediaItemError.message);
   }
 
   return {
     kind: uploadType.kind,
     src: publicUrl,
   };
+}
+
+export async function saveAdminHomeMediaUpload(file: {
+  arrayBuffer: () => Promise<ArrayBuffer>;
+  name: string;
+  size: number;
+  type: string;
+}) {
+  return saveAdminMediaUpload("home", file);
 }

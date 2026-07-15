@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { AdminPageEditorPanel } from "@/components/admin/admin-page-editor-panel";
+import { AdminAboutStoryEditorPanel } from "@/components/admin/admin-about-story-editor-panel";
 import { AdminShell } from "@/components/admin/admin-shell";
 import { readAdminPageContent } from "@/lib/admin/page-content";
 
@@ -32,7 +33,11 @@ export default async function AdminPageEditorPage({ params }: AdminPageEditorPag
 
   return (
     <AdminShell activeSection="pages" kicker="Page Editor" title={page.title}>
-      <AdminPageEditorPanel initialPageContent={pageContent} pageId={page.id} />
+      {page.id === "about-founder" ? (
+        <AdminAboutStoryEditorPanel initialPageContent={pageContent} pageId={page.id} />
+      ) : (
+        <AdminPageEditorPanel initialPageContent={pageContent} pageId={page.id} />
+      )}
     </AdminShell>
   );
 }
