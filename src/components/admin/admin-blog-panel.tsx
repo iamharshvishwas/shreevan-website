@@ -22,7 +22,7 @@ type UploadState = "idle" | "uploading" | "error";
 type BlogView = "list" | "editor";
 type StatusFilter = "all" | AdminContentStatus;
 type SortMode = "updated-desc" | "title-asc" | "status-asc" | "date-desc";
-type BulkAction = "" | "publish" | "draft" | "archive";
+type BulkAction = "" | "publish" | "draft" | "archive" | "delete";
 
 const emptyCoverMedia: NonNullable<AdminJournalArticle["coverMedia"]> = {
   kind: "",
@@ -906,18 +906,37 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
       return;
     }
 
+    const selectedIds = new Set(selectedArticleIds);
+
+    if (bulkAction === "delete") {
+      const confirmed = window.confirm(
+        `Permanently delete ${selectedIds.size} selected blog post${selectedIds.size === 1 ? "" : "s"}? This cannot be undone.`,
+      );
+
+      if (!confirmed) {
+        return;
+      }
+    }
+
     const status: AdminContentStatus =
       bulkAction === "publish" ? "published" : bulkAction === "draft" ? "draft" : "archived";
-    const selectedIds = new Set(selectedArticleIds);
     const nextBlog: AdminBlogStore = {
       ...blog,
-      journalArticles: blog.journalArticles.map((article) =>
-        selectedIds.has(article.id)
-          ? { ...article, status, scheduledAt: "" }
-          : article,
-      ),
+      journalArticles:
+        bulkAction === "delete"
+          ? blog.journalArticles.filter((article) => !selectedIds.has(article.id))
+          : blog.journalArticles.map((article) =>
+              selectedIds.has(article.id) ? { ...article, status, scheduledAt: "" } : article,
+            ),
     };
-    const actionLabel = bulkAction === "publish" ? "published" : bulkAction === "draft" ? "moved to draft" : "archived";
+    const actionLabel =
+      bulkAction === "publish"
+        ? "published"
+        : bulkAction === "draft"
+          ? "moved to draft"
+          : bulkAction === "delete"
+            ? "deleted permanently"
+            : "archived";
     const saved = await persistBlog(nextBlog);
 
     if (saved) {
@@ -1323,6 +1342,7 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
                 <option value="publish">Publish</option>
                 <option value="draft">Move to Draft</option>
                 <option value="archive">Archive</option>
+                <option value="delete">Delete permanently</option>
               </select>
             </label>
             <button className="admin-secondary-button" type="button" onClick={() => void applyBulkAction()} disabled={saveState === "saving"}>

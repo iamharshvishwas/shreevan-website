@@ -1105,17 +1105,16 @@ function normalizeById<T extends { id: string }>(
 }
 
 function normalizeJournalArticles(incoming: unknown, defaults: AdminJournalArticle[]) {
-  const incomingItems = Array.isArray(incoming) ? incoming.filter(isRecord) : [];
-  const incomingById = new Map(
-    incomingItems.map((item) => [typeof item.id === "string" ? item.id : "", item] as const),
-  );
-  const defaultIds = new Set(defaults.map((item) => item.id));
-  const defaultArticles = defaults.map((fallback) => normalizeJournalArticle(incomingById.get(fallback.id), fallback));
-  const customArticles = incomingItems
-    .filter((item) => typeof item.id === "string" && item.id && !defaultIds.has(item.id))
-    .map((item, index) => normalizeJournalArticle(item, makeJournalArticleFallback(item, index)));
+  // An explicit array is the source of truth. This matters for the Blog
+  // manager's permanent delete action: a removed seeded article must not be
+  // silently recreated from defaults on the next save.
+  if (!Array.isArray(incoming)) {
+    return defaults;
+  }
 
-  return [...defaultArticles, ...customArticles];
+  return incoming
+    .filter(isRecord)
+    .map((item, index) => normalizeJournalArticle(item, makeJournalArticleFallback(item, index)));
 }
 
 export function normalizeAdminContentTrust(value: unknown): AdminContentTrustStore {
