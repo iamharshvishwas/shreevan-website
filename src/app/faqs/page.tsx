@@ -6,7 +6,7 @@ import { breadcrumbSchema, webPageSchema } from "@/lib/schema/site-schema";
 import { buildPageMetadata } from "@/lib/seo/page-metadata";
 import { faqPageSchema, getPublicFaqContent } from "@/lib/site/public-content-trust";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export const metadata: Metadata = buildPageMetadata({
   title: "FAQs for International Wellness Retreat Guests",

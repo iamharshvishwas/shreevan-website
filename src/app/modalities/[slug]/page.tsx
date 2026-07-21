@@ -7,6 +7,8 @@ import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema, educationalServiceSchema, faqPageSchema, webPageSchema } from "@/lib/schema/site-schema";
 import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
+export const revalidate = 3600;
+
 type ModalityPageProps = {
   params: Promise<{
     slug: string;

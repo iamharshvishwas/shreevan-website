@@ -5,6 +5,8 @@ import { breadcrumbSchema, programServiceSchema, webPageSchema } from "@/lib/sch
 import { siteConfig } from "@/config/site";
 import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
+export const revalidate = 3600;
+
 const pageUrl = `${siteConfig.url}/programs/7-day-foundation`;
 const pageDescription =
   "A 7-day Shreevan Wellness foundation retreat in Rishikesh designed to help participants rebuild healthy habits through yoga, pranayama, meditation, sattvic living and reflection.";

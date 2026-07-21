@@ -8,7 +8,7 @@ import { getPublicProgramSummaries } from "@/lib/site/public-programs";
 
 const pageUrl = `${siteConfig.url}/programs`;
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Immersive Wellness Programs",

@@ -8,7 +8,7 @@ import { getPublicHomeContent } from "@/lib/site/public-home";
 import { getPublicPageContent } from "@/lib/site/public-pages";
 import { getPublicSiteOrigin, getPublicSiteSettings } from "@/lib/site/public-settings";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   const [settings, homePage] = await Promise.all([getPublicSiteSettings(), getPublicPageContent("home")]);

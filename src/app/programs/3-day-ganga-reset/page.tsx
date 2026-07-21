@@ -5,6 +5,8 @@ import { breadcrumbSchema, programServiceSchema, webPageSchema } from "@/lib/sch
 import { siteConfig } from "@/config/site";
 import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
+export const revalidate = 3600;
+
 const pageUrl = `${siteConfig.url}/programs/3-day-ganga-reset`;
 const pageDescription =
   "A 3-day Shreevan Wellness retreat in Rishikesh designed to help participants pause, breathe, reconnect and leave with a simple wellness routine.";

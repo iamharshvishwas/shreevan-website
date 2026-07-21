@@ -5,6 +5,8 @@ import { breadcrumbSchema, programServiceSchema, webPageSchema } from "@/lib/sch
 import { siteConfig } from "@/config/site";
 import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
+export const revalidate = 3600;
+
 const pageUrl = `${siteConfig.url}/programs/14-day-transformation`;
 const pageDescription =
   "A 14-day Shreevan Wellness transformation retreat in Rishikesh for guests seeking emotional reflection, life redesign, daily rituals and a personal transformation blueprint.";

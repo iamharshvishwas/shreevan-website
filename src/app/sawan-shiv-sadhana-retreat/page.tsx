@@ -13,7 +13,7 @@ const pageDescription =
 const pageUrl = `${siteConfig.url}${pagePath}`;
 const campaignImage = absoluteSiteUrl("/images/campaigns/sawan-shiv-sadhana-retreat-main.jpeg");
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   ...buildPageMetadata({

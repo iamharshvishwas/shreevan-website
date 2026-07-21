@@ -8,6 +8,8 @@ import { blogPostingSchema, breadcrumbSchema, faqPageSchema, webPageSchema } fro
 import { absoluteSiteUrl, buildPageMetadata } from "@/lib/seo/page-metadata";
 import { getPublicJournalContent } from "@/lib/site/public-content-trust";
 
+export const revalidate = 3600;
+
 type JournalArticlePageProps = {
   params: Promise<{
     slug: string;

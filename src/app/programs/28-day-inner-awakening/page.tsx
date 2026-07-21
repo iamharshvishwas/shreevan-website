@@ -5,6 +5,8 @@ import { breadcrumbSchema, programServiceSchema, webPageSchema } from "@/lib/sch
 import { siteConfig } from "@/config/site";
 import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
+export const revalidate = 3600;
+
 const pageUrl = `${siteConfig.url}/programs/28-day-inner-awakening`;
 const pageDescription =
   "A 28-day Shreevan Wellness flagship personal transformation immersion in Rishikesh for clarity, purpose, yogic living and sustainable wellbeing.";

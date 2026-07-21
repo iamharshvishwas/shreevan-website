@@ -6,7 +6,7 @@ import { breadcrumbSchema, itemListSchema, webPageSchema } from "@/lib/schema/si
 import { buildPageMetadata } from "@/lib/seo/page-metadata";
 import { getPublicJournalContent } from "@/lib/site/public-content-trust";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 const pageUrl = `${siteConfig.url}/journal`;
 

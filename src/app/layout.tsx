@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
 import { Inter, Lora } from "next/font/google";
-import { headers } from "next/headers";
-import Script from "next/script";
 import { JsonLd } from "@/lib/schema/json-ld";
 import { localBusinessSchema, organizationSchema, websiteSchema } from "@/lib/schema/site-schema";
 import { siteConfig } from "@/config/site";
 import { CrmWidget } from "@/components/integrations/crm-widget";
+import { PublicTrackingScripts } from "@/components/integrations/public-tracking-scripts";
 import { PublicSiteSettingsProvider } from "@/components/site/public-settings-provider";
 import { getPublicSiteOrigin, getPublicSiteSettings } from "@/lib/site/public-settings";
-import { isAdminHostname } from "@/lib/site/is-admin-host";
 import "./globals.css";
 
 const inter = Inter({
@@ -22,8 +20,6 @@ const lora = Lora({
   variable: "--font-lora",
   display: "swap",
 });
-
-export const dynamic = "force-dynamic";
 
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getPublicSiteSettings();
@@ -98,97 +94,17 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const [settings, requestHeaders] = await Promise.all([getPublicSiteSettings(), headers()]);
-
-  // Third-party analytics/ad scripts (GTM, Ahrefs, Meta Pixel, GA, Clarity)
-  // must never load on the admin panel -- admin page views, login attempts
-  // and internal navigation shouldn't be sent to external tracking services.
-  // Checks both the admin.* host (proxy.ts rewrites this to /admin/*) and the
-  // /admin path prefix reached directly on the main host (x-shreevan-admin-area,
-  // set by proxy.ts, since headers() alone can't see the resolved pathname).
-  const isAdmin =
-    isAdminHostname(requestHeaders.get("host")) || requestHeaders.get("x-shreevan-admin-area") === "1";
+  const settings = await getPublicSiteSettings();
 
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <head>
-        {!isAdmin ? (
-          <>
-            <Script id="google-tag-manager" strategy="beforeInteractive">
-              {`
-                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                })(window,document,'script','dataLayer','GTM-NGPZPVNW');
-              `}
-            </Script>
-            <Script
-              src="https://analytics.ahrefs.com/analytics.js"
-              data-key="T/r3nCE6XddTFkbdGXJD7w"
-              strategy="beforeInteractive"
-            />
-            <Script id="meta-pixel" strategy="beforeInteractive">
-              {`
-                !function(f,b,e,v,n,t,s)
-                {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-                n.queue=[];t=b.createElement(e);t.async=!0;
-                t.src=v;s=b.getElementsByTagName(e)[0];
-                s.parentNode.insertBefore(t,s)}(window, document,'script',
-                'https://connect.facebook.net/en_US/fbevents.js');
-                fbq('init', '879700964726720');
-                fbq('track', 'PageView');
-              `}
-            </Script>
-          </>
-        ) : null}
         <JsonLd data={organizationSchema(settings)} />
         <JsonLd data={websiteSchema(settings)} />
         <JsonLd data={localBusinessSchema(settings)} />
       </head>
       <body className={`${inter.variable} ${lora.variable}`}>
-        {!isAdmin ? (
-          <>
-            <Script src="https://www.googletagmanager.com/gtag/js?id=G-86YTRFY4KK" strategy="afterInteractive" />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'G-86YTRFY4KK');
-              `}
-            </Script>
-            <Script id="microsoft-clarity" strategy="afterInteractive">
-              {`
-                (function(c,l,a,r,i,t,y){
-                    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-                })(window, document, "clarity", "script", "xbidosyg3u");
-              `}
-            </Script>
-            <noscript>
-              <iframe
-                src="https://www.googletagmanager.com/ns.html?id=GTM-NGPZPVNW"
-                height="0"
-                width="0"
-                style={{ display: "none", visibility: "hidden" }}
-              />
-            </noscript>
-            <noscript>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                height="1"
-                width="1"
-                style={{ display: "none" }}
-                src="https://www.facebook.com/tr?id=879700964726720&ev=PageView&noscript=1"
-                alt=""
-              />
-            </noscript>
-          </>
-        ) : null}
+        <PublicTrackingScripts />
         <PublicSiteSettingsProvider settings={settings}>
           {children}
           <CrmWidget />

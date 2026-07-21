@@ -5,6 +5,8 @@ import { breadcrumbSchema, programServiceSchema, webPageSchema } from "@/lib/sch
 import { siteConfig } from "@/config/site";
 import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
+export const revalidate = 3600;
+
 const pageUrl = `${siteConfig.url}/programs/60-day-rishi-residency`;
 const pageDescription =
   "A 60-day Shreevan Wellness conscious living residency in Rishikesh for advanced lifestyle transformation, yogic living, mentoring and integration.";

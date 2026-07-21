@@ -6,7 +6,7 @@ import { siteConfig } from "@/config/site";
 import { buildPageMetadata } from "@/lib/seo/page-metadata";
 import { getPublicAboutStoryContent, getPublicPageContent } from "@/lib/site/public-pages";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPublicPageContent("about-founder");

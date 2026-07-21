@@ -6,6 +6,8 @@ import { JsonLd } from "@/lib/schema/json-ld";
 import { breadcrumbSchema, faqPageSchema, itemListSchema, webPageSchema } from "@/lib/schema/site-schema";
 import { buildPageMetadata } from "@/lib/seo/page-metadata";
 
+export const revalidate = 3600;
+
 const pageUrl = `${siteConfig.url}/modalities`;
 
 export const metadata: Metadata = buildPageMetadata({
