@@ -250,13 +250,27 @@ h3 { font-size: clamp(1.28rem, 1.55vw, 1.65rem); }
 .modality-standards-grid h3 { margin-top: 18px; }
 .modality-standards-grid p { margin-top: 14px; color: var(--stone-600); line-height: 1.58; }
 
-.program-pathways-image { aspect-ratio: 16 / 7; min-height: 380px; margin: -18px 0 52px; overflow: hidden; border: 1px solid var(--line-sand); border-radius: 14px; background: var(--mist-100); box-shadow: var(--shadow); }
-.program-pathways-image img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
-.program-index { border-top: 1px solid var(--line-sand); }
-.program-row { display: grid; grid-template-columns: 82px minmax(240px, 1fr) minmax(340px, 430px) auto; gap: 28px; align-items: center; padding: 32px 0; border-bottom: 1px solid var(--line-sand); }
-.program-no { color: var(--gold-600); font-family: var(--font-heading); font-size: 2rem; line-height: 1; }
-.program-row p:not(.program-label) { margin-top: 10px; color: var(--stone-600); }
-.program-label { margin-bottom: 10px; color: var(--clay-600); }
+.program-card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.program-card, .program-featured-card { border: 1px solid var(--line-sand); border-radius: 16px; background: var(--white); box-shadow: var(--shadow-sm); }
+.program-card { display: flex; min-height: 310px; flex-direction: column; padding: 30px; }
+.program-card-duration { display: flex; align-items: baseline; gap: 8px; color: var(--forest-700); }
+.program-card-duration strong { font-family: var(--font-heading); font-size: clamp(2.8rem, 4vw, 3.5rem); font-weight: 500; line-height: 0.9; }
+.program-card-duration span { font-size: 0.82rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; }
+.program-card h3, .program-featured-card h3 { margin-top: 26px; font-size: clamp(1.65rem, 2.2vw, 2.2rem); }
+.program-card > p:not(.program-card-duration), .program-featured-card p:not(.program-card-duration):not(.program-featured-label) { margin-top: 18px; color: var(--stone-600); line-height: 1.58; }
+.program-card-link { margin-top: auto; padding-top: 24px; color: var(--river-600); font-weight: 850; }
+.program-card-link span { margin-left: 8px; font-size: 1.25em; }
+.program-card-link:hover { color: var(--forest-900); }
+.program-featured-card { grid-column: span 2; overflow: hidden; border-color: rgba(23, 61, 50, 0.62); }
+.program-featured-label { margin: 0; background: var(--forest-900); color: var(--white); padding: 13px 34px; font-size: 0.78rem; font-weight: 850; letter-spacing: 0.1em; line-height: 1.2; text-transform: uppercase; }
+.program-featured-body { display: grid; align-content: start; min-height: 366px; padding: 34px; }
+.program-card-duration.compact { display: inline-flex; width: fit-content; align-items: center; border-radius: 8px; background: var(--forest-900); color: var(--white); padding: 8px 12px; }
+.program-card-duration.compact strong { font-family: var(--font-body); font-size: 0.9rem; font-weight: 850; line-height: 1; }
+.program-card-duration.compact span { font-size: 0.72rem; }
+.program-featured-card h3 { margin-top: 24px; font-size: clamp(2rem, 3vw, 3rem); }
+.program-featured-for { color: var(--forest-700) !important; }
+.program-featured-cta { width: 100%; margin-top: 28px; }
+.program-residency-card { min-height: 440px; }
 dl { display: grid; grid-template-columns: minmax(96px, 0.72fr) minmax(180px, 1.28fr); gap: 18px; margin: 0; }
 dt { color: var(--forest-700); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
 dd { margin: 6px 0 0; color: var(--stone-600); line-height: 1.45; }
@@ -1201,7 +1215,8 @@ main [id] { scroll-margin-top: 132px; }
   .program-proof-grid div { border-top: 1px solid var(--line-mist); border-left: 0; padding: 18px 0; }
   .program-proof-grid div:first-child { border-top: 0; }
   .intent-image { min-height: 360px; }
-  .program-pathways-image { min-height: 320px; margin-top: -16px; }
+  .program-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .program-featured-card, .program-residency-card { grid-column: span 2; }
   .international-image { min-height: 300px; }
   .safety-image { min-height: 420px; }
   .testimonial-image { min-height: 320px; }
@@ -1244,10 +1259,14 @@ main [id] { scroll-margin-top: 132px; }
   .image-slot-wide { min-height: 280px; }
   .image-slot p { font-size: 1.35rem; }
   .intent-image { min-height: 320px; }
-  .program-pathways-image { aspect-ratio: 4 / 3; min-height: 260px; margin-bottom: 36px; }
   .international-image { aspect-ratio: 4 / 3; min-height: 250px; }
   .testimonial-image { aspect-ratio: 4 / 3; min-height: 250px; margin-bottom: 28px; }
-  .proof-grid, .included-media-grid, .included-grid, .testimonial-grid, .program-row { grid-template-columns: 1fr; }
+  .proof-grid, .included-media-grid, .included-grid, .testimonial-grid { grid-template-columns: 1fr; }
+  .program-card-grid { grid-template-columns: 1fr; gap: 16px; }
+  .program-featured-card, .program-residency-card { grid-column: auto; }
+  .program-card { min-height: 0; padding: 24px; }
+  .program-featured-label { padding-inline: 24px; }
+  .program-featured-body { min-height: 0; padding: 24px; }
   .included-media-grid { margin-bottom: 28px; }
   .principle-grid, .contact-channel-grid, .video-story-grid, .journal-article-grid, .stay-room-grid, .stay-included-grid, .stay-meal-grid, .stay-gallery-grid, .booking-reassurance-grid, .booking-fit-lists, .booking-after-grid, .program-choice-grid, .payment-method-grid, .legal-card-list, .home-answer-cards, .faq-standard-grid, .program-outcome-grid, .program-inclusion-list, .program-media-slots, .seo-card-grid, .modality-quick-grid, .modality-retreat-grid, .modality-suitability-grid, .modality-connection-grid, .modality-decision-grid, .modality-standards-grid { grid-template-columns: 1fr; }
   .identity-list article { grid-template-columns: 1fr; gap: 10px; }
@@ -1256,10 +1275,7 @@ main [id] { scroll-margin-top: 132px; }
   .journal-detail-points span { grid-row: auto; }
   .proof-grid div { border-top: 1px solid var(--line-mist); border-left: 0; padding: 16px 0; }
   .proof-grid div:first-child { border-top: 0; }
-  .program-row { padding: 28px 0; }
-  .signature { padding-inline: 18px; }
   dl { grid-template-columns: 1fr; }
-  .program-row .text-link { grid-column: auto; }
   .included-grid article, .testimonial-grid article { min-height: auto; padding: 24px; }
   .form-grid, .phone-fields { grid-template-columns: 1fr; }
   .form-intro h2 { font-size: clamp(2.08rem, 10.5vw, 3rem); }

@@ -127,40 +127,45 @@ export function HomePage({
               <p>{content.programPathways.copy}</p>
             </div>
 
-            <figure className="program-pathways-image">
-              <Image
-                src="/images/home/program-pathways-retreat-corridor.webp"
-                alt="Retreat guests walking through a calm wellness corridor in Rishikesh"
-                width={1600}
-                height={1195}
-                sizes="(max-width: 720px) 100vw, 1180px"
-              />
-            </figure>
-
-            <div className="program-index">
-              {content.programPathways.items.map((program, index) => (
-                <article className={`program-row${program.label ? " signature" : ""}`} key={program.id}>
-                  <span className="program-no">{String(index + 1).padStart(2, "0")}</span>
-                  <div>
-                    {program.label ? <p className="program-label">{program.label}</p> : null}
-                    <h3>{program.title}</h3>
-                    <p>{program.summary}</p>
-                  </div>
-                  <dl>
-                    <div>
-                      <dt>Duration</dt>
-                      <dd>{program.duration}</dd>
-                    </div>
-                    <div>
-                      <dt>Outcome</dt>
-                      <dd>{program.outcome}</dd>
-                    </div>
-                  </dl>
-                  <a className="text-link" href={program.href}>
-                    View program
+            <div className="program-card-grid">
+              {content.programPathways.items.slice(0, 3).map((program) => (
+                <article className="program-card" key={program.id}>
+                  <ProgramDuration duration={program.duration} />
+                  <h3>{program.title}</h3>
+                  <p>{program.summary}</p>
+                  <a className="program-card-link" href={program.href}>
+                    View program <span aria-hidden="true">→</span>
                   </a>
                 </article>
               ))}
+
+              {content.programPathways.items[3] ? (
+                <article className="program-featured-card">
+                  <p className="program-featured-label">{content.programPathways.items[3].label || "Flagship program"}</p>
+                  <div className="program-featured-body">
+                    <ProgramDuration duration={content.programPathways.items[3].duration} compact />
+                    <h3>{content.programPathways.items[3].title}</h3>
+                    <p>{content.programPathways.items[3].outcome}</p>
+                    <p className="program-featured-for">
+                      <strong>Best for:</strong> {content.programPathways.items[3].summary}
+                    </p>
+                    <a className="button button-primary program-featured-cta" href={content.programPathways.items[3].href}>
+                      View the {content.programPathways.items[3].duration} program
+                    </a>
+                  </div>
+                </article>
+              ) : null}
+
+              {content.programPathways.items[4] ? (
+                <article className="program-card program-residency-card">
+                  <ProgramDuration duration={content.programPathways.items[4].duration} />
+                  <h3>{content.programPathways.items[4].title}</h3>
+                  <p>{content.programPathways.items[4].summary}</p>
+                  <a className="program-card-link" href={content.programPathways.items[4].href}>
+                    View program <span aria-hidden="true">→</span>
+                  </a>
+                </article>
+              ) : null}
             </div>
           </div>
         </section>
@@ -371,6 +376,17 @@ export function HomePage({
 
       <SiteFooter />
     </>
+  );
+}
+
+function ProgramDuration({ duration, compact = false }: Readonly<{ duration: string; compact?: boolean }>) {
+  const [value, ...unit] = duration.trim().split(/\s+/);
+
+  return (
+    <p className={`program-card-duration${compact ? " compact" : ""}`}>
+      <strong>{value}</strong>
+      <span>{unit.join(" ") || "days"}</span>
+    </p>
   );
 }
 
