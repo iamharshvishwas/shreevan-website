@@ -24,6 +24,7 @@ function isMarkdownConvertiblePath(pathname: string) {
     pathname === "/modalities" ||
     pathname === "/journal" ||
     pathname === "/faqs" ||
+    pathname === "/sawan-shiv-sadhana-retreat" ||
     pathname === "/testimonials" ||
     pathname === "/about-founder" ||
     pathname === "/accommodation-inclusions" ||

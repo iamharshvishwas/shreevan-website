@@ -152,13 +152,13 @@ export function ThreeDayGangaResetPage() {
 
             <div className="program-hero-media">
               <figure className="intent-image program-hero-slot">
-                <img
+                <Image
                   src="/images/programs/3-day-ganga-reset-arrival-calm.jpeg"
                   alt="Guest arriving into a calm Ganga-side retreat setting in Rishikesh"
-                  width="1195"
-                  height="1600"
-                  loading="eager"
-                  decoding="async"
+                  width={1195}
+                  height={1600}
+                  priority
+                  sizes="(max-width: 720px) 100vw, 50vw"
                 />
               </figure>
               <aside className="program-summary-card" aria-label="Program summary">

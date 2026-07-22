@@ -473,6 +473,42 @@ async function journalDocument(origin: string, pathname: string): Promise<Markdo
   };
 }
 
+function sawanRetreatDocument(): MarkdownDocument {
+  return {
+    title: "Sawan Special Shiv Sadhana Retreat in Rishikesh | Shreevan Wellness",
+    description:
+      "A 3 nights / 4 days seasonal Shreevan Wellness retreat in Rishikesh with devotional practice, meditation, Ganga Aarti, sattvik meals and stay.",
+    canonicalPath: "/sawan-shiv-sadhana-retreat",
+    body: [
+      "# Sawan Special Shiv Sadhana Retreat in Rishikesh",
+      "",
+      "A 3 nights / 4 days, suitability-led seasonal retreat for guests who wish to explore a guided rhythm of Shiva devotion, meditation, silence and reflection during Sawan.",
+      "",
+      "## At a glance",
+      "",
+      "- Location: Rishikesh, India",
+      "- Duration: 3 nights / 4 days",
+      "- Starting price: ₹21,000; final room category, dates and availability are confirmed before booking.",
+      "",
+      "## What the retreat includes",
+      "",
+      "- Guided Shivling Rudra Abhishek and devotional ritual context.",
+      "- Rudri Path or Shri Rudram chanting, guided meditation and quiet reflection.",
+      "- A Ganga Aarti experience, sattvik meals and comfortable stay.",
+      "- A clear booking conversation for first-time guests, wellness travellers and devotional visitors.",
+      "",
+      "## Suitability and boundaries",
+      "",
+      "This is a guided spiritual-wellness retreat, not medical care, mental-health treatment, emergency support or a guarantee of spiritual outcomes. Guests should consider their travel, health and personal context before booking, and seek appropriate professional support where needed.",
+      "",
+      "## Booking",
+      "",
+      "Contact Shreevan Wellness by WhatsApp or use the enquiry form on the standard website view to confirm current dates and suitability.",
+      "",
+    ].join("\n"),
+  };
+}
+
 async function simplePageDocument(pathname: string): Promise<MarkdownDocument | null> {
   const pageId = STANDARD_PAGE_IDS[pathname];
   if (pageId) {
@@ -516,6 +552,7 @@ export async function buildMarkdownDocument(pathname: string) {
     (pathname === "/faqs" ? await faqDocument() : null) ??
     (pathname === "/testimonials" ? await storyDocument() : null) ??
     (pathname === "/journal" || pathname.startsWith("/journal/") ? await journalDocument(origin, pathname) : null) ??
+    (pathname === "/sawan-shiv-sadhana-retreat" ? sawanRetreatDocument() : null) ??
     (await simplePageDocument(pathname));
 
   if (!document) return null;

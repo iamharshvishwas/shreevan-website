@@ -33,7 +33,7 @@ export function CrmWidget() {
         id="shreevan-crm-widget"
         src={settings.crm.scriptUrl}
         data-api={settings.crm.apiUrl}
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
       <Script
         id="shreevan-crm-forms"

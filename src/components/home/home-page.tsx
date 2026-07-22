@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { SuitabilityForm } from "@/components/forms/suitability-form";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -120,13 +121,12 @@ export function HomePage({
             </div>
 
             <figure className="program-pathways-image">
-              <img
+              <Image
                 src="/images/home/program-pathways-retreat-corridor.webp"
                 alt="Retreat guests walking through a calm wellness corridor in Rishikesh"
-                width="1600"
-                height="1195"
-                loading="lazy"
-                decoding="async"
+                width={1600}
+                height={1195}
+                sizes="(max-width: 720px) 100vw, 1180px"
               />
             </figure>
 
@@ -167,7 +167,7 @@ export function HomePage({
             <div className="included-media-grid" aria-label="Included retreat experience images">
               {includedMedia.map((item) => (
                 <figure key={item.src}>
-                  <img src={item.src} alt={item.alt} width="900" height="1205" loading="lazy" decoding="async" />
+                  <Image src={item.src} alt={item.alt} width={900} height={1205} sizes="(max-width: 720px) 100vw, 33vw" />
                   <figcaption>{item.caption}</figcaption>
                 </figure>
               ))}
@@ -225,13 +225,12 @@ export function HomePage({
             </div>
             <div className="international-panel">
               <figure className="international-image">
-                <img
+                <Image
                   src="/images/home/international-visitor-reassurance.webp"
                   alt="Retreat host explaining arrival and stay details to international guests"
-                  width="1500"
-                  height="1120"
-                  loading="lazy"
-                  decoding="async"
+                  width={1500}
+                  height={1120}
+                  sizes="(max-width: 720px) 100vw, 58vw"
                 />
               </figure>
               <div className="reassurance-list">
@@ -283,13 +282,12 @@ export function HomePage({
               <h2 id="testimonials-title">{content.testimonials.heading}</h2>
             </div>
             <figure className="testimonial-image">
-              <img
+              <Image
                 src="/images/home/testimonials-healing-story-reflection.webp"
                 alt="Retreat guest journaling quietly beside a window after guided reflection"
-                width="1500"
-                height="1120"
-                loading="lazy"
-                decoding="async"
+                width={1500}
+                height={1120}
+                sizes="(max-width: 720px) 100vw, 1180px"
               />
               <figcaption>Healing stories begin with lived reflection</figcaption>
             </figure>

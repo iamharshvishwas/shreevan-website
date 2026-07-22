@@ -33,9 +33,9 @@ export function PublicTrackingScripts() {
       <Script
         src="https://analytics.ahrefs.com/analytics.js"
         data-key="T/r3nCE6XddTFkbdGXJD7w"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
-      <Script id="meta-pixel" strategy="afterInteractive">
+      <Script id="meta-pixel" strategy="lazyOnload">
         {`
           !function(f,b,e,v,n,t,s)
           {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -49,8 +49,8 @@ export function PublicTrackingScripts() {
           fbq('track', 'PageView');
         `}
       </Script>
-      <Script src="https://www.googletagmanager.com/gtag/js?id=G-86YTRFY4KK" strategy="afterInteractive" />
-      <Script id="google-analytics" strategy="afterInteractive">
+      <Script src="https://www.googletagmanager.com/gtag/js?id=G-86YTRFY4KK" strategy="lazyOnload" />
+      <Script id="google-analytics" strategy="lazyOnload">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
@@ -58,7 +58,7 @@ export function PublicTrackingScripts() {
           gtag('config', 'G-86YTRFY4KK');
         `}
       </Script>
-      <Script id="microsoft-clarity" strategy="afterInteractive">
+      <Script id="microsoft-clarity" strategy="lazyOnload">
         {`
           (function(c,l,a,r,i,t,y){
               c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};

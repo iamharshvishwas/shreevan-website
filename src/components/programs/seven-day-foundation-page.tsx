@@ -180,13 +180,13 @@ export function SevenDayFoundationPage() {
 
             <div className="program-hero-media">
               <div className="image-slot home-media-slot has-media program-hero-slot">
-                <img
+                <Image
                   src="/images/programs/7-day-foundation-hero.jpeg"
                   alt="Guest arriving into a calm Ganga-side practice space during the 7-day foundation retreat"
-                  width="1194"
-                  height="1600"
-                  loading="eager"
-                  decoding="async"
+                  width={1194}
+                  height={1600}
+                  priority
+                  sizes="(max-width: 720px) 100vw, 50vw"
                 />
               </div>
               <aside className="program-summary-card" aria-label="Program summary">

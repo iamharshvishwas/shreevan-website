@@ -235,13 +235,13 @@ export function FourteenDayTransformationPage() {
 
             <div className="program-hero-media">
               <div className="image-slot home-media-slot has-media program-hero-slot">
-                <img
+                <Image
                   src="/images/programs/14-day-transformation-hero-arrival.webp"
                   alt="Guest arriving at Shreevan Wellness for the 14-day Ganga Sattva Transformation retreat in Rishikesh"
-                  width="2400"
-                  height="1792"
-                  loading="eager"
-                  decoding="async"
+                  width={2400}
+                  height={1792}
+                  priority
+                  sizes="(max-width: 720px) 100vw, 50vw"
                 />
               </div>
               <aside className="program-summary-card" aria-label="Program summary">
