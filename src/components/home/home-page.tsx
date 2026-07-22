@@ -56,7 +56,14 @@ export function HomePage({
         </section>
 
         <section className="photo-band" aria-label="Photography placeholder">
-          <HomeMediaSlot className="image-slot-wide" media={content.mediaBand.media} />
+          <HomeMediaSlot
+            className="image-slot-wide"
+            media={content.mediaBand.media}
+            priority
+            sizes="100vw"
+            width={1920}
+            height={1072}
+          />
         </section>
 
         <section className="proof-strip" aria-label="Business trust signals">
@@ -98,13 +105,13 @@ export function HomePage({
               ))}
             </div>
             <figure className="intent-image">
-              <img
+              <Image
                 src="/images/home/woman-journaling-at-retreat-window.jpeg"
                 alt="Guest journaling beside a retreat window with the Ganga landscape outside"
-                width="896"
-                height="1152"
+                width={896}
+                height={1152}
                 loading="lazy"
-                decoding="async"
+                sizes="(max-width: 720px) 100vw, 30vw"
               />
             </figure>
           </div>
@@ -367,7 +374,21 @@ export function HomePage({
   );
 }
 
-function HomeMediaSlot({ className, media }: Readonly<{ className: string; media: PublicHomeMedia }>) {
+function HomeMediaSlot({
+  className,
+  media,
+  priority = false,
+  sizes = "(max-width: 720px) 100vw, 50vw",
+  width,
+  height,
+}: Readonly<{
+  className: string;
+  media: PublicHomeMedia;
+  priority?: boolean;
+  sizes?: string;
+  width?: number;
+  height?: number;
+}>) {
   const classes = `image-slot home-media-slot ${className}${media.src ? " has-media" : ""}`;
 
   if (!media.src) {
@@ -383,8 +404,10 @@ function HomeMediaSlot({ className, media }: Readonly<{ className: string; media
     <div className={classes}>
       {media.kind === "video" ? (
         <video aria-label={media.alt || media.caption} controls muted playsInline preload="metadata" src={media.src} />
+      ) : width && height ? (
+        <Image src={media.src} alt={media.alt} width={width} height={height} priority={priority} sizes={sizes} />
       ) : (
-        <img src={media.src} alt={media.alt} />
+        <img src={media.src} alt={media.alt} loading={priority ? "eager" : "lazy"} fetchPriority={priority ? "high" : "auto"} />
       )}
       {media.caption ? (
         <div className="home-media-caption">
