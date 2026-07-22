@@ -147,7 +147,7 @@ export function HomePage({
                     <h3>{content.programPathways.items[3].title}</h3>
                     <p>{content.programPathways.items[3].outcome}</p>
                     <p className="program-featured-for">
-                      <strong>Best for:</strong> {content.programPathways.items[3].summary}
+                      <strong>For:</strong> {withoutBestForPrefix(content.programPathways.items[3].summary)}
                     </p>
                     <a className="button button-primary program-featured-cta" href={content.programPathways.items[3].href}>
                       View the {content.programPathways.items[3].duration} program
@@ -388,6 +388,10 @@ function ProgramDuration({ duration, compact = false }: Readonly<{ duration: str
       <span>{unit.join(" ") || "days"}</span>
     </p>
   );
+}
+
+function withoutBestForPrefix(value: string) {
+  return value.replace(/^best for\s*/i, "");
 }
 
 function HomeMediaSlot({
