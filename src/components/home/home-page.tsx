@@ -128,44 +128,48 @@ export function HomePage({
             </div>
 
             <div className="program-card-grid">
-              {content.programPathways.items.slice(0, 3).map((program) => (
-                <article className="program-card" key={program.id}>
-                  <ProgramDuration duration={program.duration} />
-                  <h3>{program.title}</h3>
-                  <p>{program.summary}</p>
-                  <a className="program-card-link" href={program.href}>
-                    View program <span aria-hidden="true">→</span>
-                  </a>
-                </article>
-              ))}
-
-              {content.programPathways.items[3] ? (
-                <article className="program-featured-card">
-                  <p className="program-featured-label">{content.programPathways.items[3].label || "Flagship program"}</p>
-                  <div className="program-featured-body">
-                    <ProgramDuration duration={content.programPathways.items[3].duration} compact />
-                    <h3>{content.programPathways.items[3].title}</h3>
-                    <p>{content.programPathways.items[3].outcome}</p>
-                    <p className="program-featured-for">
-                      <strong>For:</strong> {withoutBestForPrefix(content.programPathways.items[3].summary)}
-                    </p>
-                    <a className="button button-primary program-featured-cta" href={content.programPathways.items[3].href}>
-                      View the {content.programPathways.items[3].duration} program
+              <div className="program-card-row">
+                {content.programPathways.items.slice(0, 3).map((program) => (
+                  <article className="program-card" key={program.id}>
+                    <ProgramDuration duration={program.duration} />
+                    <h3>{program.title}</h3>
+                    <p>{program.summary}</p>
+                    <a className="program-card-link" href={program.href}>
+                      View program <span aria-hidden="true">→</span>
                     </a>
-                  </div>
-                </article>
-              ) : null}
+                  </article>
+                ))}
+              </div>
 
-              {content.programPathways.items[4] ? (
-                <article className="program-card program-residency-card">
-                  <ProgramDuration duration={content.programPathways.items[4].duration} />
-                  <h3>{content.programPathways.items[4].title}</h3>
-                  <p>{content.programPathways.items[4].summary}</p>
-                  <a className="program-card-link" href={content.programPathways.items[4].href}>
-                    View program <span aria-hidden="true">→</span>
-                  </a>
-                </article>
-              ) : null}
+              <div className="program-card-feature-row">
+                {content.programPathways.items[3] ? (
+                  <article className="program-featured-card">
+                    <p className="program-featured-label">{content.programPathways.items[3].label || "Flagship program"}</p>
+                    <div className="program-featured-body">
+                      <ProgramDuration duration={content.programPathways.items[3].duration} compact />
+                      <h3>{content.programPathways.items[3].title}</h3>
+                      <p>{content.programPathways.items[3].outcome}</p>
+                      <p className="program-featured-for">
+                        <strong>For:</strong> {withoutBestForPrefix(content.programPathways.items[3].summary)}
+                      </p>
+                      <a className="button button-primary program-featured-cta" href={content.programPathways.items[3].href}>
+                        View the {content.programPathways.items[3].duration} program
+                      </a>
+                    </div>
+                  </article>
+                ) : null}
+
+                {content.programPathways.items[4] ? (
+                  <article className="program-card program-residency-card">
+                    <ProgramDuration duration={content.programPathways.items[4].duration} />
+                    <h3>{content.programPathways.items[4].title}</h3>
+                    <p>{content.programPathways.items[4].summary}</p>
+                    <a className="program-card-link" href={content.programPathways.items[4].href}>
+                      View program <span aria-hidden="true">→</span>
+                    </a>
+                  </article>
+                ) : null}
+              </div>
             </div>
           </div>
         </section>
