@@ -174,6 +174,83 @@ export function HomePage({
           </div>
         </section>
 
+        <section className="section fit-section" id="fit" aria-labelledby="fit-title">
+          <div className="container">
+            <div className="section-heading centered">
+              <p className="eyebrow">03 — FIT</p>
+              <h2 id="fit-title">Who this is for — and who it isn&apos;t</h2>
+            </div>
+            <div className="fit-grid">
+              <article className="fit-card fit-card-for">
+                <h3>Shreevan is for you if</h3>
+                <ul className="fit-list">
+                  <li>
+                    <svg className="fit-icon fit-icon-check" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
+                      <path d="M6 10l3 3 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span>You&apos;re a professional, founder or leader who needs to properly step away</span>
+                  </li>
+                  <li>
+                    <svg className="fit-icon fit-icon-check" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
+                      <path d="M6 10l3 3 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span>You&apos;re moving through a real transition — burnout, loss, a breakup, a milestone</span>
+                  </li>
+                  <li>
+                    <svg className="fit-icon fit-icon-check" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
+                      <path d="M6 10l3 3 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span>You want structure and guidance, not a loose, figure-it-out-yourself holiday</span>
+                  </li>
+                  <li>
+                    <svg className="fit-icon fit-icon-check" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
+                      <path d="M6 10l3 3 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span>You care about routines you can actually keep once you&apos;re home</span>
+                  </li>
+                </ul>
+              </article>
+              <article className="fit-card fit-card-not">
+                <h3>It&apos;s probably not, if</h3>
+                <ul className="fit-list">
+                  <li>
+                    <svg className="fit-icon fit-icon-cross" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
+                      <path d="M7 7l6 6M13 7l-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                    <span>You need medical diagnosis or treatment — we&apos;re not a clinical facility</span>
+                  </li>
+                  <li>
+                    <svg className="fit-icon fit-icon-cross" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
+                      <path d="M7 7l6 6M13 7l-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                    <span>You want a luxury spa week with no structure or practice</span>
+                  </li>
+                  <li>
+                    <svg className="fit-icon fit-icon-cross" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
+                      <path d="M7 7l6 6M13 7l-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                    <span>You&apos;re looking for a party trip or purely social travel</span>
+                  </li>
+                  <li>
+                    <svg className="fit-icon fit-icon-cross" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
+                      <path d="M7 7l6 6M13 7l-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                    </svg>
+                    <span>You want a guaranteed outcome or an overnight fix</span>
+                  </li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </section>
+
         <section className="section included-section" id="included" aria-labelledby="included-title">
           <div className="container">
             <div className="section-heading centered">
