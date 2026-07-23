@@ -298,20 +298,22 @@ export function HomePage({
           </div>
         </section>
 
-        <section className="section credibility-section" id="credibility" aria-labelledby="credibility-title">
+        <section className="section credibility-section" id="story" aria-labelledby="story-title">
           <div className="container credibility-grid">
-            <div>
-              <p className="eyebrow">{content.team.eyebrow}</p>
-              <h2 id="credibility-title">{content.team.heading}</h2>
-              <p>{content.team.body}</p>
-            </div>
-            <div className="team-panel">
-              <HomeMediaSlot className="portrait-slot" media={content.team.media} />
-              <ul>
-                {content.team.bullets.map((item) => (
-                  <li key={item.id}>{item.text}</li>
-                ))}
-              </ul>
+            <HomeMediaSlot className="portrait-slot" media={content.team.media} />
+            <div className="story-content">
+              <p className="eyebrow">02 — OUR STORY</p>
+              <h2 id="story-title">Founded by a physician who has seen burnout up close.</h2>
+              <blockquote className="founder-quote">
+                &ldquo;I started Shreevan after years of watching capable, high-performing people run themselves into the ground &mdash; with nowhere structured and credible to recover. This is the place I wished existed.&rdquo;
+              </blockquote>
+              <div className="founder-details">
+                <h3>Dr. Isha Dutta</h3>
+                <p>Founder &amp; Lead Facilitator &middot; MD, integrative &amp; lifestyle medicine &middot; 18 years in practice</p>
+              </div>
+              <a href="/about" className="story-link">
+                Read Dr. Dutta&apos;s full story &rarr;
+              </a>
             </div>
           </div>
         </section>
