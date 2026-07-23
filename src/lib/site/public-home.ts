@@ -8,6 +8,7 @@ import type {
   AdminHomeDifferentiationCard,
   AdminHomeMedia,
   AdminHomeProgramItem,
+  AdminHomeRhythmItem,
   AdminHomeTaggedCard,
   AdminHomeTestimonial,
   AdminHomeTextItem,
@@ -88,6 +89,26 @@ function cleanTestimonials(items: AdminHomeTestimonial[], fallback: AdminHomeTes
   }));
 }
 
+function cleanRhythmItems(items: AdminHomeRhythmItem[], fallback: AdminHomeRhythmItem[]) {
+  return items.map((item, index) => {
+    const fb = fallback[index] ?? {
+      id: `rhythm-${index + 1}`,
+      time: "",
+      title: item.text || "",
+      copy: "",
+      text: item.text || "",
+    };
+
+    return {
+      id: cleanText(item.id, fb.id),
+      time: cleanText(item.time ?? "", fb.time ?? ""),
+      title: cleanText(item.title ?? "", fb.title ?? item.text ?? ""),
+      copy: cleanText(item.copy ?? "", fb.copy ?? ""),
+      text: cleanText(item.text, fb.text),
+    };
+  });
+}
+
 function toPublicHomeContent(store: AdminHomeContentStore, fallback: AdminHomeContentStore): PublicHomeContent {
   return {
     hero: {
@@ -126,7 +147,7 @@ function toPublicHomeContent(store: AdminHomeContentStore, fallback: AdminHomeCo
       eyebrow: cleanText(store.rhythm.eyebrow, fallback.rhythm.eyebrow),
       heading: cleanText(store.rhythm.heading, fallback.rhythm.heading),
       body: cleanText(store.rhythm.body, fallback.rhythm.body),
-      items: cleanTextItems(store.rhythm.items, fallback.rhythm.items),
+      items: cleanRhythmItems(store.rhythm.items, fallback.rhythm.items),
     },
     team: {
       eyebrow: cleanText(store.team.eyebrow, fallback.team.eyebrow),
