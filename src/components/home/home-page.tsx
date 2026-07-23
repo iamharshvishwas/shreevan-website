@@ -200,17 +200,24 @@ export function HomePage({
         </section>
 
         <section className="section rhythm-section" aria-labelledby="rhythm-title">
-          <div className="container rhythm-grid">
-            <div>
-              <p className="eyebrow light">{content.rhythm.eyebrow}</p>
+          <div className="container">
+            <div className="rhythm-top-header">
+              <span className="eyebrow light">{content.rhythm.eyebrow}</span>
+              <div className="rhythm-top-line" aria-hidden="true" />
+            </div>
+            <div className="rhythm-header-content">
               <h2 id="rhythm-title">{content.rhythm.heading}</h2>
               <p>{content.rhythm.body}</p>
             </div>
-            <ol className="rhythm-list">
+            <div className="rhythm-horizontal-grid">
               {content.rhythm.items.map((item) => (
-                <li key={item.id}>{item.text}</li>
+                <article key={item.id} className="rhythm-horizontal-card">
+                  <div className="rhythm-card-time">{item.time || item.text}</div>
+                  <h3 className="rhythm-card-title">{item.title || item.text}</h3>
+                  {item.copy && <p className="rhythm-card-copy">{item.copy}</p>}
+                </article>
               ))}
-            </ol>
+            </div>
           </div>
         </section>
 

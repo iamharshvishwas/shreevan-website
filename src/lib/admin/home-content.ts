@@ -19,6 +19,14 @@ export type AdminHomeTextItem = {
   text: string;
 };
 
+export type AdminHomeRhythmItem = {
+  id: string;
+  time?: string;
+  title?: string;
+  copy?: string;
+  text: string;
+};
+
 export type AdminHomeTitleCopyItem = {
   id: string;
   title: string;
@@ -85,7 +93,7 @@ export type AdminHomeContentStore = {
     eyebrow: string;
     heading: string;
     body: string;
-    items: AdminHomeTextItem[];
+    items: AdminHomeRhythmItem[];
   };
   team: {
     eyebrow: string;
@@ -306,18 +314,60 @@ export const defaultAdminHomeContent: AdminHomeContentStore = {
     ],
   },
   rhythm: {
-    eyebrow: "Retreat experience",
-    heading: "A daily rhythm designed for clarity",
+    eyebrow: "05 A DAY AT SHREEVAN",
+    heading: "One calm rhythm, repeated until it becomes yours.",
     body:
-      "The day is intentionally paced between practice, learning, meals, rest and reflection. The experience should feel structured, not crowded.",
+      "Each day follows the same gentle structure so your nervous system can settle into it. Sessions are guided, rest is built in, and nothing is performative.",
     items: [
-      { id: "rhythm-1", text: "Morning yoga and pranayama" },
-      { id: "rhythm-2", text: "Intention circle" },
-      { id: "rhythm-3", text: "Workshop or learning session" },
-      { id: "rhythm-4", text: "Sattvic meals" },
-      { id: "rhythm-5", text: "Reflection and journaling" },
-      { id: "rhythm-6", text: "Meditation or Yoga Nidra" },
-      { id: "rhythm-7", text: "Evening sharing circle" },
+      {
+        id: "rhythm-1",
+        time: "06:00",
+        title: "Wake & stillness",
+        copy: "A quiet start before the day's first practice.",
+        text: "Wake & stillness",
+      },
+      {
+        id: "rhythm-2",
+        time: "06:30",
+        title: "Yoga & breathwork",
+        copy: "A grounding practice to begin the day with attention.",
+        text: "Yoga & breathwork",
+      },
+      {
+        id: "rhythm-3",
+        time: "08:00",
+        title: "Sattvic breakfast",
+        copy: "Shared, seasonal and plant-forward — no rush.",
+        text: "Sattvic breakfast",
+      },
+      {
+        id: "rhythm-4",
+        time: "10:00",
+        title: "Guided session",
+        copy: "Reflection, journaling or a facilitated workshop.",
+        text: "Guided session",
+      },
+      {
+        id: "rhythm-5",
+        time: "13:30",
+        title: "Sattvic lunch & rest",
+        copy: "Nourishing meal followed by unstructured personal time.",
+        text: "Sattvic lunch & rest",
+      },
+      {
+        id: "rhythm-6",
+        time: "16:30",
+        title: "Yoga Nidra & nature",
+        copy: "Walks by the Ganges, river time and deep relaxation.",
+        text: "Yoga Nidra & nature",
+      },
+      {
+        id: "rhythm-7",
+        time: "19:30",
+        title: "Evening reflection",
+        copy: "A quiet close with sharing circle and guided meditation.",
+        text: "Evening reflection",
+      },
     ],
   },
   team: {
@@ -488,6 +538,23 @@ function normalizeTextItem(value: unknown, fallback: AdminHomeTextItem, index: n
   return {
     id: stringValue(input.id, fallback.id || `${prefix}-${index + 1}`),
     text: stringValue(input.text, fallback.text),
+  };
+}
+
+function normalizeRhythmItem(
+  value: unknown,
+  fallback: AdminHomeRhythmItem,
+  index: number,
+): AdminHomeRhythmItem {
+  const input = isRecord(value) ? value : {};
+  const title = stringValue(input.title, fallback.title ?? "");
+
+  return {
+    id: stringValue(input.id, fallback.id || `rhythm-${index + 1}`),
+    time: stringValue(input.time, fallback.time ?? ""),
+    title,
+    copy: stringValue(input.copy, fallback.copy ?? ""),
+    text: stringValue(input.text, fallback.text || title || fallback.id),
   };
 }
 
@@ -662,8 +729,8 @@ export function normalizeAdminHomeContent(value: unknown): AdminHomeContentStore
       items: normalizeArray(
         rhythm.items,
         defaultAdminHomeContent.rhythm.items,
-        (item, fallback, index) => normalizeTextItem(item, fallback, index, "rhythm"),
-        { id: "", text: "" },
+        normalizeRhythmItem,
+        { id: "", time: "", title: "", copy: "", text: "" },
       ),
     },
     team: {
