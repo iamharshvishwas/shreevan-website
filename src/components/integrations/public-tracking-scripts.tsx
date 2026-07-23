@@ -1,21 +1,27 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import Script from "next/script";
 
+const emptySubscribe = () => () => {};
+
 export function PublicTrackingScripts() {
   const pathname = usePathname();
-  const [shouldLoad, setShouldLoad] = useState(false);
+  const isClient = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
 
-  useEffect(() => {
-    const isAdminHost = window.location.hostname.startsWith("admin.");
-    const isAdminPath = pathname?.startsWith("/admin") ?? false;
+  if (!isClient) {
+    return null;
+  }
 
-    setShouldLoad(!isAdminHost && !isAdminPath);
-  }, [pathname]);
+  const isAdminHost = window.location.hostname.startsWith("admin.");
+  const isAdminPath = pathname?.startsWith("/admin") ?? false;
 
-  if (!shouldLoad) {
+  if (isAdminHost || isAdminPath) {
     return null;
   }
 

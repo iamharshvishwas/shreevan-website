@@ -661,7 +661,12 @@ export function AdminBlogPanel({ initialBlog }: Readonly<{ initialBlog: AdminBlo
 
   useEffect(() => {
     const knownIds = new Set(blog.journalArticles.map((article) => article.id));
-    setSelectedArticleIds((current) => current.filter((id) => knownIds.has(id)));
+    queueMicrotask(() => {
+      setSelectedArticleIds((current) => {
+        const next = current.filter((id) => knownIds.has(id));
+        return next.length === current.length ? current : next;
+      });
+    });
   }, [blog.journalArticles]);
 
   useEffect(() => {
