@@ -318,10 +318,21 @@ export function HomePage({
 
         <section className="section international-section" id="international" aria-labelledby="international-title">
           <div className="container">
-            <div className="section-heading centered">
-              <p className="eyebrow">{content.travel.eyebrow}</p>
-              <h2 id="international-title">{content.travel.heading}</h2>
-              <p>{content.travel.body}</p>
+            <div className="international-header-grid">
+              <div className="international-header-text">
+                <p className="eyebrow">{content.travel.eyebrow}</p>
+                <h2 id="international-title">{content.travel.heading}</h2>
+                <p>{content.travel.body}</p>
+              </div>
+              <figure className="international-image">
+                <Image
+                  src="/images/home/international-visitor-reassurance.webp"
+                  alt="Retreat host explaining arrival and stay details to international guests"
+                  width={1500}
+                  height={1120}
+                  sizes="(max-width: 720px) 100vw, 50vw"
+                />
+              </figure>
             </div>
 
             <div className="travel-reassurance-wrapper">

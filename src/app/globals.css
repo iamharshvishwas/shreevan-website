@@ -322,8 +322,13 @@ dd { margin: 6px 0 0; color: var(--stone-600); line-height: 1.45; }
 .rhythm-card-time { color: var(--gold-500); font-family: var(--font-heading); font-size: 1.45rem; font-weight: 600; line-height: 1; margin-bottom: 4px; }
 .rhythm-card-title { color: var(--white); font-size: 1.05rem; font-weight: 700; line-height: 1.3; margin: 0; }
 .rhythm-card-copy { color: rgba(232, 240, 236, 0.65); font-size: 0.88rem; line-height: 1.45; margin: 0; }
+.international-header-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 48px; align-items: center; margin-bottom: 44px; }
+.international-header-text h2 { font-size: clamp(2rem, 3.2vw, 2.75rem); line-height: 1.15; color: var(--forest-950); margin-top: 14px; margin-bottom: 20px; }
+.international-header-text p:not(.eyebrow) { color: var(--stone-600); font-size: 1.05rem; line-height: 1.5; margin: 0; }
+.international-image { margin: 0; overflow: hidden; border-radius: 16px; box-shadow: var(--shadow); aspect-ratio: 16 / 10; width: 100%; border: 1px solid var(--line-sand); }
+.international-image img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
 
-.travel-reassurance-wrapper { margin-top: 40px; }
+.travel-reassurance-wrapper { margin-top: 0; }
 .reassurance-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
 .reassurance-list article { border: 1px solid rgba(0, 0, 0, 0.08); border-radius: 12px; background: var(--white); padding: 28px 24px; display: flex; flex-direction: column; height: 100%; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
 .travel-card-icon { width: 28px; height: 28px; color: var(--forest-700); margin-bottom: 20px; flex-shrink: 0; }
@@ -1245,6 +1250,7 @@ main [id] { scroll-margin-top: 132px; }
   .intent-image { min-height: 360px; }
   .program-card-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .program-card-feature-row { grid-template-columns: 1fr; }
+  .international-header-grid { grid-template-columns: 1fr; gap: 28px; }
   .international-image { min-height: 300px; }
   .reassurance-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .safety-image { min-height: 420px; }
