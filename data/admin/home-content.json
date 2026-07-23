@@ -262,27 +262,27 @@
     "cards": [
       {
         "id": "travel-1",
-        "title": "Airport and transfer guidance",
-        "copy": "Nearest airport, travel time, arrival window and transfer support.",
-        "tag": "Arrival"
+        "title": "Getting here",
+        "copy": "Airport transfers are arranged; e-Visa is straightforward for most nationalities.",
+        "tag": "Getting here"
       },
       {
         "id": "travel-2",
-        "title": "Accommodation and daily life",
-        "copy": "Rooms, bathrooms, climate, laundry, quiet hours, internet policy and packing.",
-        "tag": "Stay"
+        "title": "Where you'll stay",
+        "copy": "Private or shared rooms, simply furnished and comfortable, on the retreat grounds.",
+        "tag": "Where you'll stay"
       },
       {
         "id": "travel-3",
-        "title": "Sattvic meals explained plainly",
-        "copy": "Vegetarian food, caffeine, alcohol, spice level and dietary suitability.",
-        "tag": "Food"
+        "title": "What you'll eat",
+        "copy": "Sattvic, plant-forward meals, seasonal and easy on travel-tired digestion.",
+        "tag": "What you'll eat"
       },
       {
         "id": "travel-4",
-        "title": "Suitability before payment",
-        "copy": "Goals, expectations, health context and whether the retreat is responsible for them.",
-        "tag": "Fit"
+        "title": "What to pack",
+        "copy": "Modest, comfortable layers — days are active but low-impact, no prior fitness required.",
+        "tag": "What to pack"
       }
     ]
   },

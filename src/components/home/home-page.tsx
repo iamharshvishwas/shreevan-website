@@ -317,39 +317,52 @@ export function HomePage({
         </section>
 
         <section className="section international-section" id="international" aria-labelledby="international-title">
-          <div className="container international-grid">
-            <div>
+          <div className="container">
+            <div className="section-heading centered">
               <p className="eyebrow">{content.travel.eyebrow}</p>
               <h2 id="international-title">{content.travel.heading}</h2>
               <p>{content.travel.body}</p>
             </div>
-            <div className="international-panel">
-              <figure className="international-image">
-                <Image
-                  src="/images/home/international-visitor-reassurance.webp"
-                  alt="Retreat host explaining arrival and stay details to international guests"
-                  width={1500}
-                  height={1120}
-                  sizes="(max-width: 720px) 100vw, 58vw"
-                />
-              </figure>
+
+            <div className="travel-reassurance-wrapper">
               <div className="reassurance-list">
-                {content.travel.cards.map((card) => (
+                {content.travel.cards.map((card, index) => (
                   <article key={card.id}>
-                    <span>{card.tag}</span>
+                    {index === 0 && (
+                      <svg className="travel-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                        <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    )}
+                    {index === 1 && (
+                      <svg className="travel-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" strokeLinecap="round" strokeLinejoin="round" />
+                        <polyline points="9 22 9 12 15 12 15 22" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    )}
+                    {index === 2 && (
+                      <svg className="travel-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                        <path d="M18 8a6 6 0 0 1-6 6 6 6 0 0 1-6-6M12 2v12M12 22v-4" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    )}
+                    {index === 3 && (
+                      <svg className="travel-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                        <rect x="6" y="8" width="12" height="12" rx="2" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M9 8V6a3 3 0 016 0v2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    )}
                     <h3>{card.title}</h3>
                     <p>{card.copy}</p>
                   </article>
                 ))}
               </div>
-              <div className="source-link-panel" aria-label="Official travel references">
-                <p>Official travel references for international visitors</p>
-                <div>
-                  {homeReferenceLinks.map((link) => (
-                    <a key={link.id} href={link.href} target="_blank" rel="noopener noreferrer">
-                      {link.label}
-                    </a>
-                  ))}
+
+              <div className="travel-advisories-bar" aria-label="Official travel advisories">
+                <span className="advisories-label">OFFICIAL TRAVEL ADVISORIES</span>
+                <div className="advisories-links">
+                  <a href="https://travel.state.gov" target="_blank" rel="noopener noreferrer">US State Dept ↗</a>
+                  <a href="https://www.gov.uk/foreign-travel-advice/india" target="_blank" rel="noopener noreferrer">UK FCDO ↗</a>
+                  <a href="https://travel.gc.ca/destinations/india" target="_blank" rel="noopener noreferrer">Canada travel ↗</a>
+                  <a href="https://indianvisaonline.gov.in/evisa/" target="_blank" rel="noopener noreferrer">India e-Visa ↗</a>
                 </div>
               </div>
             </div>
