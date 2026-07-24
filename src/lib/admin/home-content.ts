@@ -525,7 +525,7 @@ function normalizeMedia(value: unknown, fallback: AdminHomeMedia): AdminHomeMedi
 
   return {
     kind: mediaKindValue(input.kind, fallback.kind),
-    src: stringValue(input.src, fallback.src),
+    src: typeof input.src === "string" && input.src.trim() !== "" ? input.src : fallback.src,
     alt: stringValue(input.alt, fallback.alt),
     caption: stringValue(input.caption, fallback.caption),
     placeholder: stringValue(input.placeholder, fallback.placeholder),
