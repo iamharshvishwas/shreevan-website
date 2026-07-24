@@ -45,7 +45,7 @@ export const defaultAdminAboutStoryContent: AdminAboutStoryContent = {
     primaryCtaHref: "/book-consultation",
     secondaryCtaLabel: "Explore programs",
     secondaryCtaHref: "/programs/28-day-inner-awakening",
-    media: { src: "/images/about/founder.jpg", alt: "Founder Isha Dutta", caption: "Founder portrait, Ganga-side moment or calm retreat welcome image" },
+    media: { src: "/images/home/founder.jpg", alt: "Founder Isha Dutta", caption: "Founder portrait, Ganga-side moment or calm retreat welcome image" },
   },
   pillars: [
     { id: "story-pillar-roots", title: "Rooted in Rishikesh", copy: "The retreat experience is shaped by the sacred rhythm of Maa Ganga, yogic practice and quiet daily structure." },
