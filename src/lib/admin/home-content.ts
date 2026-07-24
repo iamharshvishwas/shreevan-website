@@ -376,10 +376,10 @@ export const defaultAdminHomeContent: AdminHomeContentStore = {
     body:
       'Add founder credentials, facilitator experience, training, guest-care standards and how suitability concerns are handled. This keeps trust personal without turning the page into a heavy "why us" block.',
     media: {
-      kind: "",
-      src: "",
-      alt: "",
-      caption: "Founder, lead facilitator or retreat team portrait",
+      kind: "image",
+      src: "/images/home/founder.jpg",
+      alt: "Dr. Isha Dutta - Founder",
+      caption: "Founder & Lead Facilitator",
       placeholder: "Image slot",
     },
     bullets: [

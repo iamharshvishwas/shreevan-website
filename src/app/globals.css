@@ -283,8 +283,8 @@ dd { margin: 6px 0 0; color: var(--stone-600); line-height: 1.45; }
 .signature { padding-inline: 24px 0; background: linear-gradient(90deg, rgba(232, 240, 236, 0.76), rgba(232, 240, 236, 0)); }
 
 .included-section, .credibility-section, .testimonials-section { background: var(--white); }
-.credibility-grid { display: grid; grid-template-columns: minmax(320px, 0.85fr) minmax(0, 1fr); gap: 64px; align-items: center; }
-.portrait-slot { min-height: 480px; aspect-ratio: 4 / 5; border-radius: 20px; background: #eae7df; border: 1px dashed rgba(0, 0, 0, 0.15); margin: 0; }
+.credibility-grid { display: grid; grid-template-columns: minmax(280px, 0.55fr) minmax(0, 1fr); gap: 64px; align-items: center; }
+.portrait-slot { min-height: 360px; aspect-ratio: 3 / 4; border-radius: 20px; background: #eae7df; border: 1px dashed rgba(0, 0, 0, 0.15); margin: 0; }
 .story-content { display: flex; flex-direction: column; gap: 20px; }
 .story-content .eyebrow { color: #6b7770; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; margin: 0; }
 .story-content h2 { font-family: var(--font-heading); font-size: clamp(2.1rem, 3.5vw, 2.9rem); font-weight: 400; line-height: 1.18; color: var(--forest-950); margin: 0; }
