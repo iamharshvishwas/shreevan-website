@@ -45,7 +45,7 @@ export const defaultAdminAboutStoryContent: AdminAboutStoryContent = {
     primaryCtaHref: "/book-consultation",
     secondaryCtaLabel: "Explore programs",
     secondaryCtaHref: "/programs/28-day-inner-awakening",
-    media: { src: "", alt: "", caption: "Founder portrait, Ganga-side moment or calm retreat welcome image" },
+    media: { src: "/images/about/founder.jpg", alt: "Founder Isha Dutta", caption: "Founder portrait, Ganga-side moment or calm retreat welcome image" },
   },
   pillars: [
     { id: "story-pillar-roots", title: "Rooted in Rishikesh", copy: "The retreat experience is shaped by the sacred rhythm of Maa Ganga, yogic practice and quiet daily structure." },
@@ -123,7 +123,7 @@ export const defaultAdminAboutStoryContent: AdminAboutStoryContent = {
 
 function isRecord(value: unknown): value is Record<string, unknown> { return Boolean(value && typeof value === "object" && !Array.isArray(value)); }
 function stringValue(value: unknown, fallback: string) { return typeof value === "string" ? value : fallback; }
-function media(value: unknown, fallback: AdminStoryMedia): AdminStoryMedia { const input = isRecord(value) ? value : {}; return { src: stringValue(input.src, fallback.src), alt: stringValue(input.alt, fallback.alt), caption: stringValue(input.caption, fallback.caption) }; }
+function media(value: unknown, fallback: AdminStoryMedia): AdminStoryMedia { const input = isRecord(value) ? value : {}; return { src: typeof input.src === "string" && input.src.trim() !== "" ? input.src : fallback.src, alt: stringValue(input.alt, fallback.alt), caption: stringValue(input.caption, fallback.caption) }; }
 function cards(value: unknown, fallback: AdminStoryCard[], prefix: string): AdminStoryCard[] { if (!Array.isArray(value)) return fallback; return value.map((item, index) => { const input = isRecord(item) ? item : {}; const itemFallback = fallback[index] ?? { id: `${prefix}-${index + 1}`, title: "New item", copy: "" }; return { id: stringValue(input.id, itemFallback.id), title: stringValue(input.title, itemFallback.title), copy: stringValue(input.copy, itemFallback.copy) }; }); }
 function textItems(value: unknown, fallback: AdminStoryTextItem[], prefix: string): AdminStoryTextItem[] { if (!Array.isArray(value)) return fallback; return value.map((item, index) => { const input = isRecord(item) ? item : {}; const itemFallback = fallback[index] ?? { id: `${prefix}-${index + 1}`, text: "" }; return { id: stringValue(input.id, itemFallback.id), text: stringValue(input.text, itemFallback.text) }; }); }
 

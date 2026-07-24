@@ -391,7 +391,7 @@ dd { margin: 6px 0 0; color: var(--stone-600); line-height: 1.45; }
 .story-hero-copy .hero-actions { justify-content: flex-start; }
 .story-hero-media { position: relative; }
 .story-portrait-slot { min-height: 560px; border-radius: 14px; box-shadow: var(--shadow); }
-.story-founder-card { position: absolute; right: 26px; bottom: 26px; display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 16px; align-items: center; max-width: 390px; border: 1px solid var(--line-sand); border-radius: 14px; background: rgba(255, 255, 255, 0.94); box-shadow: var(--shadow); padding: 18px; }
+.story-founder-card { position: absolute; right: 26px; bottom: 26px; display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 16px; align-items: center; max-width: 460px; border: 1px solid var(--line-sand); border-radius: 14px; background: rgba(255, 255, 255, 0.94); box-shadow: var(--shadow); padding: 14px 18px; }
 .story-founder-card img { border: 1px solid var(--line-sand); border-radius: 12px; background: var(--white); }
 .story-founder-card span { display: block; color: var(--moss-600); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; line-height: 1.2; text-transform: uppercase; }
 .story-founder-card strong { display: block; margin-top: 3px; color: var(--forest-900); font-family: var(--font-heading); font-size: 1.35rem; font-weight: 600; line-height: 1.1; }
