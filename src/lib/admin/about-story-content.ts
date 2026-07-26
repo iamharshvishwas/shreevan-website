@@ -45,7 +45,7 @@ export const defaultAdminAboutStoryContent: AdminAboutStoryContent = {
     primaryCtaHref: "/book-consultation",
     secondaryCtaLabel: "Explore programs",
     secondaryCtaHref: "/programs/28-day-inner-awakening",
-    media: { src: "/images/about/founder-new.jpg", alt: "Founder Isha Dutta", caption: "Founder portrait, Ganga-side moment or calm retreat welcome image" },
+    media: { src: "/images/about/founder-portrait-peaceful-retreat.webp", alt: "Founder Isha Dutta", caption: "Founder portrait, Ganga-side moment or calm retreat welcome image" },
   },
   pillars: [
     { id: "story-pillar-roots", title: "Rooted in Rishikesh", copy: "The retreat experience is shaped by the sacred rhythm of Maa Ganga, yogic practice and quiet daily structure." },
@@ -126,7 +126,7 @@ function stringValue(value: unknown, fallback: string) { return typeof value ===
 function media(value: unknown, fallback: AdminStoryMedia): AdminStoryMedia { 
   const input = isRecord(value) ? value : {}; 
   let src = typeof input.src === "string" && input.src.trim() !== "" ? input.src : fallback.src;
-  if (src === "/images/about/founder.jpg" || src === "/images/home/founder.jpg") {
+  if (src === "/images/about/founder.jpg" || src === "/images/about/founder-new.jpg" || src === "/images/home/founder.jpg") {
     src = fallback.src;
   }
   return { src, alt: stringValue(input.alt, fallback.alt), caption: stringValue(input.caption, fallback.caption) }; 
