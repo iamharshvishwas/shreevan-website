@@ -237,9 +237,15 @@ export function TwentyEightDayInnerAwakeningPage() {
             </div>
 
             <div className="program-hero-media">
-              <div className="image-slot program-hero-slot flagship-slot">
-                <span>Image slot</span>
-                <p>Full retreat arc: Ganga practice, trek, silent sitting, cooking, community and graduation</p>
+              <div className="image-slot home-media-slot has-media program-hero-slot flagship-slot">
+                <Image
+                  src="/images/programs/28-day-inner-awakening-hero.webp"
+                  alt="Group sunrise yoga practice beside the Ganga during the 28-day Sattva Ganga Inner Awakening retreat"
+                  width={1792}
+                  height={2400}
+                  priority
+                  sizes="(max-width: 720px) 100vw, 50vw"
+                />
               </div>
               <aside className="program-summary-card flagship-summary" aria-label="Program summary">
                 <Image src={siteConfig.logos.symbol} alt="" width={72} height={72} />
@@ -247,10 +253,6 @@ export function TwentyEightDayInnerAwakeningPage() {
                   <div>
                     <dt>Duration</dt>
                     <dd>28 days</dd>
-                  </div>
-                  <div>
-                    <dt>Standard investment</dt>
-                    <dd>$2,200 USD</dd>
                   </div>
                   <div>
                     <dt>Positioning</dt>
