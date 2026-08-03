@@ -21,6 +21,13 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   trailingSlash: false,
   htmlLimitedBots: /.*/,
+  experimental: {
+    // Inlines page <link rel="stylesheet"> as <style> in <head> on production
+    // builds, removing the render-blocking CSS request round-trip — the
+    // biggest lever for the "Render blocking requests" / LCP Lighthouse
+    // finding. Well-suited to Tailwind's small, compact per-route bundles.
+    inlineCss: true,
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 31536000,
