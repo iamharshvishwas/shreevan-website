@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { siteConfig } from "@/config/site";
+import "./program-detail-shared.css";
 
 const transformationLadder = [
   ["3 Days", "Reset"],
