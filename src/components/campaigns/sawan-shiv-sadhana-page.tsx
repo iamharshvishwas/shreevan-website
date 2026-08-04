@@ -3,6 +3,7 @@ import Link from "next/link";
 import { CalendarDays, CheckCircle2, Clock3, IndianRupee, MapPin, MessageCircle, Phone, ShieldCheck } from "lucide-react";
 import { SawanRetreatForm, SawanWhatsAppLink } from "@/components/campaigns/sawan-retreat-form";
 import { siteConfig } from "@/config/site";
+import "./sawan-shiv-sadhana.css";
 
 type CampaignVideo = {
   mp4: string;
