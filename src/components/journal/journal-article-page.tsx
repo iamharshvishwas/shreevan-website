@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { extractHeadings, injectHeadingIds } from "@/lib/content/article-seo";
 import { findArticleAuthor } from "@/lib/content/authors";
 import type { PublicJournalArticle } from "@/lib/site/public-content-trust-types";
+import "./journal.css";
 
 function JournalBlock({ block }: Readonly<{ block: PublicJournalArticle["blocks"][number] }>) {
   if (block.type === "heading") {

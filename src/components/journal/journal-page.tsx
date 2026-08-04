@@ -6,6 +6,7 @@ import { WhatsAppPhoneFields } from "@/components/forms/whatsapp-phone-fields";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import type { PublicJournalArticle, PublicJournalContent } from "@/lib/site/public-content-trust-types";
+import "./journal.css";
 
 function formatArticleSearch(article: PublicJournalArticle) {
   return [
