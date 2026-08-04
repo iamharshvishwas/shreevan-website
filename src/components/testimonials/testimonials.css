@@ -1,0 +1,61 @@
+/* Testimonials (healing stories) shared CSS -- split out of globals.css so only the
+   /testimonials route ships these rules. Imported by healing-stories-page.tsx. Not
+   part of the original 8-phase plan (which didn't account for this route separately)
+   -- extracted alongside Phase 5 since the investigation for the shared story.css
+   split already required mapping every class on this page. */
+
+.stories-hero { background: radial-gradient(circle at 80% 18%, rgba(181, 139, 58, 0.12), transparent 34%), var(--sand-050); }
+.stories-hero-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(420px, 0.74fr); gap: 72px; align-items: center; }
+.stories-hero .hero-lede { max-width: 760px; margin-inline: 0; }
+.stories-hero .hero-actions { justify-content: flex-start; }
+.stories-hero-media { min-height: 560px; border-radius: var(--radius-card); box-shadow: var(--shadow-md); }
+
+.featured-story-section, .story-library-section { background: var(--white); }
+.featured-story-panel { display: grid; grid-template-columns: minmax(390px, 0.82fr) minmax(0, 0.9fr); gap: 56px; align-items: center; border: 1px solid var(--line-sand); border-radius: var(--radius-card); background: var(--sand-050); padding: 30px; }
+.featured-story-media { min-height: 520px; border-radius: var(--radius-callout); background: var(--mist-100); }
+.featured-story-panel > div:last-child > p:not(.eyebrow) { margin-top: 22px; color: var(--stone-600); }
+.story-meta-list { display: grid; grid-template-columns: 1fr; gap: 0; margin-top: 30px; border-top: 1px solid var(--line-sand); }
+.story-meta-list div { display: grid; grid-template-columns: minmax(120px, 0.32fr) minmax(0, 1fr); gap: 24px; padding-block: 18px; border-bottom: 1px solid var(--line-sand); }
+.story-meta-list dd { margin: 0; color: var(--stone-600); }
+
+.story-card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.story-card { display: grid; grid-template-rows: auto 1fr; overflow: hidden; border: 1px solid var(--line-sand); border-radius: var(--radius-card); background: var(--white); box-shadow: var(--shadow-sm); }
+.story-card-media { min-height: 260px; border: 0; border-bottom: 1px dashed rgba(49, 90, 73, 0.34); }
+.story-card > div:last-child { display: grid; gap: 12px; padding: 26px; }
+.story-card > div:last-child > span { color: var(--moss-600); font-size: 0.74rem; font-weight: 850; letter-spacing: 0.1em; line-height: 1.2; text-transform: uppercase; }
+.story-card p { color: var(--stone-600); line-height: 1.55; }
+.story-card strong { display: block; margin-top: 4px; color: var(--forest-700); font-size: 0.96rem; line-height: 1.5; }
+
+.video-stories-section, .consent-section { background: var(--forest-950); color: rgba(232, 240, 236, 0.78); }
+.video-stories-section h2, .video-stories-section h3, .consent-section h2 { color: var(--white); }
+.video-story-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.video-story-grid article { border: 1px solid rgba(211, 224, 216, 0.2); border-radius: var(--radius-card); background: rgba(255, 255, 255, 0.045); padding: 18px; }
+.video-story-grid h3 { margin-top: 22px; }
+.video-story-grid p { margin-top: 10px; color: rgba(232, 240, 236, 0.76); }
+
+.outcome-story-section { background: var(--sand-050); }
+.outcome-story-grid, .consent-grid { display: grid; grid-template-columns: minmax(280px, 0.58fr) minmax(0, 1fr); gap: 72px; align-items: start; }
+.outcome-story-grid > div:first-child > p:not(.eyebrow), .consent-grid > div:first-child > p:not(.eyebrow) { margin-top: 24px; color: var(--stone-600); }
+.consent-grid > div:first-child > p:not(.eyebrow) { color: rgba(232, 240, 236, 0.76); }
+.outcome-map { display: grid; gap: 0; border-top: 1px solid var(--line-sand); }
+.outcome-map article { display: grid; grid-template-columns: minmax(100px, 0.24fr) minmax(180px, 0.36fr) minmax(0, 1fr); gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--line-sand); }
+.outcome-map span { color: var(--gold-500); font-family: var(--font-heading); font-size: 1.28rem; line-height: 1.2; }
+.outcome-map h3 { font-family: var(--font-body); font-size: 1rem; font-weight: 850; line-height: 1.35; }
+.outcome-map p { color: var(--stone-600); line-height: 1.55; }
+
+@media (max-width: 1180px) {
+  .stories-hero-grid { grid-template-columns: minmax(0, 0.85fr) minmax(360px, 0.78fr); gap: 46px; }
+  .stories-hero-media, .featured-story-media { min-height: 480px; }
+}
+
+@media (max-width: 960px) {
+  .stories-hero-grid, .featured-story-panel, .story-card-grid, .outcome-story-grid, .consent-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .video-story-grid { grid-template-columns: 1fr; }
+  .stories-hero-media, .featured-story-media { min-height: 340px; }
+  .story-card-media { min-height: 220px; }
+  .featured-story-panel { padding: 22px; }
+  .story-meta-list div, .outcome-map article { grid-template-columns: 1fr; gap: 8px; }
+}

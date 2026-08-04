@@ -1,0 +1,28 @@
+/* Shared story CSS -- .story-proof-strip / .story-marker-grid / .story-cta* are used
+   by BOTH about-founder-page.tsx and healing-stories-page.tsx (testimonials), so this
+   file is imported by both rather than duplicated or left in globals.css. */
+
+.story-proof-strip { border-block: 1px solid var(--line-mist); background: var(--white); padding-block: 30px; }
+.story-marker-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; }
+.story-marker-grid article { padding: 10px 30px; border-left: 1px solid var(--line-mist); }
+.story-marker-grid article:first-child { border-left: 0; padding-left: 0; }
+.story-marker-grid h2 { color: var(--forest-900); font-family: var(--font-body); font-size: 0.98rem; font-weight: 850; line-height: 1.2; }
+.story-marker-grid p { margin-top: 8px; color: var(--stone-600); font-size: 0.9rem; line-height: 1.5; }
+.standards-list { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; counter-reset: standard; }
+.standards-list li { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 20px; padding: 20px 0; border-bottom: 1px solid rgba(211, 224, 216, 0.2); color: var(--white); counter-increment: standard; }
+.standards-list li:first-child { border-top: 1px solid rgba(211, 224, 216, 0.2); }
+.standards-list li::before { content: counter(standard, decimal-leading-zero); color: var(--gold-500); font-family: var(--font-heading); font-size: 1.28rem; line-height: 1.2; }
+.story-cta-section { background: linear-gradient(180deg, var(--sand-050), var(--white)); }
+.story-cta { max-width: 920px; text-align: center; }
+.story-cta p:not(.eyebrow) { max-width: 720px; margin: 22px auto 0; color: var(--stone-600); }
+.story-cta .button { margin-top: 28px; }
+
+@media (max-width: 960px) {
+  .story-marker-grid { grid-template-columns: 1fr; }
+  .story-marker-grid article { border-top: 1px solid var(--line-mist); border-left: 0; padding: 18px 0; }
+  .story-marker-grid article:first-child { border-top: 0; }
+}
+
+@media (max-width: 640px) {
+  .standards-list li { grid-template-columns: 44px minmax(0, 1fr); gap: 14px; }
+}

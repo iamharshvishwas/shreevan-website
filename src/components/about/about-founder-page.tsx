@@ -4,6 +4,8 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { siteConfig } from "@/config/site";
 import type { AdminAboutStoryContent } from "@/lib/admin/about-story-content";
+import "@/components/shared/story.css";
+import "./about-founder.css";
 
 export function AboutFounderPage({ content }: Readonly<{ content: AdminAboutStoryContent }>) {
   return (

@@ -2,6 +2,8 @@ import Link from "next/link";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import type { PublicStoryContent } from "@/lib/site/public-content-trust-types";
+import "@/components/shared/story.css";
+import "./testimonials.css";
 
 function stageLabel(id: string) {
   return id.slice(0, 1).toUpperCase() + id.slice(1);
