@@ -6,6 +6,7 @@ import { WhatsAppPhoneFields } from "@/components/forms/whatsapp-phone-fields";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { siteConfig } from "@/config/site";
+import "./payment.css";
 
 const programs = [
   {

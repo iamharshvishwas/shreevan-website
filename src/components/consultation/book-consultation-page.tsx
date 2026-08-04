@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ConsultationQualificationForm } from "@/components/forms/consultation-qualification-form";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import "./booking.css";
 
 const conversationSignals = [
   ["No payment here", "This page only starts a suitability conversation."],
