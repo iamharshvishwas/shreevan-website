@@ -130,4 +130,7 @@
   .booking-fit-lists article, .booking-after-grid article { min-height: auto; }
   .booking-last-actions { display: grid; grid-template-columns: 1fr; }
   .booking-conversation-card, .booking-fit-lists article, .booking-last-word-panel { border-radius: 12px; }
+  .form-stepper { grid-template-columns: 1fr; }
+  .form-nav-actions { display: grid; grid-template-columns: 1fr; }
+  .form-nav-actions .button { width: 100%; }
 }
