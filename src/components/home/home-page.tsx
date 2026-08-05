@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { homeAnswerSummary, homeFaqs, homeReferenceLinks } from "@/lib/content/home-aeo";
 import type { PublicHomeMedia, PublicHomeContent } from "@/lib/site/public-home-types";
+import "./home-page.css";
 
 const includedMedia = [
   {
