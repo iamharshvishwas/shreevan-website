@@ -1,0 +1,93 @@
+/* Stay/accommodation shared CSS -- split out of globals.css so only the
+   /accommodation-inclusions route ships these rules. Imported by
+   stay-food-page.tsx. */
+
+.stay-hero { padding-block: 64px 78px; background: radial-gradient(circle at 82% 18%, rgba(57, 118, 132, 0.12), transparent 32%), var(--sand-050); }
+.stay-hero-grid { display: grid; grid-template-columns: minmax(0, 0.94fr) minmax(390px, 0.68fr); gap: 72px; align-items: center; }
+.stay-hero .hero-lede { max-width: 790px; margin-inline: 0; }
+.stay-hero .hero-actions { justify-content: flex-start; }
+.stay-hero-media { display: grid; gap: 16px; }
+.stay-hero-slot { min-height: 520px; border-radius: var(--radius-card); box-shadow: var(--shadow-md); }
+.stay-hero-note { border: 1px solid var(--line-sand); border-radius: var(--radius-card); background: var(--white); box-shadow: var(--shadow-sm); padding: 22px; }
+.stay-hero-note span, .stay-room-body > span { display: inline-flex; border-radius: var(--radius-pill); background: var(--mist-100); color: var(--forest-700); padding: 6px 10px; font-size: 0.72rem; font-weight: 850; letter-spacing: 0.08em; line-height: 1.2; text-transform: uppercase; }
+.stay-hero-note p { margin-top: 12px; color: var(--forest-900); font-family: var(--font-heading); font-size: clamp(1.22rem, 1.8vw, 1.62rem); line-height: 1.25; }
+
+.stay-proof-strip { border-block: 1px solid var(--line-mist); background: var(--white); padding-block: 30px; }
+.stay-marker-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; }
+.stay-marker-grid article { padding: 10px 30px; border-left: 1px solid var(--line-mist); }
+.stay-marker-grid article:first-child { border-left: 0; padding-left: 0; }
+.stay-marker-grid h2 { color: var(--forest-900); font-family: var(--font-body); font-size: 0.98rem; font-weight: 850; line-height: 1.2; }
+.stay-marker-grid p { margin-top: 8px; color: var(--stone-600); font-size: 0.9rem; line-height: 1.5; }
+
+.stay-room-section, .stay-included-section, .stay-gallery-section { background: var(--white); }
+.stay-room-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.stay-room-card { display: grid; grid-template-rows: auto 1fr; overflow: hidden; border: 1px solid var(--line-sand); border-radius: var(--radius-card); background: var(--white); box-shadow: var(--shadow-sm); }
+.stay-room-image { min-height: 300px; border: 0; border-bottom: 1px dashed rgba(49, 90, 73, 0.34); }
+.stay-room-body { display: grid; align-content: start; padding: 26px; }
+.stay-room-body h3 { margin-top: 16px; }
+.stay-room-body p { margin-top: 12px; color: var(--stone-600); line-height: 1.55; }
+.stay-room-body ul { display: grid; gap: 9px; margin: 18px 0 0; padding-left: 20px; color: var(--stone-600); line-height: 1.45; }
+
+.stay-included-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.stay-included-grid article { min-height: 260px; border: 1px solid var(--line-sand); border-radius: var(--radius-card); background: var(--white); padding: 28px; }
+.stay-included-grid span { display: block; color: var(--gold-500); font-family: var(--font-heading); font-size: 1.35rem; line-height: 1; }
+.stay-included-grid h3 { margin-top: 18px; }
+.stay-included-grid p { margin-top: 14px; color: var(--stone-600); line-height: 1.55; }
+
+.stay-food-section, .stay-confirm-section { background: var(--forest-950); color: rgba(232, 240, 236, 0.78); }
+.stay-food-section h2, .stay-food-section h3, .stay-confirm-section h2 { color: var(--white); }
+.stay-food-grid { display: grid; grid-template-columns: minmax(280px, 0.58fr) minmax(0, 1fr); gap: 72px; align-items: start; }
+.stay-food-grid > div:first-child p:not(.eyebrow) { margin-top: 24px; color: rgba(232, 240, 236, 0.76); line-height: 1.62; }
+.stay-food-grid .button { margin-top: 30px; }
+.stay-meal-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.stay-meal-grid article { min-height: 214px; border: 1px solid rgba(211, 224, 216, 0.2); border-radius: var(--radius-card); background: rgba(255, 255, 255, 0.045); padding: 26px; }
+.stay-meal-grid p { margin-top: 12px; color: rgba(232, 240, 236, 0.76); line-height: 1.55; }
+
+.stay-gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.stay-gallery-grid .image-slot { min-height: 260px; border-radius: var(--radius-card); }
+
+.stay-reassurance-section { background: var(--sand-050); }
+.stay-reassurance-grid { display: grid; grid-template-columns: minmax(280px, 0.48fr) minmax(0, 1fr); gap: 72px; align-items: start; }
+.stay-reassurance-grid > div:first-child p:not(.eyebrow) { margin-top: 24px; color: var(--stone-600); line-height: 1.62; }
+.stay-reassurance-list { display: grid; gap: 0; border-top: 1px solid var(--line-sand); }
+.stay-reassurance-list article { display: grid; grid-template-columns: minmax(130px, 0.26fr) minmax(180px, 0.34fr) minmax(0, 1fr); gap: 22px; padding: 24px 0; border-bottom: 1px solid var(--line-sand); }
+.stay-reassurance-list span { color: var(--gold-500); font-family: var(--font-heading); font-size: 1.12rem; line-height: 1.2; }
+.stay-reassurance-list h3 { font-family: var(--font-body); font-size: 1rem; font-weight: 850; line-height: 1.35; }
+.stay-reassurance-list p { color: var(--stone-600); line-height: 1.55; }
+
+.stay-confirm-panel { display: grid; grid-template-columns: minmax(280px, 0.56fr) minmax(0, 0.9fr); gap: 72px; align-items: start; }
+.stay-confirm-panel > div:first-child p:not(.eyebrow) { margin-top: 24px; color: rgba(232, 240, 236, 0.76); line-height: 1.62; }
+.stay-confirm-list { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; counter-reset: confirm; }
+.stay-confirm-list li { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 20px; padding: 20px 0; border-bottom: 1px solid rgba(211, 224, 216, 0.2); color: var(--white); line-height: 1.55; counter-increment: confirm; }
+.stay-confirm-list li:first-child { border-top: 1px solid rgba(211, 224, 216, 0.2); }
+.stay-confirm-list li::before { content: counter(confirm, decimal-leading-zero); color: var(--gold-500); font-family: var(--font-heading); font-size: 1.22rem; line-height: 1.35; }
+
+.stay-cta-section { background: linear-gradient(180deg, var(--sand-050), var(--white)); }
+.stay-cta-panel { display: grid; grid-template-columns: minmax(280px, 1fr) auto; gap: 42px; align-items: center; border: 1px solid var(--line-sand); border-radius: var(--radius-card); background: var(--white); box-shadow: var(--shadow-sm); padding: 34px; }
+.stay-cta-panel p:not(.eyebrow) { max-width: 760px; margin-top: 18px; color: var(--stone-600); line-height: 1.62; }
+.stay-cta-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-end; }
+
+@media (max-width: 1180px) {
+  .stay-hero-grid { grid-template-columns: minmax(0, 0.86fr) minmax(360px, 0.78fr); gap: 46px; }
+  .stay-hero-slot { min-height: 480px; }
+  .stay-room-grid, .stay-included-grid, .stay-gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 960px) {
+  .stay-hero-grid, .stay-marker-grid, .stay-food-grid, .stay-reassurance-grid, .stay-confirm-panel, .stay-cta-panel { grid-template-columns: 1fr; }
+  .stay-cta-actions { justify-content: flex-start; }
+  .stay-marker-grid article { border-top: 1px solid var(--line-mist); border-left: 0; padding: 18px 0; }
+  .stay-marker-grid article:first-child { border-top: 0; }
+}
+
+@media (max-width: 640px) {
+  .stay-room-grid, .stay-included-grid, .stay-meal-grid, .stay-gallery-grid { grid-template-columns: 1fr; }
+  .stay-room-body, .stay-included-grid article, .stay-meal-grid article, .stay-cta-panel { padding: 22px; }
+  .stay-hero-slot { min-height: 340px; }
+  .stay-room-image, .stay-gallery-grid .image-slot { min-height: 220px; }
+  .stay-reassurance-list article { grid-template-columns: 1fr; gap: 9px; }
+  .stay-confirm-list li { grid-template-columns: 44px minmax(0, 1fr); gap: 14px; }
+  .stay-included-grid article, .stay-meal-grid article { min-height: auto; }
+  .stay-cta-actions { display: grid; grid-template-columns: 1fr; }
+  .stay-room-card, .stay-cta-panel { border-radius: 12px; }
+}

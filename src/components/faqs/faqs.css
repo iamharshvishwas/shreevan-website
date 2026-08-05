@@ -1,0 +1,69 @@
+/* FAQs page-only CSS -- split out of globals.css so only the /faqs route ships
+   these rules. The .faq-item/.faq-answer/.faq-question-list accordion and
+   .faq-layout/.faq-category-nav/.faq-main-column nav are used by home-page.tsx
+   and modalities-pages.tsx too, so those stay in globals.css rather than move
+   here. Imported by faqs-page.tsx. */
+
+.faq-hero { padding-block: 64px 78px; background: radial-gradient(circle at 82% 18%, rgba(181, 139, 58, 0.12), transparent 34%), var(--sand-050); }
+.faq-hero-grid { display: grid; grid-template-columns: minmax(0, 0.96fr) minmax(360px, 0.58fr); gap: 72px; align-items: center; }
+.faq-hero .hero-lede { max-width: 790px; margin-inline: 0; }
+.faq-hero .hero-actions { justify-content: flex-start; }
+.faq-hero-card { border: 1px solid var(--line-sand); border-radius: var(--radius-card); background: var(--white); box-shadow: var(--shadow-md); padding: 30px; }
+.faq-hero-card > span { display: inline-flex; border-radius: var(--radius-pill); background: var(--mist-100); color: var(--forest-700); padding: 7px 11px; font-size: 0.74rem; font-weight: 850; letter-spacing: 0.08em; line-height: 1.2; text-transform: uppercase; }
+.faq-hero-card h2 { margin-top: 18px; font-size: clamp(1.7rem, 2.4vw, 2.35rem); }
+.faq-hero-card ul { display: grid; gap: 12px; margin: 24px 0 0; padding: 0; list-style: none; }
+.faq-hero-card li { position: relative; padding-left: 24px; color: var(--stone-600); line-height: 1.5; }
+.faq-hero-card li::before { content: ""; position: absolute; top: 0.72em; left: 0; width: 8px; height: 8px; border-radius: var(--radius-pill); background: var(--gold-500); }
+
+.faq-decision-strip { border-block: 1px solid var(--line-mist); background: var(--white); padding-block: 30px; }
+.faq-decision-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; }
+.faq-decision-grid a { display: block; padding: 10px 30px; border-left: 1px solid var(--line-mist); text-decoration: none; }
+.faq-decision-grid a:first-child { border-left: 0; padding-left: 0; }
+.faq-decision-grid a:hover h2 { color: var(--river-600); }
+.faq-decision-grid span { color: var(--gold-500); font-family: var(--font-heading); font-size: 1.2rem; line-height: 1; }
+.faq-decision-grid h2 { margin-top: 12px; font-family: var(--font-body); font-size: 1rem; font-weight: 850; line-height: 1.3; transition: color var(--dur-base) var(--ease-calm); }
+.faq-decision-grid p { margin-top: 8px; color: var(--stone-600); font-size: 0.9rem; line-height: 1.5; }
+
+.faq-library-section { background: var(--white); }
+.faq-topic-block { scroll-margin-top: 132px; padding-block: 34px; border-top: 1px solid var(--line-sand); }
+.faq-topic-block:first-of-type { padding-top: 0; }
+.faq-topic-heading { display: grid; grid-template-columns: minmax(180px, 0.32fr) minmax(0, 1fr); gap: 28px; align-items: start; margin-bottom: 22px; }
+.faq-topic-heading > span { color: var(--gold-500); font-family: var(--font-heading); font-size: clamp(1.5rem, 2vw, 2.05rem); line-height: 1.15; }
+.faq-topic-heading p { color: var(--stone-600); line-height: 1.55; }
+.faq-link-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.faq-link-row a { border: 1px solid var(--line-mist); border-radius: var(--radius-pill); color: var(--forest-700); padding: 8px 12px; font-size: 0.82rem; font-weight: 850; line-height: 1.2; text-decoration: none; }
+.faq-link-row a:hover { border-color: var(--forest-900); background: var(--mist-100); color: var(--forest-950); }
+.faq-responsible-section { background: var(--forest-950); color: rgba(232, 240, 236, 0.78); }
+.faq-responsible-section h2, .faq-responsible-section h3 { color: var(--white); }
+.faq-responsible-grid { display: grid; grid-template-columns: minmax(280px, 0.52fr) minmax(0, 1fr); gap: 72px; align-items: start; }
+.faq-responsible-grid > div:first-child p:not(.eyebrow) { margin-top: 24px; color: rgba(232, 240, 236, 0.76); line-height: 1.62; }
+.faq-standard-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.faq-standard-grid article { min-height: 250px; border: 1px solid rgba(211, 224, 216, 0.2); border-radius: var(--radius-card); background: rgba(255, 255, 255, 0.045); padding: 28px; }
+.faq-standard-grid span { display: block; color: var(--gold-500); font-family: var(--font-heading); font-size: 1.35rem; line-height: 1; }
+.faq-standard-grid h3 { margin-top: 18px; }
+.faq-standard-grid p { margin-top: 14px; color: rgba(232, 240, 236, 0.76); line-height: 1.55; }
+.faq-final-section { background: linear-gradient(180deg, var(--sand-050), var(--white)); }
+.faq-final-panel { display: grid; grid-template-columns: minmax(280px, 1fr) auto; gap: 42px; align-items: center; border: 1px solid var(--line-sand); border-radius: var(--radius-card); background: var(--white); box-shadow: var(--shadow-sm); padding: 34px; }
+.faq-final-panel p:not(.eyebrow) { max-width: 760px; margin-top: 18px; color: var(--stone-600); line-height: 1.62; }
+.faq-final-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-end; }
+
+@media (max-width: 1180px) {
+  .faq-hero-grid { grid-template-columns: minmax(0, 0.88fr) minmax(320px, 0.7fr); gap: 46px; }
+  .faq-standard-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 960px) {
+  .faq-hero-grid, .faq-decision-grid, .faq-topic-heading, .faq-responsible-grid, .faq-standard-grid, .faq-final-panel { grid-template-columns: 1fr; }
+  .faq-decision-grid a { border-top: 1px solid var(--line-mist); border-left: 0; padding: 18px 0; }
+  .faq-decision-grid a:first-child { border-top: 0; }
+}
+
+@media (max-width: 640px) {
+  .faq-standard-grid { grid-template-columns: 1fr; }
+  .faq-hero-card, .faq-final-panel { padding: 22px; }
+  .faq-standard-grid article { padding: 22px; }
+  .faq-topic-heading { gap: 10px; }
+  .faq-link-row { display: grid; grid-template-columns: 1fr; }
+  .faq-final-actions { display: grid; grid-template-columns: 1fr; }
+  .faq-hero-card, .faq-final-panel { border-radius: 12px; }
+}

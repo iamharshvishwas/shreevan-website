@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import "./stay-food.css";
 
 const trustMarkers = [
   ["Private comfort", "Quiet rooms selected for rest, recovery and daily retreat rhythm."],

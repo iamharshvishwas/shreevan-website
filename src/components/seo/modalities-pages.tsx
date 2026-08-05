@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import type { ModalitiesHubContent, ModalityContent, ModalityLink } from "@/lib/content/modalities";
+import "./modality.css";
 
 function anchorId(prefix: string, title: string, index: number) {
   return `${prefix}-${index}-${title

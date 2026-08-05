@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import type { PublicFaqContent, PublicFaqLink } from "@/lib/site/public-content-trust-types";
+import "./faqs.css";
 
 const decisionCards = [
   {

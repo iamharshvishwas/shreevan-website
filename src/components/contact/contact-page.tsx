@@ -3,6 +3,7 @@ import { ContactEnquiryForm } from "@/components/forms/contact-enquiry-form";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import type { PublicSiteSettings } from "@/lib/site/public-settings-types";
+import "./contact.css";
 
 function whatsappHref(value: string) {
   const normalized = value.replace(/[^\d]/g, "");

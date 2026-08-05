@@ -1,0 +1,45 @@
+/* Legal shared CSS -- split out of globals.css so only the 4 legal routes
+   (privacy-policy, refund-policy, terms-conditions, wellness-disclaimer) ship
+   these rules. Imported once by the shared legal-page.tsx component. */
+
+.legal-hero { padding-block: 64px 52px; background: var(--sand-050); }
+.legal-hero-inner { max-width: 940px; }
+.legal-hero .hero-lede { max-width: 760px; margin-inline: 0; }
+.legal-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.legal-meta span { display: inline-flex; border: 1px solid var(--line-sand); border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.58); color: var(--forest-700); padding: 7px 12px; font-size: 0.78rem; font-weight: 850; letter-spacing: 0.06em; line-height: 1.2; text-transform: uppercase; }
+.legal-body-section { background: var(--white); }
+.legal-grid { display: grid; grid-template-columns: minmax(260px, 0.38fr) minmax(0, 1fr); gap: 72px; align-items: start; }
+.legal-aside { position: sticky; top: 118px; border: 1px solid var(--line-sand); border-radius: var(--radius-card); background: var(--sand-050); padding: 24px; }
+.legal-aside h2 { font-family: var(--font-body); font-size: 0.78rem; font-weight: 850; letter-spacing: 0.12em; line-height: 1.25; text-transform: uppercase; }
+.legal-aside dl { display: grid; grid-template-columns: 1fr; gap: 0; margin-top: 18px; }
+.legal-aside dl div { padding-block: 18px; border-top: 1px solid var(--line-sand); }
+.legal-aside dt { color: var(--forest-700); font-size: 0.74rem; letter-spacing: 0.09em; }
+.legal-aside dd { margin-top: 7px; color: var(--stone-600); font-size: 0.9rem; line-height: 1.5; }
+.legal-note { margin-top: 20px; border: 1px solid rgba(169, 95, 69, 0.26); border-radius: var(--radius-callout); background: #fff8ef; padding: 18px; }
+.legal-note h3 { font-family: var(--font-body); font-size: 0.92rem; font-weight: 850; }
+.legal-note p { margin-top: 8px; color: var(--stone-600); font-size: 0.9rem; line-height: 1.55; }
+.legal-content { max-width: 850px; }
+.legal-section { padding-block: 34px; border-top: 1px solid var(--line-sand); }
+.legal-section:first-child { padding-top: 0; border-top: 0; }
+.legal-section h2 { font-size: clamp(1.7rem, 2.4vw, 2.35rem); }
+.legal-section h3 { font-family: var(--font-body); font-size: 1rem; font-weight: 850; line-height: 1.35; }
+.legal-section p { margin-top: 18px; color: var(--stone-600); line-height: 1.68; }
+.legal-section a { color: var(--river-600); font-weight: 800; }
+.legal-section ul { display: grid; gap: 12px; margin: 20px 0 0; padding-left: 22px; color: var(--stone-600); }
+.legal-section li { padding-left: 4px; line-height: 1.6; }
+.legal-card-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 22px; }
+.legal-card-list article { border: 1px solid var(--line-sand); border-radius: var(--radius-card); background: var(--white); padding: 22px; }
+.legal-card-list p { margin-top: 10px; font-size: 0.96rem; }
+.legal-contact-block { margin-top: 10px; border-bottom: 1px solid var(--line-sand); }
+
+@media (max-width: 960px) {
+  .legal-grid { grid-template-columns: 1fr; }
+  .legal-aside { position: static; }
+}
+
+@media (max-width: 640px) {
+  .legal-card-list { grid-template-columns: 1fr; }
+  .legal-hero { padding-block: 42px 36px; }
+  .legal-section { padding-block: 28px; }
+  .legal-aside, .legal-card-list article { padding: 20px; }
+}
