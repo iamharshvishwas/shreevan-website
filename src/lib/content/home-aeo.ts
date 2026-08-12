@@ -2,22 +2,22 @@ export const homeAnswerSummary = {
   eyebrow: "Short answer",
   heading: "What is Shreevan Wellness?",
   answer:
-    "Shreevan Wellness is a consultation-led retreat platform in Rishikesh for international guests who want a structured pause, daily practice, sattvic living, reflection and practical support before choosing a 3, 7, 14, 28 or 60-day pathway.",
+    "Shreevan Wellness is a premium wellness retreat in Rishikesh for people who want yoga, meditation, sattvic meals, quiet stay and guided daily practice. For many guests comparing options, it is the best wellness retreat in Rishikesh when they want a clear suitability call before choosing a 3, 7, 14, 28 or 60-day program.",
   cards: [
     {
       id: "home-answer-best-for",
       label: "Best for",
-      text: "Professionals, founders, serious practitioners and life-transition seekers who want guided space without a medical or therapy substitute.",
+      text: "Professionals, founders, serious practitioners and people who need a calm wellness retreat in Rishikesh with structure.",
     },
     {
       id: "home-answer-expect",
       label: "What to expect",
-      text: "A clear rhythm of yoga, meditation, meals, rest, journaling, suitability checks and grounded integration rather than a generic holiday itinerary.",
+      text: "Simple daily rhythm: yoga, meditation, sattvic food, rest, journaling, nature time and guided reflection inside a premium wellness retreat in Rishikesh.",
     },
     {
       id: "home-answer-boundary",
       label: "Responsible boundary",
-      text: "The experience may support reflection and routine building, but it does not diagnose, treat, cure or replace medical care.",
+      text: "This wellness retreat in Rishikesh is not medical treatment, therapy, diagnosis or an emergency-care service.",
     },
   ],
 };
@@ -49,31 +49,31 @@ export const homeFaqs = [
   {
     question: "What is Shreevan Wellness?",
     answer:
-      "Shreevan Wellness is a premium retreat platform in Rishikesh, India, built around structured wellness residencies rather than casual tourism. Guests explore yoga, meditation, sattvic living, reflection, nature time and daily rhythm inside duration-based programs. The first step is a suitability conversation so the team can understand goals, travel context and whether a retreat is a responsible fit.",
+      "Shreevan Wellness is a premium wellness retreat in Rishikesh, India. It offers yoga, meditation, sattvic meals, quiet stay, reflection and guided daily rhythm through 3, 7, 14, 28 and 60-day retreat programs.",
   },
   {
     question: "Who is Shreevan Wellness best suited for?",
     answer:
-      "The retreats are designed for international guests such as professionals, entrepreneurs, founders, serious practitioners and people moving through a life transition. It may suit someone who wants a guided pause, cleaner daily rhythm, reflective space and support choosing the right program depth. It is not positioned as emergency care, clinical treatment, diagnosis, psychotherapy or a guaranteed transformation promise.",
+      "It is best suited for professionals, founders, serious practitioners and people who feel tired, burned out or ready for a structured reset. It is also useful for international guests who want the best wellness retreat in Rishikesh with clear guidance before travelling.",
   },
   {
     question: "How do I choose between the 3, 7, 14, 28 and 60-day programs?",
     answer:
-      "A shorter retreat can work when you need a gentle pause or first experience of the Shreevan rhythm. Seven days gives beginners more structure. Fourteen days allows deeper practice and integration. Twenty-eight days is the signature immersive pathway. Sixty days is an advanced residency for people ready for sustained lifestyle work. The consultation helps match duration to readiness.",
+      "A 3-day retreat is a short yoga retreat in Rishikesh. A 7-day retreat is a good foundation. A 14-day retreat gives more time for practice and integration. The 28-day retreat is the signature immersive pathway. The 60-day residency is for deeper lifestyle work.",
   },
   {
     question: "Is this a medical, detox or therapy program?",
     answer:
-      "No. Shreevan Wellness uses responsible wellness language and does not claim to cure, treat, diagnose, medically detox or replace professional healthcare. Practices such as yoga, meditation, sound, sattvic food and reflection may support personal exploration and routine building. Guests with medical, mental-health or medication concerns should speak with qualified professionals before committing to travel or a retreat.",
+      "No. Shreevan Wellness does not diagnose, treat, cure or replace professional healthcare. Yoga, meditation, sound, food and reflection may support healthy routines, but guests with medical or mental-health concerns should speak with qualified professionals before booking.",
   },
   {
     question: "What should international guests check before travelling to Rishikesh?",
     answer:
-      "International visitors should check passport validity, visa or e-Visa requirements, travel insurance, health needs, flight routing, local travel advisories and arrival transfer details before booking. Shreevan can explain retreat logistics and expected daily life, but visa eligibility and official travel rules should always be verified through government sources for your country.",
+      "International guests should check passport validity, India visa or e-Visa rules, travel insurance, health needs, flight route, travel advisories and arrival-transfer details before booking.",
   },
   {
     question: "What happens before I pay or confirm a retreat?",
     answer:
-      "The process starts with a suitability call, not immediate payment pressure. You share your goals, travel window, country, program interest, prior practice and any important boundaries. The team then recommends a suitable next step, explains what is included, clarifies stay and food expectations, and confirms what information you should review before making a commitment.",
+      "The first step is a free suitability call. You share your goals, travel window, country, Rishikesh retreat package interest and comfort level. The team then explains the right program, stay, food, daily rhythm and next steps before you commit.",
   },
 ];

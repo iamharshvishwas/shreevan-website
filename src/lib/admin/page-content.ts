@@ -124,16 +124,17 @@ export const defaultAdminPageContent: AdminPageContentStore = {
       status: "published",
       connected: true,
       seo: {
-        title: `${siteConfig.name} | ${siteConfig.tagline}`,
-        description: siteConfig.description,
+        title: `Best Wellness Retreat in Rishikesh | ${siteConfig.name}`,
+        description:
+          "Choose a premium wellness retreat in Rishikesh with yoga, meditation, sattvic meals, quiet stay and consultation-led programs.",
         canonicalPath: "/",
         noindex: false,
       },
       hero: {
-        eyebrow: "Premium wellness retreats in India",
-        title: "Return to Your True Self",
+        eyebrow: "Premium wellness retreat in Rishikesh",
+        title: "Best Wellness Retreat in Rishikesh",
         lede:
-          "Structured retreat experiences for professionals, founders, serious practitioners and life-transition seekers who want space, rhythm and guided reconnection.",
+          "A calm place for yoga, meditation, sattvic food, rest and guided daily practice in Rishikesh. If you are looking for the best wellness retreat in Rishikesh, Shreevan gives you space, structure and a responsible way to reset.",
         primaryCtaLabel: "Book a consultation",
         primaryCtaHref: "#consultation",
         secondaryCtaLabel: "Explore programs",

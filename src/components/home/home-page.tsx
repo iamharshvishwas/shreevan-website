@@ -2,7 +2,8 @@ import Image from "next/image";
 import { SuitabilityForm } from "@/components/forms/suitability-form";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
-import { homeAnswerSummary, homeFaqs, homeReferenceLinks } from "@/lib/content/home-aeo";
+import { siteConfig } from "@/config/site";
+import { homeAnswerSummary, homeFaqs } from "@/lib/content/home-aeo";
 import type { PublicHomeMedia, PublicHomeContent } from "@/lib/site/public-home-types";
 import "./home-page.css";
 
@@ -39,6 +40,7 @@ export function HomePage({
           <div className="container hero-inner">
             <p className="eyebrow">{content.hero.eyebrow}</p>
             <h1 id="hero-title">{content.hero.title}</h1>
+            <h2 className="hero-tagline">{siteConfig.tagline}</h2>
             <p className="hero-lede">{content.hero.lede}</p>
             <div className="hero-actions">
               <a className="button button-primary" href={content.hero.primaryCtaHref}>
@@ -127,6 +129,12 @@ export function HomePage({
               </div>
               <p>{content.programPathways.copy}</p>
             </div>
+            <p className="program-routing-note">
+              Whether you are exploring a{" "}
+              <a href="/programs/3-day-ganga-reset">3 days yoga retreat in Rishikesh</a>, comparing a{" "}
+              <a href="/programs">Rishikesh retreat package</a>, or searching for the best wellness retreat in
+              Rishikesh, every pathway starts with a suitability call and a clear daily rhythm.
+            </p>
 
             <div className="program-card-grid">
               <div className="program-card-row">
@@ -136,7 +144,7 @@ export function HomePage({
                     <h3>{program.title}</h3>
                     <p>{program.summary}</p>
                     <a className="program-card-link" href={program.href}>
-                      View program <span aria-hidden="true">→</span>
+                      {program.copy || "View program"} <span aria-hidden="true">→</span>
                     </a>
                   </article>
                 ))}
@@ -154,7 +162,7 @@ export function HomePage({
                         <strong>For:</strong> {withoutBestForPrefix(content.programPathways.items[3].summary)}
                       </p>
                       <a className="button button-primary program-featured-cta" href={content.programPathways.items[3].href}>
-                        View the {content.programPathways.items[3].duration} program
+                        {content.programPathways.items[3].copy || `View the ${content.programPathways.items[3].duration} program`}
                       </a>
                     </div>
                   </article>
@@ -166,7 +174,7 @@ export function HomePage({
                     <h3>{content.programPathways.items[4].title}</h3>
                     <p>{content.programPathways.items[4].summary}</p>
                     <a className="program-card-link" href={content.programPathways.items[4].href}>
-                      View program <span aria-hidden="true">→</span>
+                      {content.programPathways.items[4].copy || "View program"} <span aria-hidden="true">→</span>
                     </a>
                   </article>
                 ) : null}
@@ -179,7 +187,12 @@ export function HomePage({
           <div className="container">
             <div className="section-heading centered">
               <p className="eyebrow">03 — FIT</p>
-              <h2 id="fit-title">Who this is for — and who it isn&apos;t</h2>
+              <h2 id="fit-title">Who this retreat is for</h2>
+              <p>
+                Shreevan is not for every traveller. It is for guests who want a structured wellness retreat in
+                Rishikesh, a premium wellness retreat in Rishikesh, and a responsible daily rhythm instead of a casual
+                holiday.
+              </p>
             </div>
             <div className="fit-grid">
               <article className="fit-card fit-card-for">
@@ -190,61 +203,61 @@ export function HomePage({
                       <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
                       <path d="M6 10l3 3 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    <span>You&apos;re a professional, founder or leader who needs to properly step away</span>
+                    <span>You are a professional, founder or leader who needs time away</span>
                   </li>
                   <li>
                     <svg className="fit-icon fit-icon-check" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                       <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
                       <path d="M6 10l3 3 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    <span>You&apos;re moving through a real transition — burnout, loss, a breakup, a milestone</span>
+                    <span>You feel tired, burned out, emotionally heavy or ready for change</span>
                   </li>
                   <li>
                     <svg className="fit-icon fit-icon-check" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                       <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
                       <path d="M6 10l3 3 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    <span>You want structure and guidance, not a loose, figure-it-out-yourself holiday</span>
+                    <span>You want a premium wellness retreat in Rishikesh with quiet, guidance and daily practice</span>
                   </li>
                   <li>
                     <svg className="fit-icon fit-icon-check" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                       <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
                       <path d="M6 10l3 3 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    <span>You care about routines you can actually keep once you&apos;re home</span>
+                    <span>You want simple routines you can continue after going home</span>
                   </li>
                 </ul>
               </article>
               <article className="fit-card fit-card-not">
-                <h3>It&apos;s probably not, if</h3>
+                <h3>It may not be right if</h3>
                 <ul className="fit-list">
                   <li>
                     <svg className="fit-icon fit-icon-cross" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                       <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
                       <path d="M7 7l6 6M13 7l-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                     </svg>
-                    <span>You need medical diagnosis or treatment — we&apos;re not a clinical facility</span>
+                    <span>You need medical diagnosis, clinical treatment or emergency care</span>
                   </li>
                   <li>
                     <svg className="fit-icon fit-icon-cross" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                       <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
                       <path d="M7 7l6 6M13 7l-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                     </svg>
-                    <span>You want a luxury spa week with no structure or practice</span>
+                    <span>You want a spa holiday with no routine or practice</span>
                   </li>
                   <li>
                     <svg className="fit-icon fit-icon-cross" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                       <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
                       <path d="M7 7l6 6M13 7l-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                     </svg>
-                    <span>You&apos;re looking for a party trip or purely social travel</span>
+                    <span>You are looking for nightlife, parties or social tourism</span>
                   </li>
                   <li>
                     <svg className="fit-icon fit-icon-cross" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                       <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.5" />
                       <path d="M7 7l6 6M13 7l-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                     </svg>
-                    <span>You want a guaranteed outcome or an overnight fix</span>
+                    <span>You want a guaranteed result or an overnight transformation</span>
                   </li>
                 </ul>
               </article>
@@ -270,7 +283,7 @@ export function HomePage({
               {content.differentiation.cards.map((card) => (
                 <article className={card.highlighted ? "boundary" : undefined} key={card.id}>
                   <h3>{card.title}</h3>
-                  <p>{card.copy}</p>
+                  <p>{renderDifferentiationCopy(card.id, card.copy)}</p>
                 </article>
               ))}
             </div>
@@ -304,15 +317,22 @@ export function HomePage({
             <HomeMediaSlot className="portrait-slot" media={content.team.media} />
             <div className="story-content">
               <p className="eyebrow">02 — OUR STORY</p>
-              <h2 id="story-title">Founded by a physician who has seen burnout up close.</h2>
+              <h2 id="story-title">
+                Founded by a Genetics Researcher who believes lasting well-being begins with self-awareness and balance
+              </h2>
               <blockquote className="founder-quote">
-                &ldquo;I started Shreevan after years of watching capable, high-performing people run themselves into the ground &mdash; with nowhere structured and credible to recover. This is the place I wished existed.&rdquo;
+                &ldquo;I started Shreevan after years of watching capable people run themselves into the ground, with nowhere structured and credible to recover. This is the place I wished existed.&rdquo;
               </blockquote>
+              <p className="founder-context">
+                Shreevan keeps its wellness language clear. Guests are guided with care, but the retreat is not
+                presented as medical treatment, therapy or a guaranteed result. That clarity matters when choosing the
+                best wellness retreat in Rishikesh.
+              </p>
               <div className="founder-details">
                 <h3>Dr. Isha Dutta</h3>
-                <p>Founder &amp; Lead Facilitator &middot; MD, integrative &amp; lifestyle medicine &middot; 18 years in practice</p>
+                <p>Founder &amp; Lead Facilitator &middot; PhD - Genetics</p>
               </div>
-              <a href="/about" className="story-link">
+              <a href="/about-founder" className="story-link">
                 Read Dr. Dutta&apos;s full story &rarr;
               </a>
             </div>
@@ -507,6 +527,41 @@ function ProgramDuration({ duration, compact = false }: Readonly<{ duration: str
 
 function withoutBestForPrefix(value: string) {
   return value.replace(/^best for\s*/i, "");
+}
+
+function renderDifferentiationCopy(id: string, fallback: string) {
+  switch (id) {
+    case "diff-1":
+      return (
+        <>
+          Daily <a href="/modalities/yoga-therapy">yoga therapy retreat</a> practice, breathwork and gentle movement
+          help the body settle into the retreat rhythm.
+        </>
+      );
+    case "diff-2":
+      return (
+        <>
+          Guided <a href="/modalities/guided-meditation">meditation classes in Rishikesh</a> and Yoga Nidra create
+          quiet time for rest, awareness and reflection.
+        </>
+      );
+    case "diff-3":
+      return (
+        <>
+          Simple vegetarian food supports a lighter routine. If you are comparing a{" "}
+          <a href="/modalities/panchkarma-detox">panchkarma detox retreat</a>, check scope and fit during the call.
+        </>
+      );
+    case "diff-4":
+      return (
+        <>
+          <a href="/modalities/sound-healing">Sound healing therapy</a> may be included to support calm, rest and inner
+          focus.
+        </>
+      );
+    default:
+      return fallback;
+  }
 }
 
 function HomeMediaSlot({

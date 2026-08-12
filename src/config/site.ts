@@ -17,5 +17,5 @@ export const siteConfig = {
     logoOnForest: "/images/brand/logo-on-forest.png",
   },
   description:
-    "Premium structured wellness retreats in Rishikesh, India for international guests seeking guided reconnection, rhythm and responsible transformation.",
+    "A premium wellness retreat in Rishikesh for yoga, meditation, sattvic living, quiet rest and guided retreat programs.",
 };

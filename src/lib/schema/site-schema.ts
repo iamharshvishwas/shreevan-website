@@ -61,7 +61,11 @@ export function organizationSchema(settings?: PublicSiteSettings) {
       areaServed: ["US", "CA", "GB", "IN"],
     },
     knowsAbout: [
+      "Best wellness retreat in Rishikesh",
       "Rishikesh wellness retreats",
+      "Rishikesh retreat packages",
+      "Yoga and meditation retreat in Rishikesh India",
+      "Executive wellness retreat India",
       "Yoga therapy",
       "Guided meditation",
       "Sound healing",
