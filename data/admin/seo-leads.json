@@ -156,17 +156,17 @@
     },
     {
       "id": "yoga-therapy",
-      "label": "Yoga Therapy & Medicine",
+      "label": "Yoga Therapy Retreat in Rishikesh",
       "path": "/modalities/yoga-therapy",
       "intent": "educational",
       "indexable": true,
       "sitemapEnabled": true,
       "priority": 0.68,
       "changeFrequency": "monthly",
-      "focusKeyword": "yoga therapy retreat Rishikesh",
+      "focusKeyword": "yoga therapy retreat in Rishikesh",
       "qaStatus": "ready",
-      "notes": "Educational modality page linked from program pages.",
-      "lastReviewedAt": "2026-06-26"
+      "notes": "Educational modality page rewritten for yoga therapy retreat in Rishikesh with non-medical boundaries.",
+      "lastReviewedAt": "2026-08-13"
     },
     {
       "id": "guided-meditation",

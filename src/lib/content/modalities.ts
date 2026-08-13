@@ -9,6 +9,12 @@ export type ModalityFaq = {
   answer: string;
 };
 
+export type ModalityImage = {
+  src: string;
+  alt: string;
+  caption?: string;
+};
+
 export type ModalityArticleSection = {
   title: string;
   body: string[];
@@ -25,6 +31,18 @@ export type ModalityRetreatStep = {
   stage: string;
   title: string;
   copy: string;
+};
+
+export type ModalityComparison = {
+  title: string;
+  intro: string[];
+  image?: ModalityImage;
+  columns: [string, string];
+  rows: Array<{
+    aspect: string;
+    primary: string;
+    comparison: string;
+  }>;
 };
 
 export type ModalitySuitability = {
@@ -46,11 +64,15 @@ export type ModalityContent = {
   summary: string;
   hero: {
     eyebrow: string;
+    tagline?: string;
     answer: string;
     boundaryNote: string;
   };
+  heroImage?: ModalityImage;
   quickAnswer: ModalityQuickAnswer;
   articleSections: ModalityArticleSection[];
+  comparison?: ModalityComparison;
+  retreatImage?: ModalityImage;
   retreatExperience: ModalityRetreatStep[];
   suitability: ModalitySuitability;
   relatedModalities: ModalityLink[];
@@ -307,144 +329,232 @@ export const modalitiesHubContent: ModalitiesHubContent = {
 export const modalities: ModalityContent[] = [
   {
     slug: "yoga-therapy",
-    title: "Yoga Therapy & Medicine",
+    title: "Yoga Therapy Retreat in Rishikesh",
     shortTitle: "Yoga Therapy",
     path: "/modalities/yoga-therapy",
     category: "Movement, breath and embodied awareness",
     description:
-      "Educational yoga-based practice within Shreevan Wellness retreats, used to support rhythm, mobility, self-awareness and daily lifestyle structure.",
-    seoTitle: "Yoga Therapy Retreat Practice in Rishikesh | Shreevan Wellness",
+      "Gentle yoga-based wellness learning within Shreevan Wellness retreats, used for breath, posture awareness, rest and daily rhythm.",
+    seoTitle: "Yoga Therapy Retreat in Rishikesh | Gentle & Guided | Shreevan",
     seoDescription:
-      "Understand how Shreevan Wellness uses yoga therapy responsibly inside Rishikesh retreats for movement, breath, posture awareness and daily rhythm.",
+      "Explore gentle yoga therapy in Rishikesh at Shreevan Wellness. Learn breath-led movement, posture awareness and daily rhythm in a non-medical retreat setting.",
     keywords: [
-      "yoga therapy retreat Rishikesh",
-      "yoga therapy India",
-      "retreat yoga practice",
-      "breath and movement",
-      "responsible wellness",
+      "yoga therapy retreat in Rishikesh",
+      "yoga therapy in Rishikesh",
+      "yoga therapy retreat",
+      "yoga therapy for beginners",
+      "yoga therapy vs yoga",
+      "gentle yoga retreat in Rishikesh",
+      "yoga wellness retreat practice",
     ],
     summary:
-      "Yoga therapy at Shreevan is guided wellness education, not diagnosis or treatment. It helps guests explore breath, posture, mobility, attention and daily rhythm inside a structured retreat environment.",
+      "Yoga therapy at Shreevan is gentle yoga-based wellness learning, not diagnosis or treatment. It helps guests explore breath, posture awareness, rest and daily rhythm inside a structured Rishikesh retreat.",
     hero: {
-      eyebrow: "Yoga therapy retreat practice",
+      eyebrow: "Core Modality · Shreevan Wellness Rishikesh",
+      tagline: "Gentle Yoga for Breath, Posture and Daily Rhythm",
       answer:
-        "Yoga therapy at Shreevan means gentle, guided yoga-informed practice used to build body awareness, breath literacy and a realistic daily rhythm. It is paced through suitability, not performance.",
+        "Yoga therapy at Shreevan Wellness is a gentle, breath-led practice. This yoga therapy retreat in Rishikesh is paced for comfort, not performance. You learn simple movement, posture awareness and rest that can continue after the retreat.",
       boundaryNote:
-        "This page is educational. Yoga practice may support general well-being, but it is not a substitute for physiotherapy, medical care, injury care or urgent professional help.",
+        "This page is educational. Yoga therapy at Shreevan is a wellness practice, not medical care, physio care or pain care. If you have an injury, health condition, recent surgery or pregnancy, speak with a doctor or trained care provider before travel.",
+    },
+    heroImage: {
+      src: "/images/modalities/yoga-therapy/yoga-therapy-retreat-rishikesh-hero.webp",
+      alt: "Facilitator guiding a gentle yoga therapy retreat session in Rishikesh",
+      caption: "Gentle, supported practice in a calm Rishikesh retreat setting.",
     },
     quickAnswer: {
       simpleTerms:
-        "Yoga therapy is the careful use of movement, breath, rest and awareness so a guest can understand their body better and build a sustainable practice rhythm.",
+        "Yoga therapy in Rishikesh at Shreevan means gentle yoga-based wellness learning. It uses slow movement, breath cues, posture cues and rest. The aim is to help you notice your body and build a daily rhythm. It does not push advanced yoga shapes.",
       bestFor: [
-        "Guests who feel disconnected from their body after long work seasons.",
-        "Beginners who want gentle guidance rather than advanced postures.",
-        "Travelers who want movement, breath and reflection in one practice container.",
+        "Beginners who want a gentle yoga therapy retreat in Rishikesh.",
+        "Guests who feel stiff, tired or disconnected from the body after long work seasons.",
+        "Travelers who want breath, movement and rest in one clear practice.",
       ],
       whatToExpect: [
-        "Breath-led movement, simple postural awareness and rest.",
-        "Options to slow down, modify or pause based on comfort.",
-        "A practice rhythm that can be continued after the retreat.",
+        "Slow breath-led movement and simple posture awareness.",
+        "Options to pause, rest or modify the practice.",
+        "A short daily rhythm you can continue at home.",
       ],
       whatItIsNot: [
-        "Not medical yoga treatment or physiotherapy.",
-        "Not a promise to remove pain or reverse a condition.",
-        "Not a competitive asana class.",
+        "Not physio care or medical treatment.",
+        "Not a promise to remove pain or cure a condition.",
+        "Not a hard fitness class or advanced asana class.",
       ],
     },
     articleSections: [
       {
-        title: "What yoga therapy means at Shreevan",
+        title: "What is yoga therapy at Shreevan?",
         body: [
-          "At Shreevan, yoga therapy is best understood as yoga-informed wellness education. The practice uses accessible movement, breath awareness, simple alignment cues, guided relaxation and reflective pauses. The aim is not to impress the body into advanced shapes. The aim is to help the guest notice how they stand, breathe, rest, respond to effort and carry tension through the day.",
-          "The word therapy can be misunderstood, so the boundary matters. Shreevan does not present this page as medical treatment. The retreat setting can offer a supportive environment for general well-being, but health conditions, injuries and pain require qualified professional guidance. The suitability conversation helps decide intensity, modification and whether a guest should avoid certain practices.",
+          "Yoga therapy at Shreevan is yoga-based wellness learning. It uses gentle movement, breath, posture awareness and guided rest. The practice is simple, slow and suitable for many beginners.",
+          "The goal is body awareness. You learn how you stand, sit, breathe, move and rest. You also learn when to soften effort and when to stop.",
+          "This is not health treatment. It does not diagnose, treat or cure health conditions. It gives you a safe retreat setting to understand your body better.",
         ],
       },
       {
-        title: "Why people explore yoga therapy in a retreat",
+        title: "Why choose a yoga therapy retreat in Rishikesh?",
         body: [
-          "Many international guests arrive after years of screen-heavy work, leadership pressure, travel fatigue or inconsistent routines. They may not need a hard workout. They need a way to return to the body without judgment. Yoga therapy offers a slower language for that return: breath, posture, sensation, pace and rest.",
-          "A retreat gives the practice a cleaner container than a casual weekly class. Meals, sleep, silence, nature and daily rhythm support the learning. The guest is not only doing yoga for one hour. They are observing how the body feels before breakfast, after sitting, during conversation, before sleep and after reflection.",
+          "A yoga therapy retreat in Rishikesh gives you time to slow down. You are not rushing from one class to another. You have space for movement, breath, meals, rest, silence and reflection.",
+          "Many guests arrive after screen-heavy work, travel fatigue or high stress. They may not need a hard workout. They need a gentle way to return to the body.",
+          "At Shreevan, the practice is held inside a full retreat rhythm. This makes the learning easier to carry into daily life.",
         ],
       },
       {
-        title: "How it works inside the retreat rhythm",
+        title: "How the practice works inside the retreat day",
         body: [
-          "A session may begin with arrival cues: noticing breath, the floor, the spine and areas that feel tense or tired. The practice can then move through gentle mobility, standing stability, supported postures, breath-led transitions and rest. The facilitator may offer options rather than fixed demands.",
-          "In longer programs, yoga therapy becomes part of a pattern. Morning practice may prepare the body for meditation. Evening practice may help the guest transition out of mental speed. Journaling can help connect physical sensation with daily choices. The result is a more coherent rhythm, not a single dramatic session.",
+          "A session may begin with simple arrival cues. You may notice the breath, the floor, the spine and areas that feel tense.",
+          "The practice can include gentle joint work, standing balance, supported postures, slow shifts and rest. The guide offers options. You do not have to force a shape.",
+          "Morning practice may prepare the body for meditation. Evening practice may help the body settle before sleep. Small repeats help the practice feel familiar.",
         ],
       },
       {
-        title: "How Shreevan approaches this modality",
+        title: "Key benefits of a yoga wellness retreat practice",
         body: [
-          "Shreevan's approach is structured but not rigid. The practice respects the fact that guests arrive with different histories, bodies and tolerance levels. A corporate executive with neck tension, a founder recovering from burnout, and a seeker with years of yoga experience should not be pushed through the same intensity.",
-          "The standard is consent-aware pacing. Guests should feel free to ask for modifications, skip a shape, use support, reduce intensity or choose rest. A premium retreat is not proven by how hard it pushes people. It is proven by how clearly it holds practice, safety and integration.",
+          "The benefit is not only stretching. The real value is learning how your body responds to daily pressure.",
+          "Breath awareness helps you notice shallow, fast or held breath. Posture awareness gives you simple cues for sitting, standing and moving.",
+          "Slower shifts help you move with attention instead of rushing. Rest practice teaches that rest is part of training, not a failure. Daily rhythm gives you a simple routine that can fit normal life.",
         ],
       },
       {
         title: "What beginners should know",
         body: [
-          "You do not need to be flexible to begin. Flexibility is not the entry requirement. Curiosity, honesty and willingness to move slowly are more useful. The first goal is to understand what your body is already communicating. From there, a simple practice can become more intelligent and repeatable.",
-          "Beginners should also know that discomfort and pain are not the same. Mild effort may be part of learning. Sharp pain, dizziness, numbness or pressure should be treated as a signal to stop and communicate. If you have a known condition or recent injury, professional advice before travel is part of responsible preparation.",
+          "You do not need to be flexible. You also do not need a long yoga background. This page is designed for people who want yoga therapy for beginners in a clear retreat setting.",
+          "The most useful skill is honesty. Tell the guide when something feels too strong. Stop if you feel sharp pain, dizziness, numbness or unsafe pressure.",
+          "Gentle effort is normal. Pain is not the goal. A responsible practice respects the difference.",
         ],
       },
       {
         title: "What to be careful about",
         body: [
-          "Avoid choosing a retreat because it sounds physically intense. The better question is whether the practice is suitable for your current body and season. Hot yoga, forceful breathing, headstands, deep twists and long holds may not be appropriate for many guests, especially without preparation.",
-          "If you are pregnant, older, managing blood pressure, glaucoma, balance issues, joint concerns, spine conditions or recent surgery, discuss this before booking. Shreevan can adapt a wellness practice, but it cannot replace the role of your health professional.",
+          "Do not choose a retreat only because it sounds intense. The better question is whether the practice fits your current body.",
+          "Be careful with forceful breathing, headstands, deep twists, long holds or hot yoga if your body is not ready. These practices may not suit everyone.",
+          "If you have recent surgery, pregnancy, spine concerns, blood pressure concerns, eye-pressure concerns, balance issues or chronic pain, speak with a doctor or trained care provider first.",
         ],
       },
     ],
+    comparison: {
+      title: "Yoga therapy vs a regular yoga class",
+      intro: [
+        "The main difference is the goal. A regular yoga class often focuses on a sequence. Yoga therapy at Shreevan focuses on body awareness, breath and daily rhythm.",
+        "It is also slower. You can pause, use support or choose a softer option. The practice is not about proving flexibility. It is about learning what your body needs now.",
+      ],
+      image: {
+        src: "/images/modalities/yoga-therapy/yoga-therapy-props-practice-clarity.webp",
+        alt: "Yoga therapy props used for slow movement and posture awareness",
+        caption: "Props help keep the practice slower, steadier and easier to adapt.",
+      },
+      columns: ["Yoga therapy at Shreevan", "Regular yoga class"],
+      rows: [
+        {
+          aspect: "Goal",
+          primary: "Breath, posture awareness and daily rhythm.",
+          comparison: "One class or sequence.",
+        },
+        {
+          aspect: "Pace",
+          primary: "Slow, with changes when needed.",
+          comparison: "Usually group-paced.",
+        },
+        {
+          aspect: "Beginner fit",
+          primary: "Built for beginners and people returning to yoga.",
+          comparison: "Depends on class level.",
+        },
+        {
+          aspect: "Focus",
+          primary: "How the practice supports the full day.",
+          comparison: "What happens on the mat.",
+        },
+        {
+          aspect: "Boundary",
+          primary: "Wellness learning, not treatment.",
+          comparison: "General yoga or fitness practice.",
+        },
+      ],
+    },
+    retreatImage: {
+      src: "/images/modalities/yoga-therapy/retreat-guest-journaling-after-yoga-therapy-rishikesh.webp",
+      alt: "Guest journaling after yoga therapy practice at a Rishikesh retreat",
+      caption: "Reflection helps guests connect the practice to daily rhythm.",
+    },
     retreatExperience: [
       {
         stage: "Before session",
         title: "Readiness and pacing",
         copy:
-          "You share relevant comfort notes during the suitability process, then arrive with simple expectations: comfortable clothing, hydration and willingness to modify.",
+          "Share comfort notes during the suitability process. Arrive in loose clothing, hydrated and ready to modify.",
       },
       {
         stage: "During session",
         title: "Movement with options",
         copy:
-          "Practice may include breath, mobility, gentle strength, supported postures and rest. You are not expected to perform advanced shapes.",
+          "Practice may include breath, gentle joint work, supported postures and rest. Advanced shapes are not expected.",
       },
       {
         stage: "After session",
-        title: "Reflection, not evaluation",
+        title: "Reflection, not judgment",
         copy:
-          "The useful question is not whether you were good at yoga. It is what you noticed about breath, effort, resistance and rest.",
+          "The useful question is simple: what did you notice about breath, effort, tension and rest?",
       },
       {
         stage: "Daily rhythm",
         title: "Small continuity",
         copy:
-          "Longer stays use repetition so the practice becomes familiar enough to continue at home in a realistic way.",
+          "Longer stays repeat the practice so it feels familiar enough to continue at home.",
       },
     ],
     suitability: {
       maySuitYouIf: [
-        "You want gentle movement and breath guidance rather than a fitness-first yoga class.",
-        "You are rebuilding routine after stress, travel fatigue or long work seasons.",
-        "You prefer structured practice with room for adaptation.",
+        "You want a gentle yoga retreat in Rishikesh with breath and movement.",
+        "You are a beginner or returning after a long break.",
+        "You feel stiff, tired or disconnected from your body.",
+        "You prefer a practice that allows rest and modification.",
       ],
       beCarefulIf: [
-        "You are drawn to intense postures before building basic awareness.",
-        "You tend to ignore pain signals or compare yourself with others.",
+        "You want intense postures before building basic awareness.",
+        "You often ignore pain signals during practice.",
         "You expect yoga to fix a medical or injury-related issue by itself.",
       ],
       consultProfessionalIf: [
-        "You have recent surgery, chronic pain, spinal conditions or joint instability.",
-        "You are pregnant or have significant blood pressure, balance or eye-pressure concerns.",
+        "You have recent surgery, chronic pain or spine concerns.",
+        "You are pregnant or have blood pressure, balance or eye-pressure concerns.",
         "You are under medical supervision and unsure which movements are safe.",
       ],
     },
-    relatedModalities: [modalityLinks.meditation, modalityLinks.sadhana, modalityLinks.sound],
+    relatedModalities: [
+      {
+        ...modalityLinks.meditation,
+        note: "guided meditation retreat practice",
+      },
+      {
+        ...modalityLinks.sound,
+        note: "sound healing retreat practice",
+      },
+      {
+        ...modalityLinks.sadhana,
+        note: "spiritual sadhana practice",
+      },
+    ],
     relatedPrograms: [
-      programs.threeDay,
-      programs.sevenDay,
-      programs.fourteenDay,
-      programs.twentyEightDay,
-      programs.sixtyDay,
+      {
+        ...programs.threeDay,
+        note: "3 days yoga retreat in Rishikesh",
+      },
+      {
+        ...programs.sevenDay,
+        note: "7 days yoga retreat in Rishikesh",
+      },
+      {
+        ...programs.fourteenDay,
+        note: "14 days yoga retreat in Rishikesh",
+      },
+      {
+        ...programs.twentyEightDay,
+        note: "28 day wellness retreat in Rishikesh",
+      },
+      {
+        ...programs.sixtyDay,
+        note: "60-day Rishi Tantra residency",
+      },
     ],
     futureBlogTopics: [
       "Yoga therapy vs regular yoga class: what retreat guests should know",
@@ -453,40 +563,45 @@ export const modalities: ModalityContent[] = [
     ],
     faqs: [
       {
+        question: "What is yoga therapy?",
+        answer:
+          "Yoga therapy is a gentle yoga-based wellness practice. It uses movement, breath, posture awareness and rest to help you understand your body better. At Shreevan, it is educational and non-medical.",
+      },
+      {
         question: "Is yoga therapy at Shreevan a medical treatment?",
         answer:
-          "No. Shreevan presents yoga therapy as yoga-informed wellness education inside a retreat rhythm. It may help guests explore breath, movement, posture and daily routine, but it does not diagnose, treat or cure health conditions. If you have pain, injury, pregnancy, surgery history or a medical condition, consult a qualified professional before travel and share relevant context during the suitability process.",
+          "No. Shreevan offers yoga-based wellness learning, not medical care or physio care. It may support general well-being and daily routine building, but it does not diagnose, treat or cure health conditions.",
       },
       {
         question: "Do I need previous yoga experience?",
         answer:
-          "No previous experience is required for the gentler entry programs. The practice can be adjusted for beginners through slower pacing, simpler movements and more rest. What matters is not flexibility or performance. What matters is whether you can listen, communicate discomfort and stay honest about your current capacity. Longer programs may include more repetition and deeper practice, so suitability matters.",
+          "No. You do not need previous yoga experience for the gentler entry programs. The practice can be slowed down and modified. What matters is honest communication, not flexibility.",
       },
       {
         question: "How is this different from a normal yoga class?",
         answer:
-          "A normal class often focuses on a single session. Yoga therapy inside a retreat is connected to the wider day: meditation, meals, rest, journaling, silence and sleep. The practice is less about completing a sequence and more about noticing patterns. It can help guests understand how movement, breath and attention affect their daily rhythm.",
+          "A normal class often focuses on one session or sequence. Yoga therapy at Shreevan connects the practice to the wider retreat day, including breath, meals, rest, meditation, sleep and reflection.",
       },
       {
-        question: "Can yoga therapy help with stress or burnout?",
+        question: "Can yoga therapy support stress or burnout-related fatigue?",
         answer:
-          "Yoga practice may support general well-being, stress awareness and healthier routines for some people. Shreevan avoids promising a cure for burnout because burnout can involve work conditions, health factors and mental-health needs. The retreat can provide a structured pause, guided practice and reflection, but it should not replace professional care when deeper support is needed.",
+          "It may support stress awareness and rest for some guests. It can help you notice breath, effort and tension patterns. It should not replace mental-health care, medical care or work changes when deeper support is needed.",
       },
       {
         question: "What if I have an injury or limited mobility?",
         answer:
-          "Share this before booking. Some guests can participate with modifications, while others may need to avoid certain movements or consult a professional first. A responsible retreat should never push you through sharp pain, dizziness or unsafe strain. The suitability call helps identify whether the program can be adapted comfortably or whether another timing would be wiser.",
+          "Share this before booking. Some guests can practice with modifications, while others may need professional advice first. A responsible yoga therapy retreat should never push you through sharp pain or unsafe strain.",
       },
       {
         question: "Which Shreevan program uses yoga therapy the most?",
         answer:
-          "Yoga therapy appears across the retreat ladder, but the depth changes with duration. The 3-day reset uses gentle practice for arrival and grounding. The 7-day foundation builds continuity. The 14-day, 28-day and 60-day programs can use more repetition, reflection and personal rhythm work. Choose by readiness, not only by ambition.",
+          "Yoga therapy appears across the retreat pathway. The 3-day program uses it gently. The 7-day program builds continuity. The 14-day, 28-day and 60-day programs allow more repetition and reflection.",
       },
     ],
     finalCta: {
-      title: "Choose a yoga rhythm your body can actually continue.",
+      title: "Choose a yoga therapy retreat in Rishikesh that fits your body",
       copy:
-        "If you are unsure whether a gentle reset or a longer immersion fits your body, start with a suitability call. The goal is to make the practice safe, clear and realistic.",
+        "If you are unsure whether a gentle reset or a longer immersion fits your body, start with a suitability call. The goal is to choose a practice rhythm that feels clear, safe and realistic.",
     },
   },
   {

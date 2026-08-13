@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -22,6 +23,27 @@ function LinkCards({ links, label }: Readonly<{ links: ModalityLink[]; label: st
         </Link>
       ))}
     </div>
+  );
+}
+
+function ModalityImageFigure({
+  image,
+  className,
+  priority = false,
+  sizes,
+}: Readonly<{
+  image: NonNullable<ModalityContent["heroImage"]>;
+  className?: string;
+  priority?: boolean;
+  sizes: string;
+}>) {
+  return (
+    <figure className={`modality-image-figure${className ? ` ${className}` : ""}`}>
+      <div className="modality-image-frame">
+        <Image src={image.src} alt={image.alt} fill priority={priority} sizes={sizes} />
+      </div>
+      {image.caption ? <figcaption>{image.caption}</figcaption> : null}
+    </figure>
   );
 }
 
@@ -270,11 +292,12 @@ export function ModalityDetailPage({ modality }: Readonly<{ modality: ModalityCo
       <SiteHeader />
 
       <main id="main">
-        <section className="section seo-hub-hero" aria-labelledby="modality-title">
-          <div className="container seo-hub-hero-grid">
-            <div>
+        <section className="section seo-hub-hero modality-detail-hero" aria-labelledby="modality-title">
+          <div className="container seo-hub-hero-grid modality-detail-hero-grid">
+            <div className="modality-detail-hero-copy">
               <p className="eyebrow">{modality.hero.eyebrow}</p>
               <h1 id="modality-title">{modality.title}</h1>
+              {modality.hero.tagline ? <h2 className="modality-hero-tagline">{modality.hero.tagline}</h2> : null}
               <p className="hero-lede">{modality.hero.answer}</p>
               <div className="hero-actions">
                 <Link className="button button-primary" href="/book-consultation">
@@ -285,10 +308,20 @@ export function ModalityDetailPage({ modality }: Readonly<{ modality: ModalityCo
                 </Link>
               </div>
             </div>
-            <aside className="seo-hub-note" aria-label="Responsible wellness boundary">
-              <span>Responsible boundary</span>
-              <p>{modality.hero.boundaryNote}</p>
-            </aside>
+            <div className="modality-hero-side">
+              {modality.heroImage ? (
+                <ModalityImageFigure
+                  className="modality-hero-image"
+                  image={modality.heroImage}
+                  priority
+                  sizes="(max-width: 960px) 100vw, 42vw"
+                />
+              ) : null}
+              <aside className="seo-hub-note" aria-label="Responsible wellness boundary">
+                <span>Responsible boundary</span>
+                <p>{modality.hero.boundaryNote}</p>
+              </aside>
+            </div>
           </div>
         </section>
 
@@ -371,6 +404,51 @@ export function ModalityDetailPage({ modality }: Readonly<{ modality: ModalityCo
           </div>
         </section>
 
+        {modality.comparison ? (
+          <section className="section modality-comparison-section" aria-labelledby="modality-comparison-title">
+            <div className="container">
+              <div className="section-heading split-heading">
+                <div>
+                  <p className="eyebrow">Practice clarity</p>
+                  <h2 id="modality-comparison-title">{modality.comparison.title}</h2>
+                </div>
+                <div>
+                  {modality.comparison.intro.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </div>
+              </div>
+              {modality.comparison.image ? (
+                <ModalityImageFigure
+                  className="modality-comparison-image"
+                  image={modality.comparison.image}
+                  sizes="(max-width: 960px) 100vw, 1120px"
+                />
+              ) : null}
+              <div className="modality-comparison-table-wrap">
+                <table className="modality-comparison-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Aspect</th>
+                      <th scope="col">{modality.comparison.columns[0]}</th>
+                      <th scope="col">{modality.comparison.columns[1]}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {modality.comparison.rows.map((row) => (
+                      <tr key={row.aspect}>
+                        <th scope="row">{row.aspect}</th>
+                        <td>{row.primary}</td>
+                        <td>{row.comparison}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        ) : null}
+
         <section className="section modality-retreat-section" aria-labelledby="retreat-experience-title">
           <div className="container">
             <div className="section-heading split-heading">
@@ -383,6 +461,13 @@ export function ModalityDetailPage({ modality }: Readonly<{ modality: ModalityCo
                 whether the practice becomes useful beyond the retreat.
               </p>
             </div>
+            {modality.retreatImage ? (
+              <ModalityImageFigure
+                className="modality-retreat-image"
+                image={modality.retreatImage}
+                sizes="(max-width: 960px) 100vw, 1120px"
+              />
+            ) : null}
             <div className="modality-retreat-grid">
               {modality.retreatExperience.map((step, index) => (
                 <article className="modality-retreat-card" key={step.title}>

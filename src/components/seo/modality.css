@@ -37,9 +37,39 @@
 .modality-article-block h3 { margin-top: 18px; }
 .modality-article-block p { margin-top: 16px; color: var(--stone-600); line-height: 1.7; }
 
+.modality-detail-hero { padding-block: clamp(64px, 7vw, 104px); }
+.modality-detail-hero-grid { display: grid; grid-template-columns: minmax(0, 0.98fr) minmax(390px, 0.72fr); gap: clamp(36px, 5vw, 72px); align-items: center; }
+.modality-detail-hero-copy { min-width: 0; }
+.modality-detail-hero-copy h1 { max-width: 780px; font-size: clamp(3.05rem, 5vw, 5rem); }
+.modality-detail-hero-copy .hero-lede { margin-inline: 0; }
+.modality-detail-hero-copy .hero-actions { justify-content: flex-start; }
+.modality-hero-tagline { max-width: 720px; margin-top: 16px; color: var(--forest-800); font-family: var(--font-body); font-size: clamp(1.2rem, 1.8vw, 1.75rem); font-weight: 850; line-height: 1.24; }
+.modality-hero-side { display: grid; gap: 18px; align-content: start; }
+.modality-image-figure { margin: 0; }
+.modality-image-frame { position: relative; overflow: hidden; width: 100%; aspect-ratio: 16 / 9; min-height: 320px; border: 1px solid var(--line-sand); border-radius: 8px; background: var(--mist-100); box-shadow: var(--shadow-sm); }
+.modality-image-frame img { object-fit: cover; }
+.modality-image-figure figcaption { margin-top: 10px; color: var(--stone-600); font-size: 0.94rem; font-weight: 720; line-height: 1.45; }
+.modality-hero-image .modality-image-frame { min-height: 360px; max-height: 440px; aspect-ratio: 4 / 3; }
+
+.modality-comparison-section { background: var(--white); }
+.modality-comparison-section .split-heading > div:last-child { display: grid; gap: 12px; }
+.modality-comparison-section .split-heading p { color: var(--stone-600); line-height: 1.62; }
+.modality-comparison-image { margin-bottom: 28px; }
+.modality-comparison-image .modality-image-frame { min-height: 360px; }
+.modality-comparison-table-wrap { overflow-x: auto; border: 1px solid var(--line-sand); border-radius: var(--radius-card); background: var(--white); box-shadow: var(--shadow-sm); }
+.modality-comparison-table { width: 100%; min-width: 720px; border-collapse: collapse; text-align: left; }
+.modality-comparison-table th, .modality-comparison-table td { border-bottom: 1px solid var(--line-sand); padding: 18px 20px; vertical-align: top; line-height: 1.5; }
+.modality-comparison-table thead th { background: var(--sand-050); color: var(--forest-900); font-size: 0.84rem; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; }
+.modality-comparison-table tbody th { color: var(--forest-900); font-weight: 850; }
+.modality-comparison-table tbody td { color: var(--stone-600); }
+.modality-comparison-table tr:last-child th, .modality-comparison-table tr:last-child td { border-bottom: 0; }
+
 .modality-retreat-section { background: var(--forest-950); color: rgba(232, 240, 236, 0.76); }
 .modality-retreat-section h2, .modality-retreat-section h3 { color: var(--white); }
 .modality-retreat-section .split-heading > p { color: rgba(232, 240, 236, 0.76); }
+.modality-retreat-image { margin-bottom: 30px; }
+.modality-retreat-image .modality-image-frame { min-height: 380px; border-color: rgba(211, 224, 216, 0.2); background: rgba(255, 255, 255, 0.045); }
+.modality-retreat-image figcaption { color: rgba(232, 240, 236, 0.76); }
 .modality-retreat-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
 .modality-retreat-card { min-height: 300px; border: 1px solid rgba(211, 224, 216, 0.18); border-radius: var(--radius-card); background: rgba(255, 255, 255, 0.045); padding: 26px; }
 .modality-retreat-card p:first-of-type { margin-top: 20px; color: rgba(232, 240, 236, 0.66); font-size: 0.78rem; font-weight: 850; letter-spacing: 0.1em; line-height: 1.25; text-transform: uppercase; }
@@ -80,11 +110,21 @@
 
 @media (max-width: 960px) {
   .modality-quick-grid, .modality-article-grid, .modality-retreat-grid, .modality-suitability-grid, .modality-connection-grid, .modality-decision-grid, .modality-standards-grid { grid-template-columns: 1fr; }
+  .modality-detail-hero-grid { grid-template-columns: 1fr; gap: 32px; }
+  .modality-detail-hero-copy .hero-actions { justify-content: center; }
+  .modality-detail-hero-copy, .modality-detail-hero-copy h1, .modality-detail-hero-copy .hero-lede, .modality-hero-tagline { max-width: none; text-align: center; }
   .modality-article-nav { position: static; }
+  .modality-image-frame, .modality-hero-image .modality-image-frame, .modality-comparison-image .modality-image-frame, .modality-retreat-image .modality-image-frame { min-height: 280px; }
+  .modality-hero-image .modality-image-frame { aspect-ratio: 16 / 9; }
 }
 
 @media (max-width: 640px) {
   .seo-card-grid, .modality-quick-grid, .modality-retreat-grid, .modality-suitability-grid, .modality-connection-grid, .modality-decision-grid, .modality-standards-grid { grid-template-columns: 1fr; }
   .seo-info-card, .modality-quick-card, .modality-article-block, .modality-retreat-card, .modality-suitability-grid article, .modality-connection-grid article, .modality-decision-card, .modality-standards-grid article { padding: 22px; }
   .modality-quick-card, .modality-article-block, .modality-retreat-card, .modality-suitability-grid article, .modality-connection-grid article, .modality-decision-card, .modality-standards-grid article { border-radius: 12px; }
+  .modality-image-frame, .modality-hero-image .modality-image-frame, .modality-comparison-image .modality-image-frame, .modality-retreat-image .modality-image-frame { min-height: 220px; }
+  .modality-detail-hero-copy h1 { font-size: clamp(2.55rem, 12vw, 3.35rem); }
+  .modality-comparison-table-wrap { border-radius: 12px; }
+  .modality-comparison-table { min-width: 620px; }
+  .modality-comparison-table th, .modality-comparison-table td { padding: 15px 16px; }
 }
