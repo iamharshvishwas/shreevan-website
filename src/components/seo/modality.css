@@ -49,7 +49,7 @@
 .modality-image-frame { position: relative; overflow: hidden; width: 100%; aspect-ratio: 16 / 9; min-height: 320px; border: 1px solid var(--line-sand); border-radius: 8px; background: var(--mist-100); box-shadow: var(--shadow-sm); }
 .modality-image-frame img { object-fit: cover; }
 .modality-image-figure figcaption { margin-top: 10px; color: var(--stone-600); font-size: 0.94rem; font-weight: 720; line-height: 1.45; }
-.modality-hero-image .modality-image-frame { min-height: 360px; max-height: 440px; aspect-ratio: 4 / 3; }
+.modality-hero-image .modality-image-frame { min-height: 0; max-height: none; aspect-ratio: 16 / 9; }
 
 .modality-comparison-section { background: var(--white); }
 .modality-comparison-section .split-heading > div:last-child { display: grid; gap: 12px; }
@@ -115,14 +115,15 @@
   .modality-detail-hero-copy, .modality-detail-hero-copy h1, .modality-detail-hero-copy .hero-lede, .modality-hero-tagline { max-width: none; text-align: center; }
   .modality-article-nav { position: static; }
   .modality-image-frame, .modality-hero-image .modality-image-frame, .modality-comparison-image .modality-image-frame, .modality-retreat-image .modality-image-frame { min-height: 280px; }
-  .modality-hero-image .modality-image-frame { aspect-ratio: 16 / 9; }
+  .modality-hero-image .modality-image-frame { min-height: 0; aspect-ratio: 16 / 9; }
 }
 
 @media (max-width: 640px) {
   .seo-card-grid, .modality-quick-grid, .modality-retreat-grid, .modality-suitability-grid, .modality-connection-grid, .modality-decision-grid, .modality-standards-grid { grid-template-columns: 1fr; }
   .seo-info-card, .modality-quick-card, .modality-article-block, .modality-retreat-card, .modality-suitability-grid article, .modality-connection-grid article, .modality-decision-card, .modality-standards-grid article { padding: 22px; }
   .modality-quick-card, .modality-article-block, .modality-retreat-card, .modality-suitability-grid article, .modality-connection-grid article, .modality-decision-card, .modality-standards-grid article { border-radius: 12px; }
-  .modality-image-frame, .modality-hero-image .modality-image-frame, .modality-comparison-image .modality-image-frame, .modality-retreat-image .modality-image-frame { min-height: 220px; }
+  .modality-image-frame, .modality-comparison-image .modality-image-frame, .modality-retreat-image .modality-image-frame { min-height: 220px; }
+  .modality-hero-image .modality-image-frame { min-height: 0; }
   .modality-detail-hero-copy h1 { font-size: clamp(2.55rem, 12vw, 3.35rem); }
   .modality-comparison-table-wrap { border-radius: 12px; }
   .modality-comparison-table { min-width: 620px; }

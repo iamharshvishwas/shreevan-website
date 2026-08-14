@@ -309,6 +309,20 @@ async function modalitiesDocument(origin: string, pathname: string): Promise<Mar
     addHeading(lines, section.title);
     lines.push(...section.body, "");
   }
+  if (modality.comparison) {
+    addHeading(lines, modality.comparison.title);
+    lines.push(...modality.comparison.intro, "");
+    for (const row of modality.comparison.rows) {
+      lines.push(
+        `### ${row.aspect}`,
+        "",
+        `**${modality.comparison.columns[0]}:** ${row.primary}`,
+        "",
+        `**${modality.comparison.columns[1]}:** ${row.comparison}`,
+        "",
+      );
+    }
+  }
   addHeading(lines, "Inside a Shreevan retreat");
   for (const step of modality.retreatExperience) {
     lines.push(`### ${step.stage}: ${step.title}`, "", step.copy, "");

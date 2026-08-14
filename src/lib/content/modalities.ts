@@ -606,144 +606,238 @@ export const modalities: ModalityContent[] = [
   },
   {
     slug: "guided-meditation",
-    title: "Guided Meditation & Mind Mastery",
+    title: "Guided Meditation Retreat in Rishikesh",
     shortTitle: "Guided Meditation",
     path: "/modalities/guided-meditation",
     category: "Attention, reflection and inner steadiness",
     description:
-      "Guided meditation and reflective practice for guests who need structure, steadiness and a responsible entry into stillness.",
-    seoTitle: "Guided Meditation Retreat Practice | Shreevan Wellness",
+      "Guided meditation and reflective practice for guests who need a calm, structured and responsible entry into stillness.",
+    seoTitle: "Guided Meditation Retreat in Rishikesh | Shreevan Wellness",
     seoDescription:
-      "Learn how guided meditation supports Shreevan Wellness retreat guests with attention, reflection, stillness and responsible pacing.",
+      "Explore guided meditation in Rishikesh at Shreevan Wellness. Learn breath awareness, attention practice and simple stillness habits in a non-clinical retreat setting.",
     keywords: [
+      "guided meditation retreat in Rishikesh",
       "guided meditation retreat",
+      "guided meditation in Rishikesh",
+      "meditation retreat in Rishikesh",
       "Rishikesh meditation retreat",
+      "guided meditation for beginners",
       "meditation for beginners",
       "mind mastery retreat",
       "wellness meditation India",
     ],
     summary:
-      "Guided meditation gives the mind a container rather than demanding instant silence. It supports self-observation, emotional pacing and practice continuity across the retreat rhythm.",
+      "Guided meditation at Shreevan gives busy minds a clear place to begin. The practice uses breath awareness, simple attention cues and reflection without forcing silence.",
     hero: {
-      eyebrow: "Guided meditation retreat practice",
+      eyebrow: "Core Modality · Shreevan Wellness Rishikesh",
+      tagline: "Quiet Mental Noise, Practice Stillness and Build Attention Habits",
       answer:
-        "Guided meditation at Shreevan is a structured way to explore attention, breath, observation and reflection. It helps guests enter stillness with support instead of pressure.",
+        "Guided meditation at Shreevan Wellness gives busy minds a clear place to begin. This guided meditation retreat in Rishikesh uses breath awareness, simple attention cues and quiet reflection. The practice is gradual, beginner-friendly and free from forced silence. You learn a daily rhythm that can continue after the retreat.",
       boundaryNote:
-        "Meditation is a wellness practice, not psychotherapy, psychiatric care, crisis care or a substitute for prescribed care or professional support.",
+        "This page is educational. Guided meditation at Shreevan is a wellness practice. It is not psychotherapy, psychiatric care, crisis care or a replacement for prescribed care. If you have active mental-health concerns, speak with a qualified professional before booking.",
+    },
+    heroImage: {
+      src: "/images/modalities/guided-meditation/guided-meditation-retreat-rishikesh-hero.webp",
+      alt: "Guided meditation retreat in Rishikesh with facilitator-led seated practice",
+      caption: "A calm practice setting helps beginners enter stillness without pressure.",
     },
     quickAnswer: {
       simpleTerms:
-        "Guided meditation means you are led through a practice using voice, breath cues, body awareness, reflective prompts or silence in manageable intervals.",
+        "Guided meditation in Rishikesh at Shreevan means a facilitator leads you through breath, sound, body awareness and reflection. You do not have to stop every thought. The aim is to notice the mind, soften pressure and build a simple meditation habit.",
       bestFor: [
-        "Guests whose mind feels fast, scattered or over-occupied.",
-        "Beginners who find silent meditation intimidating.",
-        "Experienced seekers who want a steadier retreat container.",
+        "Beginners who want a guided meditation retreat in Rishikesh.",
+        "Guests who feel mentally busy, distracted or screen-tired.",
+        "Professionals who want a calm routine they can continue at home.",
       ],
       whatToExpect: [
-        "Breath awareness, body scanning, reflection and quiet pauses.",
-        "Shorter practices in entry programs and deeper repetition in longer stays.",
-        "Integration through journaling, silence and daily rhythm.",
+        "Clear breath cues and short periods of silence.",
+        "Simple attention anchors, body awareness and reflection.",
+        "Journaling or quiet integration after some sessions.",
       ],
       whatItIsNot: [
-        "Not therapy, trauma processing or crisis intervention.",
-        "Not a test of whether you can stop thinking.",
-        "Not a guaranteed path to bliss or permanent calm.",
+        "Not psychotherapy or psychiatric treatment.",
+        "Not a promise to stop thoughts forever.",
+        "Not a strict silent retreat or endurance test.",
       ],
     },
     articleSections: [
       {
-        title: "What guided meditation means",
+        title: "What guided meditation means at Shreevan",
         body: [
-          "Guided meditation is a practice container. Instead of asking the guest to sit in silence and figure everything out, the facilitator offers cues that help attention settle. The cue may be breath, sensation, sound, a simple image, a mantra, a question or a period of quiet observation.",
-          "This matters for retreat guests because the mind often becomes louder when the external world becomes quieter. A structured voice can make the first layer of stillness less confusing. It also helps beginners understand that meditation is not about deleting thoughts. It is about changing the relationship with attention.",
+          "Guided meditation is a supported attention practice. A facilitator gives simple cues so you are not left alone with a restless mind. The cue may be breath, sound, body sensation, a short phrase or a reflective question.",
+          "This matters because many people feel more mental noise when life becomes quiet. Guidance helps you stay with the practice without forcing silence.",
+          "At Shreevan, guided meditation is taught as wellness education. It is not therapy, diagnosis or treatment. It is a practical way to notice attention and build a calmer rhythm.",
         ],
       },
       {
-        title: "Why people explore it",
+        title: "Why guided meditation in Rishikesh helps beginners",
         body: [
-          "Many visitors are not looking for a religious performance. They are looking for space to notice what constant pressure has done to attention, sleep, decision-making and emotional tone. Guided meditation can help create a pause between stimulus and response. It may support general calm and self-awareness when practiced responsibly.",
-          "For founders, executives and life-transition seekers, meditation can also expose how hard it is to be still. That insight is useful when held gently. It should not become another achievement metric. Shreevan frames meditation as practice, not as proof of spiritual status.",
+          "A guided meditation retreat in Rishikesh gives you time away from screens, rushed meals and constant decisions. The setting supports slower breath, quieter mornings and steady practice.",
+          "Many guests have tried meditation apps at home. They may still struggle with routine. A retreat gives them a clean container: guidance, food rhythm, movement, rest and reflection.",
+          "This does not make meditation a quick fix. It simply gives the mind fewer distractions and a better place to learn.",
         ],
       },
       {
-        title: "How it works inside a retreat",
+        title: "How the practice works inside the retreat day",
         body: [
-          "A retreat allows meditation to be repeated in different states: after arrival, after movement, before meals, in silence, after journaling and before sleep. This repetition teaches the guest that attention changes across the day. Some sessions may feel calm. Others may feel restless. Both are information.",
-          "Shorter programs may use guided practices to help guests arrive and decompress. Longer programs can include more silence, longer sits, reflective circles and integration prompts. The progression should be paced. Intensity without readiness can become destabilizing for some people.",
+          "A session may begin with arrival cues. You notice the seat, the breath and the body. The facilitator then gives a simple anchor for attention.",
+          "Some sessions may include breath awareness. Some may include body scanning, sound focus, journaling or short silence. You can use a chair, cushion or soft gaze if needed.",
+          "Morning guided meditation can help the day begin slowly. Evening practice can support reflection before rest. Repetition makes the practice easier to remember at home.",
         ],
       },
       {
-        title: "How Shreevan approaches it",
+        title: "Core practices used in guided meditation",
         body: [
-          "Shreevan's meditation approach is supportive, structured and consent-aware. The facilitator can offer a clear start, a steady anchor and a clear end. Guests should know what is happening and why. This reduces the mystery that can make meditation feel inaccessible.",
-          "The retreat also avoids inflated claims. Meditation may be meaningful, but it is not a replacement for mental-health care. If a guest is in acute distress, managing active symptoms or changing medication, professional guidance matters more than retreat intensity.",
+          "Guided meditation at Shreevan uses simple practices instead of complicated theory. The goal is to make stillness understandable.",
+          "Breath awareness helps you notice natural breathing without forcing it. Anchor practice gives attention one clear place to return. Body awareness helps you notice posture, tension and comfort.",
+          "Sound awareness teaches listening without chasing every thought. Reflective journaling gives you a few clear notes after practice. These practices support guided meditation for beginners because they give the mind something clear to do.",
         ],
       },
       {
         title: "What beginners should know",
         body: [
-          "You are allowed to have thoughts. You are allowed to feel bored. You are allowed to become emotional, distracted or sleepy. None of those experiences means you are failing. In the beginning, noticing what is happening is already practice.",
-          "Beginners should also know that eyes closed is not mandatory for everyone. Some people feel safer with a soft gaze. Some need shorter sessions. Some need movement before sitting. A well-held retreat adapts the entry point rather than forcing one ideal method.",
+          "You do not need prior meditation experience. You do not need to sit perfectly. You also do not need to stop every thought.",
+          "Meditation for beginners works best when the practice is short, clear and kind. If the mind wanders, you return to the cue. That return is part of the practice.",
+          "Some guests prefer eyes open. Some need a chair. Some need movement before sitting. A responsible retreat allows practical options.",
         ],
       },
       {
         title: "What to be careful about",
         body: [
-          "Long silence, intense introspection and certain practices may not suit everyone. Guests with active mental-health concerns, panic, dissociation, recent trauma, severe insomnia or crisis-level distress should consult a qualified professional before joining a meditation-heavy retreat.",
-          "Meditation can be gentle, but gentle does not mean risk-free for every person. The responsible question is not whether meditation is good in general. The question is whether this form, duration and timing are suitable for you now.",
+          "Meditation can feel gentle, but it is not right for every person at every time. Long silence and deep inward focus can feel difficult for some guests.",
+          "Be careful if you have active panic, severe depression, recent trauma, severe insomnia or crisis-level distress. In those situations, speak with a qualified mental-health professional before choosing a meditation-heavy retreat.",
+          "The question is not whether meditation is good in general. The question is whether this form, duration and timing are suitable for you now.",
         ],
       },
     ],
+    comparison: {
+      title: "How a guided meditation retreat compares to apps and silent retreats",
+      intro: [
+        "A meditation app can help you start, but it cannot always adjust to your state. A silent retreat can be deep, but it may feel too intense for some beginners.",
+        "A guided meditation retreat in Rishikesh sits between those options. It gives you human guidance, a retreat rhythm and enough softness to build trust with the practice.",
+      ],
+      image: {
+        src: "/images/modalities/guided-meditation/guided-meditation-practice-clarity-rishikesh.webp",
+        alt: "Guided meditation practice setup with cushion and journal in Rishikesh",
+        caption: "Simple anchors make meditation easier to understand and repeat.",
+      },
+      columns: ["Guided meditation retreat at Shreevan", "Apps or strict silent retreats"],
+      rows: [
+        {
+          aspect: "Guidance",
+          primary: "Human guidance with clear cues.",
+          comparison: "Pre-recorded audio or limited verbal guidance.",
+        },
+        {
+          aspect: "Setting",
+          primary: "Quiet Rishikesh retreat rhythm.",
+          comparison: "Home, work setting or dedicated silence setting.",
+        },
+        {
+          aspect: "Pace",
+          primary: "Gentle and adjustable.",
+          comparison: "Self-paced or often more intensive.",
+        },
+        {
+          aspect: "Beginner fit",
+          primary: "Built for gradual entry.",
+          comparison: "Easy to start or better after readiness.",
+        },
+        {
+          aspect: "Goal",
+          primary: "Daily attention habits and reflection.",
+          comparison: "Short practice support or deep silence discipline.",
+        },
+      ],
+    },
+    retreatImage: {
+      src: "/images/modalities/guided-meditation/meditation-reflection-daily-rhythm-rishikesh.webp",
+      alt: "Guest journaling after guided meditation at a Rishikesh retreat",
+      caption: "Reflection helps guests carry the practice into daily life.",
+    },
     retreatExperience: [
       {
         stage: "Before session",
-        title: "A clear container",
+        title: "Clear entry",
         copy:
-          "The facilitator explains the practice, expected duration and optional modifications so the mind knows what it is entering.",
+          "The facilitator explains the practice, time and options before you begin.",
       },
       {
         stage: "During session",
         title: "Guided attention",
         copy:
-          "You may be invited to notice breath, body, sound, sensation or a reflective question, with silence used in manageable intervals.",
+          "You may notice breath, body, sound, silence or a simple reflective question.",
       },
       {
         stage: "After session",
-        title: "Grounding",
+        title: "Gentle grounding",
         copy:
-          "Guests may journal, sit quietly or transition slowly so the practice is integrated rather than abruptly interrupted.",
+          "You may journal, sit quietly or move slowly before returning to the day.",
       },
       {
         stage: "Daily rhythm",
         title: "Repeatable practice",
         copy:
-          "The goal is to leave with a meditation rhythm you can realistically continue, even if it is short and simple.",
+          "The goal is a meditation habit you can continue, even if it is short.",
       },
     ],
     suitability: {
       maySuitYouIf: [
-        "You want to begin meditation but need structure and guidance.",
-        "You feel mentally overloaded and need a quieter rhythm.",
+        "You want guided meditation for beginners in a calm retreat setting.",
+        "You feel mentally busy and want a slower daily rhythm.",
         "You value reflection, journaling and self-observation.",
+        "You want a guided meditation retreat that is not rigid or dogmatic.",
       ],
       beCarefulIf: [
-        "You expect meditation to permanently stop thoughts.",
-        "You are using retreat practice to avoid needed professional support.",
+        "You expect meditation to remove every thought.",
+        "You are using retreat practice to avoid professional support.",
         "You want a very intense silent practice without prior experience.",
       ],
       consultProfessionalIf: [
-        "You have active panic, severe depression, psychosis symptoms or crisis-level distress.",
+        "You have active panic, severe depression or crisis-level distress.",
         "You are changing psychiatric medication or currently under clinical care.",
-        "You have a trauma history and know that inward attention can feel destabilizing.",
+        "You have a trauma history and inward attention can feel destabilizing.",
       ],
     },
-    relatedModalities: [modalityLinks.yoga, modalityLinks.sound, modalityLinks.sadhana, modalityLinks.chakra],
+    relatedModalities: [
+      {
+        ...modalityLinks.yoga,
+        note: "movement, breath and posture awareness",
+      },
+      {
+        ...modalityLinks.sound,
+        note: "guided rest and listening practice",
+      },
+      {
+        ...modalityLinks.sadhana,
+        note: "discipline, meaning and daily integration",
+      },
+      {
+        ...modalityLinks.chakra,
+        note: "symbolic self-inquiry and reflection",
+      },
+    ],
     relatedPrograms: [
-      programs.threeDay,
-      programs.sevenDay,
-      programs.fourteenDay,
-      programs.twentyEightDay,
-      programs.sixtyDay,
+      {
+        ...programs.threeDay,
+        note: "3 days yoga retreat in Rishikesh",
+      },
+      {
+        ...programs.sevenDay,
+        note: "7 days yoga retreat in Rishikesh",
+      },
+      {
+        ...programs.fourteenDay,
+        note: "14 days yoga retreat in Rishikesh",
+      },
+      {
+        ...programs.twentyEightDay,
+        note: "28 day wellness retreat in Rishikesh",
+      },
+      {
+        ...programs.sixtyDay,
+        note: "advanced lifestyle residency",
+      },
     ],
     futureBlogTopics: [
       "Guided meditation vs silent meditation for first-time retreat guests",
@@ -752,40 +846,45 @@ export const modalities: ModalityContent[] = [
     ],
     faqs: [
       {
+        question: "What is guided meditation?",
+        answer:
+          "Guided meditation is a practice where a facilitator leads your attention with simple cues. The cue may be breath, sound, body awareness, silence or reflection. At Shreevan, it is a wellness practice, not therapy or medical care.",
+      },
+      {
         question: "Is guided meditation suitable for beginners?",
         answer:
-          "Yes, guided meditation is often the easiest entry point for beginners because the facilitator provides structure. You do not need to know how to sit perfectly or keep the mind empty. The practice can begin with short intervals, breath cues and simple observation. If you have active mental-health concerns, suitability should be discussed carefully before choosing a meditation-heavy program.",
+          "Yes. Guided meditation for beginners is often easier than sitting alone in silence. The facilitator gives clear steps, short pauses and simple anchors. You do not need previous experience.",
       },
       {
         question: "What happens during a guided meditation session?",
         answer:
-          "A session usually begins with arrival cues, then moves into breath awareness, body awareness, sound, reflection or a simple anchor. The facilitator may include pauses of silence and then guide you back gently. After the session, you may journal or sit quietly. The exact structure depends on the program duration and the readiness of the group.",
+          "A session usually begins with arrival cues. You may notice breath, body, sound or a reflective question. The facilitator may include short silence, then guide you back gently.",
       },
       {
         question: "Will meditation stop my thoughts?",
         answer:
-          "No responsible meditation page should promise that. Thoughts may continue, especially in the beginning. The practice is about noticing thoughts without automatically following them. Over time, some guests may experience more space and steadiness, but the goal is not to force silence. The goal is to build a healthier relationship with attention.",
+          "No. Meditation does not require a blank mind. Thoughts may continue. The practice is about noticing thoughts without automatically following each one.",
       },
       {
         question: "Can guided meditation help with stress?",
         answer:
-          "Meditation and mindfulness practices may support general well-being and stress awareness for some people. Shreevan uses cautious language because stress can involve work, health, relationships and mental-health factors. A retreat can provide space, routine and guided practice, but it is not a replacement for professional care when symptoms are significant or persistent.",
+          "Guided meditation may support stress awareness and general calm for some guests. It can give you space to notice breath, thought patterns and pressure. It is not a replacement for professional care when symptoms are significant.",
       },
       {
         question: "Is guided meditation the same as therapy?",
         answer:
-          "No. Guided meditation at Shreevan is a wellness and self-observation practice. It is not psychotherapy, psychiatric care, trauma treatment or crisis support. It may sit alongside professional care if your provider agrees, but it should not be used as a substitute. Guests with active clinical concerns should discuss travel and practice suitability before booking.",
+          "No. Guided meditation at Shreevan is a non-clinical wellness and self-observation practice. It is not psychotherapy, psychiatric care, trauma treatment or crisis support.",
       },
       {
-        question: "Which programs include guided meditation?",
+        question: "Which Shreevan programs include guided meditation?",
         answer:
-          "Guided meditation is relevant across the Shreevan retreat ladder. The 3-day reset uses it gently for arrival and reflection. The 7-day foundation builds continuity. The 14-day, 28-day and 60-day programs can include deeper repetition and integration. The longer the program, the more important suitability and pacing become.",
+          "Guided meditation appears across the Shreevan retreat pathway. The 3-day program uses it gently. The 7-day program builds rhythm. The 14-day, 28-day and 60-day programs allow more repetition and reflection.",
       },
     ],
     finalCta: {
-      title: "Stillness should feel held, not forced.",
+      title: "Let stillness feel held, not forced.",
       copy:
-        "If you are unsure how much meditation is right for you, use the suitability call to choose a program that meets your current capacity.",
+        "If you are unsure how much guided meditation is right for you, use the suitability call. We will help you choose a guided meditation retreat in Rishikesh that fits your current capacity.",
     },
   },
   {

@@ -254,10 +254,10 @@ export const defaultAdminSeoLeads: AdminSeoLeadsStore = {
       sitemapEnabled: true,
       priority: 0.68,
       changeFrequency: "monthly",
-      focusKeyword: "guided meditation retreat Rishikesh",
+      focusKeyword: "guided meditation retreat in Rishikesh",
       qaStatus: "ready",
-      notes: "Educational modality page linked from program and journal pages.",
-      lastReviewedAt: "2026-06-26",
+      notes: "Updated with guided meditation retreat copy, comparison section, FAQ and image-led SXO content.",
+      lastReviewedAt: "2026-08-14",
     },
     {
       id: "sound-healing",
