@@ -889,141 +889,240 @@ export const modalities: ModalityContent[] = [
   },
   {
     slug: "sound-healing",
-    title: "Sound Healing & Vibrational Therapy",
+    title: "Sound Healing Retreat in Rishikesh",
     shortTitle: "Sound Healing",
     path: "/modalities/sound-healing",
     category: "Rest, stillness and sensory decompression",
     description:
-      "Sound-supported wellness practice used as a gentle rest and reflection modality within Shreevan retreat rhythm.",
-    seoTitle: "Sound Healing Retreat Practice | Shreevan Wellness",
+      "Guided sound bath and sound-supported rest practice for guests who want a calmer entry into stillness.",
+    seoTitle: "Sound Healing Retreat in Rishikesh | Sound Bath at Shreevan",
     seoDescription:
-      "Understand Shreevan Wellness sound healing as a supportive retreat modality for rest, listening and reflection without medical cure claims.",
+      "Experience a gentle sound healing retreat in Rishikesh with guided sound bath sessions, Tibetan singing bowls and quiet rest at Shreevan Wellness.",
     keywords: [
+      "sound healing retreat in Rishikesh",
       "sound healing retreat",
-      "vibrational therapy retreat",
-      "sound bath Rishikesh",
-      "wellness sound practice",
-      "guided rest India",
+      "sound healing in Rishikesh",
+      "sound bath",
+      "sound bath in Rishikesh",
+      "sound therapy",
+      "sound healing therapy",
+      "Tibetan singing bowls",
+      "sound bowls",
+      "sound bath meditation",
     ],
     summary:
-      "Sound work is framed as supportive wellness education. It can help guests slow down, listen, rest and transition between active practice and quiet reflection.",
+      "Sound healing at Shreevan is a guided listening and rest practice. It uses acoustic sound, silence and a calm retreat rhythm without medical or guaranteed-healing claims.",
     hero: {
-      eyebrow: "Sound-supported rest practice",
+      eyebrow: "Sound-Supported Rest Modality · Shreevan Wellness Rishikesh",
+      tagline: "Sound Bath, Tibetan Singing Bowls and Gentle Sensory Rest",
       answer:
-        "Sound healing at Shreevan is a guided listening and rest practice using resonant sound, silence and stillness. It is designed as a supportive retreat layer, not a medical intervention.",
+        "Sound healing at Shreevan Wellness is a guided listening and rest practice. This sound healing retreat in Rishikesh uses Tibetan singing bowls, chimes, silence and gentle pauses to help guests slow down. The session is calm, optional and held as part of the wider retreat rhythm. It is not a medical treatment or a dramatic spiritual performance.",
       boundaryNote:
-        "Sound sessions are optional wellness practices. They are not medical treatment, guaranteed nervous-system repair, trauma work or a replacement for professional care.",
+        "Sound sessions are optional wellness practices. They are not medical treatment, trauma therapy, guaranteed nervous-system repair or a replacement for professional clinical care. If you have sound sensitivity, tinnitus, migraines, seizure history or recent trauma, speak with a qualified professional before joining.",
+    },
+    heroImage: {
+      src: "/images/modalities/sound-healing/sound-healing-retreat-rishikesh.webp",
+      alt: "Guided sound healing retreat in Rishikesh with Tibetan singing bowls",
+      caption: "A gentle listening practice gives the mind a simple place to rest.",
     },
     quickAnswer: {
       simpleTerms:
-        "Sound healing means resting while listening to carefully held tones, rhythm, bowls, bells, voice or ambient sound as part of a reflective retreat session.",
+        "Sound healing is a guided rest practice where you listen to steady acoustic tones. A sound bath usually means lying down or sitting while a facilitator plays Tibetan singing bowls, bells, chimes or soft rhythm. At Shreevan, sound healing in Rishikesh is used as a calm retreat layer. It may support rest and attention, but it is not presented as a cure.",
       bestFor: [
-        "Guests who need rest but find silent meditation difficult.",
-        "People who want a softer transition after movement or travel.",
-        "Visitors who respond well to music, rhythm, atmosphere and quiet.",
+        "Guests who want a sound healing retreat in Rishikesh but prefer a gentle, non-clinical setting.",
+        "People who find silent meditation difficult and need a soft sound anchor.",
+        "Travelers who want quiet sensory rest after movement, conversation or screen time.",
       ],
       whatToExpect: [
-        "A calm room, lying or seated rest, and guided listening.",
-        "Periods of sound, silence and gentle transition.",
-        "Optional participation with permission to step out if needed.",
+        "A calm room, simple setup and clear guidance before the session begins.",
+        "Supported lying down or seated rest with blankets, cushions or distance options.",
+        "Periods of Tibetan singing bowls, chimes, silence and slow return.",
       ],
       whatItIsNot: [
-        "Not a clinical sound therapy protocol.",
-        "Not a guarantee of emotional release or healing.",
-        "Not suitable for everyone without sensitivity checks.",
+        "Not clinical sound therapy or medical treatment.",
+        "Not a promise of emotional release, sleep repair or guaranteed healing.",
+        "Not a loud performance, spectacle or endurance practice.",
       ],
     },
     articleSections: [
       {
         title: "What sound healing means at Shreevan",
         body: [
-          "Sound healing is a common wellness phrase, but Shreevan uses it carefully. In this context, it means a guided sound-supported rest session. The facilitator may use bowls, bells, drone, voice, rhythm or silence to create a listening environment where the guest can slow down and notice the body without needing to perform.",
-          "The word healing can create unrealistic expectations, so the page keeps the boundary clear. Sound may feel calming, spacious or emotionally meaningful for some people. It may also feel neutral or overstimulating for others. The experience is treated as optional wellness support rather than a guaranteed outcome.",
+          "Sound healing is a common wellness phrase, so Shreevan uses it carefully. Here, it means a guided listening and rest session. A facilitator may use Tibetan singing bowls, bells, chimes, voice, rhythm or silence to create a calm sound field.",
+          "The aim is simple. You listen, rest and notice how your body responds. You do not have to perform, visualize or believe in a fixed outcome. The sound gives your attention something gentle to meet.",
+          "This sound healing retreat in Rishikesh keeps the boundary clear. Sound can feel calming or meaningful for some guests, but it is not a medical protocol or guaranteed result.",
         ],
       },
       {
-        title: "Why people explore it",
+        title: "Why people explore sound bath sessions",
         body: [
-          "Many guests arrive with a nervous habit of doing. Even on retreat, they may want to optimize, analyze and achieve. Sound practice gives them a different instruction: receive, listen, rest and let the session be simple. That can be useful for guests who find formal meditation too mental at first.",
-          "Sound also creates a transition between active and quiet parts of the day. After travel, movement or conversation, a sound session may help the group settle into a slower pace. It is often easier to rest when attention has something gentle to meet.",
+          "Many people arrive at retreat with a busy mind. Even when the body is tired, the mind may still analyze, plan and repeat old thoughts. Sitting in silence can feel hard at first.",
+          "A guided acoustic session gives the mind a softer entry point. Instead of trying to force silence, you listen to tone, rhythm and quiet pauses. This can make rest feel easier for beginners.",
+          "This practice also fits the Rishikesh setting. The slower pace, river air, food rhythm and retreat schedule can help guests move from doing into listening.",
         ],
       },
       {
-        title: "How it works inside a retreat",
+        title: "How a sound bath works inside a retreat",
         body: [
-          "A session may begin with an explanation of what sounds will be used and how long the practice will last. Guests may lie down or sit, keep eyes open or closed, and use props for comfort. The facilitator then holds the sound environment with periods of tone, rhythm, quiet and grounding.",
-          "In shorter programs, sound may be used as a reset layer. In longer programs, it can support integration after deeper practice days. The most important design choice is pacing. A sound session should never be framed as something a guest must endure to receive a result.",
+          "A session usually begins with a short explanation. The facilitator tells you what sounds may be used, how long the session will last and how to adjust your position.",
+          "You may lie down, sit on a chair, keep your eyes open or close them. You can ask for more distance from the instruments if sound feels too strong. A responsible sound healing session should never make you feel trapped.",
+          "During the session, the facilitator may use sound bowls, chimes, bells and periods of silence. The closing should be slow. You may sit quietly, drink water, stretch gently or journal.",
         ],
       },
       {
-        title: "How Shreevan approaches it",
+        title: "How Shreevan keeps sound therapy grounded",
         body: [
-          "Shreevan's approach is atmosphere-led and responsible. The session should feel clean, calm and clear. Guests should know that they can adjust position, cover the ears, sit instead of lie down, or leave quietly if sound becomes uncomfortable.",
-          "The practice is also kept separate from medical claims. Some sound content online overstates frequency, vibration and body effects. Shreevan can honor sound as a traditional and sensory practice without presenting it as a cure or regulated clinical treatment.",
+          "The phrase sound therapy can mean different things online. Some pages use strong claims about frequencies, chakras, trauma release or body repair. Shreevan does not use sound in that way on this page.",
+          "At Shreevan, sound therapy language means a wellness practice that supports rest, listening and reflection. The facilitator holds a calm environment. Guests keep choice over posture, distance and participation.",
+          "This is important for trust. The practice should feel quiet, respectful and consent-aware. It should not ask guests to believe that a specific result must happen.",
         ],
       },
       {
         title: "What beginners should know",
         body: [
-          "You do not need to understand instruments or spiritual terminology. The practice is simple: listen, rest, notice and return gently when the mind wanders. If emotion arises, it does not need to be dramatized. If nothing special happens, the session can still be useful as rest.",
-          "Beginners should also know that sensitivity is valid. Some people prefer lower volume, more distance from instruments or a seated posture. A good retreat container allows these adjustments without making the guest feel difficult.",
+          "You do not need experience with sound healing, sound bath meditation or Tibetan singing bowls. You only need to be willing to rest and listen.",
+          "Some guests feel relaxed. Some feel emotional. Some feel neutral. All of these responses can be normal. Nothing dramatic needs to happen for the session to be useful.",
+          "If you are new to this practice, choose comfort first. Use a cushion, sit instead of lie down, keep eyes open or ask to stay farther from the sound bowls.",
         ],
       },
       {
-        title: "What to be careful about",
+        title: "When to be careful",
         body: [
-          "Sound can be intense for people with migraines, tinnitus, sound sensitivity, certain neurological conditions, trauma triggers or anxiety around enclosed group experiences. Suitability should be discussed before deep or long sessions.",
-          "The safest framing is modest. Sound practice can be supportive within a broader retreat rhythm. It should not be used as proof that something has been healed, released or permanently changed. Integration matters more than dramatic interpretation.",
+          "Sound can be intense for some people. Be careful if you have tinnitus, sound-triggered migraines, seizure history, acute anxiety, recent trauma or strong sensitivity to group-room sound.",
+          "If you are unsure, speak with a qualified professional before booking. Also tell the Shreevan team before the session so the setup can be adjusted.",
+          "A good sound healing retreat in Rishikesh should respect limits. Safety, consent and comfort matter more than intensity.",
         ],
       },
     ],
+    comparison: {
+      title: "Sound bath vs meditation vs music listening",
+      intro: [
+        "A guided sound session is not the same as casual music listening. It is also not the same as silent seated meditation. Each practice has a different role inside a retreat.",
+        "At Shreevan, these sessions give the mind a gentle sound anchor. They can bridge movement, guided meditation and quiet evening rest.",
+      ],
+      image: {
+        src: "/images/modalities/sound-healing/tibetan-singing-bowls-sound-bath-rishikesh.webp",
+        alt: "Tibetan singing bowls and sound bath instruments for sound healing in Rishikesh",
+        caption: "Simple instruments and clear guidance keep the practice grounded.",
+      },
+      columns: ["Shreevan guided sound session", "Silent meditation or casual music"],
+      rows: [
+        {
+          aspect: "Main method",
+          primary: "Guided acoustic listening and rest.",
+          comparison: "Attention training or personal audio choice.",
+        },
+        {
+          aspect: "Mental effort",
+          primary: "Low to moderate, with sound as an anchor.",
+          comparison: "Moderate for meditation, low for casual music.",
+        },
+        {
+          aspect: "Body position",
+          primary: "Lying down, seated or supported.",
+          comparison: "Usually seated for meditation, any position for music.",
+        },
+        {
+          aspect: "Retreat role",
+          primary: "Bridge between movement, stillness and rest.",
+          comparison: "Builds attention habits or offers informal downtime.",
+        },
+        {
+          aspect: "Best for",
+          primary: "Guests who need sensory support and quiet pacing.",
+          comparison: "Guests ready for silence or simple personal relaxation.",
+        },
+      ],
+    },
+    retreatImage: {
+      src: "/images/modalities/sound-healing/sound-bath-reflection-rishikesh-retreat.webp",
+      alt: "Guest reflecting after a sound bath during a wellness retreat in Rishikesh",
+      caption: "Quiet reflection helps the session become part of the retreat rhythm.",
+    },
     retreatExperience: [
       {
         stage: "Before session",
         title: "Comfort setup",
         copy:
-          "Guests are told what to expect, how loud the session may be and what options exist for comfort, distance or exit.",
+          "The facilitator explains the session length, sound level and posture choices. You can choose a mat, cushion, chair or more distance from the instruments.",
       },
       {
         stage: "During session",
-        title: "Listening and rest",
+        title: "Guided sound bath",
         copy:
-          "The practice may include bowls, bells, drone, voice, rhythm and silence. Your role is to listen and remain comfortable.",
+          "The session may include Tibetan singing bowls, chimes, bells, soft rhythm and silence. Your only task is to stay comfortable and listen.",
       },
       {
         stage: "After session",
         title: "Slow return",
         copy:
-          "The closing should be grounded, with time to sit, drink water, journal or transition gently.",
+          "The closing gives you time to sit up slowly, drink water, stretch gently or notice how you feel. There is no pressure to explain the experience.",
       },
       {
         stage: "Daily rhythm",
-        title: "A soft bridge",
+        title: "Reflection and integration",
         copy:
-          "Sound can bridge movement, meditation and evening rest without adding physical intensity.",
+          "Longer programs may pair these sessions with journaling, meditation or evening rest. This helps the practice connect with daily life.",
       },
     ],
     suitability: {
       maySuitYouIf: [
-        "You need rest but find silent meditation hard.",
-        "You enjoy sensory practices, music, rhythm or atmosphere.",
-        "You want a softer modality inside a structured retreat.",
+        "You want a sound healing retreat in Rishikesh with clear guidance and a calm setting.",
+        "You find silent meditation difficult and prefer a sound anchor.",
+        "You enjoy gentle sensory practices, music, rhythm or quiet atmosphere.",
+        "You want a softer modality inside a structured wellness retreat.",
       ],
       beCarefulIf: [
         "You are sensitive to sound, vibration or group-room intensity.",
-        "You expect sound to guarantee a specific emotional experience.",
-        "You are uncomfortable lying still and need a seated option.",
+        "You expect sound healing therapy to guarantee a specific result.",
+        "You feel uncomfortable lying still and need a seated option.",
+        "You prefer complete silence during rest practices.",
       ],
       consultProfessionalIf: [
-        "You have tinnitus, seizure history, migraines or sound-triggered symptoms.",
-        "You have trauma-related triggers around sound or enclosed environments.",
-        "You are unsure whether sensory practices are suitable for your current condition.",
+        "You have tinnitus, seizure history, sound-triggered migraines or neurological symptoms.",
+        "You have recent trauma or strong triggers around enclosed acoustic environments.",
+        "You are pregnant, recovering from surgery or unsure about sensory practices.",
+        "You currently need clinical mental-health or medical support.",
       ],
     },
-    relatedModalities: [modalityLinks.meditation, modalityLinks.yoga, modalityLinks.chakra],
-    relatedPrograms: [programs.sevenDay, programs.fourteenDay, programs.twentyEightDay],
+    relatedModalities: [
+      {
+        ...modalityLinks.meditation,
+        note: "attention, reflection and steady practice",
+      },
+      {
+        ...modalityLinks.yoga,
+        note: "movement, breath and posture awareness",
+      },
+      {
+        ...modalityLinks.sadhana,
+        note: "discipline, meaning and daily integration",
+      },
+      {
+        ...modalityLinks.chakra,
+        note: "symbolic self-inquiry and reflection",
+      },
+    ],
+    relatedPrograms: [
+      {
+        ...programs.threeDay,
+        note: "arrival reset and gentle sound-supported rest",
+      },
+      {
+        ...programs.sevenDay,
+        note: "foundation rhythm with sound-supported rest",
+      },
+      {
+        ...programs.fourteenDay,
+        note: "deeper sensory calm and reflection arc",
+      },
+      {
+        ...programs.twentyEightDay,
+        note: "longer integration through rest and practice",
+      },
+    ],
     futureBlogTopics: [
-      "What to expect in a sound bath at a wellness retreat",
+      "What to expect in a guided sound session at a wellness retreat",
       "Sound healing vs meditation: which is easier for beginners?",
       "How to evaluate sound healing claims responsibly",
     ],
@@ -1031,38 +1130,43 @@ export const modalities: ModalityContent[] = [
       {
         question: "What is sound healing in a retreat context?",
         answer:
-          "At Shreevan, sound healing means a guided listening and rest practice using resonant sound, silence and a calm environment. It is not presented as a medical intervention. Guests may lie down or sit while the facilitator uses sound to support stillness and reflection. The value is in rest, attention and atmosphere, not in a guaranteed result.",
+          "Sound healing in a retreat context is a guided rest practice where guests listen to resonant acoustic instruments such as Tibetan singing bowls, chimes, bells and soft rhythm. At Shreevan, it is used as a calm wellness modality. It supports listening, rest and reflection, but it is not presented as medical treatment.",
+      },
+      {
+        question: "What is the difference between sound healing and a sound bath?",
+        answer:
+          "Sound healing is the broader wellness phrase. A sound bath is one session format where guests usually sit or lie down while sound moves through the room. At Shreevan, the terms are used carefully. The focus is guided acoustic rest, not a guaranteed healing outcome.",
       },
       {
         question: "Is sound healing scientifically proven?",
         answer:
-          "Research around sound baths and singing bowls is still limited, and claims online can be overstated. Shreevan therefore uses modest language. Sound practice may feel relaxing or meaningful for some guests, but the site does not promise clinical effects, permanent change or specific health outcomes. It is offered as one supportive wellness layer inside a wider retreat rhythm.",
+          "Research around sound baths and singing bowls is still developing, and many online claims are too strong. Listening to calm acoustic tones may help some people relax, but Shreevan does not promise clinical results, sleep repair, trauma release or permanent change. The practice is offered as one supportive retreat layer.",
       },
       {
         question: "What if I am sensitive to sound?",
         answer:
-          "Tell the team before booking and again before the session. You may need lower volume, more distance from instruments, a seated posture, ear coverage or the option to step out. Sound work should be consent-aware. If you have tinnitus, migraines, seizure history or other sound-triggered symptoms, consult a qualified professional before participating.",
+          "Tell the team before booking and before the session starts. You may need lower volume, more distance from the instruments, a chair, ear coverage or the option to step out. If you have tinnitus, migraines, seizure history or sound-triggered symptoms, consult a qualified professional first.",
       },
       {
         question: "Do I need to believe in vibration or energy for it to work?",
         answer:
-          "No. You can approach the session simply as guided rest and listening. Some guests connect sound with spiritual language, while others experience it as atmosphere, music or a calming ritual. Shreevan does not require a belief system. The practice is held in a way that respects different backgrounds and keeps claims grounded.",
+          "No. You can approach the session as simple listening and rest. Some guests connect sound with spiritual language. Others experience it as atmosphere, rhythm or quiet time. Shreevan keeps the practice open, grounded and respectful of different backgrounds.",
       },
       {
-        question: "Can sound healing replace meditation?",
+        question: "Can sound bath sessions replace meditation?",
         answer:
-          "Sound practice can be an easier doorway into stillness for some guests, but it does not fully replace meditation training. Meditation builds attention through repeated practice, while sound sessions offer a supportive listening environment. In a retreat, the two can work together: sound can soften the body and mind, while meditation builds steadier awareness.",
+          "These sessions can make stillness easier for some beginners, but they do not fully replace meditation training. Meditation builds attention through repeated practice. Guided sound gives the mind a gentle anchor and can support the transition into quieter practice.",
       },
       {
-        question: "Which programs include sound healing?",
+        question: "Which Shreevan programs include sound healing?",
         answer:
-          "Sound healing is most relevant in the 7-day, 14-day and 28-day programs where there is enough time to use it as rest, transition and integration. It may not be central to every guest's plan. Suitability, group context and program design decide how often it appears and how deeply it is used.",
+          "Sound healing may be included in the 7-day, 14-day and 28-day retreat pathways when it fits the group, schedule and suitability needs. Shorter programs may use it lightly for arrival or rest. The exact rhythm depends on the retreat plan and guest readiness.",
       },
     ],
     finalCta: {
       title: "Use sound as support, not spectacle.",
       copy:
-        "If you want a softer way into rest and meditation, ask during the suitability call whether sound-supported practice fits your program.",
+        "If you want a softer way into rest and meditation, ask during the suitability call whether a sound healing retreat in Rishikesh fits your goals, sensitivity and program length.",
     },
   },
   {
