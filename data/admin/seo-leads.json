@@ -212,31 +212,31 @@
     },
     {
       "id": "chakra-opening",
-      "label": "Chakra Opening & Energy Balancing",
+      "label": "Chakra Opening Retreat in Rishikesh",
       "path": "/modalities/chakra-opening",
       "intent": "educational",
       "indexable": true,
       "sitemapEnabled": true,
       "priority": 0.64,
       "changeFrequency": "monthly",
-      "focusKeyword": "chakra opening retreat India",
+      "focusKeyword": "chakra opening retreat in Rishikesh",
       "qaStatus": "ready",
-      "notes": "Educational modality page with non-clinical spiritual language.",
-      "lastReviewedAt": "2026-06-26"
+      "notes": "Updated with chakra opening keyword coverage, grounded comparison table, FAQ answers and image-led integration content.",
+      "lastReviewedAt": "2026-08-15"
     },
     {
       "id": "spiritual-sadhanas",
-      "label": "Spiritual Sadhanas & Yogic Philosophy",
+      "label": "Spiritual Sadhana Retreat in Rishikesh",
       "path": "/modalities/spiritual-sadhanas",
       "intent": "educational",
       "indexable": true,
       "sitemapEnabled": true,
       "priority": 0.66,
       "changeFrequency": "monthly",
-      "focusKeyword": "spiritual sadhana retreat Rishikesh",
+      "focusKeyword": "spiritual sadhana retreat in Rishikesh",
       "qaStatus": "ready",
-      "notes": "Educational modality page for yogic philosophy and practice discipline.",
-      "lastReviewedAt": "2026-06-26"
+      "notes": "Updated with spiritual sadhana retreat keyword coverage, grounded comparison table, FAQ answers and image-led integration content.",
+      "lastReviewedAt": "2026-08-15"
     },
     {
       "id": "testimonials",

@@ -1410,84 +1410,97 @@ export const modalities: ModalityContent[] = [
   },
   {
     slug: "chakra-opening",
-    title: "Chakra Opening & Energy Balancing",
+    title: "Chakra Opening Retreat in Rishikesh",
     shortTitle: "Chakra Opening",
     path: "/modalities/chakra-opening",
-    category: "Symbolic self-inquiry and energetic awareness",
+    category: "Yogic symbolism and grounded self-inquiry",
     description:
-      "A reflective, non-clinical modality for guests exploring yogic symbolism, attention, breath and inner awareness.",
-    seoTitle: "Chakra Opening Retreat Education | Shreevan Wellness",
+      "A reflective, non-clinical modality for guests exploring chakra symbolism, breath, meditation, journaling and daily-life awareness.",
+    seoTitle: "Chakra Opening Retreat in Rishikesh | Shreevan Wellness",
     seoDescription:
-      "Understand chakra opening at Shreevan Wellness as symbolic self-inquiry and reflective yogic practice without medical or guaranteed outcome claims.",
+      "Explore chakra opening in Rishikesh as grounded yogic self-inquiry with breath, meditation, journaling and clear non-medical wellness boundaries.",
     keywords: [
-      "chakra opening retreat",
-      "energy balancing retreat",
-      "chakra meditation India",
-      "spiritual retreat Rishikesh",
-      "yogic self inquiry",
+      "chakra opening retreat in Rishikesh",
+      "chakra opening in Rishikesh",
+      "chakra healing in Rishikesh",
+      "energy balancing retreat in Rishikesh",
+      "chakra meditation in Rishikesh",
+      "opening chakras for beginners",
+      "how to open a chakra",
+      "chakras open or closed",
+      "chakra opening rishikesh price",
+      "scientific evidence for chakras",
     ],
     summary:
-      "Chakra work is handled as reflective yogic language, not a diagnostic system. It supports self-inquiry, intention setting and personal meaning inside a wider retreat rhythm.",
+      "Chakra work at Shreevan is held as symbolic yogic self-inquiry inside a retreat rhythm. It helps guests reflect on grounding, expression, compassion, clarity and purpose without turning the practice into medical diagnosis, psychic scanning or guaranteed energetic clearing.",
     hero: {
-      eyebrow: "Yogic symbolism and self-inquiry",
+      eyebrow: "Yogic Symbolism & Reflective Inquiry - Shreevan Wellness Rishikesh",
+      tagline: "Grounded energy balancing, yogic symbolism and mindful self-inquiry.",
       answer:
-        "Chakra opening at Shreevan is a symbolic and reflective practice layer. It helps guests explore themes such as grounding, expression, compassion and clarity through breath, meditation and journaling.",
+        "A chakra opening retreat in Rishikesh at Shreevan uses traditional yogic symbolism as a map for self-inquiry. Through breath, meditation, guided reflection and journaling, guests explore themes such as grounding, expression, compassion, clarity and daily balance.",
       boundaryNote:
-        "This page does not claim that chakras diagnose illness, cure conditions, remove trauma or guarantee spiritual awakening.",
+        "This page is educational. Chakra reflection is not medical treatment, psychological diagnosis, trauma therapy, guaranteed energetic clearing or a replacement for licensed healthcare.",
+    },
+    heroImage: {
+      src: "/images/modalities/chakra-opening/chakra-opening-retreat-rishikesh.webp",
+      alt: "Guest in a chakra opening retreat in Rishikesh practicing guided meditation and reflective breathwork",
+      caption: "Grounded chakra reflection in a calm Rishikesh retreat setting.",
     },
     quickAnswer: {
       simpleTerms:
-        "Chakra work uses traditional yogic symbolism as a map for reflection. At Shreevan, it is treated as meaning-making and practice inquiry, not as medical diagnosis.",
+        "Chakra opening is best understood as a traditional yogic self-inquiry practice. At Shreevan, chakra opening in Rishikesh means using symbolic themes, breath awareness, meditation and journaling to reflect on grounding, expression, compassion, clarity and purpose. The practice is paced gently and held as wellness education, not as medical or psychological care.",
       bestFor: [
-        "Guests who are spiritually curious but want grounded language.",
-        "Seekers exploring values, intention, expression and inner alignment.",
-        "Longer-program guests ready for reflective work beyond routine.",
+        "Guests curious about yogic philosophy but wanting grounded language.",
+        "Guests exploring values, emotional patterns, voice, purpose or transition.",
+        "Longer retreat guests who have enough time for reflection and integration.",
       ],
       whatToExpect: [
-        "Meditation, breath, journaling and guided reflection.",
-        "Symbolic themes rather than medical interpretation.",
-        "Connection with yoga, sound and sadhana practices.",
+        "Gentle breath awareness and guided meditation.",
+        "Symbolic theme exploration in simple language.",
+        "Quiet journaling and reflection prompts.",
+        "Connection with yoga therapy, guided meditation, sound practice and spiritual sadhana where suitable.",
       ],
       whatItIsNot: [
         "Not a clinical energy diagnosis.",
-        "Not guaranteed chakra clearing or instant healing.",
-        "Not a way to bypass therapy, medical care or practical life decisions.",
+        "Not instant chakra clearing.",
+        "Not a psychic scan or paranormal promise.",
+        "Not a replacement for medical care, therapy or crisis support.",
       ],
     },
     articleSections: [
       {
-        title: "What chakra opening means here",
+        title: "What chakra opening means at Shreevan",
         body: [
-          "Chakra language can be powerful, but it can also be misused. Shreevan treats chakra opening as a symbolic yogic map for self-inquiry. The themes may include grounding, creative flow, discipline, compassion, expression, insight and connection. These themes can help a guest reflect on life patterns without turning the page into a diagnostic system.",
-          "This means the practice is not used to tell a guest that a specific chakra is the reason for a medical condition. It is not used to claim trauma has been cleared. It is not used to create fear. It is a reflective language that can sit alongside meditation, breath, journaling and sadhana.",
+          "Chakra opening at Shreevan means reflective practice with yogic symbolism. It does not mean someone checks your body for blocked energy or tells you which part of your life is broken. The practice uses themes such as grounding, creativity, discipline, compassion, voice, clarity and meaning as prompts for self-inquiry.",
+          "This chakra opening retreat in Rishikesh is designed for guests who want depth without pressure. The aim is not drama. The aim is to notice patterns, write honestly, breathe steadily and connect practice with daily choices.",
         ],
       },
       {
-        title: "Why people explore it",
+        title: "Why people explore chakra work",
         body: [
-          "People often come to chakra work when ordinary productivity language no longer explains what they are feeling. They may be asking questions about identity, voice, trust, purpose, grief, transitions or spiritual direction. Chakra symbolism can provide a structured way to explore those questions.",
-          "For international guests, this page must make the language accessible without flattening its Indian spiritual context. The tone should be respectful, clear and non-sensational. The visitor should understand that they are entering a reflective tradition, not buying a guaranteed energetic repair.",
+          "People often search for chakra healing in Rishikesh when ordinary language does not fully describe what they feel. They may be moving through stress, transition, grief, creative block, questions around purpose, or a need for a more spiritual frame.",
+          "At Shreevan, we keep that search grounded. Chakra language is used carefully, without fear or fantasy. Guests are invited to reflect, not to outsource their inner life to a practitioner.",
+        ],
+      },
+      {
+        title: "Understanding chakras as symbolic maps",
+        body: [
+          "In yogic traditions, chakra language is often used as a symbolic map for awareness. At Shreevan, these themes are used for reflection, journaling and practice inquiry. The goal is not to prove or diagnose a chakra state. The goal is to help guests notice patterns in daily life with more honesty and steadiness.",
+          "Common themes include stability, creativity, discipline, compassion, expression, clarity, meaning, humility and stillness. The language is traditional, but the retreat application stays practical and grounded.",
         ],
       },
       {
         title: "How it works inside a retreat",
         body: [
-          "A chakra-themed session may include breath, gentle movement, visualization, mantra, journaling or guided inquiry around a theme. For example, a grounding session may focus on stability and routine. A heart-centered reflection may explore compassion and boundaries. A throat-centered reflection may examine truth and expression.",
-          "The practice becomes more meaningful when connected to daily rhythm. What does grounding mean at breakfast? What does expression mean in a group circle? What does clarity mean when choosing the next step after the retreat? This turns symbolism into lived reflection.",
-        ],
-      },
-      {
-        title: "How Shreevan approaches it",
-        body: [
-          "Shreevan's approach is spiritually literate and cautious. It allows guests to explore subtle language without being pressured into belief. Some guests may experience chakra work as spiritual practice. Others may experience it as guided reflection. Both can be respected.",
-          "The facilitator's role is to hold the map lightly. The guest remains the authority on their own experience. No one should be told that they are blocked, broken or spiritually behind. A premium retreat should deepen reflection without creating dependency.",
+          "A chakra meditation in Rishikesh session may begin with one theme, such as grounding or expression. The facilitator explains the theme in simple language. Then the practice may include breath, quiet sitting, gentle movement, mantra, visualization or journaling.",
+          "The most important part is integration. A grounding theme may become a better morning routine. A voice theme may become one honest conversation. A clarity theme may become a cleaner decision after the retreat. This is how symbolic practice becomes practical.",
         ],
       },
       {
         title: "What beginners should know",
         body: [
-          "You do not need to memorize the chakra system before arriving. A good session explains the theme in simple language and gives you a way to reflect. You can participate through breath, journaling and quiet attention even if you do not share every belief associated with the tradition.",
-          "Beginners should also avoid chasing dramatic experiences. Some sessions may feel subtle. Some may bring insight. Some may simply feel like a quiet practice. The integration question is more important: what did you notice, and how does that inform your next daily choice?",
+          "Opening chakras for beginners should be simple, steady and grounded. You do not need to memorize the full chakra system before arriving. A good session explains one theme at a time and gives you a way to reflect through breath, journaling or quiet attention.",
+          "Beginners should not chase dramatic experiences. Some sessions may feel subtle. Some may bring useful insight. Some may simply help you slow down. The better question is: what did you notice, and what small choice can you make with that awareness?",
         ],
       },
       {
@@ -1498,30 +1511,74 @@ export const modalities: ModalityContent[] = [
         ],
       },
     ],
+    comparison: {
+      title: "Grounded yogic inquiry vs commercial mystical claims",
+      intro: [
+        "A responsible energy balancing retreat in Rishikesh should make the practice clear, grounded and consent-led. Chakra language can support reflection, but it should not be used to create fear, dependency or instant-result promises.",
+      ],
+      image: {
+        src: "/images/modalities/chakra-opening/chakra-reflection-journaling-rishikesh.webp",
+        alt: "Journal and meditation props for chakra reflection and self-inquiry at Shreevan Wellness Rishikesh",
+        caption: "Simple tools for breath, reflection and journaling.",
+      },
+      columns: ["Shreevan's grounded chakra inquiry", "Commercial instant claims to avoid"],
+      rows: [
+        {
+          aspect: "Core method",
+          primary: "Breath, meditation, journaling and reflective inquiry.",
+          comparison: "Psychic scans or instant energetic clearing.",
+        },
+        {
+          aspect: "Pace",
+          primary: "Gentle, gradual and consent-led.",
+          comparison: "Overnight awakening or forced release.",
+        },
+        {
+          aspect: "Facilitator role",
+          primary: "Holds space and explains themes clearly.",
+          comparison: "Claims to fix, unblock or diagnose you.",
+        },
+        {
+          aspect: "Outcome",
+          primary: "More self-awareness and grounded choices.",
+          comparison: "Dependency on rituals or predictions.",
+        },
+        {
+          aspect: "Safety",
+          primary: "Non-medical and non-diagnostic.",
+          comparison: "Claims that replace therapy or medical care.",
+        },
+      ],
+    },
+    retreatImage: {
+      src: "/images/modalities/chakra-opening/chakra-energy-balancing-rishikesh-integration.webp",
+      alt: "Guest integrating chakra energy balancing practice during a quiet retreat rhythm in Rishikesh",
+      caption: "Reflection becomes useful when it returns to daily rhythm.",
+    },
     retreatExperience: [
       {
-        stage: "Before session",
-        title: "Theme setting",
+        stage: "Theme setting",
+        title: "Enter with one clear theme",
         copy:
-          "The facilitator explains the symbolic theme and gives guests a grounded way to enter without needing prior knowledge.",
+          "The facilitator introduces a simple symbolic theme, such as grounding, voice, compassion or clarity, without asking guests to believe anything blindly.",
       },
       {
-        stage: "During session",
-        title: "Reflection and practice",
+        stage: "Practice",
+        title: "Breathe, sit and reflect",
         copy:
-          "The session may include breath, meditation, journaling, mantra, visualization or gentle movement.",
+          "The session may include breath awareness, meditation, gentle movement, mantra, visualization or journal prompts depending on suitability.",
       },
       {
-        stage: "After session",
-        title: "Meaning into action",
+        stage: "Integration",
+        title: "Connect insight with daily life",
         copy:
-          "Guests reflect on how the theme relates to routine, relationships, choices and post-retreat integration.",
+          "Guests link the theme to routine, food rhythm, rest, communication, boundaries or post-retreat decisions.",
       },
       {
         stage: "Daily rhythm",
-        title: "Symbolism becomes practical",
+        title: "Keep the practice grounded",
         copy:
-          "A theme such as grounding or expression is explored through simple choices, not only through session language.",
+          "The work continues through simple choices, not through pressure, performance or dramatic spiritual language.",
       },
     ],
     suitability: {
@@ -1542,130 +1599,164 @@ export const modalities: ModalityContent[] = [
       ],
     },
     relatedModalities: [modalityLinks.meditation, modalityLinks.sound, modalityLinks.sadhana, modalityLinks.yoga],
-    relatedPrograms: [programs.fourteenDay, programs.twentyEightDay, programs.sixtyDay],
+    relatedPrograms: [programs.sevenDay, programs.fourteenDay, programs.twentyEightDay, programs.sixtyDay],
     futureBlogTopics: [
-      "Chakra work without overclaims: a beginner guide",
-      "Energy balancing vs emotional awareness in retreat practice",
-      "How to use chakra symbolism for journaling and integration",
+      "Chakra opening retreat in Rishikesh: responsible expectations before booking",
+      "Are chakras open or closed? A grounded beginner guide",
+      "Chakra healing in Rishikesh without overclaims",
+      "How to use chakra symbolism for journaling and daily integration",
     ],
     faqs: [
       {
         question: "What does chakra opening mean at Shreevan?",
         answer:
-          "At Shreevan, chakra opening means symbolic self-inquiry through yogic themes, breath, meditation and reflection. It does not mean a practitioner diagnoses your health or guarantees an energetic result. The practice may help guests explore grounding, expression, compassion, clarity and intention in a structured way. It is held as reflection, not medical or psychological treatment.",
+          "At Shreevan, chakra opening means symbolic yogic self-inquiry through breath, meditation, journaling and guided reflection. It does not mean a practitioner diagnoses your health or guarantees an energetic result. The practice helps guests explore themes like grounding, voice, compassion and clarity in a structured retreat setting.",
       },
       {
         question: "Do I need to believe in chakras?",
         answer:
-          "No. You can approach the practice as a symbolic map for reflection. Some guests connect deeply with the traditional language, while others use the themes as prompts for journaling and self-awareness. Shreevan should not pressure belief. The goal is honest inquiry, respectful practice and integration into daily life, not forced agreement.",
+          "No. You can approach chakra language as a symbolic map for reflection. Some guests connect with the traditional language, while others use it as a prompt for journaling and self-awareness. The goal is honest inquiry, not forced belief.",
       },
       {
-        question: "Can chakra work heal trauma?",
+        question: "Are chakras open or closed in real life?",
         answer:
-          "Shreevan does not make that claim. Trauma requires appropriate professional support, and spiritual practice should not be used as a substitute. Chakra-themed reflection may bring awareness to themes like safety, voice or boundaries, but it should be paced carefully. If you know introspection can destabilize you, consult a qualified professional and discuss suitability before booking.",
+          "At Shreevan, chakras are not treated as simple on/off switches. In yogic and contemplative traditions, chakra language points to qualities of awareness, attention and life patterning. We use the language for reflection, not for diagnosis.",
       },
       {
-        question: "What happens in a chakra session?",
+        question: "Can chakra opening heal trauma or disease?",
         answer:
-          "A session may begin with a theme, such as grounding or expression. The facilitator may then guide breath, meditation, visualization, journaling or gentle movement. The practice should include a grounded close, so guests can connect the theme to daily choices. It should not feel like a mysterious performance or a forced emotional release.",
+          "No. Chakra reflection is a contemplative wellness practice, not medical treatment, psychotherapy, trauma therapy or crisis care. If you need medical or mental-health support, consult a qualified professional before booking.",
       },
       {
-        question: "Which programs include chakra opening?",
+        question: "What is the chakra opening Rishikesh price?",
         answer:
-          "Chakra work is most relevant in the 14-day, 28-day and 60-day programs because those durations allow more reflection and integration. It may not be central to every guest's plan. The suitability call helps decide whether this language feels useful, neutral or unnecessary for your retreat goals.",
+          "Chakra reflection is not sold as a separate instant-fix therapy at Shreevan. It may be included where suitable inside longer retreat programs. The final cost depends on program duration, stay, food and inclusions. Check the program page or book a suitability call for current pricing.",
       },
       {
-        question: "How is chakra work different from spiritual sadhana?",
+        question: "Is chakra opening suitable for beginners?",
         answer:
-          "Chakra work uses symbolic themes as a reflection map. Sadhana is broader daily discipline: practice, silence, study, mantra, service and integration. Chakra work may appear inside sadhana, but it is not the whole path. If you want a grounded daily spiritual rhythm, read the spiritual sadhanas page next.",
+          "Yes, if it is paced simply. Opening chakras for beginners should not involve pressure, fear or complicated claims. At Shreevan, the practice is explained in plain language and held through breath, meditation and journaling.",
+      },
+      {
+        question: "How is chakra work different from meditation?",
+        answer:
+          "Meditation may focus on breath, silence or witness awareness. Chakra work uses symbolic themes, such as grounding or expression, to guide reflection. At Shreevan, both practices can support each other inside a retreat rhythm.",
+      },
+      {
+        question: "Is there scientific evidence for chakras?",
+        answer:
+          "Chakras are part of yogic and contemplative traditions, not a medical anatomy model. Shreevan does not use chakra language to make scientific or clinical claims. The practical value here is reflection, attention, meaning-making and daily-life integration.",
       },
     ],
     finalCta: {
-      title: "Explore subtle language without losing the ground.",
+      title: "Explore subtle practice with clear ground.",
       copy:
         "If chakra work is part of your curiosity, discuss it during the suitability call so the practice can be held with clarity, consent and appropriate pacing.",
     },
   },
   {
     slug: "spiritual-sadhanas",
-    title: "Spiritual Sadhanas & Yogic Philosophy",
+    title: "Spiritual Sadhana Retreat in Rishikesh",
     shortTitle: "Spiritual Sadhanas",
     path: "/modalities/spiritual-sadhanas",
-    category: "Practice discipline, meaning and integration",
+    category: "Yogic discipline, reflection and conscious living",
     description:
-      "Yogic philosophy and sadhana practice for guests who want grounded spiritual depth without pressure, performance or inflated claims.",
-    seoTitle: "Spiritual Sadhana Retreat Practice | Shreevan Wellness",
+      "A grounded spiritual practice path for guests who want meditation, silence, yogic study, reflection and daily-life integration without pressure, performance or inflated claims.",
+    seoTitle: "Spiritual Sadhana Retreat in Rishikesh | Shreevan Wellness",
     seoDescription:
-      "Explore how Shreevan Wellness uses spiritual sadhanas and yogic philosophy for grounded practice, reflection and integration.",
+      "Explore a grounded spiritual sadhana retreat in Rishikesh with meditation, silence, yogic study, reflection and daily-life integration at Shreevan Wellness.",
     keywords: [
-      "spiritual sadhana retreat",
-      "yogic philosophy retreat",
-      "Rishikesh spiritual retreat",
-      "conscious living retreat",
-      "daily sadhana practice",
+      "spiritual sadhana retreat in Rishikesh",
+      "spiritual retreat in Rishikesh",
+      "best spiritual retreat in Rishikesh",
+      "spiritual sadhanas in Rishikesh",
+      "spiritual retreat in Rishikesh price",
+      "sadhna for spiritual growth",
+      "why is Rishikesh sacred",
     ],
     summary:
-      "Sadhana at Shreevan means steady practice, not spiritual performance. The goal is disciplined rhythm, humility, reflection and integration into daily life.",
+      "Spiritual sadhana at Shreevan means steady practice. It may include meditation, breath awareness, mantra, silence, study, journaling, mindful action and reflection. The focus is not spiritual performance. The focus is a clear daily rhythm that can continue after the retreat.",
     hero: {
-      eyebrow: "Yogic discipline and conscious living",
+      eyebrow: "Yogic Discipline & Conscious Living - Shreevan Wellness Rishikesh",
+      tagline: "Grounded Daily Practice, Yogic Study and Mindful Living",
       answer:
-        "Spiritual sadhana at Shreevan is a grounded daily practice path that may include silence, meditation, mantra, study, reflection, service and integration into ordinary life.",
+        "Spiritual sadhana at Shreevan Wellness is a steady daily practice path. This spiritual sadhana retreat in Rishikesh may include meditation, breath awareness, mantra, silence, yogic study, reflection and mindful action. The focus is not performance or pressure. The focus is a rhythm you can understand, practice and carry into daily life.",
       boundaryNote:
-        "Sadhana is not spiritual pressure, guru dependency, superiority, guaranteed awakening or a replacement for professional support when needed.",
+        "This page is educational. Spiritual sadhana at Shreevan is not religious conversion, guru dependency, psychological diagnosis, crisis care or a replacement for medical or mental-health support.",
+    },
+    heroImage: {
+      src: "/images/modalities/spiritual-sadhanas/spiritual-sadhana-retreat-rishikesh.webp",
+      alt: "Spiritual sadhana retreat in Rishikesh with guided yogic study at Shreevan Wellness",
+      caption: "A grounded spiritual retreat setting for study, reflection and daily practice.",
     },
     quickAnswer: {
       simpleTerms:
-        "Sadhana means steady practice. It is the discipline of returning to a chosen rhythm again and again so insight can become part of daily life.",
+        "Spiritual sadhana means steady practice. In a retreat, it means returning to meditation, silence, study, reflection and mindful action each day so insight becomes part of ordinary life.",
       bestFor: [
-        "Guests who want depth beyond a wellness holiday.",
-        "Seekers who value philosophy, silence and daily discipline.",
-        "Longer-stay guests ready to integrate practice into life decisions.",
+        "Guests who want spiritual depth without pressure.",
+        "People looking for a grounded spiritual retreat in Rishikesh.",
+        "Longer-stay guests who want rhythm, reflection and integration.",
       ],
       whatToExpect: [
-        "Meditation, reflection, silence, mantra, study or service depending on program design.",
-        "Simple daily rhythm rather than dramatic spiritual theater.",
-        "Questions about how practice continues after departure.",
+        "Morning quiet, breath practice, meditation or mantra.",
+        "Simple yogic philosophy and guided reflection.",
+        "Journaling, mindful meals and integration conversations.",
+        "A practice rhythm that changes by program duration.",
       ],
       whatItIsNot: [
         "Not a promise of enlightenment.",
         "Not forced belief, conversion or guru pressure.",
-        "Not an escape from practical responsibilities.",
+        "Not an escape from family, health or work responsibilities.",
+        "Not a replacement for clinical or crisis support.",
       ],
     },
     articleSections: [
       {
-        title: "What sadhana means",
+        title: "What spiritual sadhana means",
         body: [
-          "Sadhana is disciplined spiritual practice. In a retreat context, it means returning to a rhythm that can include meditation, breath, mantra, silence, study, reflection, service, ethical inquiry and conscious daily choices. The emphasis is steady repetition, not dramatic performance.",
-          "For Shreevan, sadhana gives the retreat a deeper spine. Without sadhana, a retreat can become a collection of pleasant sessions. With sadhana, the day begins to ask a stronger question: how will this practice change the way I live when I return home?",
+          "Spiritual sadhana is disciplined practice. In a retreat context, it means returning to a rhythm that can include meditation, breath awareness, mantra, silence, yogic study, reflection, service, ethical inquiry and conscious daily choices.",
+          "For Shreevan, spiritual sadhana gives the retreat a deeper spine. Without practice, a retreat can become a collection of pleasant sessions. With practice, the day begins to ask a stronger question: how will this change the way I live when I return home?",
+          "A spiritual sadhana retreat in Rishikesh should stay simple and honest. The emphasis is steady repetition, humility and integration, not dramatic spiritual performance.",
         ],
       },
       {
-        title: "Why people explore it",
+        title: "Why people explore a spiritual retreat",
         body: [
-          "Many guests come to Rishikesh because they are not only tired. They are questioning direction, identity, success, grief, devotion, service or meaning. Sadhana offers a way to engage those questions through practice rather than endless analysis.",
-          "This does not mean every guest needs the same spiritual intensity. A founder may need humility and silence. A life-transition seeker may need steadier prayer or reflection. A long-term practitioner may need structure and accountability. The practice should meet the person, not force a template.",
+          "Many guests come to Rishikesh because they are not only tired. They are questioning direction, identity, success, grief, devotion, service or meaning. Spiritual sadhana offers a way to engage those questions through practice rather than endless analysis.",
+          "This does not mean every guest needs the same spiritual intensity. A founder may need humility and silence. A life-transition seeker may need steadier reflection. A long-term practitioner may need structure and accountability.",
+          "The best spiritual retreat in Rishikesh is not the most intense one for every person. The right retreat meets the person, respects readiness and avoids pressure.",
+        ],
+      },
+      {
+        title: "Why Rishikesh matters for sadhana",
+        body: [
+          "People often ask why Rishikesh is sacred for spiritual practice. Rishikesh has a long association with yoga, meditation, ashram life, pilgrimage and the Ganga. This history gives the place a strong contemplative atmosphere.",
+          "At Shreevan, the setting supports practice, but the place is not used as a shortcut. A spiritual retreat in Rishikesh still needs clear guidance, daily rhythm, consent, boundaries and post-retreat integration.",
+          "The value of spiritual sadhanas in Rishikesh comes from how the place, practice and personal honesty work together.",
         ],
       },
       {
         title: "How it works inside a retreat",
         body: [
           "Sadhana can appear in small daily rituals: morning silence, guided meditation, mantra, contemplation, journaling, mindful meals, service, evening reflection or philosophical discussion. The point is not how exotic the practice looks. The point is whether the guest can return to it with sincerity.",
-          "Longer programs allow sadhana to deepen because repetition reveals patterns. The first days may be about arrival. The middle may expose resistance. The later stage may ask what needs to change after the retreat. This is where integration becomes serious.",
+          "Longer programs allow practice to deepen because repetition reveals patterns. The first days may be about arrival. The middle may expose resistance. The later stage may ask what needs to change after the retreat.",
+          "This is where sadhna for spiritual growth becomes practical. It moves from an inspiring retreat idea into daily choices, boundaries and habits.",
         ],
       },
       {
         title: "How Shreevan approaches it",
         body: [
-          "Shreevan's approach should be reverent without being coercive. Spiritual practice is offered with context, choice and respect. Guests should never feel pushed into belief, devotion, disclosure or practices that conflict with their conscience.",
+          "Shreevan's approach is reverent without being coercive. Spiritual practice is offered with context, choice and respect. Guests should never feel pushed into belief, devotion, disclosure or practices that conflict with their conscience.",
           "A responsible spiritual retreat also avoids spiritual bypassing. Practice should not be used to deny emotion, avoid repair, ignore health needs or pretend that ordinary responsibilities do not matter. The deeper the practice, the more grounded the integration should become.",
+          "This is why the suitability call matters. It helps match the spiritual retreat in Rishikesh to the guest's readiness, program duration and support needs.",
         ],
       },
       {
         title: "What beginners should know",
         body: [
-          "Beginners often imagine sadhana as something extreme. In reality, it can begin with a simple daily commitment: sit, breathe, read, reflect, serve, eat consciously or close the day with honesty. The power is in returning.",
+          "Beginners often imagine sadhana as something extreme. In reality, it can begin with a simple daily commitment: sit, breathe, read, reflect, serve, eat consciously or close the day with honesty.",
           "You do not need to arrive as a spiritual expert. You do need openness, respect for the place and willingness to practice without turning the retreat into self-display. Silence and simplicity may be more transformative than adding more techniques.",
+          "If you are comparing programs, ask about rhythm, group size, inclusions and the spiritual retreat in Rishikesh price before you book. The right choice should feel clear, not rushed.",
         ],
       },
       {
@@ -1676,6 +1767,56 @@ export const modalities: ModalityContent[] = [
         ],
       },
     ],
+    comparison: {
+      title: "Grounded sadhana vs spiritual performance",
+      intro: [
+        "The main difference is intention. Grounded spiritual sadhana builds a repeatable rhythm. Spiritual performance chases status, intensity or a special identity.",
+        "Use this comparison to understand how Shreevan keeps spiritual sadhana practical, respectful and easier to integrate after the retreat.",
+      ],
+      image: {
+        src: "/images/modalities/spiritual-sadhanas/spiritual-sadhana-practice-rishikesh.webp",
+        alt: "Yogic study and journaling setup for spiritual sadhana practice in Rishikesh",
+        caption: "Simple tools for study, silence and reflection.",
+      },
+      columns: ["Grounded spiritual sadhana at Shreevan", "What to avoid"],
+      rows: [
+        {
+          aspect: "Intention",
+          primary: "Daily rhythm, reflection and integration.",
+          comparison: "Chasing dramatic spiritual status.",
+        },
+        {
+          aspect: "Belief",
+          primary: "Respectful, non-coercive and open to different backgrounds.",
+          comparison: "Forced belief, conversion pressure or guru dependency.",
+        },
+        {
+          aspect: "Practice",
+          primary: "Meditation, silence, study, mantra, journaling and mindful action.",
+          comparison: "Random techniques without context.",
+        },
+        {
+          aspect: "Pace",
+          primary: "Gradual repetition based on readiness.",
+          comparison: "Sudden intensity or pressure to disclose.",
+        },
+        {
+          aspect: "Outcome",
+          primary: "Better self-awareness and daily-life clarity.",
+          comparison: "Guaranteed awakening or escape from life.",
+        },
+        {
+          aspect: "Safety",
+          primary: "Clear boundaries and suitability conversation.",
+          comparison: "Replacing medical or mental-health support.",
+        },
+      ],
+    },
+    retreatImage: {
+      src: "/images/modalities/spiritual-sadhanas/spiritual-sadhana-integration-rishikesh.webp",
+      alt: "Guest integrating spiritual sadhana practice during a Rishikesh retreat",
+      caption: "Practice becomes useful when it returns to daily rhythm.",
+    },
     retreatExperience: [
       {
         stage: "Before practice",
@@ -1687,7 +1828,7 @@ export const modalities: ModalityContent[] = [
         stage: "During practice",
         title: "Steady discipline",
         copy:
-          "The retreat may include meditation, silence, mantra, study, reflection, seva or mindful daily routines.",
+          "The spiritual sadhana retreat may include meditation, silence, mantra, study, reflection, seva or mindful daily routines based on suitability.",
       },
       {
         stage: "After practice",
@@ -1704,9 +1845,10 @@ export const modalities: ModalityContent[] = [
     ],
     suitability: {
       maySuitYouIf: [
-        "You want spiritual depth with structure and humility.",
+        "You want a spiritual retreat in Rishikesh with structure and humility.",
         "You are ready to examine daily life, values and choices.",
         "You prefer grounded practice over decorative wellness experiences.",
+        "You want sadhna for spiritual growth in a clear, non-coercive setting.",
       ],
       beCarefulIf: [
         "You are looking for guaranteed awakening or spiritual status.",
@@ -1717,6 +1859,7 @@ export const modalities: ModalityContent[] = [
         "You are in active crisis or severe distress.",
         "You have a mental-health condition affected by intense spiritual practice or sleep changes.",
         "You are unsure whether silence, fasting, mantra or deep introspection is suitable.",
+        "You are under psychiatric care or changing medication.",
       ],
     },
     relatedModalities: [modalityLinks.meditation, modalityLinks.yoga, modalityLinks.chakra, modalityLinks.sound],
@@ -1731,6 +1874,7 @@ export const modalities: ModalityContent[] = [
       "What is daily sadhana and how can a beginner start?",
       "Spiritual retreat vs wellness holiday: how to choose responsibly",
       "How to keep practice alive after returning home",
+      "Why is Rishikesh sacred for spiritual practice?",
     ],
     faqs: [
       {
@@ -1739,14 +1883,29 @@ export const modalities: ModalityContent[] = [
           "Sadhana means steady spiritual practice. It can include meditation, mantra, silence, study, reflection, service and conscious daily routine. At Shreevan, it is framed as discipline and integration, not spiritual performance. The practice asks how insight becomes part of ordinary life after the retreat, not only how meaningful the retreat feels while you are there.",
       },
       {
+        question: "What is a spiritual sadhana retreat in Rishikesh?",
+        answer:
+          "A spiritual sadhana retreat in Rishikesh is a structured retreat where daily practice is central. At Shreevan, it may include meditation, breath awareness, mantra, silence, yogic study, journaling, mindful meals and reflection. The goal is not spiritual performance. The goal is a grounded rhythm that supports daily-life integration.",
+      },
+      {
         question: "Do I need to follow a specific religion?",
         answer:
           "No. Shreevan is rooted in Indian yogic and spiritual context, but the practice should not be coercive or conversion-focused. Guests can participate respectfully without being forced into belief. Some practices may use traditional language or ritual, so the suitability conversation is a good place to clarify comfort, boundaries and expectations.",
       },
       {
+        question: "Why is Rishikesh considered sacred for spiritual practice?",
+        answer:
+          "Rishikesh is associated with yoga, meditation, ashram life, pilgrimage and the Ganga. Many guests choose a spiritual retreat in Rishikesh because the place supports quiet practice and reflection. The setting can help, but it is not a shortcut. A responsible retreat still needs clear rhythm, consent, boundaries and integration.",
+      },
+      {
         question: "Is sadhana only for advanced practitioners?",
         answer:
           "No. Sadhana can begin simply. A beginner may start with short meditation, mindful meals, journaling, silence or a daily reflection. Advanced practice is not defined by complexity alone. It is defined by steadiness, humility and integration. Longer programs can hold more repetition, but even a short reset can introduce the principle of daily return.",
+      },
+      {
+        question: "What is the spiritual retreat in Rishikesh price?",
+        answer:
+          "The spiritual retreat in Rishikesh price depends on the program duration, stay, food and inclusions. At Shreevan, sadhana is usually part of a wider retreat rhythm rather than a standalone instant-fix session. Check the program page or book a suitability call for current pricing and the right duration.",
       },
       {
         question: "Can spiritual practice replace therapy or medical care?",
