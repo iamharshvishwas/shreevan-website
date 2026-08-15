@@ -1171,180 +1171,241 @@ export const modalities: ModalityContent[] = [
   },
   {
     slug: "panchkarma-detox",
-    title: "Panchkarma & Deep Detox",
+    title: "Panchakarma Retreat in Rishikesh",
     shortTitle: "Panchkarma Detox",
     path: "/modalities/panchkarma-detox",
     category: "Ayurveda-informed cleansing education",
     description:
-      "Responsible Panchkarma and detox education within suitability-led retreat planning, without disease cure or guaranteed detox claims.",
-    seoTitle: "Panchkarma and Detox Retreat Education | Shreevan Wellness",
+      "Ayurveda-informed Panchakarma retreat education in Rishikesh with food rhythm, rest and suitability-first detox boundaries.",
+    seoTitle: "Panchakarma Retreat in Rishikesh | Ayurveda-Informed Detox",
     seoDescription:
-      "Learn how Shreevan Wellness discusses Panchkarma and detox responsibly, with suitability checks, Ayurveda-informed education and no cure claims.",
+      "Learn how Shreevan Wellness explains Panchakarma retreat planning in Rishikesh with food rhythm, rest, suitability review and clear non-medical detox boundaries.",
     keywords: [
-      "Panchkarma retreat India",
-      "detox retreat Rishikesh",
-      "Ayurveda wellness retreat",
+      "panchakarma retreat in Rishikesh",
+      "panchkarma retreat in Rishikesh",
+      "panchakarma Rishikesh",
+      "panchkarma centre in Rishikesh",
+      "panchakarma therapy in Rishikesh",
+      "panchkarma therapy in Rishikesh",
+      "panchakarma treatment cost in Rishikesh",
+      "panchakarma retreat Rishikesh price",
+      "ayurvedic detox retreat Rishikesh",
       "responsible detox retreat",
-      "Panchkarma education",
     ],
     summary:
-      "Panchkarma and detox language must stay careful. Shreevan treats this as suitability-led wellness education and retreat support, not a promise to cure, treat or medically cleanse disease.",
+      "Panchakarma and Panchkarma language must stay careful. Shreevan treats this as Ayurveda-informed retreat education in Rishikesh, not a promise to cure, treat or medically cleanse disease.",
     hero: {
       eyebrow: "Ayurveda-informed retreat education",
+      tagline: "Ayurveda-Informed Detox, Food Rhythm and Rest",
       answer:
-        "Panchkarma and deep detox at Shreevan are discussed through readiness, food rhythm, rest, routine and responsible expectation-setting. This page explains the wellness context before any deeper recommendation is considered.",
+        "A Panchakarma retreat in Rishikesh at Shreevan Wellness is discussed as a careful wellness pathway, not a medical cleanse. This page explains Panchakarma and Panchkarma language through food rhythm, rest, routine, readiness and suitability, so you can understand what may fit before choosing a longer retreat.",
       boundaryNote:
-        "This is not medical cleansing, treatment, diagnosis, cure or a replacement for professional medical advice. Suitability review is essential.",
+        "This page is educational. Shreevan does not present Panchakarma as medical treatment, diagnosis, disease cure, guaranteed detox, weight-loss therapy or a replacement for professional care. If you have a health condition, medication, pregnancy, recent surgery or eating-disorder history, speak with a qualified professional before booking.",
+    },
+    heroImage: {
+      src: "/images/modalities/panchakarma/panchakarma-retreat-rishikesh-suitability-consultation.webp",
+      alt: "Ayurveda-informed suitability conversation for a Panchakarma retreat in Rishikesh",
+      caption: "A calm suitability conversation should come before any deeper detox expectation.",
     },
     quickAnswer: {
       simpleTerms:
-        "Panchkarma is a traditional Ayurvedic cleansing framework. On this site, it is explained carefully as Ayurveda-informed education and readiness conversation within a retreat context.",
+        "Panchakarma is a traditional Ayurvedic cleansing framework. At Shreevan, a Panchakarma retreat in Rishikesh is explained in a retreat context: simple food rhythm, rest, reduced overload, gentle routine and suitability review. It is not positioned as hospital care or a promise to cleanse organs or cure disease.",
       bestFor: [
-        "Guests curious about Ayurveda, food rhythm and deeper lifestyle reset.",
-        "Visitors considering longer programs where routine and rest can be held properly.",
-        "People who want careful expectation-setting before using detox language.",
+        "Guests looking for Ayurveda-informed detox education in Rishikesh, without extreme fasting or miracle claims.",
+        "People considering a longer retreat where food rhythm, rest and daily routine can be held properly.",
+        "Visitors comparing Panchakarma therapy in Rishikesh with safer wellness retreat options.",
       ],
       whatToExpect: [
-        "Discussion of readiness, food, rest, routine and comfort.",
-        "Clear boundaries around health claims and professional guidance.",
-        "More relevance in longer programs than short resets.",
+        "A suitability conversation before any deeper detox or Panchkarma pathway is suggested.",
+        "Simple meals, rest windows, hydration, reflection and calmer daily rhythm.",
+        "Clear explanation of what Shreevan can support and what requires professional medical advice.",
       ],
       whatItIsNot: [
-        "Not a disease cleanse or guaranteed detox.",
-        "Not medical treatment or a substitute for your doctor.",
-        "Not something to rush into because it sounds advanced.",
+        "Not a guaranteed detox, disease cleanse or weight-loss promise.",
+        "Not Panchakarma treatment in Rishikesh in a clinical or hospital sense.",
+        "Not something to rush into because it sounds advanced or traditional.",
       ],
     },
     articleSections: [
       {
-        title: "What Panchkarma means in this context",
+        title: "What Panchakarma means at Shreevan",
         body: [
-          "Panchkarma belongs to the Ayurvedic tradition, and many guests search for it when they are interested in cleansing, reset, food discipline and deeper routine. Shreevan treats this topic with extra care because detox language online is often exaggerated.",
-          "On this website, Panchkarma and deep detox are framed as Ayurveda-informed education and suitability-led planning. The retreat can discuss rhythm, meals, rest, preparation and readiness. It should not promise to remove disease, cleanse organs, reverse conditions or replace professional care.",
+          "Panchakarma is a classical Ayurvedic cleansing idea. Many people also spell it Panchkarma when searching online. At Shreevan, the page uses both terms carefully because guests may arrive with different levels of knowledge and different expectations.",
+          "In this retreat context, Panchakarma means education, readiness and lifestyle planning. The focus is food rhythm, rest, routine, suitability and responsible support. It should not be read as a promise to remove toxins, treat disease, reverse symptoms or replace medical care.",
         ],
       },
       {
-        title: "Why people explore it",
+        title: "Why people search for Panchakarma in Rishikesh",
         body: [
-          "Guests often explore detox when they feel heavy, depleted, overstimulated or disconnected from healthy routine. They may want a clean environment, simpler food, reduced digital load, better sleep rhythm and guidance around how to stop living in constant excess.",
-          "Those goals can be valid without turning the page into a medical claim. For many retreat guests, the practical value may be in structure: eating at regular times, resting properly, observing cravings, simplifying inputs and understanding how lifestyle patterns affect daily energy.",
+          "Many guests search for Panchakarma in Rishikesh when they feel tired, heavy, overstimulated or disconnected from routine. They may want simpler food, a quieter environment, less digital load and a few days of steady rhythm near the Ganga.",
+          "Those goals are valid, but the language must stay honest. A responsible Panchakarma retreat in Rishikesh should help you understand readiness, not pressure you with fear-based detox claims. The first step is clarity, not intensity.",
         ],
       },
       {
-        title: "How it works inside a retreat",
+        title: "How it fits inside a retreat",
         body: [
-          "Panchkarma-informed retreat planning begins before the guest arrives. The team needs to understand basic context, comfort level, medical boundaries and expectations. A short stay is not the same as a longer residency. Deeper practices require more time, more supervision and more careful screening.",
-          "Inside the retreat, the focus may include sattvic meals, rest windows, gentle movement, hydration, reflection, reduced stimulation and conversations around daily rhythm. Any deeper Ayurvedic recommendation should be handled by appropriately qualified professionals and only when suitable.",
+          "Inside a retreat, Panchakarma-informed support begins with context. The team needs to understand your comfort level, travel timing, food needs, health boundaries and expectations. A short reset is different from a 14-day or 28-day retreat.",
+          "The practical rhythm may include sattvic meals, rest windows, gentle movement, hydration, guided reflection and lower stimulation. Any deeper Ayurvedic recommendation should depend on suitability and qualified guidance. The retreat should fit the person, not force the person into a fixed detox idea.",
         ],
       },
       {
-        title: "How Shreevan approaches it",
+        title: "How Shreevan keeps detox language responsible",
         body: [
-          "Shreevan's approach is conservative. The site does not use detox as a fear-based selling tool. It does not tell visitors that they are toxic, broken or in need of dramatic cleansing. It invites a responsible conversation about readiness and the level of support that is appropriate.",
-          "This is especially important for international guests. A visitor flying from the US, Canada or the UK needs to understand what is included, what is not included, what requires professional review and what should not be attempted casually while traveling.",
+          "Shreevan does not use detox as a fear-based sales word. The page should never tell visitors that they are toxic, broken or in need of urgent cleansing. It should explain what is possible in a wellness retreat and what is outside scope.",
+          "This matters for international guests. Someone flying to Rishikesh from the US, UK, Canada or another country needs clear expectations before travel. They should know what is educational, what is supportive, what requires professional advice and what should not be attempted casually.",
         ],
       },
       {
-        title: "What beginners should know",
+        title: "What beginners should know before booking",
         body: [
-          "Beginners should not choose the most intense option first because it sounds more powerful. In wellness, intensity without readiness can create discomfort, confusion or risk. A simple foundation of food rhythm, sleep, movement and reflection may be more useful than trying to do too much too quickly.",
-          "If you are new to Ayurveda, begin by learning the language: digestion, routine, rest, constitution, season, food quality and habit. Then use the suitability call to understand whether a Panchkarma-informed pathway belongs in your retreat plan.",
+          "If you are new to Ayurveda, start with simple language. Learn about food rhythm, digestion, rest, routine, season, constitution and daily habits. These basics often matter more than choosing the most intense option.",
+          "A beginner may not need a deep detox retreat first. A simple foundation of regular meals, sleep, movement and reflection may be more useful. The suitability call helps decide whether Panchakarma-informed planning belongs in your retreat pathway.",
         ],
       },
       {
         title: "What to be careful about",
         body: [
-          "Be careful with any detox promise that sounds guaranteed, medical or urgent. Be especially careful if you are pregnant, breastfeeding, underweight, managing an eating-disorder history, taking medication, managing a chronic condition, recovering from surgery or dealing with significant symptoms.",
-          "A responsible retreat should never pressure you to stop medication, ignore medical advice, fast aggressively or treat discomfort as proof that the process is working. Professional guidance and suitability boundaries come first.",
+          "Be careful with any page that promises fast toxin removal, guaranteed weight loss, organ cleansing, permanent cure or dramatic results. Those claims are not responsible for a wellness retreat page.",
+          "You should slow down if you are pregnant, breastfeeding, underweight, recovering from surgery, taking medication, managing diabetes, heart concerns, kidney concerns, liver concerns, chronic illness, severe symptoms or an eating-disorder history. In these cases, professional guidance comes first.",
         ],
       },
     ],
+    comparison: {
+      title: "Panchakarma retreat vs commercial detox",
+      intro: [
+        "People often use Panchakarma, Panchkarma, detox retreat and treatment language as if they mean the same thing. They do not. Shreevan uses this page to explain the wellness retreat context clearly, so a guest can choose with better expectations.",
+        "A Panchakarma retreat in Rishikesh should be slower and more suitability-led than a generic detox plan. It should focus on readiness, food rhythm and integration rather than pressure, fear or guaranteed results.",
+      ],
+      image: {
+        src: "/images/modalities/panchakarma/ayurvedic-detox-routine-rishikesh-retreat.webp",
+        alt: "Simple sattvic routine for an Ayurveda-informed detox retreat in Rishikesh",
+        caption: "Simple food rhythm and rest make the retreat context clearer than detox hype.",
+      },
+      columns: ["Shreevan retreat approach", "Unsafe detox expectation"],
+      rows: [
+        {
+          aspect: "Purpose",
+          primary: "Understand routine, food rhythm, rest and readiness in a retreat setting.",
+          comparison: "Promise a quick cleanse, cure, weight-loss result or toxin flush.",
+        },
+        {
+          aspect: "Language",
+          primary: "Uses Panchakarma and Panchkarma as Ayurveda-informed wellness education.",
+          comparison: "Uses treatment claims without clear professional scope.",
+        },
+        {
+          aspect: "Food",
+          primary: "Simple, warm, supportive meals based on suitability and comfort.",
+          comparison: "Extreme fasting, shame around food or one-size-fits-all restriction.",
+        },
+        {
+          aspect: "Duration",
+          primary: "Longer programs can hold more rhythm and integration.",
+          comparison: "Suggests deep detox can be rushed in a few days.",
+        },
+        {
+          aspect: "Cost and price",
+          primary: "Panchakarma retreat Rishikesh price depends on duration, stay choice and suitability.",
+          comparison: "Hides inclusions or sells a fixed treatment package without context.",
+        },
+        {
+          aspect: "Next step",
+          primary: "Begin with a suitability call and choose the right retreat container.",
+          comparison: "Book first and discuss risks later.",
+        },
+      ],
+    },
+    retreatImage: {
+      src: "/images/modalities/panchakarma/panchakarma-retreat-rishikesh-rest-integration.webp",
+      alt: "Guest resting and reflecting during a Panchakarma retreat rhythm in Rishikesh",
+      caption: "Rest and integration keep the retreat focused on steady habits, not pressure.",
+    },
     retreatExperience: [
       {
-        stage: "Before session",
-        title: "Suitability conversation",
+        stage: "Before booking",
+        title: "Suitability first",
         copy:
-          "The team clarifies health context, expectations, food comfort, travel timing and whether professional input is needed.",
+          "A Panchakarma retreat in Rishikesh should begin with questions about health context, travel timing, food comfort, expectations and whether professional advice is needed.",
       },
       {
         stage: "During retreat",
-        title: "Rhythm and simplicity",
+        title: "Simple daily rhythm",
         copy:
-          "Practice may emphasize meals, rest, light movement, hydration, reflection and reduced stimulation instead of dramatic claims.",
+          "The retreat may use simple meals, rest windows, hydration, gentle movement and quiet reflection instead of aggressive detox claims.",
       },
       {
-        stage: "After deeper work",
+        stage: "After deeper support",
         title: "Careful integration",
         copy:
-          "The guest should transition gradually, observe energy and continue only what is realistic and appropriate.",
+          "The guest should transition slowly, notice energy and continue only the habits that are realistic, safe and appropriate at home.",
       },
       {
-        stage: "Daily rhythm",
+        stage: "Long-term view",
         title: "Lifestyle context",
         copy:
-          "The deeper value is often in understanding daily choices, not chasing an extreme cleanse.",
+          "The deeper value is often in learning daily choices, not chasing an extreme cleanse or a guaranteed result.",
       },
     ],
     suitability: {
       maySuitYouIf: [
-        "You want Ayurveda-informed education, food rhythm and lifestyle simplification.",
-        "You are considering a longer retreat where rest and routine can be held.",
-        "You are comfortable with a careful suitability-first process.",
+        "You want Ayurveda-informed detox education in Rishikesh with clear safety boundaries.",
+        "You are considering a longer retreat for food rhythm, rest and simple daily routine.",
+        "You prefer a careful Panchkarma centre in Rishikesh that starts with suitability, not pressure.",
       ],
       beCarefulIf: [
-        "You are looking for a guaranteed cleanse or fast result.",
-        "You want to use detox language to override medical advice.",
-        "You have a history of extreme dieting or body-focused anxiety.",
+        "You are looking for guaranteed detox, fast weight loss or a fixed treatment result.",
+        "You want to use Panchakarma therapy in Rishikesh instead of medical advice.",
+        "You have a history of extreme dieting, body anxiety or pushing through discomfort.",
       ],
       consultProfessionalIf: [
         "You are pregnant, breastfeeding, underweight or recovering from surgery.",
-        "You take medication or manage diabetes, heart conditions, kidney concerns or chronic illness.",
-        "You have an eating-disorder history or active symptoms that require clinical care.",
+        "You take medication or manage diabetes, heart concerns, kidney concerns, liver concerns or chronic illness.",
+        "You have severe symptoms, active mental-health concerns or an eating-disorder history.",
       ],
     },
-    relatedModalities: [modalityLinks.yoga, modalityLinks.meditation, modalityLinks.sadhana],
+    relatedModalities: [modalityLinks.yoga, modalityLinks.meditation, modalityLinks.sound],
     relatedPrograms: [programs.fourteenDay, programs.twentyEightDay, programs.sixtyDay],
     futureBlogTopics: [
-      "Responsible detox retreat expectations for international guests",
-      "Panchkarma retreat questions to ask before booking",
-      "Sattvic food rhythm vs extreme detox claims",
+      "Panchakarma retreat in Rishikesh: what to ask before booking",
+      "Panchakarma treatment cost in Rishikesh: what affects retreat pricing",
+      "Ayurvedic detox retreat vs extreme fasting: how to choose safely",
     ],
     faqs: [
       {
-        question: "Is Panchkarma the same as a detox retreat?",
+        question: "What is Panchakarma therapy?",
         answer:
-          "Panchkarma is a traditional Ayurvedic cleansing framework, while detox retreat is a broad modern phrase that is often used loosely. Shreevan treats the topic carefully. The page explains Ayurveda-informed education, food rhythm, rest and suitability rather than promising a medical cleanse. Any deeper recommendation should depend on readiness, context and qualified guidance.",
+          "Panchakarma therapy is a traditional Ayurvedic cleansing framework. On this page, Shreevan explains it as Ayurveda-informed retreat education, not medical treatment. The focus is food rhythm, rest, routine, readiness and suitability. Any clinical decision should be discussed with a qualified professional.",
       },
       {
-        question: "Does Shreevan promise detox results?",
+        question: "Is Panchkarma treatment in Rishikesh the same as a wellness retreat?",
         answer:
-          "No. Shreevan does not promise organ cleansing, weight loss, cure or guaranteed results. The responsible value is in structured routine, simpler meals, rest, reduced stimulation and guided reflection. Some guests may feel lighter or clearer, but the site does not turn that possibility into a claim. Suitability and safety come first.",
+          "No. Many people search for Panchkarma treatment in Rishikesh, but Shreevan positions this page as a wellness retreat education page. It can help you understand detox language, routine and program fit. It does not replace a clinic, hospital, doctor or licensed medical treatment.",
       },
       {
-        question: "Who should be careful with Panchkarma or detox language?",
+        question: "What is the Panchakarma treatment cost in Rishikesh?",
         answer:
-          "Anyone pregnant, breastfeeding, taking medication, managing chronic illness, recovering from surgery, underweight, diabetic, medically unstable or dealing with an eating-disorder history should be careful. This does not mean every retreat is impossible. It means professional advice and transparent suitability review are essential before choosing a deeper cleansing-oriented path.",
+          "Panchakarma treatment cost in Rishikesh depends on duration, stay category, inclusions, level of support and whether a person is suitable for deeper Ayurveda-informed work. Shreevan should not give a generic price without context. The right next step is a suitability call and program comparison.",
       },
       {
-        question: "Can I do Panchkarma in a 3-day retreat?",
+        question: "Is Panchakarma safe for everyone?",
         answer:
-          "A 3-day retreat is better for arrival, rest, simple routine and gentle reset. It is usually too short for deeper Panchkarma-style expectations. If you are seriously interested in Ayurveda-informed cleansing, review the 14-day, 28-day or 60-day pathways and discuss what is realistic during the suitability call. Duration and readiness matter.",
+          "No. Panchakarma or Panchkarma-style detox language is not suitable for everyone. Pregnancy, recent surgery, medication, chronic illness, diabetes, kidney or liver concerns, underweight status and eating-disorder history need professional guidance before booking.",
       },
       {
-        question: "Will I have to fast or follow a strict diet?",
+        question: "Is Panchakarma a weight-loss detox?",
         answer:
-          "Do not assume that. Shreevan's content emphasizes sattvic meals, routine and suitability rather than aggressive restriction. Any food plan should consider comfort, health context, travel demands and professional guidance when needed. A premium retreat should never use fear or shame around food. The goal is a supportive rhythm, not punishment.",
+          "No. A responsible Panchakarma retreat in Rishikesh should not be sold as a weight-loss detox. Some guests may feel lighter after rest, simpler food and routine, but that is not a guaranteed result. The page should focus on rhythm, education and suitability.",
       },
       {
-        question: "How does Panchkarma connect with yoga and meditation?",
+        question: "How many days are needed for a Panchakarma retreat in Rishikesh?",
         answer:
-          "In a retreat, Ayurveda-informed routine can support the wider day. Simple meals, rest and regular timing can make yoga and meditation feel more coherent. Yoga brings body awareness, meditation supports attention, and Ayurveda-informed education helps guests notice lifestyle patterns. The practices should support each other gently, not overwhelm the guest.",
+          "A short stay can support rest and routine, but deeper Panchakarma-informed planning usually needs more time. For Shreevan, the 14-day, 28-day and 60-day programs are more relevant than a rushed 3-day detox expectation. Duration should depend on readiness and professional boundaries.",
       },
     ],
     finalCta: {
-      title: "Treat detox language with care.",
+      title: "Start with suitability, not detox pressure.",
       copy:
-        "If Ayurveda-informed cleansing is part of your interest, use the suitability call to clarify what is appropriate, what requires professional input and which program length can hold it responsibly.",
+        "If you are exploring a Panchakarma retreat in Rishikesh, begin with a calm suitability call. Clarify your health context, food needs, retreat length and what Shreevan can responsibly support before choosing a program.",
     },
   },
   {
