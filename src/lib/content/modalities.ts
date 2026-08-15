@@ -73,6 +73,7 @@ export type ModalityContent = {
   articleSections: ModalityArticleSection[];
   comparison?: ModalityComparison;
   retreatImage?: ModalityImage;
+  suitabilityImage?: ModalityImage;
   retreatExperience: ModalityRetreatStep[];
   suitability: ModalitySuitability;
   relatedModalities: ModalityLink[];
@@ -1816,6 +1817,11 @@ export const modalities: ModalityContent[] = [
       src: "/images/modalities/spiritual-sadhanas/spiritual-sadhana-integration-rishikesh.webp",
       alt: "Guest integrating spiritual sadhana practice during a Rishikesh retreat",
       caption: "Practice becomes useful when it returns to daily rhythm.",
+    },
+    suitabilityImage: {
+      src: "/images/modalities/spiritual-sadhanas/spiritual-retreat-suitability-conversation-rishikesh.webp",
+      alt: "Suitability conversation for a spiritual sadhana retreat in Rishikesh",
+      caption: "A calm suitability conversation helps choose the right rhythm, boundaries and level of support.",
     },
     retreatExperience: [
       {

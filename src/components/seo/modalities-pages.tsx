@@ -487,6 +487,13 @@ export function ModalityDetailPage({ modality }: Readonly<{ modality: ModalityCo
               <p className="eyebrow">Suitability</p>
               <h2 id="suitability-title">Who this may suit, and when to slow down</h2>
             </div>
+            {modality.suitabilityImage ? (
+              <ModalityImageFigure
+                className="modality-suitability-image"
+                image={modality.suitabilityImage}
+                sizes="(max-width: 960px) 100vw, 1120px"
+              />
+            ) : null}
             <div className="modality-suitability-grid">
               <article>
                 <h3>May suit you if</h3>
