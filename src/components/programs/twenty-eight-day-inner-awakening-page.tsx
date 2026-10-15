@@ -556,21 +556,20 @@ export function TwentyEightDayInnerAwakeningPage() {
           <div className="container program-pricing-panel">
             <div>
               <p className="eyebrow">Pricing clarity</p>
-              <h2 id="pricing-title">Standard investment: $2,200 USD</h2>
+              <h2 id="pricing-title">Standard investment: USD 2,799 including GST</h2>
               <p>
-                The roadmap sets the 28-day standard price at $2,200, with no selling price below $2,000
-                without founder approval. Final invoice, registration fee, room category and payment
-                deadline should be confirmed after suitability review.
+                The 28-day standard investment is USD 2,799, including GST. Final invoice, room
+                category and payment deadline should be confirmed after suitability review.
               </p>
             </div>
             <dl>
               <div>
                 <dt>Standard</dt>
-                <dd>$2,200</dd>
+                <dd>USD 2,799</dd>
               </div>
               <div>
-                <dt>Minimum selling price</dt>
-                <dd>$2,000</dd>
+                <dt>Tax</dt>
+                <dd>GST included</dd>
               </div>
               <div>
                 <dt>Booking flow</dt>

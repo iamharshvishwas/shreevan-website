@@ -18,7 +18,7 @@ const programSchema = programServiceSchema({
   audienceType:
     "International professionals, entrepreneurs and seekers ready for a structured long-form transformation immersion",
   offers: {
-    price: "2200",
+    price: "2799",
     priceCurrency: "USD",
   },
 });
