@@ -108,11 +108,11 @@ export function BookConsultationPage() {
           <div className="container booking-fit-grid">
             <div>
               <p className="eyebrow">Fit before form</p>
-              <h2 id="fit-title">This page should make the right guest feel safer, not rushed</h2>
+              <h2 id="fit-title">A thoughtful first step, not a rushed one</h2>
               <p>
-                High-value international visitors often leave when the page feels like a generic lead
-                form. The consultation request should feel like a thoughtful intake before a meaningful
-                journey.
+                This is a calm intake before a meaningful journey, not a generic enquiry form. Share
+                your context at your own pace, and we will help you decide whether a retreat is the right
+                next step.
               </p>
             </div>
 

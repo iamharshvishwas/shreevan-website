@@ -271,9 +271,9 @@ export function FourteenDayTransformationPage() {
             <div className="reading-column">
               <h2 id="program-intent-title">Fourteen days creates room to change your relationship with yourself</h2>
               <p>
-                The roadmap is explicit: this retreat should not be framed as simply learning yoga and
-                meditation. It is a supported space where participants identify limiting patterns,
-                understand what drains their energy and begin rebuilding daily life from a clearer place.
+                This retreat is not simply about learning yoga and meditation. It is a supported space
+                where participants identify limiting patterns, understand what drains their energy and
+                begin rebuilding daily life from a clearer place.
               </p>
               <p>
                 It is designed for life transitions, burnout, relationship recovery, leadership pressure
@@ -286,7 +286,7 @@ export function FourteenDayTransformationPage() {
         <section className="section program-fit-section" aria-labelledby="audience-title">
           <div className="container program-fit-grid">
             <div>
-              <p className="eyebrow">Target audience</p>
+              <p className="eyebrow">Who it is for</p>
               <h2 id="audience-title">Who this 14-day transformation is designed for</h2>
               <ul className="program-chip-list">
                 {targetAudience.map((item) => (
@@ -340,8 +340,8 @@ export function FourteenDayTransformationPage() {
               <p className="eyebrow">Two-week structure</p>
               <h2 id="structure-title">Awareness first, life design second</h2>
               <p>
-                The page should make the journey feel intentionally sequenced, so guests understand why
-                14 days is different from a shorter foundation retreat.
+                The two weeks are intentionally sequenced, which is why 14 days feels different from a
+                shorter foundation retreat.
               </p>
             </div>
             <div className="program-week-grid">
@@ -436,11 +436,12 @@ export function FourteenDayTransformationPage() {
               <p>2-minute 14-Day Transformation video: emotional healing and life redesign</p>
             </div>
             <div>
-              <p className="eyebrow">Trust content to add</p>
-              <h2 id="media-title">Show the depth without making exaggerated promises</h2>
+              <p className="eyebrow">A look inside</p>
+              <h2 id="media-title">The depth, shown honestly</h2>
               <p>
-                Add real visuals of workshops, Ganga walks, quiet practice, meals, sound bath, group
-                coaching and graduation. The page should feel grounded, not mystical or overpromising.
+                Workshops, Ganga walks, quiet practice, meals, sound bath, group coaching and
+                graduation: a look at how the two weeks are held, grounded and practical, without
+                exaggerated promises.
               </p>
               <div className="program-media-slots">
                 <div className="image-slot home-media-slot has-media">
@@ -501,8 +502,8 @@ export function FourteenDayTransformationPage() {
                 <h2 id="modalities-title">The methods support the journey without replacing medical care</h2>
               </div>
               <p>
-                The commercial program links back to educational modality pages so visitors can learn
-                methodology without mixing informational and booking intent.
+                Each practice has its own guide explaining what it involves, how it is used across the
+                two weeks and who it may suit.
               </p>
             </div>
             <div className="program-modality-grid four-up">

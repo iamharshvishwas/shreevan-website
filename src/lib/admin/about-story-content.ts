@@ -86,7 +86,6 @@ export const defaultAdminAboutStoryContent: AdminAboutStoryContent = {
     heading: "The location is part of the experience, not a background detail",
     paragraphs: [
       { id: "roots-1", text: "Shreevan Wellness belongs to the spiritual landscape of Rishikesh. The setting supports slower mornings, reflective practice, sattvic food and a sense of distance from ordinary pressure." },
-      { id: "roots-2", text: "The page should eventually be supported with real photographs of the stay, practice spaces, meals, approach road and surrounding nature, so international guests can judge comfort and safety without guessing." },
     ],
     media: { src: "/images/about/rishikesh-roots-origin.jpeg", alt: "Open retreat practice corridor in Rishikesh with mats facing the mountain and river landscape", caption: "Rishikesh roots" },
   },
@@ -103,10 +102,9 @@ export const defaultAdminAboutStoryContent: AdminAboutStoryContent = {
   standards: {
     eyebrow: "Responsible wellness",
     heading: "Trust grows when boundaries are visible",
-    body: "Shreevan Wellness should never need exaggerated promises to convert the right guest. The page should communicate discernment, care and professionalism from the first read.",
+    body: "Shreevan Wellness does not need exaggerated promises. It aims to show discernment, care and professionalism from the very first conversation.",
     media: { src: "/images/about/responsible-wellness-standards.jpeg", alt: "Responsible wellness documents and guest-care materials arranged on a wooden retreat table", caption: "Responsible wellness standards" },
     items: [
-      { id: "standard-credentials", text: "Founder and facilitator credentials should be shown clearly before launch." },
       { id: "standard-fit", text: "Program recommendations are based on readiness, not only duration or price." },
       { id: "standard-boundaries", text: "Health boundaries, disclaimers and emergency processes are communicated plainly." },
       { id: "standard-proof", text: "Real accommodation, food and location photography should support every claim." },

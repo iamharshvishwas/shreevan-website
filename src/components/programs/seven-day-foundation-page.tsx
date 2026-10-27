@@ -197,7 +197,7 @@ export function SevenDayFoundationPage() {
           <div className="container program-proof-grid">
             <div>
               <strong>Not a longer 3-day reset</strong>
-              <span>The roadmap positions 7 days as Rebuild: a deeper arc for changing daily patterns.</span>
+              <span>Seven days is Rebuild: a deeper arc for changing daily patterns.</span>
             </div>
             <div>
               <strong>Built around habit formation</strong>
@@ -252,8 +252,9 @@ export function SevenDayFoundationPage() {
                 ))}
               </div>
               <p>
-                These are wellness-oriented goals. This page avoids medical cure claims, guaranteed
-                transformation promises or therapy-substitute positioning.
+                These are wellness-oriented goals. The program does not make medical cure claims or
+                guaranteed transformation promises, and it is not a substitute for therapy or medical
+                care.
               </p>
             </div>
           </div>
@@ -353,9 +354,9 @@ export function SevenDayFoundationPage() {
               <p className="eyebrow">Accommodation and inclusions</p>
               <h2 id="included-title">Quiet Stay at Shreevan</h2>
               <p>
-                Guests should be able to see the room standard, privacy and restful atmosphere before they
-                enquire. Final accommodation category, dates, pricing and transfer details can still be
-                confirmed during consultation.
+                See the room standard, privacy and restful atmosphere before you enquire. Final
+                accommodation category, dates, pricing and transfer details are confirmed during
+                consultation.
               </p>
             </div>
             <div style={{ minWidth: 0 }}>
@@ -385,12 +386,12 @@ export function SevenDayFoundationPage() {
               <p>1-2 minute 7-Day Foundation video: why seven days, who benefits, what changes</p>
             </div>
             <div>
-              <p className="eyebrow">Trust content to add</p>
-              <h2 id="media-title">Show guests what one week in rhythm looks like</h2>
+              <p className="eyebrow">A look inside</p>
+              <h2 id="media-title">What one week in rhythm looks like</h2>
               <p>
-                Add real visuals of morning practice, workshops, cooking, sound healing, nature walks,
-                rooms, meals and quiet time. This page should make international guests feel clear before
-                they book a call.
+                Morning practice, workshops, cooking, sound healing, nature walks, rooms, meals and
+                quiet time: a look at how the week is held, so you can see the daily rhythm before you
+                book a call.
               </p>
               <div className="program-media-slots">
                 <div className="image-slot home-media-slot has-media">
@@ -451,8 +452,8 @@ export function SevenDayFoundationPage() {
                 <h2 id="modalities-title">The methods deepen without becoming overwhelming</h2>
               </div>
               <p>
-                The program page links into modality pages so visitors can learn the method separately
-                from the commercial program decision.
+                Each practice has its own guide explaining what it involves, how it is used during the
+                foundation week and who it may suit.
               </p>
             </div>
             <div className="program-modality-grid four-up">

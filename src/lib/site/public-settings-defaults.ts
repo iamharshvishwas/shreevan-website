@@ -90,7 +90,7 @@ export const defaultPublicSiteSettings: PublicSiteSettings = {
       footerColumn("modalities", "Modalities", modalityRoutes),
       footerColumn(
         "conversion",
-        "Conversion",
+        "Get Started",
         utilityRoutes.filter((route) => route.intent === "transactional"),
       ),
       footerColumn(

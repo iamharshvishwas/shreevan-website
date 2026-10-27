@@ -81,7 +81,7 @@ const reassuranceRows = [
   {
     label: "Before booking",
     title: "Know your room category",
-    copy: "Do not leave international guests guessing. The stay type, room comfort and upgrade options should be clearly discussed.",
+    copy: "Ask about the stay type, room comfort and upgrade options so nothing is left to guesswork.",
   },
   {
     label: "Before travel",
@@ -278,10 +278,10 @@ export function StayFoodPage() {
           <div className="container stay-reassurance-grid">
             <div>
               <p className="eyebrow">International reassurance</p>
-              <h2 id="reassurance-title">The safest conversion is a well-informed guest</h2>
+              <h2 id="reassurance-title">A well-informed guest is a confident guest</h2>
               <p>
-                A premium stay page should answer the practical worries silently sitting in the visitor’s
-                mind: cleanliness, food comfort, room privacy, travel readiness and what is not promised.
+                Here are the practical questions many guests quietly carry: cleanliness, food comfort,
+                room privacy, travel readiness and what is not promised.
               </p>
             </div>
             <div className="stay-reassurance-list">
@@ -302,8 +302,7 @@ export function StayFoodPage() {
               <p className="eyebrow light">Before you book</p>
               <h2 id="confirm-title">Confirm these details before travel or payment</h2>
               <p>
-                This is where Shreevan should feel more trustworthy than a generic retreat listing.
-                Clear answers reduce hesitation and prevent mismatch after arrival.
+                Clear answers up front reduce hesitation and prevent any mismatch after arrival.
               </p>
             </div>
             <ul className="stay-confirm-list">

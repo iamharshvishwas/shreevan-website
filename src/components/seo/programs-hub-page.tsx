@@ -48,8 +48,8 @@ export function ProgramsHubPage({ programs }: Readonly<{ programs: PublicProgram
                 <h2 id="program-list-title">Each duration has a distinct job</h2>
               </div>
               <p>
-                This page protects search intent by comparing program depth without replacing each dedicated
-                commercial program page.
+                Compare how the programs differ in depth, rhythm and commitment, then open the dedicated
+                page for the full details of the one that fits.
               </p>
             </div>
 

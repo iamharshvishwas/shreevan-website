@@ -158,7 +158,7 @@ export const defaultAdminSiteSettings: AdminSiteSettings = {
       },
       {
         id: "conversion",
-        title: "Conversion",
+        title: "Get Started",
         enabled: true,
         links: utilityRoutes.filter((route) => route.intent === "transactional").map(routeToNavLink),
       },

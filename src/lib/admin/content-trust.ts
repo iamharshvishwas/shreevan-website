@@ -280,7 +280,7 @@ export const defaultAdminContentTrust: AdminContentTrustStore = {
           question: "Can Shreevan support vegan, Jain, gluten-aware or low-spice food?",
           answer: [
             "Food preferences and dietary restrictions should be discussed during consultation before booking. Some needs may be easy to support, while allergies or strict medical diets need careful confirmation rather than casual promises.",
-            "For trust, the website should never say every diet can be handled automatically. The right answer is to disclose needs early and let the team confirm what is practical.",
+            "Not every dietary need can be handled automatically. The right step is to share your needs early and let the team confirm what is practical.",
           ],
           links: [
             { href: "/book-consultation", label: "Mention food needs" },
@@ -388,7 +388,7 @@ export const defaultAdminContentTrust: AdminContentTrustStore = {
           question: "What outcomes can I realistically expect?",
           answer: [
             "Realistic outcomes are usually practical: clearer daily rhythm, better self-observation, a calmer food and sleep routine, guided practice familiarity and a more grounded plan for life after the retreat.",
-            "The website should not promise permanent transformation from one stay. Longer programs create more structure, but the guest's readiness and after-retreat follow-through matter deeply.",
+            "No single stay promises permanent transformation. Longer programs create more structure, but the guest's readiness and after-retreat follow-through matter deeply.",
           ],
           links: [{ href: "/programs/14-day-transformation", label: "See transformation program" }],
         },
@@ -396,7 +396,7 @@ export const defaultAdminContentTrust: AdminContentTrustStore = {
           enabled: true,
           question: "What support do I get after the retreat?",
           answer: [
-            "Each program should clarify its post-retreat outputs, such as a rhythm plan, personal practice direction or integration roadmap. Longer programs may include deeper planning, but the exact aftercare path should be confirmed before booking.",
+            "Each program has its own post-retreat outputs, such as a rhythm plan, personal practice direction or integration roadmap. Longer programs may include deeper planning, but the exact aftercare path is confirmed before booking.",
             "If ongoing support is important to you, ask about it during the consultation instead of assuming it is included.",
           ],
           links: [{ href: "/programs/28-day-inner-awakening", label: "Explore flagship path" }],
@@ -420,25 +420,25 @@ export const defaultAdminContentTrust: AdminContentTrustStore = {
     {
       id: "consent-led",
       title: "Consent-led",
-      copy: "Every story should be approved by the guest before publishing.",
+      copy: "Every story is approved by the guest before publishing.",
       status: "published",
     },
     {
       id: "context-rich",
       title: "Context-rich",
-      copy: "Show program, duration, travel context and why the guest came.",
+      copy: "Each story shows the program, duration, travel context and why the guest came.",
       status: "published",
     },
     {
       id: "no-cure-claims",
       title: "No cure claims",
-      copy: "Stories should reflect individual experience, not guaranteed results.",
+      copy: "Stories reflect individual experience, not guaranteed results.",
       status: "published",
     },
     {
       id: "international-clarity",
       title: "International clarity",
-      copy: "Include details that help US, Canada and UK guests feel informed.",
+      copy: "Details are included that help US, Canada and UK guests feel informed.",
       status: "published",
     },
   ],
@@ -503,10 +503,10 @@ export const defaultAdminContentTrust: AdminContentTrustStore = {
     },
   ],
   consentStandards: [
-    "Use real guest words only after written testimonial/media consent.",
-    "Add country, program duration and travel context when the guest agrees.",
-    "Avoid before-after medical framing, diagnosis, cure language or guaranteed outcomes.",
-    "Separate guest reflection from clinical, therapeutic or emergency-care claims.",
+    "Real guest words are used only after written testimonial/media consent.",
+    "Country, program duration and travel context are added when the guest agrees.",
+    "We avoid before-after medical framing, diagnosis, cure language and guaranteed outcomes.",
+    "Guest reflection is kept separate from clinical, therapeutic or emergency-care claims.",
   ],
   journalCategories: [
     "All",
@@ -614,7 +614,7 @@ export const defaultAdminContentTrust: AdminContentTrustStore = {
       audience: "US, Canada and UK guests planning India travel for wellness.",
       tags: ["Rishikesh", "Travel", "Safety"],
       keyPoints: [
-        "A premium retreat page should make the setting, food, communication and safety expectations easy to understand.",
+        "A good retreat makes the setting, food, communication and safety expectations easy to understand.",
         "Travel readiness matters because the transformation begins before the guest arrives.",
         "The right questions should be asked before payment, not after booking pressure.",
       ],

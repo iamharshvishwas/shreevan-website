@@ -24,8 +24,8 @@ export function HealingStoriesPage({ content }: Readonly<{ content: PublicStoryC
               <p className="eyebrow">Healing stories</p>
               <h1 id="stories-title">Real guest reflections, held with honesty and care</h1>
               <p className="hero-lede">
-                This page should become the trust library for Shreevan Wellness: consent-approved
-                reflections from guests who came for structure, stillness, practice and reconnection.
+                Reflections from guests who came for structure, stillness, practice and reconnection,
+                shared only with their consent.
               </p>
               <div className="hero-actions">
                 <Link className="button button-primary" href="/book-consultation">
@@ -63,10 +63,10 @@ export function HealingStoriesPage({ content }: Readonly<{ content: PublicStoryC
             </div>
             <div>
               <p className="eyebrow">Featured reflection</p>
-              <h2 id="featured-story-title">Lead with one deep, specific story before showing many</h2>
+              <h2 id="featured-story-title">One guest’s journey, in depth</h2>
               <p>
-                Use this block for the strongest consent-approved story. It should explain what the
-                guest was seeking, what supported them during the retreat and what they carried home.
+                A featured reflection explains what the guest was seeking, what supported them during
+                the retreat and what they carried home.
               </p>
               <dl className="story-meta-list">
                 <div>
@@ -91,11 +91,11 @@ export function HealingStoriesPage({ content }: Readonly<{ content: PublicStoryC
             <div className="section-heading split-heading">
               <div>
                 <p className="eyebrow">Guest story library</p>
-                <h2 id="story-library-title">Show different guest journeys without making promises</h2>
+                <h2 id="story-library-title">Different guest journeys, shared without promises</h2>
               </div>
               <p>
-                Each story should feel specific enough to be believable and careful enough to stay within
-                responsible wellness boundaries.
+                Each story is specific to one guest’s experience and kept within responsible wellness
+                boundaries.
               </p>
             </div>
 
@@ -145,9 +145,8 @@ export function HealingStoriesPage({ content }: Readonly<{ content: PublicStoryC
               <p className="eyebrow">Expected outcomes, responsibly framed</p>
               <h2 id="outcome-story-title">The strongest stories show a journey, not a miracle</h2>
               <p>
-                This structure helps the page convert without drifting into unsupported claims. It gives
-                prospects a clear way to imagine the experience and decide if the retreat is right for
-                them.
+                These stories show a journey rather than a miracle, giving you a clear way to imagine the
+                experience and decide whether the retreat is right for you.
               </p>
             </div>
             <div className="outcome-map">
@@ -166,10 +165,10 @@ export function HealingStoriesPage({ content }: Readonly<{ content: PublicStoryC
           <div className="container consent-grid">
             <div>
               <p className="eyebrow light">Responsible publishing</p>
-              <h2 id="consent-title">A trustworthy story page needs a clear consent standard</h2>
+              <h2 id="consent-title">Our consent standard</h2>
               <p>
-                Before launch, replace every placeholder with real media, real words and documented
-                permission. This keeps the page premium and protects guest privacy.
+                We publish a guest’s story only with their documented permission, and we protect guest
+                privacy.
               </p>
             </div>
             <ul className="standards-list">

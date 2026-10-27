@@ -272,11 +272,11 @@ export function TwentyEightDayInnerAwakeningPage() {
           <div className="container editorial-grid">
             <p className="section-number">01 The flagship</p>
             <div className="reading-column">
-              <h2 id="program-intent-title">This is the page that should sell transformation, not itinerary length</h2>
+              <h2 id="program-intent-title">More than an itinerary: a personal reset and transformation</h2>
               <p>
-                The roadmap is clear: participants are not buying 28 days of yoga. They are buying a
-                personal reset and transformation experience with enough density and time to rebuild
-                daily rhythm, emotional clarity and self-connection.
+                This is not simply 28 days of yoga. It is a personal reset and transformation
+                experience with enough density and time to rebuild daily rhythm, emotional clarity and
+                self-connection.
               </p>
               <p>
                 The itinerary supports the promise, but the offer is the feeling of returning home to
@@ -325,8 +325,8 @@ export function TwentyEightDayInnerAwakeningPage() {
                 <h2 id="phases-title">Four phases from slowing down to life design</h2>
               </div>
               <p>
-                The flagship structure makes the page easier to trust: each week has a question, a theme
-                and a concrete outcome.
+                Each week has a question, a theme and a concrete outcome, so the structure is clear from
+                the first day.
               </p>
             </div>
             <div className="program-phase-grid">
@@ -472,12 +472,12 @@ export function TwentyEightDayInnerAwakeningPage() {
               <p>3-minute flagship video: the offer, the four phases and why this is not just a yoga retreat</p>
             </div>
             <div>
-              <p className="eyebrow">Trust content to add</p>
-              <h2 id="media-title">Show the complete immersion honestly</h2>
+              <p className="eyebrow">A look inside</p>
+              <h2 id="media-title">The complete immersion, shown honestly</h2>
               <p>
-                Add real visuals of rooms, meals, Ganga practice, workshops, trek, boat journey, silent
-                practice, cooking sessions and graduation. The page should feel premium because the
-                structure is clear, not because it overpromises.
+                Rooms, meals, Ganga practice, workshops, trek, boat journey, silent practice, cooking
+                sessions and graduation: a look at how the 28 days are held. The structure is clear,
+                with no overpromising.
               </p>
               <div className="program-media-slots">
                 <div className="image-slot">
@@ -520,8 +520,8 @@ export function TwentyEightDayInnerAwakeningPage() {
                 <h2 id="modalities-title">The methods are woven into the full immersion</h2>
               </div>
               <p>
-                The program page links back to educational modality pages so guests can understand the
-                methodology without mixing commercial and informational search intent.
+                Each practice has its own guide explaining what it involves, how it is woven into the
+                28 days and who it may suit.
               </p>
             </div>
             <div className="program-modality-grid four-up">

@@ -204,8 +204,8 @@ export const modalitiesHubContent: ModalitiesHubContent = {
     {
       title: "Why Shreevan separates modalities from programs",
       body: [
-        "A serious retreat website should not force a visitor to choose a package before they understand the methods being used. The modality pages answer educational search intent: what yoga therapy means, how guided meditation is approached, why sound may be included, where Ayurveda-informed detox language needs caution, and how spiritual practice is held responsibly.",
-        "The program pages answer a different intent. They explain duration, inclusions, travel readiness, rhythm, investment context and next steps. Keeping those two layers separate protects the search architecture, prevents keyword cannibalization, and gives international visitors a calmer decision path.",
+        "A serious retreat should not ask you to choose a package before you understand the methods being used. The modality pages explain what yoga therapy means, how guided meditation is approached, why sound may be included, where Ayurveda-informed detox language needs caution, and how spiritual practice is held responsibly.",
+        "The program pages explain something different: duration, inclusions, travel readiness, rhythm, investment context and next steps. Keeping the two separate gives international guests a calmer decision path, where you understand the practice first and then compare programs.",
       ],
     },
     {
@@ -227,13 +227,6 @@ export const modalitiesHubContent: ModalitiesHubContent = {
       body: [
         "Premium wellness does not need exaggerated promises. Shreevan can be serious, traditional and spiritually rooted while still being clear that retreat practices are not medical care. This matters for guests traveling from the United States, Canada and the United Kingdom, where expectations around safety, informed consent and professional boundaries are high.",
         "The suitability call exists because not every practice is right for every person at every stage. Some guests need a gentle reset. Some need a longer container. Some need to speak with a qualified health professional before deciding. This clarity builds trust.",
-      ],
-    },
-    {
-      title: "How these pages support AEO, GEO and AI search",
-      body: [
-        "Answer engines and AI summaries reward pages that give clear definitions, direct answers, boundaries and contextual next steps. Each modality page is written to answer beginner questions quickly, then expand into deeper sections for visitors who want detail.",
-        "The internal link structure is intentional. Modalities link to programs where they are applied. Program pages link back to modalities that explain the method. This gives search systems and human visitors a clean map of the Shreevan retreat system.",
       ],
     },
   ],
@@ -307,7 +300,7 @@ export const modalitiesHubContent: ModalitiesHubContent = {
     {
       question: "Why not put all modality content on one program page?",
       answer:
-        "Putting every explanation on every program page creates a confusing user experience and weak search architecture. A modality page should answer educational questions like what guided meditation is. A program page should answer commercial and logistical questions like how many days, what is included and what the booking path looks like. Separating the two makes the site clearer for users and search systems.",
+        "Because the two answer different questions. A modality page explains the practice itself, such as what guided meditation is. A program page covers the practical questions: how many days, what is included and what the booking path looks like. Keeping them separate lets you learn the method first and compare programs second, without every page repeating the same explanations.",
     },
     {
       question: "Can I choose a program without knowing the modality I want?",
@@ -1252,7 +1245,7 @@ export const modalities: ModalityContent[] = [
       {
         title: "How Shreevan keeps detox language responsible",
         body: [
-          "Shreevan does not use detox as a fear-based sales word. The page should never tell visitors that they are toxic, broken or in need of urgent cleansing. It should explain what is possible in a wellness retreat and what is outside scope.",
+          "Shreevan does not use detox as a fear-based sales word. You will never be told that you are toxic, broken or in need of urgent cleansing. The focus is on what is possible in a wellness retreat and what is outside scope.",
           "This matters for international guests. Someone flying to Rishikesh from the US, UK, Canada or another country needs clear expectations before travel. They should know what is educational, what is supportive, what requires professional advice and what should not be attempted casually.",
         ],
       },
@@ -1395,7 +1388,7 @@ export const modalities: ModalityContent[] = [
       {
         question: "Is Panchakarma a weight-loss detox?",
         answer:
-          "No. A responsible Panchakarma retreat in Rishikesh should not be sold as a weight-loss detox. Some guests may feel lighter after rest, simpler food and routine, but that is not a guaranteed result. The page should focus on rhythm, education and suitability.",
+          "No. A responsible Panchakarma retreat in Rishikesh should not be sold as a weight-loss detox. Some guests may feel lighter after rest, simpler food and routine, but that is not a guaranteed result. The focus is on rhythm, education and suitability.",
       },
       {
         question: "How many days are needed for a Panchakarma retreat in Rishikesh?",

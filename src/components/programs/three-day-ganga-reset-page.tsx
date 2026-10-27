@@ -188,9 +188,9 @@ export function ThreeDayGangaResetPage() {
             <div className="reading-column">
               <h2 id="program-intent-title">A short retreat should feel complete, not rushed</h2>
               <p>
-                The roadmap is clear: the 3-day retreat should not try to do everything. Its purpose is
-                to help a participant pause, release stress, reconnect with their inner rhythm and return
-                home with practices simple enough to repeat.
+                The 3-day retreat does not try to do everything. Its purpose is to help a participant
+                pause, release stress, reconnect with their inner rhythm and return home with practices
+                simple enough to repeat.
               </p>
               <p>
                 This is the right entry point for someone who is curious about retreat work, carrying
@@ -289,9 +289,8 @@ export function ThreeDayGangaResetPage() {
               <p className="eyebrow">Stay and inclusions</p>
               <h2 id="included-title">Your Stay at Shreevan</h2>
               <p>
-                Guests should be able to see the standard of comfort, privacy and simplicity before they
-                enquire. Final room category, transfers, dates and package specifics can still be confirmed
-                during consultation.
+                See the standard of comfort, privacy and simplicity before you enquire. Final room
+                category, transfers, dates and package specifics are confirmed during consultation.
               </p>
             </div>
             <div style={{ minWidth: 0 }}>
@@ -321,12 +320,12 @@ export function ThreeDayGangaResetPage() {
               <p>1-minute 3-Day Reset overview video: who it is for and what guests leave with</p>
             </div>
             <div>
-              <p className="eyebrow">Trust content to add</p>
-              <h2 id="media-title">Show the real place, food and pace</h2>
+              <p className="eyebrow">A look inside</p>
+              <h2 id="media-title">The real place, food and pace</h2>
               <p>
-                Add real visuals of arrival, rooms, Ganga-side practice, meals, journaling, group spaces
-                and the closing circle. International guests should not have to imagine comfort, safety
-                or daily rhythm.
+                From arrival and rooms to Ganga-side practice, meals, journaling, group spaces and the
+                closing circle, here is how the three days are held, so you can see the comfort and
+                daily rhythm for yourself.
               </p>
               <div className="program-media-slots">
                 <div className="image-slot home-media-slot has-media">

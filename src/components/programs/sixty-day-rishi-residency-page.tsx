@@ -256,7 +256,7 @@ export function SixtyDayRishiResidencyPage() {
         <section className="section residency-positioning-section" aria-labelledby="positioning-title">
           <div className="container residency-positioning-panel">
             <div>
-              <p className="eyebrow light">Premium positioning</p>
+              <p className="eyebrow light">The advanced path</p>
               <h2 id="positioning-title">A residency for serious reinvention, not casual retreat browsing</h2>
               <p>
                 The 60-day residency is not a longer version of the 28-day immersion. It is the advanced

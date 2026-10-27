@@ -120,8 +120,8 @@ export function ContactPage({ settings }: Readonly<{ settings: PublicSiteSetting
                 <h2 id="channels-title">Different questions need different paths</h2>
               </div>
               <p>
-                Keep the first step simple. Serious retreat fit questions should move toward a
-                consultation, while logistics can begin by email or the form below.
+                Keep the first step simple. Questions about whether a retreat is right for you are best
+                answered in a consultation, while logistics can begin by email or the form below.
               </p>
             </div>
 
@@ -159,9 +159,9 @@ export function ContactPage({ settings }: Readonly<{ settings: PublicSiteSetting
             </div>
             <div>
               <p className="eyebrow">Rishikesh location clarity</p>
-              <h2 id="location-title">Make the place easy to understand before someone travels</h2>
+              <h2 id="location-title">The place, explained before you travel</h2>
               <p>
-                International visitors need practical confidence: nearest airport, transfer options,
+                International guests need practical confidence: nearest airport, transfer options,
                 arrival windows, local support and what details are shared before booking.
               </p>
               <div className="location-details">
@@ -171,11 +171,7 @@ export function ContactPage({ settings }: Readonly<{ settings: PublicSiteSetting
                 </article>
                 <article>
                   <h3>Exact stay address</h3>
-                  <p>Share only after suitability, booking and guest communication steps are complete.</p>
-                </article>
-                <article>
-                  <h3>Map integration</h3>
-                  <p>Connect a verified Google Maps embed or custom geolocation block before launch.</p>
+                  <p>Shared after the suitability, booking and guest communication steps are complete.</p>
                 </article>
               </div>
             </div>
@@ -206,7 +202,7 @@ export function ContactPage({ settings }: Readonly<{ settings: PublicSiteSetting
               <h2 id="contact-form-title">Send a short note and the team can route it properly</h2>
               <p>
                 This is for general contact, logistics and partnership questions. For program suitability,
-                the consultation path is still the cleaner conversion flow.
+                a consultation is the better route.
               </p>
               <ul className="response-standards">
                 {responseStandards.map((standard) => (

@@ -392,7 +392,7 @@ export const defaultAdminHomeContent: AdminHomeContentStore = {
   travel: {
     eyebrow: "International visitor reassurance",
     heading: "Planning a wellness retreat in Rishikesh should feel clear",
-    body: "International guests often need practical answers before they book a wellness retreat in Rishikesh. Shreevan should make travel, stay, food and safety details easy to understand.",
+    body: "International guests often need practical answers before they book a wellness retreat in Rishikesh. Shreevan makes travel, stay, food and safety details easy to understand.",
     cards: [
       {
         id: "travel-1",
