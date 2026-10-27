@@ -1,8 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
-import { siteConfig } from "@/config/site";
 import "./program-detail-shared.css";
 
 const transformationLadder = [
@@ -234,23 +232,6 @@ export function SixtyDayRishiResidencyPage() {
                 <span>Image slot</span>
                 <p>Residency visuals: daily living rhythm, mentoring, service, Ganga practice and graduation</p>
               </div>
-              <aside className="program-summary-card residency-summary" aria-label="Program summary">
-                <Image src={siteConfig.logos.symbol} alt="" width={72} height={72} />
-                <dl>
-                  <div>
-                    <dt>Duration</dt>
-                    <dd>60 days</dd>
-                  </div>
-                  <div>
-                    <dt>Positioning</dt>
-                    <dd>Lifestyle transformation residency</dd>
-                  </div>
-                  <div>
-                    <dt>Investment</dt>
-                    <dd>Premium quote after suitability review</dd>
-                  </div>
-                </dl>
-              </aside>
             </div>
           </div>
         </section>

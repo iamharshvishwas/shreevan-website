@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
-import { siteConfig } from "@/config/site";
 import "./program-detail-shared.css";
 
 const transformationLadder = [
@@ -190,23 +189,6 @@ export function SevenDayFoundationPage() {
                   sizes="(max-width: 720px) 100vw, 50vw"
                 />
               </div>
-              <aside className="program-summary-card" aria-label="Program summary">
-                <Image src={siteConfig.logos.symbol} alt="" width={72} height={72} />
-                <dl>
-                  <div>
-                    <dt>Duration</dt>
-                    <dd>7 days</dd>
-                  </div>
-                  <div>
-                    <dt>Purpose</dt>
-                    <dd>Rebuild habits and establish a wellness foundation</dd>
-                  </div>
-                  <div>
-                    <dt>Price</dt>
-                    <dd>Confirmed during consultation</dd>
-                  </div>
-                </dl>
-              </aside>
             </div>
           </div>
         </section>

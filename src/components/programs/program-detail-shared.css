@@ -13,12 +13,6 @@
 .program-theme { margin-top: 18px; color: var(--gold-500); font-family: var(--font-heading); font-size: clamp(1.45rem, 2vw, 2rem); line-height: 1.2; }
 .program-hero-media { position: relative; }
 .program-hero-slot { min-height: 560px; border-radius: var(--radius-card); box-shadow: var(--shadow-md); }
-.program-summary-card { position: absolute; right: 24px; bottom: 24px; display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 18px; align-items: start; width: min(430px, calc(100% - 48px)); border: 1px solid var(--line-sand); border-radius: var(--radius-card); background: rgba(255, 255, 255, 0.95); box-shadow: var(--shadow-md); padding: 20px; }
-.program-summary-card img { border: 1px solid var(--line-sand); border-radius: 12px; background: var(--white); }
-.program-summary-card dl { display: grid; grid-template-columns: 1fr; gap: 0; margin: 0; }
-.program-summary-card dl div { padding-block: 10px; border-top: 1px solid var(--line-sand); }
-.program-summary-card dl div:first-child { padding-top: 0; border-top: 0; }
-.program-summary-card dd { margin-top: 4px; color: var(--stone-600); font-size: 0.94rem; line-height: 1.35; }
 
 .program-proof-strip { border-block: 1px solid var(--line-mist); background: var(--white); padding-block: 30px; }
 .program-proof-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; }
@@ -114,7 +108,6 @@
 
 .flagship-hero { background: radial-gradient(circle at 84% 12%, rgba(181, 139, 58, 0.18), transparent 34%), linear-gradient(135deg, var(--sand-050), #fffaf3); }
 .flagship-slot { min-height: 620px; }
-.flagship-summary { border-color: rgba(181, 139, 58, 0.34); }
 .program-phase-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
 .program-phase-grid article { min-height: 360px; border: 1px solid rgba(211, 224, 216, 0.2); border-radius: var(--radius-card); background: rgba(255, 255, 255, 0.045); padding: 28px; }
 .program-phase-grid article > span { display: block; color: var(--gold-500); font-family: var(--font-heading); font-size: 1.35rem; line-height: 1; }
@@ -155,7 +148,6 @@
 
 .residency-hero { background: radial-gradient(circle at 84% 12%, rgba(181, 139, 58, 0.2), transparent 32%), linear-gradient(135deg, #fbf4e8, var(--sand-050)); }
 .residency-slot { min-height: 640px; border-color: rgba(181, 139, 58, 0.28); }
-.residency-summary { border-color: rgba(181, 139, 58, 0.42); }
 .residency-positioning-section { background: var(--forest-950); color: rgba(232, 240, 236, 0.78); }
 .residency-positioning-panel { display: grid; grid-template-columns: minmax(0, 0.92fr) minmax(320px, 0.48fr); gap: 52px; align-items: center; border: 1px solid rgba(211, 224, 216, 0.18); border-radius: var(--radius-card); background: rgba(255, 255, 255, 0.045); padding: 42px; }
 .residency-positioning-panel h2 { color: var(--white); }
@@ -212,7 +204,6 @@
 
 @media (max-width: 960px) {
   .program-hero-grid, .program-fit-grid, .program-inclusions-grid, .program-media-grid, .program-cta-panel, .program-pricing-panel, .residency-positioning-panel, .residency-domain-grid, .residency-curriculum-grid, .residency-mentoring-grid, .residency-support-grid, .residency-graduation-grid { grid-template-columns: 1fr; }
-  .program-summary-card { position: static; width: auto; margin-top: 18px; }
   .program-proof-grid, .program-online-grid, .program-modality-grid, .program-rhythm-table, .program-week-grid { grid-template-columns: 1fr; }
   .residency-phase-grid, .residency-experience-grid, .residency-requirement-grid { grid-template-columns: 1fr; }
   .program-proof-grid div { border-top: 1px solid var(--line-mist); border-left: 0; padding: 18px 0; }
@@ -223,8 +214,6 @@
   .program-outcome-grid, .program-inclusion-list, .program-media-slots { grid-template-columns: 1fr; }
   .program-outcome-panel, .program-day-card, .program-online-grid article, .program-inclusion-list li, .program-modality-grid article, .program-cta-panel, .program-phase-grid article, .program-metric-grid article, .program-deliverable-grid article, .program-pricing-panel, .program-week-journey article, .residency-positioning-panel, .residency-domain-grid article, .residency-phase-grid article, .residency-curriculum-grid article, .residency-mentoring-grid article, .residency-support-grid article, .residency-experience-grid article, .residency-requirement-grid article { padding: 22px; }
   .program-week-grid article, .program-outcome-category-grid article, .program-experience-group-grid article, .program-phase-grid article, .program-deliverable-grid article, .residency-domain-grid article, .residency-phase-grid article, .residency-mentoring-grid article, .residency-support-grid article, .residency-requirement-grid article { min-height: auto; }
-  .program-summary-card { grid-template-columns: 56px minmax(0, 1fr); padding: 16px; }
-  .program-summary-card img { width: 56px; height: 56px; }
   .program-ladder div, .program-rhythm-table div, .flagship-rhythm div, .program-pricing-panel dl div, .program-week-journey li, .residency-curriculum-grid dl div { grid-template-columns: 1fr; gap: 7px; }
   .program-schedule-list li { grid-template-columns: 1fr; gap: 8px; }
   .program-hero-slot, .program-video-slot { min-height: 340px; }
