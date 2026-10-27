@@ -451,23 +451,23 @@ export const defaultAdminHomeContent: AdminHomeContentStore = {
     ],
   },
   testimonials: {
-    eyebrow: "Social proof",
-    heading: "Real proof matters",
+    eyebrow: "Why trust the process",
+    heading: "What you can count on before you book",
     items: [
       {
         id: "testimonial-1",
-        quote: "Verified guest stories will be added here after review consent is confirmed.",
-        attribution: "Review consent pending",
+        quote: "Every guest begins with a free suitability call, so fit, dates, room and food are clear before any travel or payment.",
+        attribution: "Consultation first",
       },
       {
         id: "testimonial-2",
-        quote: "Until then, Shreevan builds trust through clear programs, founder credibility and transparent wellness retreat in Rishikesh policies.",
-        attribution: "Trust note",
+        quote: "Each program has its own page explaining the daily rhythm, who it suits and what to expect, and our terms, refund and privacy policies are published on the site.",
+        attribution: "Clear programs and policies",
       },
       {
         id: "testimonial-3",
-        quote: "Third-party review links should be added only when they are active and verified.",
-        attribution: "Review policy",
+        quote: "We do not promise cures or guaranteed outcomes. Retreat practices are explained plainly, including what a wellness retreat can and cannot do.",
+        attribution: "Honest boundaries",
       },
     ],
   },

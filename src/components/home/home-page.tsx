@@ -25,6 +25,24 @@ const includedMedia = [
   },
 ];
 
+const trustCommitments = [
+  {
+    id: "trust-consultation",
+    label: "Consultation first",
+    copy: "Every guest begins with a free suitability call, so fit, dates, room and food are clear before any travel or payment.",
+  },
+  {
+    id: "trust-programs",
+    label: "Clear programs and policies",
+    copy: "Each program has its own page explaining the daily rhythm, who it suits and what to expect, and our terms, refund and privacy policies are published on the site.",
+  },
+  {
+    id: "trust-boundaries",
+    label: "Honest boundaries",
+    copy: "We do not promise cures or guaranteed outcomes. Retreat practices are explained plainly, including what a wellness retreat can and cannot do.",
+  },
+];
+
 export function HomePage({
   content,
 }: Readonly<{ content: PublicHomeContent }>) {
@@ -425,8 +443,8 @@ export function HomePage({
         <section className="section testimonials-section" aria-labelledby="testimonials-title">
           <div className="container">
             <div className="section-heading centered">
-              <p className="eyebrow">{content.testimonials.eyebrow}</p>
-              <h2 id="testimonials-title">{content.testimonials.heading}</h2>
+              <p className="eyebrow">Why trust the process</p>
+              <h2 id="testimonials-title">What you can count on before you book</h2>
             </div>
             <figure className="testimonial-image">
               <Image
@@ -436,13 +454,13 @@ export function HomePage({
                 height={1120}
                 sizes="(max-width: 720px) 100vw, 1180px"
               />
-              <figcaption>Healing stories begin with lived reflection</figcaption>
+              <figcaption>A calm, unhurried pace</figcaption>
             </figure>
             <div className="testimonial-grid">
-              {content.testimonials.items.map((testimonial) => (
-                <article key={testimonial.id}>
-                  <p>“{testimonial.quote}”</p>
-                  <span>{testimonial.attribution}</span>
+              {trustCommitments.map((commitment) => (
+                <article key={commitment.id}>
+                  <p>{commitment.copy}</p>
+                  <span>{commitment.label}</span>
                 </article>
               ))}
             </div>
