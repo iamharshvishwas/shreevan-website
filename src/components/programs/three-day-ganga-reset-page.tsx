@@ -368,8 +368,8 @@ export function ThreeDayGangaResetPage() {
                 <h2 id="modalities-title">The methods are simple, guided and beginner-aware</h2>
               </div>
               <p>
-                This program should link back to educational modality pages so commercial and
-                informational search intent stay separate.
+                Each practice has its own short guide explaining what it involves, how it is used
+                during the retreat and who it may suit.
               </p>
             </div>
             <div className="program-modality-grid">
