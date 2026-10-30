@@ -308,34 +308,32 @@ export function SevenDayFoundationPage() {
         </section>
 
         <section className="section program-inclusions-section" aria-labelledby="rhythm-title">
-          <div className="container program-inclusions-grid">
-            <div style={{ minWidth: 0 }}>
+          <div className="container program-inclusions-grid program-rhythm-layout">
+            <div className="program-rhythm-copy" style={{ minWidth: 0 }}>
               <p className="eyebrow">Daily schedule</p>
               <h2 id="rhythm-title">A clear rhythm for body, mind and integration</h2>
               <p>
                 The daily structure balances practice, food, workshops, reflection, practical activities
                 and evening integration.
               </p>
-              <figure className="intent-image program-rhythm-figure">
-                <img
-                  src="/images/programs/7-day-foundation-integration-reflection.jpeg"
-                  alt="Guest in quiet reflection during the integration phase of the 7-day foundation retreat"
-                  width="1194"
-                  height="1600"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </figure>
             </div>
-            <div style={{ minWidth: 0 }}>
-              <div className="program-rhythm-table">
-                {dailyRhythm.map(([time, activity]) => (
-                  <div key={`${time}-${activity}`}>
-                    <span>{time}</span>
-                    <strong>{activity}</strong>
-                  </div>
-                ))}
-              </div>
+            <figure className="intent-image program-rhythm-figure">
+              <img
+                src="/images/programs/7-day-foundation-integration-reflection.jpeg"
+                alt="Guest in quiet reflection during the integration phase of the 7-day foundation retreat"
+                width="1194"
+                height="1600"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+            <div className="program-rhythm-table">
+              {dailyRhythm.map(([time, activity]) => (
+                <div key={`${time}-${activity}`}>
+                  <span>{time}</span>
+                  <strong>{activity}</strong>
+                </div>
+              ))}
             </div>
           </div>
         </section>
