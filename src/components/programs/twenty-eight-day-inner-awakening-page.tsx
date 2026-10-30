@@ -160,8 +160,6 @@ const takeHome = [
 ];
 
 const onlineSessions = [
-  ["21 days before", "Orientation and Welcome", "Founder/team orientation, journey framing and arrival confidence."],
-  ["14 days before", "Preparing Body and Mind", "Sleep, food, movement, caffeine/alcohol reduction and mindset preparation."],
   ["7 days before", "Community Introduction", "Meet the group and reduce uncertainty before travel."],
   ["7 days after", "Reintegration Circle", "Support for translating the retreat rhythm into ordinary life."],
   ["30 days after", "Progress Review", "A review of routines, obstacles, practices and next adjustments."],
@@ -505,7 +503,7 @@ export function TwentyEightDayInnerAwakeningPage() {
               <p className="eyebrow">Online live support</p>
               <h2 id="online-title">Preparation and 90-day integration support</h2>
             </div>
-            <div className="program-online-grid seven-up">
+            <div className="program-online-grid five-up">
               {onlineSessions.map(([time, title, copy], index) => (
                 <article key={title}>
                   <span>{String(index + 1).padStart(2, "0")}</span>

@@ -94,6 +94,8 @@
 
 .program-experience-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
 .program-experience-grid span { border: 1px solid var(--line-sand); border-radius: var(--radius-pill); background: var(--sand-050); color: var(--forest-700); padding: 10px 14px; font-size: 0.9rem; font-weight: 850; line-height: 1.2; }
+.program-online-grid.four-up { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.program-online-grid.four-up article { min-height: 280px; }
 .program-online-grid.five-up { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 .program-online-grid.five-up article { min-height: 280px; }
 .program-online-grid.seven-up { grid-template-columns: repeat(7, minmax(0, 1fr)); }
@@ -200,7 +202,7 @@
 @media (max-width: 1180px) {
   .program-hero-grid { grid-template-columns: minmax(0, 0.86fr) minmax(360px, 0.78fr); gap: 46px; }
   .program-hero-slot { min-height: 500px; }
-  .program-day-grid, .program-day-grid.fourteen-grid, .program-modality-grid.four-up, .program-online-grid.five-up, .program-online-grid.seven-up, .program-outcome-category-grid, .program-experience-group-grid, .program-phase-grid, .program-metric-grid, .program-deliverable-grid, .residency-phase-grid, .residency-experience-grid, .residency-requirement-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .program-day-grid, .program-day-grid.fourteen-grid, .program-modality-grid.four-up, .program-online-grid.four-up, .program-online-grid.five-up, .program-online-grid.seven-up, .program-outcome-category-grid, .program-experience-group-grid, .program-phase-grid, .program-metric-grid, .program-deliverable-grid, .residency-phase-grid, .residency-experience-grid, .residency-requirement-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .program-week-journey article, .program-week-journey ol { grid-template-columns: 1fr; }
 }
 

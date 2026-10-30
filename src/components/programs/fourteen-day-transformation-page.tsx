@@ -157,8 +157,6 @@ const experienceGroups = [
 ];
 
 const onlineSessions = [
-  ["21 days before", "Understanding the Journey", "Founder/team orientation, philosophy, transformation expectations and questions before travel."],
-  ["14 days before", "Preparing Mind and Body", "Sleep, caffeine/alcohol reduction, simple movement, meditation introduction and mindset preparation."],
   ["7 days before", "Meet Your Community", "A calm group introduction so participants arrive with more comfort and less uncertainty."],
   ["7 days after", "Reintegration Support", "Support for returning home without losing the clarity created during the retreat."],
   ["30 days after", "Progress Review", "A check-in on practices, obstacles, routines and personal transformation blueprint."],
@@ -195,7 +193,7 @@ const inclusions = [
   "7 Yoga Nidra sessions",
   "Transformational workshops and group coaching circles",
   "Fire ceremony, sound bath, silent half-day retreat and Ganga walks",
-  "Personal transformation blueprint and seven online support sessions",
+  "Personal transformation blueprint and five online support sessions",
 ];
 
 export function FourteenDayTransformationPage() {
@@ -485,9 +483,9 @@ export function FourteenDayTransformationPage() {
           <div className="container">
             <div className="section-heading centered">
               <p className="eyebrow">Online live support</p>
-              <h2 id="online-title">Seven touchpoints support preparation and integration</h2>
+              <h2 id="online-title">Five touchpoints support preparation and integration</h2>
             </div>
-            <div className="program-online-grid seven-up">
+            <div className="program-online-grid five-up">
               {onlineSessions.map(([time, title, copy], index) => (
                 <article key={title}>
                   <span>{String(index + 1).padStart(2, "0")}</span>

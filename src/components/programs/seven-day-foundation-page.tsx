@@ -104,7 +104,6 @@ const experiences = [
 ];
 
 const onlineSessions = [
-  ["14 days before", "Preparing Your Mind and Body", "Simple preparation so participants arrive with better sleep, calmer habits and realistic expectations."],
   ["7 days before", "Meet Your Community", "A gentle orientation to reduce uncertainty and introduce the people sharing the retreat space."],
   ["7 days after", "Integration Coaching", "Support for returning home without losing the daily rhythm created during the retreat."],
   ["30 days after", "Habit Reinforcement", "A practical review of obstacles, consistency and the wellness routine."],
@@ -140,7 +139,7 @@ const inclusions = [
   "Sattvic meals and cooking workshop",
   "Fire ceremony, sound healing and nature walks",
   "Personal wellness blueprint creation",
-  "Five online live support sessions around the retreat",
+  "Four online live support sessions around the retreat",
 ];
 
 export function SevenDayFoundationPage() {
@@ -433,7 +432,7 @@ export function SevenDayFoundationPage() {
               <p className="eyebrow">Online live support</p>
               <h2 id="online-title">The foundation is supported before and after the retreat</h2>
             </div>
-            <div className="program-online-grid five-up">
+            <div className="program-online-grid four-up">
               {onlineSessions.map(([time, title, copy], index) => (
                 <article key={title}>
                   <span>{String(index + 1).padStart(2, "0")}</span>
