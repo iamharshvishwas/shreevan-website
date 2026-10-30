@@ -291,15 +291,10 @@ export function TwentyEightDayInnerAwakeningPage() {
         </section>
 
         <section className="section program-fit-section" aria-labelledby="promise-title">
-          <div className="container program-fit-grid">
-            <div>
+          <div className="container program-fit-grid program-outcomes-layout">
+            <div className="program-outcomes-copy">
               <p className="eyebrow">Expected outcomes</p>
               <h2 id="promise-title">What participants may leave with after 28 days</h2>
-              <ul className="program-chip-list">
-                {corePromises.map((promise) => (
-                  <li key={promise}>{promise}</li>
-                ))}
-              </ul>
               <p className="program-outcome-note">
                 These are wellness-oriented outcomes supported by the retreat structure. Individual
                 experience varies, and the program does not promise medical treatment, cure or guaranteed
@@ -307,7 +302,13 @@ export function TwentyEightDayInnerAwakeningPage() {
               </p>
             </div>
 
-            <div>
+            <ul className="program-chip-list">
+              {corePromises.map((promise) => (
+                <li key={promise}>{promise}</li>
+              ))}
+            </ul>
+
+            <div className="program-outcomes-ladder">
               <p className="eyebrow">Transformation ladder</p>
               <div className="program-ladder">
                 {transformationLadder.map(([duration, label]) => (

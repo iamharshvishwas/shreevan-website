@@ -279,3 +279,17 @@
 @media (max-width: 960px) {
   .program-hero-media { max-width: 420px; }
 }
+
+/* 28-day expected outcomes: heading + note and ladder side by side, outcome capsules in rows underneath */
+.program-fit-grid.program-outcomes-layout { gap: 40px 72px; grid-template-areas: "copy ladder" "chips chips"; }
+.program-outcomes-layout .program-outcomes-copy { grid-area: copy; }
+.program-outcomes-layout .program-outcomes-ladder { grid-area: ladder; }
+.program-outcomes-layout .program-chip-list { grid-area: chips; margin: 0; gap: 8px; }
+.program-outcomes-layout .program-chip-list li { padding: 8px 12px; font-size: 0.82rem; }
+.program-outcomes-layout .program-outcome-note { margin-top: 20px; }
+@media (min-width: 1280px) {
+  .program-outcomes-layout .program-chip-list li { padding: 8px 11px; font-size: 0.8rem; }
+}
+@media (max-width: 960px) {
+  .program-fit-grid.program-outcomes-layout { gap: 32px; grid-template-areas: "copy" "chips" "ladder"; }
+}
