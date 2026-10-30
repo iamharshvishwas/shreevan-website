@@ -219,6 +219,8 @@
   .program-hero-slot, .program-video-slot { min-height: 340px; }
 }
 
+.program-inclusions-grid .program-rhythm-figure { aspect-ratio: 4 / 3; min-height: 0; margin-top: 32px; }
+.program-inclusions-grid .program-rhythm-figure img { object-position: center 45%; }
 .program-intent-side .section-number { margin-bottom: 24px; }
 .program-intent-slot { aspect-ratio: 4 / 3; min-height: 0; border-radius: var(--radius-card); }
 .program-intent-slot p { font-size: 1.2rem; }

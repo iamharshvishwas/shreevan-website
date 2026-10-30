@@ -316,9 +316,7 @@ export function SevenDayFoundationPage() {
                 The daily structure balances practice, food, workshops, reflection, practical activities
                 and evening integration.
               </p>
-            </div>
-            <div style={{ minWidth: 0 }}>
-              <figure className="intent-image" style={{ marginBottom: 32 }}>
+              <figure className="intent-image program-rhythm-figure">
                 <img
                   src="/images/programs/7-day-foundation-integration-reflection.jpeg"
                   alt="Guest in quiet reflection during the integration phase of the 7-day foundation retreat"
@@ -328,6 +326,8 @@ export function SevenDayFoundationPage() {
                   decoding="async"
                 />
               </figure>
+            </div>
+            <div style={{ minWidth: 0 }}>
               <div className="program-rhythm-table">
                 {dailyRhythm.map(([time, activity]) => (
                   <div key={`${time}-${activity}`}>
