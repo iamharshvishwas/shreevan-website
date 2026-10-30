@@ -273,7 +273,7 @@ export function TwentyEightDayInnerAwakeningPage() {
             <div className="program-intent-side">
               <p className="section-number">01 The flagship</p>
               <div className="image-slot program-intent-slot">
-                <span>Image slot · 4:5 portrait</span>
+                <span>Image slot · 4:3 landscape</span>
                 <p>The depth of a full month, shown honestly</p>
               </div>
             </div>
