@@ -267,7 +267,13 @@ export function FourteenDayTransformationPage() {
 
         <section className="section program-intent-section" aria-labelledby="program-intent-title">
           <div className="container editorial-grid">
-            <p className="section-number">01 The transformation</p>
+            <div className="program-intent-side">
+              <p className="section-number">01 The transformation</p>
+              <div className="image-slot program-intent-slot">
+                <span>Image slot · 4:5 portrait</span>
+                <p>A supported space for reflection and change</p>
+              </div>
+            </div>
             <div className="reading-column">
               <h2 id="program-intent-title">Fourteen days creates room to change your relationship with yourself</h2>
               <p>

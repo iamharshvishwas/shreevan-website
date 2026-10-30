@@ -218,3 +218,10 @@
   .program-schedule-list li { grid-template-columns: 1fr; gap: 8px; }
   .program-hero-slot, .program-video-slot { min-height: 340px; }
 }
+
+.program-intent-side .section-number { margin-bottom: 24px; }
+.program-intent-slot { aspect-ratio: 4 / 5; min-height: 0; border-radius: var(--radius-card); }
+.program-intent-slot p { font-size: 1.2rem; }
+@media (max-width: 960px) {
+  .program-intent-slot { max-width: 420px; }
+}

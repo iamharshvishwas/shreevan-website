@@ -184,7 +184,13 @@ export function ThreeDayGangaResetPage() {
 
         <section className="section program-intent-section" aria-labelledby="program-intent-title">
           <div className="container editorial-grid">
-            <p className="section-number">01 The reset</p>
+            <div className="program-intent-side">
+              <p className="section-number">01 The reset</p>
+              <div className="image-slot program-intent-slot">
+                <span>Image slot · 4:5 portrait</span>
+                <p>A calm Ganga-side pause on arrival</p>
+              </div>
+            </div>
             <div className="reading-column">
               <h2 id="program-intent-title">A short retreat should feel complete, not rushed</h2>
               <p>
