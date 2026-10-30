@@ -270,10 +270,15 @@ export function TwentyEightDayInnerAwakeningPage() {
           <div className="container editorial-grid">
             <div className="program-intent-side">
               <p className="section-number">01 The flagship</p>
-              <div className="image-slot program-intent-slot">
-                <span>Image slot · 4:3 landscape</span>
-                <p>The depth of a full month, shown honestly</p>
-              </div>
+              <figure className="program-intent-figure">
+                <Image
+                  src="/images/programs/28-day-inner-awakening-return-to-yourself.webp"
+                  alt="Woman journaling on a boulder beside the Ganga at golden hour, looking up at the river"
+                  width={2000}
+                  height={1493}
+                  sizes="(max-width: 640px) 100vw, (max-width: 960px) 560px, 440px"
+                />
+              </figure>
             </div>
             <div className="reading-column">
               <h2 id="program-intent-title">More than an itinerary: a personal reset and transformation</h2>

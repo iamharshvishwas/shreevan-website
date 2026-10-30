@@ -267,10 +267,15 @@ export function FourteenDayTransformationPage() {
           <div className="container editorial-grid">
             <div className="program-intent-side">
               <p className="section-number">01 The transformation</p>
-              <div className="image-slot program-intent-slot">
-                <span>Image slot · 4:3 landscape</span>
-                <p>A supported space for reflection and change</p>
-              </div>
+              <figure className="program-intent-figure">
+                <Image
+                  src="/images/programs/14-day-transformation-one-to-one-guidance.webp"
+                  alt="Retreat guide and guest in a calm one-to-one conversation over tea on a veranda above the Ganga valley"
+                  width={2000}
+                  height={1493}
+                  sizes="(max-width: 640px) 100vw, (max-width: 960px) 560px, 440px"
+                />
+              </figure>
             </div>
             <div className="reading-column">
               <h2 id="program-intent-title">Fourteen days creates room to change your relationship with yourself</h2>

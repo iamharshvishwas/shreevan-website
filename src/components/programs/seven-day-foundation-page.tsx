@@ -213,10 +213,15 @@ export function SevenDayFoundationPage() {
           <div className="container editorial-grid">
             <div className="program-intent-side">
               <p className="section-number">01 The foundation</p>
-              <div className="image-slot program-intent-slot">
-                <span>Image slot · 4:3 landscape</span>
-                <p>A steady daily rhythm of practice, rest and food</p>
-              </div>
+              <figure className="program-intent-figure">
+                <Image
+                  src="/images/programs/7-day-foundation-morning-breathwork.webp"
+                  alt="Woman practising seated breathwork on a mat on a stone terrace above the Ganga in Rishikesh"
+                  width={2000}
+                  height={1493}
+                  sizes="(max-width: 640px) 100vw, (max-width: 960px) 560px, 440px"
+                />
+              </figure>
             </div>
             <div className="reading-column">
               <h2 id="program-intent-title">Seven days gives enough space to rebuild the basics</h2>

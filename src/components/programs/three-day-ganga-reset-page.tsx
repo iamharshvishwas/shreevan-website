@@ -186,10 +186,15 @@ export function ThreeDayGangaResetPage() {
           <div className="container editorial-grid">
             <div className="program-intent-side">
               <p className="section-number">01 The reset</p>
-              <div className="image-slot program-intent-slot">
-                <span>Image slot · 4:3 landscape</span>
-                <p>A calm Ganga-side pause on arrival</p>
-              </div>
+              <figure className="program-intent-figure">
+                <Image
+                  src="/images/programs/3-day-ganga-reset-pause-by-the-ganga.webp"
+                  alt="Guest resting on stone steps with a cup of herbal tea, looking out over the Ganga in the morning mist in Rishikesh"
+                  width={2000}
+                  height={1493}
+                  sizes="(max-width: 640px) 100vw, (max-width: 960px) 560px, 440px"
+                />
+              </figure>
             </div>
             <div className="reading-column">
               <h2 id="program-intent-title">A short retreat should feel complete, not rushed</h2>

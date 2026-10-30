@@ -252,10 +252,10 @@
   .program-stay-layout .program-stay-figure { max-width: 560px; }
 }
 .program-intent-side .section-number { margin-bottom: 24px; }
-.program-intent-slot { aspect-ratio: 4 / 3; min-height: 0; border-radius: var(--radius-card); }
-.program-intent-slot p { font-size: 1.2rem; }
+.program-intent-figure { aspect-ratio: 4 / 3; margin: 0; overflow: hidden; border: 1px solid var(--line-sand); border-radius: var(--radius-card); background: var(--mist-100); box-shadow: var(--shadow); }
+.program-intent-figure img { display: block; width: 100%; height: 100%; object-fit: cover; }
 @media (max-width: 960px) {
-  .program-intent-slot { max-width: 560px; }
+  .program-intent-figure { max-width: 560px; }
 }
 
 /* Compact program hero: smaller type, tighter padding, narrower 4:5 image, trust capsules on one line */
