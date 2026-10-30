@@ -103,8 +103,10 @@
 .program-outcome-category-grid article, .program-experience-group-grid article { border: 1px solid var(--line-sand); border-radius: var(--radius-card); background: var(--white); padding: 28px; }
 .program-outcome-category-grid article { min-height: 310px; }
 .program-experience-group-grid article { min-height: 300px; }
-.program-outcome-category-grid ul, .program-experience-group-grid ul { display: grid; gap: 10px; margin: 20px 0 0; padding-left: 20px; color: var(--stone-600); }
+.program-outcome-category-grid h3, .program-experience-group-grid h3 { color: var(--gold-500); }
+.program-outcome-category-grid ul, .program-experience-group-grid ul { display: grid; gap: 10px; margin: 20px 0 0; padding-left: 22px; list-style: disc; color: var(--stone-600); }
 .program-outcome-category-grid li, .program-experience-group-grid li { line-height: 1.45; }
+.program-outcome-category-grid li::marker, .program-experience-group-grid li::marker { color: var(--gold-500); font-size: 1.15em; }
 
 .flagship-hero { background: radial-gradient(circle at 84% 12%, rgba(181, 139, 58, 0.18), transparent 34%), linear-gradient(135deg, var(--sand-050), #fffaf3); }
 .flagship-slot { min-height: 620px; }
