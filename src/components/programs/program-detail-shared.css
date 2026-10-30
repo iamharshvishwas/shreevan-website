@@ -257,3 +257,25 @@
 @media (max-width: 960px) {
   .program-intent-slot { max-width: 560px; }
 }
+
+/* Compact program hero: smaller type, tighter padding, narrower 4:5 image, trust capsules on one line */
+.section.program-hero { padding-block: clamp(40px, 5vw, 60px); }
+.section.program-hero h1 { font-size: clamp(2.4rem, 3.9vw, 3.5rem); }
+.program-hero .program-theme { margin-top: 14px; font-size: clamp(1.15rem, 1.6vw, 1.45rem); }
+.program-hero .hero-lede { margin-top: 16px; font-size: clamp(0.98rem, 1.1vw, 1.06rem); line-height: 1.6; }
+.program-hero .hero-actions { margin-top: 22px; }
+.program-hero .hero-actions .button { min-height: 44px; }
+.program-hero .hero-trust { justify-content: flex-start; margin-top: 16px; }
+.program-hero .program-hero-slot { aspect-ratio: 4 / 5; min-height: 0; }
+.program-hero .image-slot.program-hero-slot p { font-size: 1.1rem; }
+.program-hero-grid > div:first-child { container-type: inline-size; }
+@media (min-width: 641px) {
+  .program-hero .hero-trust { gap: 6px 8px; }
+  .program-hero .hero-trust li { padding: 6px clamp(7px, 1.4cqi, 12px); font-size: 0.78rem; font-size: clamp(0.66rem, 1.9cqi, 0.82rem); white-space: nowrap; }
+}
+@media (min-width: 961px) {
+  .program-hero-grid { grid-template-columns: minmax(0, 1fr) clamp(300px, 32%, 380px); gap: 56px; }
+}
+@media (max-width: 960px) {
+  .program-hero-media { max-width: 420px; }
+}
