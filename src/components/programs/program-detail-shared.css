@@ -231,6 +231,18 @@
   .program-inclusions-grid.program-rhythm-layout { grid-template-columns: 1fr; grid-template-rows: none; grid-template-areas: "copy" "figure" "table"; gap: 32px; }
   .program-rhythm-layout .program-rhythm-figure { max-width: 360px; }
 }
+.program-inclusions-grid.program-stay-layout { grid-template-columns: minmax(0, 1fr) clamp(260px, 38%, 440px); grid-template-rows: auto 1fr; grid-template-areas: "copy figure" "list figure"; gap: 32px 72px; }
+.program-stay-layout .program-stay-copy { grid-area: copy; }
+.program-stay-layout .program-stay-figure { grid-area: figure; }
+.program-stay-layout .program-inclusion-list { grid-area: list; }
+@media (min-width: 961px) {
+  .program-stay-layout .program-inclusion-list { gap: 10px; }
+  .program-stay-layout .program-inclusion-list li { display: flex; align-items: center; min-height: 64px; padding: 14px 16px; font-size: 0.95rem; }
+}
+@media (max-width: 960px) {
+  .program-inclusions-grid.program-stay-layout { grid-template-columns: 1fr; grid-template-rows: none; grid-template-areas: "copy" "figure" "list"; gap: 32px; }
+  .program-stay-layout .program-stay-figure { max-width: 560px; }
+}
 .program-intent-side .section-number { margin-bottom: 24px; }
 .program-intent-slot { aspect-ratio: 4 / 3; min-height: 0; border-radius: var(--radius-card); }
 .program-intent-slot p { font-size: 1.2rem; }

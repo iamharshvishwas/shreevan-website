@@ -353,8 +353,8 @@ export function SevenDayFoundationPage() {
         </section>
 
         <section className="section program-inclusions-section" aria-labelledby="included-title">
-          <div className="container program-inclusions-grid">
-            <div style={{ minWidth: 0 }}>
+          <div className="container program-inclusions-grid program-stay-layout">
+            <div className="program-stay-copy" style={{ minWidth: 0 }}>
               <p className="eyebrow">Accommodation and inclusions</p>
               <h2 id="included-title">Quiet Stay at Shreevan</h2>
               <p>
@@ -363,23 +363,21 @@ export function SevenDayFoundationPage() {
                 consultation.
               </p>
             </div>
-            <div style={{ minWidth: 0 }}>
-              <figure className="international-image" style={{ marginBottom: 32 }}>
-                <img
-                  src="/images/programs/7-day-foundation-quiet-stay.jpeg"
-                  alt="Quiet retreat room at Shreevan Wellness with garden-facing windows and simple comforts"
-                  width="2200"
-                  height="1642"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </figure>
-              <ul className="program-inclusion-list">
-                {inclusions.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
+            <figure className="international-image program-stay-figure">
+              <img
+                src="/images/programs/7-day-foundation-quiet-stay.jpeg"
+                alt="Quiet retreat room at Shreevan Wellness with garden-facing windows and simple comforts"
+                width="2200"
+                height="1642"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+            <ul className="program-inclusion-list">
+              {inclusions.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
           </div>
         </section>
 
